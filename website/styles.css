@@ -574,6 +574,133 @@ body {
 /* ==========================================================================
    TWO AGENTS & THE TRUTH
    ========================================================================== */
+.video-theater-wrapper {
+  max-width: 960px;
+  margin: 0 auto 48px auto;
+  width: 100%;
+}
+
+.video-theater-frame {
+  background: var(--bg-card);
+  border: 1px solid rgba(229, 169, 59, 0.35);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(229, 169, 59, 0.12);
+  transition: var(--transition-smooth);
+}
+
+.video-theater-frame:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(229, 169, 59, 0.2);
+}
+
+.video-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(10, 14, 23, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.video-dot-group {
+  display: flex;
+  gap: 7px;
+}
+
+.v-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.v-dot.red { background: #FF5F56; }
+.v-dot.yellow { background: #FFBD2E; }
+.v-dot.green { background: #27C93F; }
+
+.video-bar-title {
+  color: var(--gold-primary);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.video-bar-tag {
+  color: var(--emerald-cyan);
+  background: rgba(0, 255, 179, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.video-responsive-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-responsive-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-caption-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(14, 19, 31, 0.95);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.caption-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.caption-pulse {
+  color: var(--gold-primary);
+  font-size: 0.9rem;
+}
+
+.caption-link {
+  color: var(--gold-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(229, 169, 59, 0.1);
+  border: 1px solid rgba(229, 169, 59, 0.25);
+  transition: var(--transition-fast);
+}
+
+.caption-link:hover {
+  background: rgba(229, 169, 59, 0.2);
+  border-color: var(--gold-primary);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .video-caption-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
 .two-agents-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
