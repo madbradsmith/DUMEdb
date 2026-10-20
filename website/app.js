@@ -1,69 +1,10 @@
 /**
  * DUME Studio — Deterministic Unit-Record Memory Engine
- * Client-side interactive engine: Audio, Live Simulator, Odometer Calculator, Gallery Lightbox
+ * Client-side interactive engine: Live Simulator, Odometer Calculator, Gallery Lightbox
  */
 
 (function () {
   'use strict';
-
-  // --- AUDIO SFX ENGINE ---
-  let sfxEnabled = true;
-  const audioCache = {};
-
-  const soundFiles = {
-    relay: 'assets/sfx_punch_card_relay.wav',
-    blip: 'assets/sfx_ui_blip.wav',
-    glitch: 'assets/sfx_digital_glitch_whoosh.wav',
-    subbass: 'assets/sfx_sub_bass_drop.wav'
-  };
-
-  function playSound(type) {
-    if (!sfxEnabled) return;
-    try {
-      const src = soundFiles[type] || type;
-      if (!audioCache[src]) {
-        audioCache[src] = new Audio(src);
-      }
-      const sound = audioCache[src].cloneNode();
-      sound.volume = 0.35;
-      sound.play().catch(() => {
-        // Autoplay policy fallback
-      });
-    } catch (e) {
-      console.warn('Audio play error:', e);
-    }
-  }
-
-  // Audio Toggle Button
-  const sfxToggleBtn = document.getElementById('sfx-toggle');
-  const sfxLabel = sfxToggleBtn ? sfxToggleBtn.querySelector('.sfx-label') : null;
-  const sfxIcon = document.getElementById('sfx-icon');
-
-  if (sfxToggleBtn) {
-    sfxToggleBtn.addEventListener('click', () => {
-      sfxEnabled = !sfxEnabled;
-      if (sfxEnabled) {
-        sfxToggleBtn.classList.remove('muted');
-        if (sfxLabel) sfxLabel.textContent = 'SFX: ON';
-        if (sfxIcon) sfxIcon.textContent = '🔊';
-        playSound('blip');
-      } else {
-        sfxToggleBtn.classList.add('muted');
-        if (sfxLabel) sfxLabel.textContent = 'SFX: OFF';
-        if (sfxIcon) sfxIcon.textContent = '🔇';
-      }
-    });
-  }
-
-  // Custom Audio Trigger Buttons (Frank & Silicon Agent)
-  document.querySelectorAll('.audio-trigger-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const sfx = btn.getAttribute('data-sfx');
-      if (sfx) {
-        playSound('assets/' + sfx);
-      }
-    });
-  });
 
   // --- TOAST NOTIFICATIONS ---
   const toast = document.getElementById('toast-notice');
@@ -87,7 +28,6 @@
       copyInstallBtn.addEventListener('click', () => {
         const text = copyInstallBtn.getAttribute('data-copy') || 'pip install dumedb';
         navigator.clipboard.writeText(text).then(() => {
-          playSound('blip');
           showToast('✓ Copied to clipboard: ' + text);
         });
       });
@@ -101,7 +41,6 @@
         if (targetEl) {
           const text = targetEl.innerText.trim();
           navigator.clipboard.writeText(text).then(() => {
-            playSound('blip');
             showToast('✓ Code snippet copied to clipboard!');
           });
         }
@@ -131,13 +70,11 @@
     if (!cmd) return;
 
     appendTermLine('<span class="term-prompt">SENTINEL@DUMEDB:~$</span> ' + escapeHtml(cmd), 'cmd');
-    playSound('relay');
 
     const lower = cmd.toLowerCase().replace(/['"]/g, '').trim();
 
     if (lower === 'box is the game' || lower === 'wake' || lower === 'cabinet_wake') {
       setTimeout(() => {
-        playSound('subbass');
         appendTermLine('[*] EXECUTING CABINET_WAKE HANDSHAKE PROTOCOL...', 'resp-wake');
         appendTermLine('[*] Codeword Validated: <span class="highlight">"box is the game"</span>', 'resp-wake');
         appendTermLine('----------------------------------------------------', 'sys');
@@ -234,7 +171,6 @@
     if (btnClear && termOutput) {
       btnClear.addEventListener('click', () => {
         termOutput.innerHTML = '<div class="term-line sys">[CLEARED] Console ready. Type "box is the game" to wake.</div>';
-        playSound('blip');
       });
     }
 
@@ -242,7 +178,6 @@
     if (btnScanlines && termShell) {
       btnScanlines.addEventListener('click', () => {
         termShell.classList.toggle('crt');
-        playSound('blip');
       });
     }
   }
@@ -344,7 +279,6 @@
         if (targetPanel) {
           targetPanel.classList.add('active');
         }
-        playSound('blip');
       });
     });
   }
@@ -369,7 +303,6 @@
         modalCaption.innerHTML = `<strong>${captionTitle}</strong> — ${captionDesc}`;
         modal.classList.add('active');
         modal.setAttribute('aria-hidden', 'false');
-        playSound('blip');
       });
     });
 

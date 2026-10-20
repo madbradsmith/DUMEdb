@@ -262,32 +262,7 @@ body {
   gap: 12px;
 }
 
-.sfx-toggle-btn {
-  background: rgba(229, 169, 59, 0.1);
-  border: 1px solid var(--border-gold);
-  color: var(--gold-primary);
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
 
-.sfx-toggle-btn:hover {
-  background: rgba(229, 169, 59, 0.2);
-  box-shadow: 0 0 10px var(--gold-glow);
-}
-
-.sfx-toggle-btn.muted {
-  color: var(--text-muted);
-  border-color: var(--border-subtle);
-  background: transparent;
-}
 
 .btn-nav-gh {
   background: #161b22;
@@ -308,56 +283,6 @@ body {
   border-color: var(--gold-primary);
   box-shadow: 0 0 12px var(--gold-glow);
 }
-
-/* ==========================================================================
-   TELEMETRY STRIP
-   ========================================================================== */
-.telemetry-bar {
-  background: #070a10;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 8px 16px;
-  z-index: 900;
-}
-
-.telemetry-track {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--text-secondary);
-}
-
-.telemetry-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.telemetry-divider {
-  color: rgba(255, 255, 255, 0.15);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.pulse-green {
-  background: var(--emerald-cyan);
-  box-shadow: 0 0 8px var(--emerald-cyan);
-  animation: pulse-dot 1.5s infinite;
-}
-
-.val.gold { color: var(--gold-primary); font-weight: 700; }
-.val.emerald { color: var(--emerald-cyan); font-weight: 700; }
-.val.danger { color: var(--danger-red); font-weight: 700; }
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -762,23 +687,7 @@ body {
   color: var(--text-secondary);
 }
 
-.audio-trigger-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
 
-.audio-trigger-btn:hover {
-  background: rgba(229, 169, 59, 0.15);
-  border-color: var(--gold-primary);
-  color: var(--gold-primary);
-}
 
 .agent-quote {
   font-size: 1.05rem;
