@@ -68,5 +68,35 @@
     "created_at": "2026-10-19T00:00:00",
     "last_fired": null,
     "fire_count": 0
+  },
+  {
+    "id": "WF-R1",
+    "title": "Direct SQLite Hardware Token Telemetry Protocol",
+    "category": "protocol",
+    "trigger": "When evaluating context consumption or measuring Bloat Float in autonomous sessions",
+    "move": "Read gen_metadata protobuf telemetry directly from ~/.gemini/antigravity-ide/conversations/<id>.db rather than estimating from truncated transcript.jsonl. Calibrate compaction ceiling to empirical ~180,000 tokens.",
+    "why": "",
+    "source": "",
+    "status": "active",
+    "fire_count": 1,
+    "last_fired_at": "2026-10-20T14:49:10.870168",
+    "created_by": "Agent (RP Session Handoff)",
+    "created_at": "2026-10-20T14:49:10.870168",
+    "updated_at": "2026-10-20T14:49:10.870168"
+  },
+  {
+    "id": "WF-R2",
+    "title": "Public Site Jury Resolution & Deployment Protocol",
+    "category": "protocol",
+    "trigger": "When addressing public website credibility, jury reviews, or landing page positioning",
+    "move": "Implement site jury enhancements (honest comparison table, published benchmark disclosures, plain-English hero callout, and enterprise roadmap) then deploy via deploy_website.py.",
+    "why": "",
+    "source": "",
+    "status": "active",
+    "fire_count": 1,
+    "last_fired_at": "2026-10-20T14:55:31.866756",
+    "created_by": "Agent (RP Session Handoff)",
+    "created_at": "2026-10-20T14:55:31.866756",
+    "updated_at": "2026-10-20T14:55:31.866756"
   }
 ]

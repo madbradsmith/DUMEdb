@@ -4969,37 +4969,6 @@
       "is_auto": false
     },
     {
-      "opcode": 2492,
-      "name": "GAME_STATE",
-      "description": "Auto-registered via MCP tool for GAME_STATE",
-      "data_type": "ENUM",
-      "enum_values": {
-        "1": "PLAYING"
-      },
-      "unit": null,
-      "is_auto": true
-    },
-    {
-      "opcode": 2493,
-      "name": "SPATIAL_ENGINE_MODE",
-      "description": "Auto-registered via MCP tool for SPATIAL_ENGINE_MODE",
-      "data_type": "ENUM",
-      "enum_values": {
-        "1": "3D_SPATIAL_OCTREE"
-      },
-      "unit": null,
-      "is_auto": true
-    },
-    {
-      "opcode": 2494,
-      "name": "TICK_RATE_HZ",
-      "description": "Auto-registered via MCP tool for TICK_RATE_HZ",
-      "data_type": "INT",
-      "enum_values": {},
-      "unit": null,
-      "is_auto": true
-    },
-    {
       "opcode": 3038,
       "name": "PAGE_COUNT",
       "description": "Auto-registered intake key PAGE_COUNT",
@@ -5075,6 +5044,74 @@
       "opcode": 3046,
       "name": "INSTANT_AVAILABILITY",
       "description": "Auto-registered intake key INSTANT_AVAILABILITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1500,
+      "name": "GAME_STATE",
+      "description": "Active game loop state",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "BOOT",
+        "2": "MENU",
+        "3": "PLAYING",
+        "4": "PAUSED",
+        "5": "GAME_OVER"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1501,
+      "name": "SPATIAL_ENGINE_MODE",
+      "description": "Active spatial indexing and coordinate projection engine",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "2D_GRID",
+        "2": "3D_SPATIAL_OCTREE",
+        "3": "OVERPASS_GEO_CLIENT"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1502,
+      "name": "ACTIVE_ENTITY_COUNT",
+      "description": "Count of live rendered entities / actors in the active scene",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "actors",
+      "is_auto": false
+    },
+    {
+      "opcode": 1503,
+      "name": "TICK_RATE_HZ",
+      "description": "Simulation physics tick rate frequency",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "Hz",
+      "is_auto": false
+    },
+    {
+      "opcode": 1504,
+      "name": "PHYSICS_COLLISION_MODE",
+      "description": "Collision detection strategy",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AABB",
+        "2": "RAYCAST",
+        "3": "SPATIAL_HASH"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1505,
+      "name": "ASSET_BUNDLE_VERSION",
+      "description": "Current PWA asset pack release hash or semantic version",
       "data_type": "STRING_REF",
       "enum_values": {},
       "unit": null,

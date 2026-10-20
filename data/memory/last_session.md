@@ -1,13 +1,13 @@
 # Last Session Log (Tactical Odometer)
-**Timestamp**: 2026-10-19 00:00:00  
-**Operator**: Generic Sentinel  
-**Status**: Zero-State Initialized  
+**Timestamp**: 2026-10-20 15:18:46  
+**Operator**: MadBrad  
+**Status**: Session Finalized via Refresh Protocol (RP)  
 
 ## 1. Summary of Completed Work
-Fresh repository install. Clean unit-record memory registers initialized.
+Diagnosed and resolved token odometer baseline jump from 2-4% to 15-20%. Decoupled static IDE platform overhead (~35k tokens) from active working context payload in dume/odometer.py, restored 120,000 ceiling, and verified fresh session wake baseline returns cleanly to ~3%.
 
 ## 2. Files Touched
-None
+dume/odometer.py
 
 ## 3. Immediate Next Handshake
-- **Target**: Ready for operator instructions. Run `cabinet_wake` to orient.
+- **Target**: 1. Ready for operator directive in fresh chat session upon wake handshake ('Box is the game'). 2. Resume Runway Gen-4 prompt dispatch and DaVinci Resolve automated timeline assembly across the 16 master slate projects, or responsive comparison table checks.
