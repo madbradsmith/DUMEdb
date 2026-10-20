@@ -191,7 +191,7 @@
       "description": "Auto-registered via batch ingestion for SHORTCUT",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "`C:\\Users\\c6182\\Desktop\\Developum Page Manager.lnk`"
+        "1": "`SAMPLE_SHORTCUT.lnk`"
       },
       "unit": null,
       "is_auto": true
@@ -224,7 +224,7 @@
       "description": "Auto-registered via batch ingestion for PATH",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "`C:\\Users\\c6182\\Desktop\\TutumMeum-EXT-V1_0`"
+        "1": "`/workspace/sample_project`"
       },
       "unit": null,
       "is_auto": true

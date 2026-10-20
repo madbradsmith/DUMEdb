@@ -56,3 +56,15 @@ htmlcov/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local Scratch, Deployment & Private Credentials
+deploy_website.py
+run_diag.bat
+inspect_ps_issue.py
+start_dumedb_silent.vbs
+pytest_results.txt
+evolum-lipsum.txt
+make_deliverable_mirror.py
+diag.txt
+*.tmp
+

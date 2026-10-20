@@ -17,11 +17,7 @@ DEFAULT_COMPACT_CEILING = 120_000  # Empirical average trigger ceiling in tokens
 
 def get_latest_transcript_path() -> Optional[Path]:
     """Finds the active conversation's transcript.jsonl by latest modification time."""
-    base_brain = Path(r"C:\Users\c6182\.gemini\antigravity-ide\brain")
-    if not base_brain.exists():
-        # Fallback to current user home
-        base_brain = Path.home() / ".gemini" / "antigravity-ide" / "brain"
-    
+    base_brain = Path.home() / ".gemini" / "antigravity-ide" / "brain"
     if not base_brain.exists():
         return None
 
