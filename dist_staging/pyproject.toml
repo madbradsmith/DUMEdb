@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dumedb"
+version = "1.0.0"
+description = "Hardware-Aligned Zero-Copy Byte-Structured Memory Engine"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "lmdb>=1.4.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.24.0",
+    "pyyaml>=6.0",
+    "mcp>=1.0.0"
+]
+
+[project.scripts]
+dumedb = "dume.server.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dume*"]
+
+[tool.setuptools.package-data]
+"dume" = ["ui/inspector/**/*", "schemas/presets/*.json"]

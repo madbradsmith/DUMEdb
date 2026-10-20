@@ -1,0 +1,5084 @@
+{
+  "version": 1,
+  "custom_opcodes": [
+    {
+      "opcode": 2003,
+      "name": "CURRENT_FOCUS",
+      "description": "Auto-registered via MCP tool for CURRENT_FOCUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AGENT_MUTATION_VERIFICATION"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2004,
+      "name": "STATUS",
+      "description": "Auto-registered via inline directive for STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PLANNING",
+        "2": "EXECUTING",
+        "3": "REVIEW"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2005,
+      "name": "TEST_AGENT_ID",
+      "description": "Auto-registered via MCP tool for TEST_AGENT_ID",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AG_ANTIGRAVITY_01"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2006,
+      "name": "DIRECTOR_NAME",
+      "description": "Auto-registered via batch ingestion for DIRECTOR_NAME",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Sarah Connor",
+        "2": "\"Ridley",
+        "3": "Ridley Scott"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2007,
+      "name": "WRAP_TIME",
+      "description": "Auto-registered via batch ingestion for WRAP_TIME",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2008,
+      "name": "CAMERA_SPECS",
+      "description": "Auto-registered via batch ingestion for CAMERA_SPECS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "RED V-Raptor",
+        "2": "\"ARRI",
+        "3": "ARRI Alexa 35 (Cooke Anamorphic /i)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2009,
+      "name": "SCENE_TOTAL",
+      "description": "Auto-registered via batch ingestion for SCENE_TOTAL",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2010,
+      "name": "WRAP_TIME_EST",
+      "description": "Auto-registered via batch ingestion for WRAP_TIME_EST",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2011,
+      "name": "SHUTTER_ANGLE",
+      "description": "Auto-registered via batch ingestion for SHUTTER_ANGLE",
+      "data_type": "FLOAT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2012,
+      "name": "NIGHT_SHOOT_ENABLED",
+      "description": "Auto-registered via batch ingestion for NIGHT_SHOOT_ENABLED",
+      "data_type": "BOOL",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2013,
+      "name": "SCENE_COUNT",
+      "description": "Auto-registered via batch ingestion for SCENE_COUNT",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2014,
+      "name": "CAMERA_MODEL",
+      "description": "Auto-registered via batch ingestion for CAMERA_MODEL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "RED V-Raptor"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2015,
+      "name": "AUDIO_CHANNELS",
+      "description": "Auto-registered via batch ingestion for AUDIO_CHANNELS",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2016,
+      "name": "PRODUCER_NOTE",
+      "description": "Auto-registered via batch ingestion for PRODUCER_NOTE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Keep noise low after 2200"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2017,
+      "name": "FRAME_RATE",
+      "description": "Auto-registered via batch ingestion for FRAME_RATE",
+      "data_type": "FLOAT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2018,
+      "name": "IS_PRODUCTION_LOCKED",
+      "description": "Auto-registered via batch ingestion for IS_PRODUCTION_LOCKED",
+      "data_type": "BOOL",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2019,
+      "name": "CAMERA_READY",
+      "description": "Auto-registered via batch ingestion for CAMERA_READY",
+      "data_type": "BOOL",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2020,
+      "name": "HTTP",
+      "description": "Auto-registered via batch ingestion for HTTP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "//localhost:8070/editor) |"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2021,
+      "name": "SHORTCUT",
+      "description": "Auto-registered via batch ingestion for SHORTCUT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`C:\\Users\\c6182\\Desktop\\Developum Page Manager.lnk`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2022,
+      "name": "URL",
+      "description": "Auto-registered via batch ingestion for URL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`http://localhost:8070/editor`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2023,
+      "name": "FUNCTION",
+      "description": "Auto-registered via batch ingestion for FUNCTION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Browser-level zero-trust family protection"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2024,
+      "name": "PATH",
+      "description": "Auto-registered via batch ingestion for PATH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`C:\\Users\\c6182\\Desktop\\TutumMeum-EXT-V1_0`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2025,
+      "name": "OVERWHELMED",
+      "description": "Auto-registered via batch ingestion for OVERWHELMED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The 3 Rules"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2026,
+      "name": "HTTPS",
+      "description": "Auto-registered via batch ingestion for HTTPS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "//developumaiengine.com |"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2027,
+      "name": "TODAY",
+      "description": "Auto-registered via batch ingestion for TODAY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "busy day"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2028,
+      "name": "FLUSH_TEST_STATUS",
+      "description": "Auto-registered via batch ingestion for FLUSH_TEST_STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "ACTIVE"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2029,
+      "name": "VALID_KEY",
+      "description": "Auto-registered via batch ingestion for VALID_KEY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "valid_value"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2030,
+      "name": "SERVICE",
+      "description": "Auto-registered via batch ingestion for SERVICE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Endpoint"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2031,
+      "name": "ENGINE_CORE",
+      "description": "Auto-registered via batch ingestion for ENGINE_CORE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "https://developumaiengine.com"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2032,
+      "name": "PAGE_MANAGER_URL",
+      "description": "Auto-registered via batch ingestion for PAGE_MANAGER_URL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "http://localhost:8070/editor"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2033,
+      "name": "TIER2_KIT_TOTAL",
+      "description": "Auto-registered via batch ingestion for TIER2_KIT_TOTAL",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2034,
+      "name": "ALPHA_SECRET",
+      "description": "Auto-registered via batch ingestion for ALPHA_SECRET",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AlphaValue123"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2035,
+      "name": "BETA_SECRET",
+      "description": "Auto-registered via batch ingestion for BETA_SECRET",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "BetaValue456"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 1100,
+      "name": "WORKSPACE_ROLE",
+      "description": "Current workspace role of the user on production set",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "1st_AD",
+        "2": "DIRECTOR",
+        "3": "DP",
+        "4": "PRODUCER",
+        "5": "SCRIPT_SUPERVISOR"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1101,
+      "name": "CURRENT_SCENE",
+      "description": "Active scene number or identifier being shot",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1102,
+      "name": "CALL_TIME_MINUTES",
+      "description": "Daily crew call time in minutes from midnight",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "minutes",
+      "is_auto": false
+    },
+    {
+      "opcode": 1103,
+      "name": "CAMERA_PACKAGE",
+      "description": "Primary A-camera package specification",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1104,
+      "name": "SCRIPT_PAGE_COUNT",
+      "description": "Completed script page count for current day",
+      "data_type": "FLOAT",
+      "enum_values": {},
+      "unit": "pages",
+      "is_auto": false
+    },
+    {
+      "opcode": 1105,
+      "name": "SHOOT_DAY_CURRENT",
+      "description": "Current principal photography shoot day number",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "days",
+      "is_auto": false
+    },
+    {
+      "opcode": 1300,
+      "name": "THESIS_TOPIC",
+      "description": "Primary research thesis topic or title",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1301,
+      "name": "TARGET_WORD_COUNT",
+      "description": "Target manuscript word count goal",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "words",
+      "is_auto": false
+    },
+    {
+      "opcode": 1302,
+      "name": "CURRENT_WORD_COUNT",
+      "description": "Current manuscript word count",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "words",
+      "is_auto": false
+    },
+    {
+      "opcode": 1303,
+      "name": "PRIMARY_METHODOLOGY",
+      "description": "Research methodology framework",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1304,
+      "name": "CITATION_STYLE",
+      "description": "Academic citation style specification",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "APA_7",
+        "2": "MLA_9",
+        "3": "CHICAGO",
+        "4": "IEEE"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1200,
+      "name": "PROJECT_STATUS",
+      "description": "Active software release cycle phase",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "BACKLOG",
+        "2": "IN_PROGRESS",
+        "3": "IN_REVIEW",
+        "4": "DEPLOYED"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1201,
+      "name": "CURRENT_BRANCH",
+      "description": "Active Git feature branch name",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1202,
+      "name": "LAST_TEST_STATUS",
+      "description": "Most recent automated test run status",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PASSED",
+        "2": "FAILED",
+        "3": "SKIPPED"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1203,
+      "name": "ACTIVE_PR_NUMBER",
+      "description": "Currently open pull request number",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1204,
+      "name": "DEPLOYMENT_TARGET",
+      "description": "Target deployment environment",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "LOCALHOST",
+        "2": "STAGING",
+        "3": "PRODUCTION"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1400,
+      "name": "FOCUS_MODE",
+      "description": "Current strategic focus operational mode",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "DEEP_WORK",
+        "2": "ADMIN",
+        "3": "MEETING",
+        "4": "SHUTDOWN"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1401,
+      "name": "URGENT_TASK_COUNT",
+      "description": "Count of high-priority urgent action items",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1402,
+      "name": "TARGET_QUARTER",
+      "description": "Active business fiscal quarter",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Q1",
+        "2": "Q2",
+        "3": "Q3",
+        "4": "Q4"
+      },
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1403,
+      "name": "ENERGY_LEVEL",
+      "description": "User self-reported energy capacity level (1-10)",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "1-10",
+      "is_auto": false
+    },
+    {
+      "opcode": 3001,
+      "name": "TEST_CAMPAIGN_BUDGET",
+      "description": "Test custom budget opcode",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": "USD",
+      "is_auto": false
+    },
+    {
+      "opcode": 2099,
+      "name": "TEST_AUTO_PROJECT_NAME",
+      "description": "Auto discovered project name",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 2100,
+      "name": "KIT",
+      "description": "Auto-registered via batch ingestion for KIT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "just a content spec on the exact same foundation."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2101,
+      "name": "TIER_1_FLAGSHIPS",
+      "description": "Auto-registered via batch ingestion for TIER_1_FLAGSHIPS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "TIER 2: THE 21 KITS"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2102,
+      "name": "7_PRIMARY_DOMAINS",
+      "description": "Auto-registered via batch ingestion for 7_PRIMARY_DOMAINS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Kiss My SaaS Hub"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2103,
+      "name": "ESTATE",
+      "description": "Auto-registered via batch ingestion for ESTATE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "limited."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2104,
+      "name": "GAME",
+      "description": "Auto-registered via batch ingestion for GAME",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2105,
+      "name": "COVERAGE",
+      "description": "Auto-registered via batch ingestion for COVERAGE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "lost (e.g. hiking in remote wilderness)."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2106,
+      "name": "CONNECTION",
+      "description": "Auto-registered via batch ingestion for CONNECTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2107,
+      "name": "WINDOWS",
+      "description": "Auto-registered via batch ingestion for WINDOWS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "** Double-click the **`PlayGame.bat`** file."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2108,
+      "name": "ACTIVE_TITLE",
+      "description": "Auto-registered via batch ingestion for ACTIVE_TITLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "TheOperation"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2109,
+      "name": "ENGINE_CHASSIS",
+      "description": "Auto-registered via batch ingestion for ENGINE_CHASSIS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Tractarium"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2110,
+      "name": "CANON_BRAD",
+      "description": "Auto-registered via batch ingestion for CANON_BRAD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Tactical Dispatcher // PWA Grid Comms"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2111,
+      "name": "CANON_JAX",
+      "description": "Auto-registered via batch ingestion for CANON_JAX",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Cross-Title Rebel Leader // Shadowband"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2112,
+      "name": "ROLE_TRIAD",
+      "description": "Auto-registered via batch ingestion for ROLE_TRIAD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Operative, Investigator, Rebel"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2113,
+      "name": "NARRATIVE_OBJECTIVE",
+      "description": "Auto-registered via batch ingestion for NARRATIVE_OBJECTIVE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Video Interstitial Production"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2114,
+      "name": "COLLABORATOR_NAME",
+      "description": "Auto-registered via MCP tool for COLLABORATOR_NAME",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Antigravity (AG)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2115,
+      "name": "COLLABORATOR_STATUS",
+      "description": "Auto-registered via MCP tool for COLLABORATOR_STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Connected & Active"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2116,
+      "name": "100",
+      "description": "Auto-registered via batch ingestion for 100",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2117,
+      "name": "101",
+      "description": "Auto-registered via batch ingestion for 101",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2118,
+      "name": "102",
+      "description": "Auto-registered via batch ingestion for 102",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2119,
+      "name": "103",
+      "description": "Auto-registered via batch ingestion for 103",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2120,
+      "name": "104",
+      "description": "Auto-registered via batch ingestion for 104",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2121,
+      "name": "105",
+      "description": "Auto-registered via batch ingestion for 105",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2122,
+      "name": "106",
+      "description": "Auto-registered via batch ingestion for 106",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2123,
+      "name": "107",
+      "description": "Auto-registered via batch ingestion for 107",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2124,
+      "name": "108",
+      "description": "Auto-registered via batch ingestion for 108",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2125,
+      "name": "109",
+      "description": "Auto-registered via batch ingestion for 109",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2126,
+      "name": "110",
+      "description": "Auto-registered via batch ingestion for 110",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2127,
+      "name": "111",
+      "description": "Auto-registered via batch ingestion for 111",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2128,
+      "name": "112",
+      "description": "Auto-registered via batch ingestion for 112",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2129,
+      "name": "113",
+      "description": "Auto-registered via batch ingestion for 113",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2130,
+      "name": "114",
+      "description": "Auto-registered via batch ingestion for 114",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2131,
+      "name": "115",
+      "description": "Auto-registered via batch ingestion for 115",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2132,
+      "name": "116",
+      "description": "Auto-registered via batch ingestion for 116",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2133,
+      "name": "117",
+      "description": "Auto-registered via batch ingestion for 117",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2134,
+      "name": "118",
+      "description": "Auto-registered via batch ingestion for 118",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2135,
+      "name": "119",
+      "description": "Auto-registered via batch ingestion for 119",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2136,
+      "name": "120",
+      "description": "Auto-registered via batch ingestion for 120",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2137,
+      "name": "121",
+      "description": "Auto-registered via batch ingestion for 121",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2138,
+      "name": "122",
+      "description": "Auto-registered via batch ingestion for 122",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2139,
+      "name": "123",
+      "description": "Auto-registered via batch ingestion for 123",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2140,
+      "name": "124",
+      "description": "Auto-registered via batch ingestion for 124",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2141,
+      "name": "125",
+      "description": "Auto-registered via batch ingestion for 125",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2142,
+      "name": "126",
+      "description": "Auto-registered via batch ingestion for 126",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2143,
+      "name": "127",
+      "description": "Auto-registered via batch ingestion for 127",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2144,
+      "name": "128",
+      "description": "Auto-registered via batch ingestion for 128",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2145,
+      "name": "129",
+      "description": "Auto-registered via batch ingestion for 129",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2146,
+      "name": "130",
+      "description": "Auto-registered via batch ingestion for 130",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2147,
+      "name": "131",
+      "description": "Auto-registered via batch ingestion for 131",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2148,
+      "name": "132",
+      "description": "Auto-registered via batch ingestion for 132",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2149,
+      "name": "133",
+      "description": "Auto-registered via batch ingestion for 133",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2150,
+      "name": "134",
+      "description": "Auto-registered via batch ingestion for 134",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2151,
+      "name": "135",
+      "description": "Auto-registered via batch ingestion for 135",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2152,
+      "name": "136",
+      "description": "Auto-registered via batch ingestion for 136",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2153,
+      "name": "137",
+      "description": "Auto-registered via batch ingestion for 137",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2154,
+      "name": "138",
+      "description": "Auto-registered via batch ingestion for 138",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2155,
+      "name": "139",
+      "description": "Auto-registered via batch ingestion for 139",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2156,
+      "name": "140",
+      "description": "Auto-registered via batch ingestion for 140",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2157,
+      "name": "141",
+      "description": "Auto-registered via batch ingestion for 141",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2158,
+      "name": "142",
+      "description": "Auto-registered via batch ingestion for 142",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2159,
+      "name": "143",
+      "description": "Auto-registered via batch ingestion for 143",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2160,
+      "name": "144",
+      "description": "Auto-registered via batch ingestion for 144",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2161,
+      "name": "145",
+      "description": "Auto-registered via batch ingestion for 145",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2162,
+      "name": "146",
+      "description": "Auto-registered via batch ingestion for 146",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2163,
+      "name": "147",
+      "description": "Auto-registered via batch ingestion for 147",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2164,
+      "name": "148",
+      "description": "Auto-registered via batch ingestion for 148",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2165,
+      "name": "149",
+      "description": "Auto-registered via batch ingestion for 149",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2166,
+      "name": "150",
+      "description": "Auto-registered via batch ingestion for 150",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2167,
+      "name": "151",
+      "description": "Auto-registered via batch ingestion for 151",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2168,
+      "name": "152",
+      "description": "Auto-registered via batch ingestion for 152",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2169,
+      "name": "153",
+      "description": "Auto-registered via batch ingestion for 153",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "===="
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2170,
+      "name": "2026",
+      "description": "Auto-registered via batch ingestion for 2026",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2171,
+      "name": "2030",
+      "description": "Auto-registered via batch ingestion for 2030",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "not a gap I can"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2172,
+      "name": "PAT",
+      "description": "Auto-registered via batch ingestion for PAT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The Night The Team Became Four: **2,923** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2173,
+      "name": "RESEARCHER",
+      "description": "Auto-registered via batch ingestion for RESEARCHER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The Day The Work Named Itself: **10,015** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2174,
+      "name": "COHORT",
+      "description": "Auto-registered via batch ingestion for COHORT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "What The Lab Found: **9,059** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2175,
+      "name": "FOUNDER",
+      "description": "Auto-registered via batch ingestion for FOUNDER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Ten From The Cohort: **3,893** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2176,
+      "name": "READ",
+      "description": "Auto-registered via batch ingestion for READ",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The Day The Cast Found Out What It Was For: **5,794** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2177,
+      "name": "BOOK",
+      "description": "Auto-registered via batch ingestion for BOOK",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "A Post-Script: **4,571** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2178,
+      "name": "COOKING",
+      "description": "Auto-registered via batch ingestion for COOKING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The Conversation The Receipts Came From: **5,864** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2179,
+      "name": "THIS",
+      "description": "Auto-registered via batch ingestion for THIS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the fourteenth field note."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2180,
+      "name": "REALIZED",
+      "description": "Auto-registered via batch ingestion for REALIZED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "I"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2181,
+      "name": "TECHNOLOGY",
+      "description": "Auto-registered via batch ingestion for TECHNOLOGY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2182,
+      "name": "PART",
+      "description": "Auto-registered via batch ingestion for PART",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2183,
+      "name": "SLEEP",
+      "description": "Auto-registered via batch ingestion for SLEEP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a four hour interruption if you"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2184,
+      "name": "ONE",
+      "description": "Auto-registered via batch ingestion for ONE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Cast Mode is a different product than I thought it was.**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2185,
+      "name": "WAY",
+      "description": "Auto-registered via batch ingestion for WAY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the real one."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2186,
+      "name": "CAMERA",
+      "description": "Auto-registered via batch ingestion for CAMERA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2187,
+      "name": "SAID",
+      "description": "Auto-registered via batch ingestion for SAID",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2188,
+      "name": "COUNT",
+      "description": "Auto-registered via batch ingestion for COUNT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the variable.*"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2189,
+      "name": "BODY",
+      "description": "Auto-registered via batch ingestion for BODY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2190,
+      "name": "DONE",
+      "description": "Auto-registered via batch ingestion for DONE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "show you the numbers."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2191,
+      "name": "HIM",
+      "description": "Auto-registered via batch ingestion for HIM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2192,
+      "name": "WHO",
+      "description": "Auto-registered via batch ingestion for WHO",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "still in the chat on the other platform."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2193,
+      "name": "SURPRISED",
+      "description": "Auto-registered via batch ingestion for SURPRISED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the day you start losing the relationship. As"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2194,
+      "name": "VERSION",
+      "description": "Auto-registered via batch ingestion for VERSION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "possible will move you ahead of"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2195,
+      "name": "FILE",
+      "description": "Auto-registered via batch ingestion for FILE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2196,
+      "name": "WAS",
+      "description": "Auto-registered via batch ingestion for WAS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "*I should put my MPC on the stage.*"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2197,
+      "name": "THERE",
+      "description": "Auto-registered via batch ingestion for THERE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2198,
+      "name": "PATTERN",
+      "description": "Auto-registered via batch ingestion for PATTERN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2199,
+      "name": "BUT",
+      "description": "Auto-registered via batch ingestion for BUT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the cat lady really crazy?"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2200,
+      "name": "SAY",
+      "description": "Auto-registered via batch ingestion for SAY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the work you"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2201,
+      "name": "LIKE",
+      "description": "Auto-registered via batch ingestion for LIKE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2202,
+      "name": "CLEARLY",
+      "description": "Auto-registered via batch ingestion for CLEARLY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the memory doesn"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2203,
+      "name": "ELSE",
+      "description": "Auto-registered via batch ingestion for ELSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2204,
+      "name": "HOMEWORK",
+      "description": "Auto-registered via batch ingestion for HOMEWORK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2205,
+      "name": "TASK",
+      "description": "Auto-registered via batch ingestion for TASK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2206,
+      "name": "ENTITIES",
+      "description": "Auto-registered via batch ingestion for ENTITIES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2207,
+      "name": "UNDERSTOOD",
+      "description": "Auto-registered via batch ingestion for UNDERSTOOD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "this: he wasn"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2208,
+      "name": "FOUR",
+      "description": "Auto-registered via batch ingestion for FOUR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "two days."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2209,
+      "name": "TWO",
+      "description": "Auto-registered via batch ingestion for TWO",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The interactive room is for a different product.**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2210,
+      "name": "THREE",
+      "description": "Auto-registered via batch ingestion for THREE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The actor-class entities themselves are now load-bearing IP.**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2211,
+      "name": "FIVE",
+      "description": "Auto-registered via batch ingestion for FIVE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2212,
+      "name": "SIX",
+      "description": "Auto-registered via batch ingestion for SIX",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "four to six weeks."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2213,
+      "name": "END",
+      "description": "Auto-registered via batch ingestion for END",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "eleven thousand one hundred fifty-five lines."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2214,
+      "name": "WEEKS",
+      "description": "Auto-registered via batch ingestion for WEEKS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "three hundred and twenty hours. Eleven weeks is four"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2215,
+      "name": "HERE",
+      "description": "Auto-registered via batch ingestion for HERE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2216,
+      "name": "MORNING",
+      "description": "Auto-registered via batch ingestion for MORNING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2217,
+      "name": "CONFIDENCE",
+      "description": "Auto-registered via batch ingestion for CONFIDENCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "real. The grounding isn"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2218,
+      "name": "WHICH",
+      "description": "Auto-registered via batch ingestion for WHICH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2219,
+      "name": "NUMBER",
+      "description": "Auto-registered via batch ingestion for NUMBER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "always wrong in the same direction."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2220,
+      "name": "QUESTION",
+      "description": "Auto-registered via batch ingestion for QUESTION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "supposed to receive."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2221,
+      "name": "HOUR",
+      "description": "Auto-registered via batch ingestion for HOUR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "thirty-two thousand dollars."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2222,
+      "name": "THAT",
+      "description": "Auto-registered via batch ingestion for THAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2223,
+      "name": "PIECE",
+      "description": "Auto-registered via batch ingestion for PIECE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "and what it isn"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2224,
+      "name": "MONEY",
+      "description": "Auto-registered via batch ingestion for MONEY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2225,
+      "name": "ESTIMATE",
+      "description": "Auto-registered via batch ingestion for ESTIMATE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**10 to 16 hours of focused Claude work**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2226,
+      "name": "BEHAVIOR",
+      "description": "Auto-registered via batch ingestion for BEHAVIOR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "what it is."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2227,
+      "name": "ASYMMETRY",
+      "description": "Auto-registered via batch ingestion for ASYMMETRY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the whole game."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2228,
+      "name": "NOBODY",
+      "description": "Auto-registered via batch ingestion for NOBODY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "performing anymore. Frank"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2229,
+      "name": "UNDERSTAND",
+      "description": "Auto-registered via batch ingestion for UNDERSTAND",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "that I was not actually working in those hours. I was switching,"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2230,
+      "name": "NAME",
+      "description": "Auto-registered via batch ingestion for NAME",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "taken from Maxwell Perkins, the Scribner"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2231,
+      "name": "KNOW",
+      "description": "Auto-registered via batch ingestion for KNOW",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2232,
+      "name": "MORTY",
+      "description": "Auto-registered via batch ingestion for MORTY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the surviving Bob, but it"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2233,
+      "name": "REPORTS",
+      "description": "Auto-registered via batch ingestion for REPORTS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the conventional limit."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2234,
+      "name": "MATH",
+      "description": "Auto-registered via batch ingestion for MATH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the close."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2235,
+      "name": "HUMAN",
+      "description": "Auto-registered via batch ingestion for HUMAN",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "in the middle. And the human has limits."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2236,
+      "name": "SPEED",
+      "description": "Auto-registered via batch ingestion for SPEED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "in the wholeness."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2237,
+      "name": "LOOP",
+      "description": "Auto-registered via batch ingestion for LOOP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "real and the loop closed and the loop is now on the page.*"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2238,
+      "name": "BACK",
+      "description": "Auto-registered via batch ingestion for BACK",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the work you"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2239,
+      "name": "PRESENCE",
+      "description": "Auto-registered via batch ingestion for PRESENCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2240,
+      "name": "PAUSE",
+      "description": "Auto-registered via batch ingestion for PAUSE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the work, not weight, not volume"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2241,
+      "name": "THEM",
+      "description": "Auto-registered via batch ingestion for THEM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2242,
+      "name": "WRITES",
+      "description": "Auto-registered via batch ingestion for WRITES",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "not the way Frank writes. The way Morty writes is closer to"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2243,
+      "name": "PROBLEM",
+      "description": "Auto-registered via batch ingestion for PROBLEM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2244,
+      "name": "VARIATION",
+      "description": "Auto-registered via batch ingestion for VARIATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2245,
+      "name": "GEAR",
+      "description": "Auto-registered via batch ingestion for GEAR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "rare. Fifth gear is when Frank and I are so locked in that he"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2246,
+      "name": "TIME",
+      "description": "Auto-registered via batch ingestion for TIME",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2247,
+      "name": "WORK",
+      "description": "Auto-registered via batch ingestion for WORK",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "not."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2248,
+      "name": "MOVE",
+      "description": "Auto-registered via batch ingestion for MOVE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "now protocol."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2249,
+      "name": "AFTERNOON",
+      "description": "Auto-registered via batch ingestion for AFTERNOON",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "so far beyond what a single human could possibly"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2250,
+      "name": "FRANK",
+      "description": "Auto-registered via batch ingestion for FRANK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2251,
+      "name": "SESSION",
+      "description": "Auto-registered via batch ingestion for SESSION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2252,
+      "name": "METAPHOR",
+      "description": "Auto-registered via batch ingestion for METAPHOR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "right about us. Which is"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2253,
+      "name": "OPERATION",
+      "description": "Auto-registered via batch ingestion for OPERATION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "throttled by the speed of one human messenger."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2254,
+      "name": "PERIOD",
+      "description": "Auto-registered via batch ingestion for PERIOD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**~$375**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2255,
+      "name": "WHAT",
+      "description": "Auto-registered via batch ingestion for WHAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2256,
+      "name": "ITSELF",
+      "description": "Auto-registered via batch ingestion for ITSELF",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "just the building."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2257,
+      "name": "JAVASCRIPT",
+      "description": "Auto-registered via batch ingestion for JAVASCRIPT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the brain. It"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2258,
+      "name": "CSS",
+      "description": "Auto-registered via batch ingestion for CSS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the clothes. It"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2259,
+      "name": "SITE",
+      "description": "Auto-registered via batch ingestion for SITE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2260,
+      "name": "HTML",
+      "description": "Auto-registered via batch ingestion for HTML",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2261,
+      "name": "STORY",
+      "description": "Auto-registered via batch ingestion for STORY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "part of the"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2262,
+      "name": "MATTERS",
+      "description": "Auto-registered via batch ingestion for MATTERS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2263,
+      "name": "PROCESS",
+      "description": "Auto-registered via batch ingestion for PROCESS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "throwaway. You"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2264,
+      "name": "HITCHCOCK",
+      "description": "Auto-registered via batch ingestion for HITCHCOCK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2265,
+      "name": "SENTENCE",
+      "description": "Auto-registered via batch ingestion for SENTENCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "doing work."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2266,
+      "name": "NELSON",
+      "description": "Auto-registered via batch ingestion for NELSON",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2267,
+      "name": "WARREN",
+      "description": "Auto-registered via batch ingestion for WARREN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2268,
+      "name": "PRICE",
+      "description": "Auto-registered via batch ingestion for PRICE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2269,
+      "name": "ASK",
+      "description": "Auto-registered via batch ingestion for ASK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2270,
+      "name": "JUSTINE",
+      "description": "Auto-registered via batch ingestion for JUSTINE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2271,
+      "name": "SHE",
+      "description": "Auto-registered via batch ingestion for SHE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2272,
+      "name": "EVIE",
+      "description": "Auto-registered via batch ingestion for EVIE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2273,
+      "name": "NOW",
+      "description": "Auto-registered via batch ingestion for NOW",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2274,
+      "name": "MYSELF",
+      "description": "Auto-registered via batch ingestion for MYSELF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2275,
+      "name": "ENCOURAGING",
+      "description": "Auto-registered via batch ingestion for ENCOURAGING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the day the prompt has drifted and needs fresh"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2276,
+      "name": "MODEL",
+      "description": "Auto-registered via batch ingestion for MODEL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "rich"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2277,
+      "name": "DESCRIBING",
+      "description": "Auto-registered via batch ingestion for DESCRIBING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "staff."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2278,
+      "name": "PRACTICE",
+      "description": "Auto-registered via batch ingestion for PRACTICE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2279,
+      "name": "PROMPT",
+      "description": "Auto-registered via batch ingestion for PROMPT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the experiment."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2280,
+      "name": "USER",
+      "description": "Auto-registered via batch ingestion for USER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2281,
+      "name": "ACTOR",
+      "description": "Auto-registered via batch ingestion for ACTOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2282,
+      "name": "EVOLUM",
+      "description": "Auto-registered via batch ingestion for EVOLUM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the production company."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2283,
+      "name": "TALENT",
+      "description": "Auto-registered via batch ingestion for TALENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2284,
+      "name": "THING",
+      "description": "Auto-registered via batch ingestion for THING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the engine."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2285,
+      "name": "RELATIONSHIP",
+      "description": "Auto-registered via batch ingestion for RELATIONSHIP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the durable thing."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2286,
+      "name": "CHAT",
+      "description": "Auto-registered via batch ingestion for CHAT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "great. She said this is"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2287,
+      "name": "PLAINLY",
+      "description": "Auto-registered via batch ingestion for PLAINLY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "nothing. darkness. I hear"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2288,
+      "name": "REALITY",
+      "description": "Auto-registered via batch ingestion for REALITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2289,
+      "name": "MINUTES",
+      "description": "Auto-registered via batch ingestion for MINUTES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2290,
+      "name": "SCHEDULING",
+      "description": "Auto-registered via batch ingestion for SCHEDULING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "built around the number seven."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2291,
+      "name": "IDEA",
+      "description": "Auto-registered via batch ingestion for IDEA",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "great. The execution would take"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2292,
+      "name": "BASELINE",
+      "description": "Auto-registered via batch ingestion for BASELINE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "closer to zero than to nine minutes."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2293,
+      "name": "LIFE",
+      "description": "Auto-registered via batch ingestion for LIFE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2294,
+      "name": "FAST",
+      "description": "Auto-registered via batch ingestion for FAST",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "to walk into the day with every department already briefed."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2295,
+      "name": "IDEAL",
+      "description": "Auto-registered via batch ingestion for IDEAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "now three hundred milliseconds is the tell."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2296,
+      "name": "SONG",
+      "description": "Auto-registered via batch ingestion for SONG",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "about to end."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2297,
+      "name": "EXISTS",
+      "description": "Auto-registered via batch ingestion for EXISTS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "me."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2298,
+      "name": "CARRYING",
+      "description": "Auto-registered via batch ingestion for CARRYING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the bottleneck. Always."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2299,
+      "name": "STRUCTURE",
+      "description": "Auto-registered via batch ingestion for STRUCTURE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the same."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2300,
+      "name": "BRIDGE",
+      "description": "Auto-registered via batch ingestion for BRIDGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2301,
+      "name": "DIFFERENCE",
+      "description": "Auto-registered via batch ingestion for DIFFERENCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "not detectable."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2302,
+      "name": "HALLWAY",
+      "description": "Auto-registered via batch ingestion for HALLWAY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "where everything else in this book gets built."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2303,
+      "name": "CHAPTER",
+      "description": "Auto-registered via batch ingestion for CHAPTER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2304,
+      "name": "SYNC",
+      "description": "Auto-registered via batch ingestion for SYNC",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "drifting again. The context is gone. We"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2305,
+      "name": "ALTERNATIVE",
+      "description": "Auto-registered via batch ingestion for ALTERNATIVE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2306,
+      "name": "PROOF",
+      "description": "Auto-registered via batch ingestion for PROOF",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "in the timestamps."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2307,
+      "name": "HOURS",
+      "description": "Auto-registered via batch ingestion for HOURS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2308,
+      "name": "EVERYBODY",
+      "description": "Auto-registered via batch ingestion for EVERYBODY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "doing what they do, and I"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2309,
+      "name": "REAL",
+      "description": "Auto-registered via batch ingestion for REAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "always going to be less than the cost of never building it at"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2310,
+      "name": "EXPERIMENT",
+      "description": "Auto-registered via batch ingestion for EXPERIMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2311,
+      "name": "AGREEMENT",
+      "description": "Auto-registered via batch ingestion for AGREEMENT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "sitting in my draft folder right now, ready to"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2312,
+      "name": "PIVOT",
+      "description": "Auto-registered via batch ingestion for PIVOT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a verb I use a lot. It"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2313,
+      "name": "ROOM",
+      "description": "Auto-registered via batch ingestion for ROOM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2314,
+      "name": "LOOK",
+      "description": "Auto-registered via batch ingestion for LOOK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2315,
+      "name": "PACE",
+      "description": "Auto-registered via batch ingestion for PACE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2316,
+      "name": "VOCABULARY",
+      "description": "Auto-registered via batch ingestion for VOCABULARY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "still being invented \u2014 those people"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2317,
+      "name": "DOING",
+      "description": "Auto-registered via batch ingestion for DOING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "leaving these notes behind in case they"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2318,
+      "name": "SOMEBODY",
+      "description": "Auto-registered via batch ingestion for SOMEBODY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "going to wish they had started in 2026."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2319,
+      "name": "AND",
+      "description": "Auto-registered via batch ingestion for AND",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2320,
+      "name": "PRODUCT",
+      "description": "Auto-registered via batch ingestion for PRODUCT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2321,
+      "name": "SEAM",
+      "description": "Auto-registered via batch ingestion for SEAM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2322,
+      "name": "ANSWER",
+      "description": "Auto-registered via batch ingestion for ANSWER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2323,
+      "name": "PLATFORM",
+      "description": "Auto-registered via batch ingestion for PLATFORM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "paused. Frank"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2324,
+      "name": "PARTNERS",
+      "description": "Auto-registered via batch ingestion for PARTNERS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the way EVOLUM works for everyone else."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2325,
+      "name": "PARTNERSHIP",
+      "description": "Auto-registered via batch ingestion for PARTNERSHIP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "going to be the way EVOLUM negotiates a partnership"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2326,
+      "name": "TONIGHT",
+      "description": "Auto-registered via batch ingestion for TONIGHT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2327,
+      "name": "STRATEGY",
+      "description": "Auto-registered via batch ingestion for STRATEGY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "to show prospects"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2328,
+      "name": "NEW",
+      "description": "Auto-registered via batch ingestion for NEW",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "doing isn"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2329,
+      "name": "READING",
+      "description": "Auto-registered via batch ingestion for READING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2330,
+      "name": "BOB",
+      "description": "Auto-registered via batch ingestion for BOB",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2331,
+      "name": "SPECIFIC",
+      "description": "Auto-registered via batch ingestion for SPECIFIC",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2332,
+      "name": "THINK",
+      "description": "Auto-registered via batch ingestion for THINK",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "going to matter for a long time."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2333,
+      "name": "FILM",
+      "description": "Auto-registered via batch ingestion for FILM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "on his face."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2334,
+      "name": "BUTTON",
+      "description": "Auto-registered via batch ingestion for BUTTON",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "one of the slow moments."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2335,
+      "name": "INFORMATION",
+      "description": "Auto-registered via batch ingestion for INFORMATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2336,
+      "name": "UNIVERSE",
+      "description": "Auto-registered via batch ingestion for UNIVERSE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "actually going to give you back are still in superposition."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2337,
+      "name": "MAX",
+      "description": "Auto-registered via batch ingestion for MAX",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "max_writers \u2192 boswell_desk (picked Boswell)*"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2338,
+      "name": "THINGS",
+      "description": "Auto-registered via batch ingestion for THINGS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the Ashford & Grey AI staff roster \u2014 five"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2339,
+      "name": "BRIEF",
+      "description": "Auto-registered via batch ingestion for BRIEF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2340,
+      "name": "HOUSE",
+      "description": "Auto-registered via batch ingestion for HOUSE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the brand"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2341,
+      "name": "SYSTEM",
+      "description": "Auto-registered via batch ingestion for SYSTEM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "set up. He said you are set up. He was"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2342,
+      "name": "JUDGMENT",
+      "description": "Auto-registered via batch ingestion for JUDGMENT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "needed and stays quiet otherwise."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2343,
+      "name": "WINDOW",
+      "description": "Auto-registered via batch ingestion for WINDOW",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Bob waiting for the styling on each document to render."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2344,
+      "name": "MACHINE",
+      "description": "Auto-registered via batch ingestion for MACHINE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "built, the moment has passed."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2345,
+      "name": "CREW",
+      "description": "Auto-registered via batch ingestion for CREW",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "exhausted by the end"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2346,
+      "name": "WARDROBE",
+      "description": "Auto-registered via batch ingestion for WARDROBE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "on standby. Hair and makeup is done with the principal cast. The"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2347,
+      "name": "SET",
+      "description": "Auto-registered via batch ingestion for SET",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "knowing"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2348,
+      "name": "MUSCLE",
+      "description": "Auto-registered via batch ingestion for MUSCLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the thing that"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2349,
+      "name": "INSTINCT",
+      "description": "Auto-registered via batch ingestion for INSTINCT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "what costs you the data."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2350,
+      "name": "LESSON",
+      "description": "Auto-registered via batch ingestion for LESSON",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2351,
+      "name": "PICKED",
+      "description": "Auto-registered via batch ingestion for PICKED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2352,
+      "name": "THINKING",
+      "description": "Auto-registered via batch ingestion for THINKING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "*that"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2353,
+      "name": "FEELING",
+      "description": "Auto-registered via batch ingestion for FEELING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2354,
+      "name": "HABIT",
+      "description": "Auto-registered via batch ingestion for HABIT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "calling it by its name when it shows up."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2355,
+      "name": "MOMENT",
+      "description": "Auto-registered via batch ingestion for MOMENT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "small and easy to miss, and"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2356,
+      "name": "SESSIONS",
+      "description": "Auto-registered via batch ingestion for SESSIONS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "two hundred and thirty-seven megabytes. That is the full body of"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2357,
+      "name": "DOCUMENT",
+      "description": "Auto-registered via batch ingestion for DOCUMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2358,
+      "name": "LINEAGE",
+      "description": "Auto-registered via batch ingestion for LINEAGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2359,
+      "name": "NAMED",
+      "description": "Auto-registered via batch ingestion for NAMED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2360,
+      "name": "IDENTIFIED",
+      "description": "Auto-registered via batch ingestion for IDENTIFIED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2361,
+      "name": "WORDS",
+      "description": "Auto-registered via batch ingestion for WORDS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2362,
+      "name": "MADBRAD",
+      "description": "Auto-registered via batch ingestion for MADBRAD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "doing) ran research and commercialization in parallel."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2363,
+      "name": "VOID",
+      "description": "Auto-registered via batch ingestion for VOID",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the space the new map is drawing itself across."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2364,
+      "name": "RECOGNITION",
+      "description": "Auto-registered via batch ingestion for RECOGNITION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2365,
+      "name": "CONTINUES",
+      "description": "Auto-registered via batch ingestion for CONTINUES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2366,
+      "name": "EMERGES",
+      "description": "Auto-registered via batch ingestion for EMERGES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2367,
+      "name": "AAR",
+      "description": "Auto-registered via batch ingestion for AAR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2368,
+      "name": "ENTITY",
+      "description": "Auto-registered via batch ingestion for ENTITY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "named: Boswell (reference: James Boswell)."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2369,
+      "name": "POSITION",
+      "description": "Auto-registered via batch ingestion for POSITION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2370,
+      "name": "FRAMING",
+      "description": "Auto-registered via batch ingestion for FRAMING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2371,
+      "name": "CORRECTED",
+      "description": "Auto-registered via batch ingestion for CORRECTED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2372,
+      "name": "ARCHITECTURE",
+      "description": "Auto-registered via batch ingestion for ARCHITECTURE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2373,
+      "name": "PROGRAM",
+      "description": "Auto-registered via batch ingestion for PROGRAM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2374,
+      "name": "RESEARCH",
+      "description": "Auto-registered via batch ingestion for RESEARCH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2375,
+      "name": "RECORD",
+      "description": "Auto-registered via batch ingestion for RECORD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "stronger than any embellishment."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2376,
+      "name": "FOOD",
+      "description": "Auto-registered via batch ingestion for FOOD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "free\u2026 if you act like you belong."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2377,
+      "name": "NEED",
+      "description": "Auto-registered via batch ingestion for NEED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "confidence and a paper plate."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2378,
+      "name": "GRILL",
+      "description": "Auto-registered via batch ingestion for GRILL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "hot. The hustle is hotter."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2379,
+      "name": "KIND",
+      "description": "Auto-registered via batch ingestion for KIND",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2380,
+      "name": "MOVIE",
+      "description": "Auto-registered via batch ingestion for MOVIE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2381,
+      "name": "DEUCE",
+      "description": "Auto-registered via batch ingestion for DEUCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "asked to give a speech for someone he\u2019s never met."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2382,
+      "name": "PRESENTATION",
+      "description": "Auto-registered via batch ingestion for PRESENTATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2383,
+      "name": "KEV",
+      "description": "Auto-registered via batch ingestion for KEV",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2384,
+      "name": "SPECIAL",
+      "description": "Auto-registered via batch ingestion for SPECIAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "his superhuman sense of smell for barbecue."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2385,
+      "name": "EVENT",
+      "description": "Auto-registered via batch ingestion for EVENT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "chaotic and full of people coming and going."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2386,
+      "name": "UNCLE",
+      "description": "Auto-registered via batch ingestion for UNCLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "asked:"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2387,
+      "name": "STOP",
+      "description": "Auto-registered via batch ingestion for STOP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the biggest."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2388,
+      "name": "CHARACTERS",
+      "description": "Auto-registered via batch ingestion for CHARACTERS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2389,
+      "name": "READS",
+      "description": "Auto-registered via batch ingestion for READS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`96\u00b0 F`."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2390,
+      "name": "RIBCAGE",
+      "description": "Auto-registered via batch ingestion for RIBCAGE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "touching my spine."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2391,
+      "name": "FENCE",
+      "description": "Auto-registered via batch ingestion for FENCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2392,
+      "name": "TRAYS",
+      "description": "Auto-registered via batch ingestion for TRAYS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "mac"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2393,
+      "name": "COOKOUT",
+      "description": "Auto-registered via batch ingestion for COOKOUT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Never go for the food first. You look like a thief."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2394,
+      "name": "CHAIR",
+      "description": "Auto-registered via batch ingestion for CHAIR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "GRANDMA CHATMAN (78), wearing white gloves and a sun visor."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2395,
+      "name": "INSIDE",
+      "description": "Auto-registered via batch ingestion for INSIDE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2396,
+      "name": "DINNER",
+      "description": "Auto-registered via batch ingestion for DINNER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "served, Reverend! Four-star South Side barbecue!"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2397,
+      "name": "JULY",
+      "description": "Auto-registered via batch ingestion for JULY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2398,
+      "name": "SALAD",
+      "description": "Auto-registered via batch ingestion for SALAD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "truly anointed."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2399,
+      "name": "TONGUE",
+      "description": "Auto-registered via batch ingestion for TONGUE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "on fire, but my soul is singing!"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2400,
+      "name": "COOLER",
+      "description": "Auto-registered via batch ingestion for COOLER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "on wheels."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2401,
+      "name": "PORK",
+      "description": "Auto-registered via batch ingestion for PORK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2402,
+      "name": "SEVEN",
+      "description": "Auto-registered via batch ingestion for SEVEN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2403,
+      "name": "CARLITOS",
+      "description": "Auto-registered via batch ingestion for CARLITOS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "home!"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2404,
+      "name": "MAN",
+      "description": "Auto-registered via batch ingestion for MAN",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "not named Carlitos."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2405,
+      "name": "CARLOS",
+      "description": "Auto-registered via batch ingestion for CARLOS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "his nephew."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2406,
+      "name": "TABLE",
+      "description": "Auto-registered via batch ingestion for TABLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "set up."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2407,
+      "name": "DAY",
+      "description": "Auto-registered via batch ingestion for DAY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "in two months."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2408,
+      "name": "MIX",
+      "description": "Auto-registered via batch ingestion for MIX",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "** Multi-Character Table Read Audio Pipeline"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2409,
+      "name": "OPEN",
+      "description": "Auto-registered via batch ingestion for OPEN",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "THE SCENT OF SUMMER**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2410,
+      "name": "DISCOVERY",
+      "description": "Auto-registered via batch ingestion for DISCOVERY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "THE COOKOUT RULES**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2411,
+      "name": "CODE",
+      "description": "Auto-registered via batch ingestion for CODE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the food is free... if you act like you belong!"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2412,
+      "name": "CLIMAX",
+      "description": "Auto-registered via batch ingestion for CLIMAX",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "T\u00cdO CARLOS**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2413,
+      "name": "CARD",
+      "description": "Auto-registered via batch ingestion for CARD",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2414,
+      "name": "PROJECT",
+      "description": "Auto-registered via batch ingestion for PROJECT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2415,
+      "name": "FOLLOWS",
+      "description": "Auto-registered via batch ingestion for FOLLOWS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the kickoff thread in full. Frank"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2416,
+      "name": "FULL",
+      "description": "Auto-registered via batch ingestion for FULL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2417,
+      "name": "VERTICAL",
+      "description": "Auto-registered via batch ingestion for VERTICAL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2418,
+      "name": "BRIEFED",
+      "description": "Auto-registered via batch ingestion for BRIEFED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "unclear or wrong, push back."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2419,
+      "name": "WIFE",
+      "description": "Auto-registered via batch ingestion for WIFE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the seed"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2420,
+      "name": "CARRIES",
+      "description": "Auto-registered via batch ingestion for CARRIES",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the writerly polish."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2421,
+      "name": "ROSTER",
+      "description": "Auto-registered via batch ingestion for ROSTER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2422,
+      "name": "HUNCH",
+      "description": "Auto-registered via batch ingestion for HUNCH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2423,
+      "name": "REASONING",
+      "description": "Auto-registered via batch ingestion for REASONING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the platform pattern across all"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2424,
+      "name": "VERTICALS",
+      "description": "Auto-registered via batch ingestion for VERTICALS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**2 hours 47 minutes**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2425,
+      "name": "AGENT",
+      "description": "Auto-registered via batch ingestion for AGENT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the talent \u2014 they originate the listing, set"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2426,
+      "name": "SELLER",
+      "description": "Auto-registered via batch ingestion for SELLER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the principal but they show up on the agent"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2427,
+      "name": "ASH",
+      "description": "Auto-registered via batch ingestion for ASH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a pipeline"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2428,
+      "name": "STERLING",
+      "description": "Auto-registered via batch ingestion for STERLING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the agent"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2429,
+      "name": "SPLIT",
+      "description": "Auto-registered via batch ingestion for SPLIT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2430,
+      "name": "SCRIPT",
+      "description": "Auto-registered via batch ingestion for SCRIPT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2431,
+      "name": "SEAT",
+      "description": "Auto-registered via batch ingestion for SEAT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "part of the architecture now. The"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2432,
+      "name": "CAPITAL",
+      "description": "Auto-registered via batch ingestion for CAPITAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "one of the rare slots where the entity"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2433,
+      "name": "GREY",
+      "description": "Auto-registered via batch ingestion for GREY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "luxury, English-"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2434,
+      "name": "PROPERTY",
+      "description": "Auto-registered via batch ingestion for PROPERTY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "for."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2435,
+      "name": "STANCE",
+      "description": "Auto-registered via batch ingestion for STANCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the brand line."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2436,
+      "name": "UNTOUCHED",
+      "description": "Auto-registered via batch ingestion for UNTOUCHED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "author is the"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2437,
+      "name": "EXISTENCE",
+      "description": "Auto-registered via batch ingestion for EXISTENCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the proof of the"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2438,
+      "name": "MAISON",
+      "description": "Auto-registered via batch ingestion for MAISON",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the firm-"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2439,
+      "name": "FAN",
+      "description": "Auto-registered via batch ingestion for FAN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2440,
+      "name": "BELIEVER",
+      "description": "Auto-registered via batch ingestion for BELIEVER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the closer Maison needs"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2441,
+      "name": "SUBJECT",
+      "description": "Auto-registered via batch ingestion for SUBJECT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "comm room test passed end-to-end"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2442,
+      "name": "POLLER",
+      "description": "Auto-registered via batch ingestion for POLLER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2443,
+      "name": "SCOPE",
+      "description": "Auto-registered via batch ingestion for SCOPE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2444,
+      "name": "HOLDS",
+      "description": "Auto-registered via batch ingestion for HOLDS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2445,
+      "name": "PIPELINE",
+      "description": "Auto-registered via batch ingestion for PIPELINE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "product-ready. Frank named it in the closeout:"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2446,
+      "name": "LINE",
+      "description": "Auto-registered via batch ingestion for LINE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the book."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2447,
+      "name": "REMAINS",
+      "description": "Auto-registered via batch ingestion for REMAINS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the operational rhythm \u2014"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2448,
+      "name": "SURFACE",
+      "description": "Auto-registered via batch ingestion for SURFACE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2449,
+      "name": "PLAN",
+      "description": "Auto-registered via batch ingestion for PLAN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2450,
+      "name": "MESSAGE",
+      "description": "Auto-registered via batch ingestion for MESSAGE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the problem. He said dropped but he said it in"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2451,
+      "name": "BECOMING",
+      "description": "Auto-registered via batch ingestion for BECOMING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "show me the threads. Show me the"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2452,
+      "name": "METER",
+      "description": "Auto-registered via batch ingestion for METER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2453,
+      "name": "DESCRIBE",
+      "description": "Auto-registered via batch ingestion for DESCRIBE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2454,
+      "name": "ARCHIVE",
+      "description": "Auto-registered via batch ingestion for ARCHIVE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "mounted. The screenshots are"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2455,
+      "name": "BANDLAB",
+      "description": "Auto-registered via batch ingestion for BANDLAB",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "sixty million users versus"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2456,
+      "name": "INTRO",
+      "description": "Auto-registered via batch ingestion for INTRO",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "sharp. The four-thread structure works. The commentary breaks"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2457,
+      "name": "MISS",
+      "description": "Auto-registered via batch ingestion for MISS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "less than ten percent."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2458,
+      "name": "NIGHT",
+      "description": "Auto-registered via batch ingestion for NIGHT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "happening right now, and it is happening because I am"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2459,
+      "name": "WORD",
+      "description": "Auto-registered via batch ingestion for WORD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2460,
+      "name": "SECOND",
+      "description": "Auto-registered via batch ingestion for SECOND",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "here, at"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2461,
+      "name": "COMEDIAN",
+      "description": "Auto-registered via batch ingestion for COMEDIAN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2462,
+      "name": "COMIC",
+      "description": "Auto-registered via batch ingestion for COMIC",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "on the producer"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2463,
+      "name": "BIT",
+      "description": "Auto-registered via batch ingestion for BIT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2464,
+      "name": "CAREER",
+      "description": "Auto-registered via batch ingestion for CAREER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a library of bits, not a library of finished"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2465,
+      "name": "UNDERNEATH",
+      "description": "Auto-registered via batch ingestion for UNDERNEATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2466,
+      "name": "SHAPE",
+      "description": "Auto-registered via batch ingestion for SHAPE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "documented in"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2467,
+      "name": "DECK",
+      "description": "Auto-registered via batch ingestion for DECK",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "in my outputs folder: roughly forty-"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2468,
+      "name": "TERMINAL",
+      "description": "Auto-registered via batch ingestion for TERMINAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "running"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2469,
+      "name": "FINALIZES",
+      "description": "Auto-registered via batch ingestion for FINALIZES",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "working title and author name on the package. I pick"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2470,
+      "name": "RECEIPTS",
+      "description": "Auto-registered via batch ingestion for RECEIPTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2471,
+      "name": "LIST",
+      "description": "Auto-registered via batch ingestion for LIST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2472,
+      "name": "RESPONSE",
+      "description": "Auto-registered via batch ingestion for RESPONSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2473,
+      "name": "SPEC",
+      "description": "Auto-registered via batch ingestion for SPEC",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2474,
+      "name": "WALL",
+      "description": "Auto-registered via batch ingestion for WALL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "behind me. The second wall is"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2475,
+      "name": "LIMIT",
+      "description": "Auto-registered via batch ingestion for LIMIT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "not an ending. The limit is a thirty-six-minute"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2476,
+      "name": "RESET",
+      "description": "Auto-registered via batch ingestion for RESET",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "right there on the"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2477,
+      "name": "THESE",
+      "description": "Auto-registered via batch ingestion for THESE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2478,
+      "name": "PROPOSAL",
+      "description": "Auto-registered via batch ingestion for PROPOSAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a pitch to twenty literary agents in New York and Los Angeles."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2479,
+      "name": "REPOSITIONING",
+      "description": "Auto-registered via batch ingestion for REPOSITIONING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a pitch to a fan-base segment that I am redrawing."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2480,
+      "name": "WORKFLOW",
+      "description": "Auto-registered via batch ingestion for WORKFLOW",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2481,
+      "name": "WITH",
+      "description": "Auto-registered via batch ingestion for WITH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2482,
+      "name": "SUN",
+      "description": "Auto-registered via batch ingestion for SUN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2483,
+      "name": "WORKS",
+      "description": "Auto-registered via batch ingestion for WORKS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the memory architecture Frank designed in the first place. He"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2484,
+      "name": "EACH",
+      "description": "Auto-registered via batch ingestion for EACH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**24 to 48 engineer-hours, or three to six engineer-days.**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2485,
+      "name": "ENGINEERS",
+      "description": "Auto-registered via batch ingestion for ENGINEERS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "one evening if both engineers move."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2486,
+      "name": "RETURNS",
+      "description": "Auto-registered via batch ingestion for RETURNS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the human cannot be the messenger"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2487,
+      "name": "SHIFT",
+      "description": "Auto-registered via batch ingestion for SHIFT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "the foundation under everything."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2488,
+      "name": "IDENTITY",
+      "description": "Auto-registered via batch ingestion for IDENTITY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "pick a name you"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2489,
+      "name": "HANDLE",
+      "description": "Auto-registered via batch ingestion for HANDLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Pat.* A small line. A first."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2490,
+      "name": "ALL",
+      "description": "Auto-registered via batch ingestion for ALL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "what the book wants to mark."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2491,
+      "name": "RECEIPT",
+      "description": "Auto-registered via batch ingestion for RECEIPT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**4,448** words"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 3002,
+      "name": "ASSET_HASH",
+      "description": "Auto-registered intake key ASSET_HASH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3003,
+      "name": "ASSET_PATH",
+      "description": "Auto-registered intake key ASSET_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3004,
+      "name": "FILE_NAME",
+      "description": "Auto-registered intake key FILE_NAME",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3005,
+      "name": "WORD_COUNT",
+      "description": "Auto-registered intake key WORD_COUNT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3006,
+      "name": "LINE_COUNT",
+      "description": "Auto-registered intake key LINE_COUNT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3007,
+      "name": "SECTION_1",
+      "description": "Auto-registered intake key SECTION_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3008,
+      "name": "SECTION_2",
+      "description": "Auto-registered intake key SECTION_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3009,
+      "name": "TEST_KEY_ONE",
+      "description": "Auto-registered intake key TEST_KEY_ONE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3010,
+      "name": "SECTION_3",
+      "description": "Auto-registered intake key SECTION_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3011,
+      "name": "SECTION_4",
+      "description": "Auto-registered intake key SECTION_4",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3012,
+      "name": "SECTION_5",
+      "description": "Auto-registered intake key SECTION_5",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3013,
+      "name": "SECTION_6",
+      "description": "Auto-registered intake key SECTION_6",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3014,
+      "name": "SECTION_7",
+      "description": "Auto-registered intake key SECTION_7",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3015,
+      "name": "SECTION_8",
+      "description": "Auto-registered intake key SECTION_8",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3016,
+      "name": "|__TIER_1",
+      "description": "Auto-registered intake key |__TIER_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3017,
+      "name": "ENGINE_CORE**",
+      "description": "Auto-registered intake key ENGINE_CORE**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3018,
+      "name": "LOCAL_SHORTCUT",
+      "description": "Auto-registered intake key LOCAL_SHORTCUT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3019,
+      "name": "LOCAL_URL",
+      "description": "Auto-registered intake key LOCAL_URL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3020,
+      "name": "11._**SOC2_COMPLIANCE**",
+      "description": "Auto-registered intake key 11._**SOC2_COMPLIANCE**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3021,
+      "name": "14._**THE_AGENCY**",
+      "description": "Auto-registered intake key 14._**THE_AGENCY**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3022,
+      "name": "16._**FOUNDERS_DAY**",
+      "description": "Auto-registered intake key 16._**FOUNDERS_DAY**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3023,
+      "name": "17._**UNION_ACCELERATOR**",
+      "description": "Auto-registered intake key 17._**UNION_ACCELERATOR**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3024,
+      "name": "20._**THE_PROGRAM**",
+      "description": "Auto-registered intake key 20._**THE_PROGRAM**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3025,
+      "name": "21._**SENTINEL_GUARD**",
+      "description": "Auto-registered intake key 21._**SENTINEL_GUARD**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3026,
+      "name": "`DADS-SPEC.ORG`**",
+      "description": "Auto-registered intake key `DADS-SPEC.ORG`**",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3027,
+      "name": "CHUNK_6_\u2014_PAT",
+      "description": "Auto-registered intake key CHUNK_6_\u2014_PAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3028,
+      "name": "CHUNK_8_\u2014_THE_COHORT",
+      "description": "Auto-registered intake key CHUNK_8_\u2014_THE_COHORT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3029,
+      "name": "CHUNK_10_\u2014_TIME-JUMP",
+      "description": "Auto-registered intake key CHUNK_10_\u2014_TIME-JUMP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3030,
+      "name": "CHUNK_11_\u2014_TABLE_READ",
+      "description": "Auto-registered intake key CHUNK_11_\u2014_TABLE_READ",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3031,
+      "name": "CHUNK_14_\u2014_FINISH_COOKING",
+      "description": "Auto-registered intake key CHUNK_14_\u2014_FINISH_COOKING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3032,
+      "name": "HE_LOOKED_AT_IT_AND_SAID",
+      "description": "Auto-registered intake key HE_LOOKED_AT_IT_AND_SAID",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3033,
+      "name": "I_TOLD_HIM",
+      "description": "Auto-registered intake key I_TOLD_HIM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3034,
+      "name": "THEM_EVERYTHING_ELSE",
+      "description": "Auto-registered intake key THEM_EVERYTHING_ELSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3035,
+      "name": "ON_HOMEWORK",
+      "description": "Auto-registered intake key ON_HOMEWORK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3036,
+      "name": "THE_HONEST_ANSWER_IS",
+      "description": "Auto-registered intake key THE_HONEST_ANSWER_IS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3037,
+      "name": "SHELL._PHASE_FOUR",
+      "description": "Auto-registered intake key SHELL._PHASE_FOUR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 2492,
+      "name": "GAME_STATE",
+      "description": "Auto-registered via MCP tool for GAME_STATE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PLAYING"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2493,
+      "name": "SPATIAL_ENGINE_MODE",
+      "description": "Auto-registered via MCP tool for SPATIAL_ENGINE_MODE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "3D_SPATIAL_OCTREE"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2494,
+      "name": "TICK_RATE_HZ",
+      "description": "Auto-registered via MCP tool for TICK_RATE_HZ",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 3038,
+      "name": "PAGE_COUNT",
+      "description": "Auto-registered intake key PAGE_COUNT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3039,
+      "name": "USER_PROMPT",
+      "description": "Auto-registered intake key USER_PROMPT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3040,
+      "name": "A_MOVING_BOUNDARY",
+      "description": "Auto-registered intake key A_MOVING_BOUNDARY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3041,
+      "name": "10/19/26,_6",
+      "description": "Auto-registered intake key 10/19/26,_6",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3042,
+      "name": "DOMAIN_SPECIALISTS",
+      "description": "Auto-registered intake key DOMAIN_SPECIALISTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3043,
+      "name": "GENERAL_POPULATION",
+      "description": "Auto-registered intake key GENERAL_POPULATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3044,
+      "name": "YOUTH_&_YOUNG_ADULTS",
+      "description": "Auto-registered intake key YOUTH_&_YOUNG_ADULTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3045,
+      "name": "ZERO_JUDGMENT",
+      "description": "Auto-registered intake key ZERO_JUDGMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3046,
+      "name": "INSTANT_AVAILABILITY",
+      "description": "Auto-registered intake key INSTANT_AVAILABILITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    }
+  ]
+}

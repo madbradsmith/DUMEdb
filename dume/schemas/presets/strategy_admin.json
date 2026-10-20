@@ -1,0 +1,44 @@
+{
+  "name": "strategy_admin",
+  "title": "Strategy & Executive Admin",
+  "description": "State registers for focus modes, task priorities, fiscal quarters, and energy capacity.",
+  "opcodes": [
+    {
+      "opcode": 1400,
+      "name": "FOCUS_MODE",
+      "description": "Current strategic focus operational mode",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "DEEP_WORK",
+        "2": "ADMIN",
+        "3": "MEETING",
+        "4": "SHUTDOWN"
+      }
+    },
+    {
+      "opcode": 1401,
+      "name": "URGENT_TASK_COUNT",
+      "description": "Count of high-priority urgent action items",
+      "data_type": "INT"
+    },
+    {
+      "opcode": 1402,
+      "name": "TARGET_QUARTER",
+      "description": "Active business fiscal quarter",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Q1",
+        "2": "Q2",
+        "3": "Q3",
+        "4": "Q4"
+      }
+    },
+    {
+      "opcode": 1403,
+      "name": "ENERGY_LEVEL",
+      "description": "User self-reported energy capacity level (1-10)",
+      "data_type": "INT",
+      "unit": "1-10"
+    }
+  ]
+}

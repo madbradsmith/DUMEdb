@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "custom_opcodes": [
+    {
+      "opcode": 2001,
+      "name": "PROJECT_STATUS",
+      "description": "Auto-registered via MCP tool for PROJECT_STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PHASE_2_TESTING"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2002,
+      "name": "WORKSPACE_ROLE",
+      "description": "Auto-registered via MCP tool for WORKSPACE_ROLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "1st_AD"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2003,
+      "name": "CURRENT_FOCUS",
+      "description": "Auto-registered via MCP tool for CURRENT_FOCUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AGENT_MUTATION_VERIFICATION"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2004,
+      "name": "STATUS",
+      "description": "Auto-registered via inline directive for STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PLANNING",
+        "2": "EXECUTING",
+        "3": "REVIEW"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2005,
+      "name": "TEST_AGENT_ID",
+      "description": "Auto-registered via MCP tool for TEST_AGENT_ID",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AG_ANTIGRAVITY_01"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2006,
+      "name": "DIRECTOR_NAME",
+      "description": "Auto-registered via batch ingestion for DIRECTOR_NAME",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Sarah Connor"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2007,
+      "name": "WRAP_TIME",
+      "description": "Auto-registered via batch ingestion for WRAP_TIME",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2008,
+      "name": "CAMERA_SPECS",
+      "description": "Auto-registered via batch ingestion for CAMERA_SPECS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "RED V-Raptor"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2009,
+      "name": "SCENE_TOTAL",
+      "description": "Auto-registered via batch ingestion for SCENE_TOTAL",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2010,
+      "name": "WRAP_TIME_EST",
+      "description": "Auto-registered via batch ingestion for WRAP_TIME_EST",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2011,
+      "name": "SHUTTER_ANGLE",
+      "description": "Auto-registered via batch ingestion for SHUTTER_ANGLE",
+      "data_type": "FLOAT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2012,
+      "name": "NIGHT_SHOOT_ENABLED",
+      "description": "Auto-registered via batch ingestion for NIGHT_SHOOT_ENABLED",
+      "data_type": "BOOL",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2013,
+      "name": "SCENE_COUNT",
+      "description": "Auto-registered via batch ingestion for SCENE_COUNT",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2014,
+      "name": "CAMERA_MODEL",
+      "description": "Auto-registered via batch ingestion for CAMERA_MODEL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "RED V-Raptor"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2015,
+      "name": "AUDIO_CHANNELS",
+      "description": "Auto-registered via batch ingestion for AUDIO_CHANNELS",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2016,
+      "name": "PRODUCER_NOTE",
+      "description": "Auto-registered via batch ingestion for PRODUCER_NOTE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Keep noise low after 2200"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2017,
+      "name": "FRAME_RATE",
+      "description": "Auto-registered via batch ingestion for FRAME_RATE",
+      "data_type": "FLOAT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2018,
+      "name": "IS_PRODUCTION_LOCKED",
+      "description": "Auto-registered via batch ingestion for IS_PRODUCTION_LOCKED",
+      "data_type": "BOOL",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2019,
+      "name": "CAMERA_READY",
+      "description": "Auto-registered via batch ingestion for CAMERA_READY",
+      "data_type": "BOOL",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2020,
+      "name": "HTTP",
+      "description": "Auto-registered via batch ingestion for HTTP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "//localhost:8070/editor) |"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2021,
+      "name": "SHORTCUT",
+      "description": "Auto-registered via batch ingestion for SHORTCUT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`C:\\Users\\c6182\\Desktop\\Developum Page Manager.lnk`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2022,
+      "name": "URL",
+      "description": "Auto-registered via batch ingestion for URL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`http://localhost:8070/editor`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2023,
+      "name": "FUNCTION",
+      "description": "Auto-registered via batch ingestion for FUNCTION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Browser-level zero-trust family protection"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2024,
+      "name": "PATH",
+      "description": "Auto-registered via batch ingestion for PATH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`C:\\Users\\c6182\\Desktop\\TutumMeum-EXT-V1_0`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2025,
+      "name": "OVERWHELMED",
+      "description": "Auto-registered via batch ingestion for OVERWHELMED",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The 3 Rules"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2026,
+      "name": "HTTPS",
+      "description": "Auto-registered via batch ingestion for HTTPS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "//developumaiengine.com |"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2027,
+      "name": "TODAY",
+      "description": "Auto-registered via batch ingestion for TODAY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "busy day"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2028,
+      "name": "FLUSH_TEST_STATUS",
+      "description": "Auto-registered via batch ingestion for FLUSH_TEST_STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "ACTIVE"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2029,
+      "name": "VALID_KEY",
+      "description": "Auto-registered via batch ingestion for VALID_KEY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "valid_value"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2030,
+      "name": "SERVICE",
+      "description": "Auto-registered via batch ingestion for SERVICE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Endpoint"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2031,
+      "name": "ENGINE_CORE",
+      "description": "Auto-registered via batch ingestion for ENGINE_CORE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "https://developumaiengine.com"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2032,
+      "name": "PAGE_MANAGER_URL",
+      "description": "Auto-registered via batch ingestion for PAGE_MANAGER_URL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "http://localhost:8070/editor"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2033,
+      "name": "TIER2_KIT_TOTAL",
+      "description": "Auto-registered via batch ingestion for TIER2_KIT_TOTAL",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2034,
+      "name": "ALPHA_SECRET",
+      "description": "Auto-registered via batch ingestion for ALPHA_SECRET",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "AlphaValue123"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2035,
+      "name": "BETA_SECRET",
+      "description": "Auto-registered via batch ingestion for BETA_SECRET",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "BetaValue456"
+      },
+      "unit": null,
+      "is_auto": true
+    }
+  ]
+}

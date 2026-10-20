@@ -1,0 +1,53 @@
+{
+  "name": "film_production",
+  "title": "Film & Media Production",
+  "description": "State registers for call times, scene tracking, camera packages, and production roles.",
+  "opcodes": [
+    {
+      "opcode": 1100,
+      "name": "WORKSPACE_ROLE",
+      "description": "Current workspace role of the user on production set",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "1st_AD",
+        "2": "DIRECTOR",
+        "3": "DP",
+        "4": "PRODUCER",
+        "5": "SCRIPT_SUPERVISOR"
+      }
+    },
+    {
+      "opcode": 1101,
+      "name": "CURRENT_SCENE",
+      "description": "Active scene number or identifier being shot",
+      "data_type": "STRING_REF"
+    },
+    {
+      "opcode": 1102,
+      "name": "CALL_TIME_MINUTES",
+      "description": "Daily crew call time in minutes from midnight",
+      "data_type": "INT",
+      "unit": "minutes"
+    },
+    {
+      "opcode": 1103,
+      "name": "CAMERA_PACKAGE",
+      "description": "Primary A-camera package specification",
+      "data_type": "STRING_REF"
+    },
+    {
+      "opcode": 1104,
+      "name": "SCRIPT_PAGE_COUNT",
+      "description": "Completed script page count for current day",
+      "data_type": "FLOAT",
+      "unit": "pages"
+    },
+    {
+      "opcode": 1105,
+      "name": "SHOOT_DAY_CURRENT",
+      "description": "Current principal photography shoot day number",
+      "data_type": "INT",
+      "unit": "days"
+    }
+  ]
+}

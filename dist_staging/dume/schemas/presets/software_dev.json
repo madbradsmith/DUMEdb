@@ -1,0 +1,53 @@
+{
+  "name": "software_dev",
+  "title": "Software Engineering & DevOps",
+  "description": "State registers for release cycles, git branches, test statuses, and PR tracking.",
+  "opcodes": [
+    {
+      "opcode": 1200,
+      "name": "PROJECT_STATUS",
+      "description": "Active software release cycle phase",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "BACKLOG",
+        "2": "IN_PROGRESS",
+        "3": "IN_REVIEW",
+        "4": "DEPLOYED"
+      }
+    },
+    {
+      "opcode": 1201,
+      "name": "CURRENT_BRANCH",
+      "description": "Active Git feature branch name",
+      "data_type": "STRING_REF"
+    },
+    {
+      "opcode": 1202,
+      "name": "LAST_TEST_STATUS",
+      "description": "Most recent automated test run status",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PASSED",
+        "2": "FAILED",
+        "3": "SKIPPED"
+      }
+    },
+    {
+      "opcode": 1203,
+      "name": "ACTIVE_PR_NUMBER",
+      "description": "Currently open pull request number",
+      "data_type": "INT"
+    },
+    {
+      "opcode": 1204,
+      "name": "DEPLOYMENT_TARGET",
+      "description": "Target deployment environment",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "LOCALHOST",
+        "2": "STAGING",
+        "3": "PRODUCTION"
+      }
+    }
+  ]
+}

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUME - Deterministic Unit-Record Memory Engine Inspector</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="logo-group">
+      <span class="logo-badge">DUME</span>
+      <h1>Deterministic Unit-Record Memory Engine</h1>
+    </div>
+    <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+      <nav class="main-nav-tabs">
+        <button type="button" class="main-tab-btn active" data-view="view-inspector">🔍 Inspector</button>
+        <button type="button" class="main-tab-btn" data-view="view-knowledge">🧠 Knowledge & Diagnostics</button>
+        <button type="button" class="main-tab-btn" data-view="view-schema-manager">📚 Schema Manager</button>
+      </nav>
+      <button type="button" class="btn-guide-modal" id="btn-open-guide-modal" data-tooltip="New to DUMEdb? Click to view the 60-second quick-start guide" style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.35); color: #c084fc; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        💡 How It Works
+      </button>
+      <button type="button" class="btn-intake-drawer" id="btn-open-intake-modal" data-tooltip="Drop manuscripts, PDFs, notes, or data to distill into permanent memory" style="background: linear-gradient(135deg, var(--accent-cyan), var(--primary)); border: none; color: white; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        📥 Document Intake
+      </button>
+      <button type="button" class="btn-connect-client" id="btn-open-connect-modal" data-tooltip="1-Click connection guides for Cursor, Claude Desktop, VS Code, and terminal agents" style="background: linear-gradient(135deg, var(--accent-purple), var(--primary)); border: none; color: white; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        🔌 Connect Your Agent
+      </button>
+      <div class="status-pill" id="proxy-status-pill" data-tooltip="Universal OpenAI Proxy: forwards turns through DUMEdb to your model" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa;">
+        <div class="indicator-dot" style="background: #60a5fa;"></div>
+        <span id="proxy-status-text">📡 Proxy Active: Forwarding to http://localhost:11434/v1</span>
+      </div>
+      <div class="status-pill" data-tooltip="Hardware-accelerated binary LMDB store active over real-time WebSocket">
+        <div class="indicator-dot" id="scribe-ws-indicator"></div>
+        <span id="lmdb-status">Background Scribe Active (WebSocket)</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Inspector View -->
+    <div id="view-inspector" class="main-view active">
+      <!-- System Telemetry Ribbon (Low-Profile < 48px Header) -->
+      <div class="telemetry-ribbon">
+        <div class="ribbon-item" title="Zero Disk / Lock Latency">
+          <span class="ribbon-icon">⚡</span>
+          <span class="ribbon-label">Fast Path:</span>
+          <span class="ribbon-val" id="metric-latency">&lt; 0.1 ms</span>
+        </div>
+        <div class="ribbon-divider"></div>
+        <div class="ribbon-item" title="LMDB Active State Key-Value Registers">
+          <span class="ribbon-icon">📊</span>
+          <span class="ribbon-label">Active Registers:</span>
+          <span class="ribbon-val" id="metric-active-count">0</span>
+        </div>
+        <div class="ribbon-divider"></div>
+        <div class="ribbon-item" title="Chronological UUIDv7 Audit History Log">
+          <span class="ribbon-icon">📜</span>
+          <span class="ribbon-label">History Log:</span>
+          <span class="ribbon-val" id="metric-history-count">0</span>
+        </div>
+        <div class="ribbon-divider"></div>
+        <div class="ribbon-item" title="Neural LLM Synthesis Latency & Speed">
+          <span class="ribbon-icon">🤖</span>
+          <span class="ribbon-label">Synthesis:</span>
+          <span class="ribbon-val" id="metric-tps" style="color: var(--accent-emerald);">-- tok/s</span>
+          <span class="ribbon-sub" id="metric-synth-ms">(0 ms)</span>
+        </div>
+        <div class="ribbon-divider"></div>
+        <div class="ribbon-item" title="Out-of-Band Event Scribe Queue">
+          <span class="ribbon-icon">📥</span>
+          <span class="ribbon-label">Scribe Queue:</span>
+          <span class="ribbon-val" id="metric-queue-size">0 Turns</span>
+        </div>
+      </div>
+
+      <!-- Zero-Token Context Sentinel Hero Gauge -->
+      <div class="fuel-gauge-card" id="fuel-gauge-widget">
+        <div class="fuel-gauge-metric" data-tooltip="Unlike RAG search which burns 5,000+ tokens every turn, DUMEdb registers cost 0 prompt tokens until injected.">
+          <span class="fuel-gauge-label">Prompt Token Burn</span>
+          <span class="fuel-gauge-val" style="color: #34d399;">0 <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">tokens (zero-copy)</span></span>
+        </div>
+        <div class="ribbon-divider" style="height: 32px;"></div>
+        <div class="fuel-gauge-metric" data-tooltip="Discrete facts, rules, and lore permanently stored in local zero-copy LMDB. Microsecond latency, no cloud lock-in.">
+          <span class="fuel-gauge-label">Hydrated Memory</span>
+          <span class="fuel-gauge-val" id="fuel-gauge-registers-val" style="color: #38bdf8;">88 <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">registers</span></span>
+        </div>
+        <div class="ribbon-divider" style="height: 32px;"></div>
+        <div class="fuel-gauge-bar-wrap" data-tooltip="Available prompt runway remaining in your context window. DUMEdb preserves 99.8% of your window for real work.">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem;">
+            <span style="font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em;">Clean Context Runway</span>
+            <span style="font-family: var(--font-mono); color: #34d399; font-weight: 700;" id="fuel-gauge-pct-val">99.8% Available</span>
+          </div>
+          <div class="fuel-gauge-progress">
+            <div class="fuel-gauge-fill" id="fuel-gauge-fill-bar"></div>
+          </div>
+        </div>
+        <div class="ribbon-divider" style="height: 32px;"></div>
+        <div class="fuel-gauge-metric" data-tooltip="The 70% Context Sentinel monitors token drift and triggers the Refresh Protocol (RP) before Bloat Float sets in.">
+          <span class="fuel-gauge-label">Context Sentinel</span>
+          <span class="fuel-gauge-val" style="font-size: 0.88rem; color: #60a5fa; align-items: center;">
+            <span class="indicator-dot" style="margin-right: 0.35rem; width: 7px; height: 7px;"></span>
+            <span>70% Sentinel Active</span>
+          </span>
+        </div>
+      </div>
+
+    <!-- Main Two-Column Layout -->
+    <div class="layout-grid">
+      
+      <!-- Left Column: Nostra Web Terminal & Live Scribe Feed -->
+      <div class="panel">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center;">
+            <div class="mac-window-chrome">
+              <div class="mac-dot red"></div>
+              <div class="mac-dot yellow"></div>
+              <div class="mac-dot green"></div>
+            </div>
+            <div class="panel-title">🖥️ Nostra Web Terminal</div>
+          </div>
+          <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; margin-left: auto;">
+            <span id="scratchpad-badge" data-tooltip="Temporary chat turns buffer. Auto-rolls over so prompt size stays bounded." style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: #c084fc; padding: 0.15rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600;">
+              🧠 0/4 Turns
+            </span>
+            <span id="terminal-speed-badge" data-tooltip="Live neural token generation speed" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 0.15rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600;">
+              ⚡ -- tok/s
+            </span>
+            <button class="btn-secondary" id="btn-flush-scratchpad" data-tooltip="Flushes conversational turns while keeping all permanent LMDB registers 100% safe." style="background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.3); color: #f87171; font-weight: 600; padding: 0.2rem 0.5rem; font-size: 0.72rem; border-radius: 6px;">
+              🧹 Flush
+            </button>
+            <button class="btn-secondary" id="btn-wake-nostra" data-tooltip="Sends the universal codeword 'box is the game.' to wake Nostra and load active state." style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; font-weight: 600; padding: 0.2rem 0.5rem; font-size: 0.72rem; border-radius: 6px;">
+              ⚡ Wake Nostra
+            </button>
+          </div>
+        </div>
+
+        <!-- Dedicated Workspace Toolbar -->
+        <div class="workspace-toolbar">
+          <div class="workspace-field" style="flex: 1; min-width: 200px;">
+            <label for="select-entity" class="toolbar-label">Active Entity UUID</label>
+            <div style="display: flex; gap: 0.35rem;">
+              <select id="select-entity" class="toolbar-input" style="flex: 1;">
+                <option value="MadBrad-Nostra-01" selected>MadBrad-Nostra-01</option>
+              </select>
+              <button type="button" id="btn-toggle-new-entity" class="btn-secondary" style="padding: 0.3rem 0.55rem; font-size: 0.78rem; white-space: nowrap;">
+                ➕ New
+              </button>
+              <button type="button" id="btn-open-entity-actions" class="btn-secondary" style="padding: 0.3rem 0.55rem; font-size: 0.78rem; white-space: nowrap;" title="Manage active entity (Rename, Archive, Delete)">
+                ⚙️ Actions
+              </button>
+            </div>
+            <div id="new-entity-container" style="display: none; margin-top: 0.35rem;">
+              <div style="display: flex; gap: 0.35rem;">
+                <input type="text" id="new-entity-name" placeholder="Name or UUID (e.g. MadBrad-Nostra-02)..." style="font-size: 0.8rem; padding: 0.35rem 0.6rem; flex: 1;">
+                <button type="button" id="btn-create-entity" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; background: var(--accent-purple); color: white; border: none; font-weight: 600;">Create</button>
+              </div>
+            </div>
+            <input type="hidden" id="entity_id" value="MadBrad-Nostra-01">
+          </div>
+
+          <button type="button" id="btn-toggle-engine-drawer" class="btn-secondary" style="margin-top: auto; padding: 0.4rem 0.75rem; font-size: 0.8rem; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+            ⚙️ Engine Settings <span id="engine-drawer-chevron">▼</span>
+          </button>
+        </div>
+
+        <!-- Collapsible Engine Settings Drawer -->
+        <div id="engine-settings-drawer" class="engine-drawer" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+            <div class="form-group" style="margin: 0;">
+              <label for="select-provider-preset">Model Engine / Provider</label>
+              <select id="select-provider-preset" class="toolbar-input" style="width: 100%;">
+                <option value="fast" selected>Nostra Fast Synthesizer (Instant 0ms)</option>
+                <option value="groq">Groq (llama-3.3-70b-versatile)</option>
+                <option value="gemini">Google Gemini 2.5 Flash</option>
+                <option value="ollama">Local Ollama (qwen2.5:0.5b)</option>
+                <option value="anthropic">Claude 3.5 Haiku</option>
+                <option value="custom">Custom Upstream / OpenAI-Compatible...</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label for="input-model-name">Target Model String <span style="font-size: 0.7rem; color: var(--accent-cyan);">(Press Enter)</span></label>
+              <div style="display: flex; gap: 0.35rem;">
+                <input type="text" id="input-model-name" class="toolbar-input" placeholder="e.g. llama-3.3-70b-versatile..." autocomplete="off">
+                <button type="button" id="btn-save-entity-model" class="btn-secondary" style="padding: 0.35rem 0.5rem; font-size: 0.75rem; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399;" title="Save model config for entity">✓</button>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label for="input-api-key">API Key & Endpoint</label>
+              <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                <input type="password" id="input-api-key" class="toolbar-input" placeholder="API Key for entity..." autocomplete="off">
+                <input type="text" id="input-endpoint-url" class="toolbar-input" placeholder="URL (e.g. https://api.groq.com/openai/v1)..." autocomplete="off" style="display: none; font-size: 0.75rem; padding: 0.3rem 0.45rem;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multimodal File Intake Dropzone -->
+        <div id="sidebar-intake-dropzone" style="margin: 0.6rem 0; border: 2px dashed var(--border-color); border-radius: 8px; padding: 0.5rem 0.75rem; background: rgba(255,255,255,0.02); text-align: center; cursor: pointer; transition: all 0.2s ease;">
+          <input type="file" id="sidebar-intake-file-input" style="display: none;" accept=".md,.markdown,.mdown,.txt,.pdf,.docx,.doc,.json,.yaml,.yml,.csv,.xlsx,.xls,.png,.jpg,.jpeg,.webp">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+            <div style="font-size: 1rem;">📁</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">
+              <b style="color: var(--text-main);">Drop docs (.md, .pdf), data (.csv, .json)</b> or <span style="color: var(--accent-cyan); text-decoration: underline;">browse file</span>
+            </div>
+            <button type="button" id="btn-sidebar-browse-intake" class="btn-secondary" style="padding: 0.2rem 0.55rem; font-size: 0.75rem;">
+              Select File
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Web Terminal Log -->
+        <div class="terminal-container" id="terminal-log">
+          <div class="terminal-line system-line">
+            <span class="terminal-prefix">[SYSTEM]</span> DUME Studio Web Terminal Initialized. Local Model: <b style="color: #60a5fa;">nostra (Llama 3.2 + Cabinet)</b>.
+          </div>
+          <div class="terminal-line system-line">
+            <span class="terminal-prefix">[STATUS]</span> Codeword: <i style="color: var(--accent-amber);">"box is the game."</i>. Click above or type below to wake Nostra.
+          </div>
+        </div>
+
+        <!-- Terminal Input Form -->
+        <form id="chat-turn-form" style="margin-top: 0.6rem;">
+          <div class="terminal-input-wrapper">
+            <span class="terminal-prompt-symbol">&gt;</span>
+            <input type="text" id="turn-input" placeholder="Type to Nostra (e.g. 'box is the game.' or 'Set my theme to Light mode')..." required autocomplete="off">
+            <button type="submit" class="btn-send">Send</button>
+          </div>
+        </form>
+
+        <div class="panel-header" style="margin-top: 0.85rem;">
+          <div class="panel-title">📡 Live Background Scribe Activity Feed</div>
+        </div>
+        <div class="scribe-feed-container" id="scribe-feed-view">
+          <div style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem;">
+            Awaiting background scribe commits over WebSocket...
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: State Register Studio Inspector (Cards, Table, Hex) & Grounded Context -->
+      <div class="panel">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div class="panel-title">🔬 State Register Studio</div>
+            <span id="studio-total-badge" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; font-size: 0.72rem; font-family: var(--font-mono); font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 9999px;">
+              88 Registers
+            </span>
+          </div>
+          
+          <!-- Triple-View Toggle Switch -->
+          <div class="view-toggle-group" style="margin-left: auto;">
+            <button type="button" class="view-toggle-btn active" id="btn-view-cards">🗂️ Cards View</button>
+            <button type="button" class="view-toggle-btn" id="btn-view-readable">📋 Table View</button>
+            <button type="button" class="view-toggle-btn" id="btn-view-hex">🔬 32B Raw Hex</button>
+          </div>
+
+          <button class="btn-secondary" id="btn-refresh-inspector" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;">Refresh</button>
+        </div>
+
+        <!-- Studio Category Chips Filter Bar -->
+        <div class="studio-category-bar" id="studio-category-bar">
+          <button type="button" class="studio-chip active" data-category="all">
+            ✨ All Registers <span class="studio-chip-count" id="chip-count-all">88</span>
+          </button>
+          <button type="button" class="studio-chip" data-category="memoir">
+            📖 Memoir & Identity <span class="studio-chip-count" id="chip-count-memoir">0</span>
+          </button>
+          <button type="button" class="studio-chip" data-category="system">
+            ⚙️ System Context <span class="studio-chip-count" id="chip-count-system">0</span>
+          </button>
+          <button type="button" class="studio-chip" data-category="narrative">
+            🎬 Narrative & Cookout <span class="studio-chip-count" id="chip-count-narrative">0</span>
+          </button>
+          <button type="button" class="studio-chip" data-category="files">
+            📄 Hydrated Files <span class="studio-chip-count" id="chip-count-files">0</span>
+          </button>
+        </div>
+
+        <!-- Studio Search & Action Bar -->
+        <div class="studio-action-bar">
+          <div class="studio-search-wrap">
+            <span class="studio-search-icon">🔍</span>
+            <input type="text" id="studio-search-input" class="studio-search-input" placeholder="Search registers by key, opcode, or value...">
+            <button type="button" id="btn-studio-search-clear" class="studio-search-clear" title="Clear Search">✕</button>
+          </div>
+          <span id="studio-filter-match-count" style="font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono); white-space: nowrap;">
+            Showing 88 of 88
+          </span>
+          <button type="button" id="btn-export-registers-json" class="btn-secondary" style="padding: 0.35rem 0.65rem; font-size: 0.75rem; display: flex; align-items: center; gap: 0.35rem; margin-left: auto;">
+            💾 Export State
+          </button>
+        </div>
+
+        <!-- View 1: Glassmorphic Register Cards Grid (Default) -->
+        <div id="readable-registers-cards-container" class="registers-card-grid inspector-tab-pane active">
+          <!-- Injected dynamically by JS -->
+          <div style="color: var(--text-muted); text-align: center; grid-column: 1 / -1; padding: 2rem;">
+            Loading active state registers...
+          </div>
+        </div>
+
+        <!-- View 2: Human-Readable Registers High-Density Table -->
+        <div id="readable-registers-view" class="inspector-tab-pane" style="display: none;">
+          <table class="data-table" id="readable-registers-table" style="margin: 0;">
+            <thead>
+              <tr>
+                <th>Opcode</th>
+                <th>Data Type</th>
+                <th>Human Resolved Value</th>
+                <th style="text-align: right;">Updated</th>
+              </tr>
+            </thead>
+            <tbody id="readable-registers-tbody">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">
+                  Select or dispatch a turn to inspect DUMEdb active registers.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- View 2: Raw 32-Byte Binary Hex Inspector -->
+        <div id="hex-dump-view-container" class="inspector-tab-pane" style="display: none;">
+          <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background: #60a5fa;"></div> UUID (16B)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background: #fbbf24;"></div> Opcode (2B)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background: #34d399;"></div> Value (8B)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background: #c084fc;"></div> Timestamp (4B)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background: #f87171;"></div> Flags (2B)</div>
+          </div>
+
+          <div class="hex-dump-container" id="hex-dump-view">
+            <div style="color: var(--text-muted);">Select or dispatch a turn to view hardware-aligned binary record bytes.</div>
+          </div>
+        </div>
+
+        <div class="panel-header" style="margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div class="panel-title">🤖 Grounded Register Context Prefix</div>
+          <span id="token-telemetry-badge" style="margin-left: auto; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; font-size: 0.72rem; font-family: var(--font-mono); font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 9999px;">
+            [DUME_STATE: ~0 tokens]
+          </span>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.35rem;">
+          <label>Injected Discrete State Registers (≤ 50 Tokens)</label>
+          <div class="prompt-preview" id="prompt-register-preview">No active entity loaded.</div>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label>Foreground LLM Stream Response</label>
+          <div class="prompt-preview" id="chat-output-preview" style="color: var(--text-main); border-color: var(--border-color);">
+            Awaiting conversation turn...
+          </div>
+        </div>
+
+      </div> <!-- End right panel-column -->
+
+    </div> <!-- End layout-grid -->
+  </div> <!-- End view-inspector -->
+
+  <!-- System Knowledge & Diagnostic Explorer View -->
+  <div id="view-knowledge" class="main-view" style="display: none;">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🧠 System Knowledge & Diagnostic Explorer</div>
+        <button type="button" id="btn-refresh-knowledge" class="btn-secondary" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;">Refresh Assets</button>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
+        <input type="text" id="input-knowledge-search" placeholder="Search ADRs, error fingerprints, or incidents..." style="flex: 1; max-width: 400px; font-size: 0.85rem;">
+        <div class="filter-pill-group">
+          <button type="button" class="knowledge-filter-pill active" data-filter="all">All Cards</button>
+          <button type="button" class="knowledge-filter-pill" data-filter="adr">ADRs</button>
+          <button type="button" class="knowledge-filter-pill" data-filter="error">Known Errors</button>
+          <button type="button" class="knowledge-filter-pill" data-filter="incident">Incidents</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 1.25rem; align-items: start;">
+        <!-- Card List Column -->
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">Ingested Diagnostic Cards</div>
+          <div id="knowledge-cards-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 540px; overflow-y: auto; padding-right: 0.35rem;">
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 2rem;">Loading knowledge assets...</div>
+          </div>
+        </div>
+
+        <!-- Card Reader Column -->
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <span>Card Reader Preview</span>
+            <span id="knowledge-active-filename" style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">No card selected</span>
+          </div>
+          <div id="asset-card-reader" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; min-height: 480px; max-height: 540px; overflow-y: auto; font-size: 0.88rem; line-height: 1.6; white-space: pre-wrap; font-family: var(--font-sans);">
+            <div style="color: var(--text-muted); text-align: center; margin-top: 5rem;">Select an ADR, Error Fingerprint, or Incident postmortem card to view sanitized markdown details.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End System Knowledge View -->
+
+  <!-- Schema Manager View -->
+
+    <div id="view-schema-manager" class="main-view" style="display: none;">
+      <!-- Preset Domain Packs Gallery -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header">
+          <div class="panel-title">📦 Preset Domain Packs (1-Click Workflow Ingestion)</div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Range: 1100–1499</span>
+        </div>
+        <div class="preset-packs-grid" id="preset-packs-grid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- Live Opcode Registry & Custom Minting -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">📚 Live Opcode Registry & Schema Minting</div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" id="btn-open-custom-opcode-modal" class="btn-secondary" style="background: var(--accent-purple); color: white; border: none; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 8px; cursor: pointer;">
+              ➕ New Custom Opcode
+            </button>
+            <a id="btn-export-schema-json" href="/api/schema/export" download="dume_schema_export.json" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 8px;">
+              📥 Export JSON
+            </a>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
+          <input type="text" id="input-schema-search" placeholder="Search opcodes by name, ID, or description..." style="flex: 1; max-width: 400px; font-size: 0.85rem;">
+          <div class="filter-pill-group">
+            <button type="button" class="filter-pill active" data-filter="all">All</button>
+            <button type="button" class="filter-pill" data-filter="preset">Presets (1xxx)</button>
+            <button type="button" class="filter-pill" data-filter="auto">Auto (2xxx)</button>
+            <button type="button" class="filter-pill" data-filter="custom">Custom (3xxx)</button>
+          </div>
+        </div>
+
+        <table class="data-table" id="schema-manager-table">
+          <thead>
+            <tr>
+              <th>Origin</th>
+              <th>Opcode ID</th>
+              <th>Opcode Name</th>
+              <th>Data Type</th>
+              <th>Description & Details</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="schema-manager-tbody">
+            <!-- Schema rows loaded via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- End Schema Manager View -->
+  </main>
+
+  <!-- New Custom Opcode Modal -->
+  <div class="modal-overlay" id="custom-opcode-modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 520px;">
+      <div class="modal-header">
+        <div class="modal-title">✨ Mint New Custom Opcode (3xxx Range)</div>
+        <button type="button" class="modal-close-btn" id="btn-close-custom-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="custom-opcode-form">
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="custom-opcode-name">Opcode Name</label>
+            <input type="text" id="custom-opcode-name" placeholder="e.g. CAMPAIGN_BUDGET_USD" required style="text-transform: uppercase;">
+          </div>
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="custom-opcode-type">Data Type</label>
+            <select id="custom-opcode-type" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.5rem; border-radius: 6px; width: 100%;">
+              <option value="INT">INT (64-bit Signed Integer)</option>
+              <option value="FLOAT">FLOAT (32-bit Floating Point)</option>
+              <option value="BOOL">BOOL (Boolean Flag)</option>
+              <option value="ENUM">ENUM (Mapped Enumeration)</option>
+              <option value="STRING_REF">STRING_REF (Off-bus Hash Pointer)</option>
+            </select>
+          </div>
+          <div class="form-group" id="custom-opcode-enum-group" style="display: none; margin-bottom: 0.75rem;">
+            <label for="custom-opcode-enum-text">Enum Map (Key: Value pairs, e.g. "1: LOW, 2: MED, 3: HIGH")</label>
+            <input type="text" id="custom-opcode-enum-text" placeholder="1: LOW, 2: MED, 3: HIGH">
+          </div>
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="custom-opcode-desc">Description</label>
+            <input type="text" id="custom-opcode-desc" placeholder="Brief description of this state register...">
+          </div>
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="custom-opcode-unit">Unit (Optional)</label>
+            <input type="text" id="custom-opcode-unit" placeholder="e.g. USD, ms, %">
+          </div>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+            <button type="button" class="btn-secondary" id="btn-cancel-custom-modal">Cancel</button>
+            <button type="submit" style="background: var(--accent-purple); color: white; border: none; font-weight: 600;">Mint Opcode</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Quick Start Walkthrough Guide Modal -->
+  <div class="modal-overlay" id="guide-modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 780px;">
+      <div class="modal-header">
+        <div class="modal-title" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.25rem;">💡</span>
+          <span>How DUMEdb Works — 60-Second Quick Start</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-guide-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- 30-Second Mental Model Hero Banner -->
+        <div class="guide-hero-banner">
+          <div style="font-size: 2.2rem; line-height: 1;">⚡</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem; color: #38bdf8; margin-bottom: 0.2rem;">
+              The Mental Model: External Brain, 0 Prompt Token Burn
+            </div>
+            <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.45;">
+              Traditional AI workflows dump 5,000+ tokens of documents and lore into your prompt on every single turn, bloating your API bill and slowing responses. 
+              <b>DUMEdb is a local deterministic memory engine.</b> It distills manuscripts, project notes, and rules into 32-byte key-value registers stored in lightning-fast local LMDB (&lt; 0.1ms). Your agent recalls facts with 100% precision—burning <b>0 prompt tokens</b>.
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-Step Flow Grid -->
+        <div class="guide-step-grid">
+          <!-- Step 1 -->
+          <div class="guide-step-card">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-title">📥 Hydrate Your Docs</div>
+            <div class="guide-step-desc">
+              Drop manuscript files (.md), call sheets (.pdf), or project dumps. DUMEdb automatically digests key-value facts into state registers.
+            </div>
+            <button type="button" class="btn-secondary" id="btn-guide-step1-action" style="margin-top: auto; padding: 0.35rem 0.65rem; font-size: 0.78rem; width: 100%; text-align: center; background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3);">
+              Drop Document &rarr;
+            </button>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="guide-step-card">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-title">🔌 Connect Any Agent</div>
+            <div class="guide-step-desc">
+              Point Cursor, Claude Desktop, VS Code (Cline), or your terminal to <code>http://localhost:8090/v1</code> or use our native 1-click MCP config.
+            </div>
+            <button type="button" class="btn-secondary" id="btn-guide-step2-action" style="margin-top: auto; padding: 0.35rem 0.65rem; font-size: 0.78rem; width: 100%; text-align: center; background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3);">
+              Choose Agent &rarr;
+            </button>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="guide-step-card">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-title">⚡ Wake &amp; Verify</div>
+            <div class="guide-step-desc">
+              Wake Nostra with the secret handshake <i>"box is the game."</i> or ask your agent anything. Your registers ground every answer with 100% precision.
+            </div>
+            <button type="button" class="btn-secondary" id="btn-guide-step3-action" style="margin-top: auto; padding: 0.35rem 0.65rem; font-size: 0.78rem; width: 100%; text-align: center; background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3);">
+              Try Wake Handshake &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Summary Tip Box -->
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            💡 <b style="color: var(--text-main);">Pro-tip:</b> Hover over any metric or label in DUME Studio to view its plain-English tooltip explanation!
+          </div>
+          <button type="button" id="btn-guide-close-cta" style="background: linear-gradient(135deg, var(--primary), var(--accent-purple)); color: white; border: none; font-weight: 600; padding: 0.45rem 1.1rem; font-size: 0.82rem; border-radius: 6px; cursor: pointer; white-space: nowrap;">
+            Got It, Let's Build! &rarr;
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Connect External Client Quick-Start Modal (Visual 1-Click Agent Picker) -->
+  <div class="modal-overlay" id="connect-modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.25rem;">🔌</span>
+          <span>Connect Your AI Agent</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-connect-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Select your agent or editor below to get pre-configured connection files and 1-click copy snippets:
+        </p>
+
+        <!-- Visual 1-Click Agent Picker Grid -->
+        <div class="agent-picker-grid" id="agent-picker-cards">
+          <div class="agent-card active" data-agent="cursor">
+            <div class="agent-card-icon">💻</div>
+            <div class="agent-card-name">Cursor IDE</div>
+            <div class="agent-card-sub">Native MCP Config</div>
+          </div>
+          <div class="agent-card" data-agent="claude">
+            <div class="agent-card-icon">🍏</div>
+            <div class="agent-card-name">Claude Desktop</div>
+            <div class="agent-card-sub">Mac &amp; Windows App</div>
+          </div>
+          <div class="agent-card" data-agent="vscode">
+            <div class="agent-card-icon">🛠️</div>
+            <div class="agent-card-name">VS Code / Cline</div>
+            <div class="agent-card-sub">Roo Code &amp; Cline</div>
+          </div>
+          <div class="agent-card" data-agent="terminal">
+            <div class="agent-card-icon">⚡</div>
+            <div class="agent-card-name">Terminal / CLI</div>
+            <div class="agent-card-sub">PowerShell &amp; Bash</div>
+          </div>
+          <div class="agent-card" data-agent="python">
+            <div class="agent-card-icon">🐍</div>
+            <div class="agent-card-name">Python SDK</div>
+            <div class="agent-card-sub">OpenAI Package</div>
+          </div>
+          <div class="agent-card" data-agent="proxy">
+            <div class="agent-card-icon">🌐</div>
+            <div class="agent-card-name">OpenAI Proxy</div>
+            <div class="agent-card-sub">Port 8090 Universal</div>
+          </div>
+        </div>
+
+        <!-- Dynamic Agent Detail Panels -->
+        <div class="agent-panels-container">
+          <!-- 1. Cursor IDE Panel -->
+          <div class="agent-pane active" id="pane-agent-cursor">
+            <div class="snippet-box">
+              <div class="snippet-label">Option A: Cursor MCP Config (Recommended) — <code>.cursor/mcp.json</code></div>
+              <div class="code-wrapper">
+                <pre id="code-mcp-cursor">{
+  "mcpServers": {
+    "dumedb": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "dume.mcp_server"]
+    }
+  }
+}</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-mcp-cursor">Copy MCP Config</button>
+              </div>
+            </div>
+            <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: rgba(255,255,255,0.02); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color);">
+              <b style="color: var(--accent-cyan);">Option B (Direct LLM Override):</b> In Cursor Settings &rarr; Models &rarr; OpenAI API Key, set Override URL to <code>http://localhost:8090/v1</code> with key <code>dume</code>.
+            </div>
+          </div>
+
+          <!-- 2. Claude Desktop Panel -->
+          <div class="agent-pane" id="pane-agent-claude" style="display: none;">
+            <div class="os-tab-bar" style="margin-bottom: 0.65rem;">
+              <button type="button" class="os-tab-btn active" id="btn-claude-mac">🍏 macOS (Apple Silicon &amp; Intel)</button>
+              <button type="button" class="os-tab-btn" id="btn-claude-win">🪟 Windows 10 / 11</button>
+            </div>
+            <!-- macOS -->
+            <div id="claude-mac-wrap">
+              <div class="snippet-box">
+                <div class="snippet-label">Config File: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></div>
+                <div class="code-wrapper">
+                  <pre id="code-mcp-claude-mac">{
+  "mcpServers": {
+    "dumedb": {
+      "command": "python3",
+      "args": ["-m", "dume.mcp_server"]
+    }
+  }
+}</pre>
+                  <button type="button" class="btn-copy-code" data-copy-target="code-mcp-claude-mac">Copy macOS Config</button>
+                </div>
+              </div>
+            </div>
+            <!-- Windows -->
+            <div id="claude-win-wrap" style="display: none;">
+              <div class="snippet-box">
+                <div class="snippet-label">Config File: <code>%APPDATA%\Claude\claude_desktop_config.json</code></div>
+                <div class="code-wrapper">
+                  <pre id="code-mcp-claude-win">{
+  "mcpServers": {
+    "dumedb": {
+      "command": "python.exe",
+      "args": ["-m", "dume.mcp_server"]
+    }
+  }
+}</pre>
+                  <button type="button" class="btn-copy-code" data-copy-target="code-mcp-claude-win">Copy Windows Config</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. VS Code / Cline Panel -->
+          <div class="agent-pane" id="pane-agent-vscode" style="display: none;">
+            <div class="snippet-box">
+              <div class="snippet-label">Cline / Roo Code Settings (OpenAI-Compatible Mode)</div>
+              <div class="code-wrapper">
+                <pre id="code-vscode-settings">Base URL: http://localhost:8090/v1
+API Key:  dume
+Model ID: nostra (or qwen2.5:0.5b / llama-3.3-70b-versatile)</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-vscode-settings">Copy Settings</button>
+              </div>
+            </div>
+            <div style="margin-top: 0.65rem; font-size: 0.8rem; color: var(--text-muted);">
+              DUMEdb grounds turns through fast-path LMDB before forwarding to your local or cloud inference model.
+            </div>
+          </div>
+
+          <!-- 4. Terminal / Shell Panel -->
+          <div class="agent-pane" id="pane-agent-terminal" style="display: none;">
+            <div class="snippet-box">
+              <div class="snippet-label">PowerShell (Windows)</div>
+              <div class="code-wrapper">
+                <pre id="code-ps1-term">$env:OPENAI_BASE_URL="http://localhost:8090/v1"
+$env:OPENAI_API_KEY="dume"</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-ps1-term">Copy PowerShell</button>
+              </div>
+            </div>
+            <div class="snippet-box" style="margin-top: 0.65rem;">
+              <div class="snippet-label">Bash / Zsh (macOS &amp; Linux)</div>
+              <div class="code-wrapper">
+                <pre id="code-bash-term">export OPENAI_BASE_URL="http://localhost:8090/v1"
+export OPENAI_API_KEY="dume"</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-bash-term">Copy Bash</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Python SDK Panel -->
+          <div class="agent-pane" id="pane-agent-python" style="display: none;">
+            <div class="snippet-box">
+              <div class="snippet-label">OpenAI Python SDK (Zero-token Grounding)</div>
+              <div class="code-wrapper">
+                <pre id="code-python-sdk">from openai import OpenAI
+
+client = OpenAI(
+    base_url="http://localhost:8090/v1",
+    api_key="dume"
+)
+
+response = client.chat.completions.create(
+    model="nostra",
+    messages=[{"role": "user", "content": "box is the game."}],
+    extra_headers={"X-Entity-ID": "MadBrad-Nostra-01"}
+)
+
+print(response.choices[0].message.content)</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-python-sdk">Copy Python Code</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Universal OpenAI Proxy Panel -->
+          <div class="agent-pane" id="pane-agent-proxy" style="display: none;">
+            <div class="connect-field-group">
+              <div class="connect-field">
+                <label>Base URL</label>
+                <div class="copy-input-row">
+                  <input type="text" value="http://localhost:8090/v1" readonly id="input-copy-baseurl">
+                  <button type="button" class="btn-copy" data-copy-target="input-copy-baseurl">Copy</button>
+                </div>
+              </div>
+              <div class="connect-field">
+                <label>API Key</label>
+                <div class="copy-input-row">
+                  <input type="text" value="dume" readonly id="input-copy-apikey">
+                  <button type="button" class="btn-copy" data-copy-target="input-copy-apikey">Copy</button>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); background: rgba(255,255,255,0.02); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color);">
+              Compatible with <b>Jan, OpenWebUI, LibreChat, Chatbox, cURL</b>, or any tool that supports custom OpenAI endpoints.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Intake Modal Tray -->
+  <div class="modal-overlay" id="intake-modal" style="display: none;">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title">📥 State Intake & Batch Document Hydration</div>
+        <button type="button" class="modal-close-btn" id="btn-close-intake-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Paste unformatted project notes, call sheets, or task dumps. DUMEdb will distill facts into discrete LMDB state registers and auto-mint schema opcodes as needed.
+        </p>
+
+        <!-- Drag & Drop Multimodal File Upload Zone -->
+        <div id="intake-dropzone" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 1.5rem; text-align: center; margin-bottom: 1.25rem; background: rgba(255, 255, 255, 0.02); cursor: pointer; transition: all 0.2s ease;">
+          <input type="file" id="intake-file-input" style="display: none;" accept=".md,.markdown,.mdown,.txt,.pdf,.docx,.doc,.json,.yaml,.yml,.csv,.xlsx,.xls,.png,.jpg,.jpeg,.webp">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄 📁 📥</div>
+          <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.25rem;">
+            Drag & Drop Files Here (.md, .pdf, .docx, .txt, .json, .csv, .xlsx)
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            DUMEdb extracts candidate registers & hashes raw asset to disk for 0 token cost
+          </div>
+          <button type="button" id="btn-browse-intake-file" onclick="document.getElementById('intake-file-input').click()" class="btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.85rem; background: linear-gradient(135deg, var(--accent-cyan), var(--primary)); color: white; border: none; font-weight: 600; border-radius: 6px; cursor: pointer;">
+            📂 Browse Files
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+          <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600;">OR PASTE TEXT DIRECTLY</span>
+          <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+        </div>
+
+        <form id="intake-form">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="intake-target-entity">Target Entity</label>
+            <select id="intake-target-entity" style="width: 100%;">
+              <option value="MadBrad-Nostra-01">MadBrad-Nostra-01</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="intake-doc-text">Ingestion Document Payload (or raw project notes)</label>
+            <textarea id="intake-doc-text" rows="6" placeholder="e.g.: Director is Sarah, wrap time is 1900, CAMERA_TYPE=RED V-Raptor, SCENE_COUNT=14..." style="width: 100%; font-family: var(--font-mono); font-size: 0.85rem; padding: 0.75rem;"></textarea>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.85rem; color: var(--text-main);">
+              <input type="checkbox" id="intake-flush-scratchpad" checked style="width: auto;">
+              🧹 Flush conversational scratchpad context buffer after commit
+            </label>
+            <button type="submit" class="btn-send" id="btn-submit-intake" style="background: linear-gradient(135deg, var(--accent-cyan), var(--primary));">
+              🚀 Run Ingestion
+            </button>
+          </div>
+        </form>
+
+        <div id="intake-result-container" style="display: none; margin-top: 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--accent-emerald); margin-bottom: 0.5rem;" id="intake-result-title">
+            ✅ Ingestion Complete
+          </div>
+          <div id="intake-diff-view" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-main);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entity Actions Modal -->
+  <div class="modal-overlay" id="entity-actions-modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 500px;">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ Entity Lifecycle & Management</div>
+        <button type="button" class="modal-close-btn" id="btn-close-entity-actions-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Managing Active Entity: <b id="entity-actions-target-id" style="color: var(--accent-amber);">MadBrad-Nostra-01</b>
+        </div>
+
+        <form id="entity-rename-form" style="margin-bottom: 1.25rem;">
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="input-entity-alias">Human-Readable Display Name (Alias)</label>
+            <div style="display: flex; gap: 0.35rem;">
+              <input type="text" id="input-entity-alias" placeholder="e.g. Production 1stAD..." style="flex: 1; font-size: 0.85rem;">
+              <button type="submit" style="padding: 0.4rem 0.85rem; font-size: 0.8rem; background: var(--accent-cyan); color: white; border: none; font-weight: 600;">Save Alias</button>
+            </div>
+          </div>
+        </form>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-main);">📦 Archive Entity</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Hide from active selector while preserving LMDB history logs.</div>
+            </div>
+            <button type="button" id="btn-archive-entity" class="btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4);">Archive</button>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+            <div>
+              <div style="font-size: 0.88rem; font-weight: 600; color: var(--accent-rose);">🗑️ Hard Delete / Purge</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Permanently wipe active registers & history log from LMDB.</div>
+            </div>
+            <button type="button" id="btn-delete-entity-prompt" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(244, 63, 94, 0.2); color: #f87171; border: 1px solid rgba(244, 63, 94, 0.4);">Purge Entity</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Multimodal File Intake Candidate Review Modal -->
+  <div class="modal-overlay" id="file-intake-review-modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <div class="modal-title">📥 Intake Candidate Register Review</div>
+        <button type="button" class="modal-close-btn" id="btn-close-intake-review-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>File: <b id="intake-modal-filename" style="color: var(--accent-cyan);">--</b> | Asset Hash: <code id="intake-modal-hash" style="color: var(--accent-amber); font-size: 0.75rem;">--</code></div>
+          <label style="font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; gap: 0.35rem;">
+            <input type="checkbox" id="intake-modal-flush-scratchpad"> Flush Scratchpad
+          </label>
+        </div>
+
+        <div style="max-height: 280px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 1rem;">
+          <table class="data-table" style="margin: 0;">
+            <thead>
+              <tr>
+                <th style="width: 35px; text-align: center;"><input type="checkbox" id="intake-select-all-candidates" checked></th>
+                <th>Register Key</th>
+                <th>Extracted Value</th>
+              </tr>
+            </thead>
+            <tbody id="intake-candidates-tbody">
+              <!-- Candidate rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="font-size: 0.75rem; color: var(--text-muted);" id="intake-candidate-count-label">0 candidates detected</div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button type="button" class="btn-secondary" id="btn-cancel-intake-review" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">Cancel</button>
+            <button type="button" id="btn-commit-intake-review" style="font-size: 0.8rem; padding: 0.4rem 1rem; background: linear-gradient(135deg, var(--accent-emerald), #059669); color: white; font-weight: 600; border: none; border-radius: 6px; cursor: pointer;">Commit to Registers</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

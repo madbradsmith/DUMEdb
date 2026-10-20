@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUME - Deterministic Unit-Record Memory Engine Inspector</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="logo-group">
+      <span class="logo-badge">DUME</span>
+      <h1>Deterministic Unit-Record Memory Engine</h1>
+    </div>
+    <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+      <nav class="main-nav-tabs">
+        <button type="button" class="main-tab-btn active" data-view="view-inspector">🔍 Inspector</button>
+        <button type="button" class="main-tab-btn" data-view="view-schema-manager">📚 Schema Manager</button>
+      </nav>
+      <button type="button" class="btn-intake-drawer" id="btn-open-intake-modal" style="background: linear-gradient(135deg, var(--accent-cyan), var(--primary)); border: none; color: white; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        📥 Document Intake
+      </button>
+      <button type="button" class="btn-connect-client" id="btn-open-connect-modal" style="background: linear-gradient(135deg, var(--accent-purple), var(--primary)); border: none; color: white; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+        🔌 Connect External Client
+      </button>
+      <div class="status-pill" id="proxy-status-pill" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa;">
+        <div class="indicator-dot" style="background: #60a5fa;"></div>
+        <span id="proxy-status-text">📡 Proxy Active: Forwarding to http://localhost:11434/v1</span>
+      </div>
+      <div class="status-pill">
+        <div class="indicator-dot" id="scribe-ws-indicator"></div>
+        <span id="lmdb-status">Background Scribe Active (WebSocket)</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Inspector View -->
+    <div id="view-inspector" class="main-view active">
+      <!-- System Metrics Header -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Foreground Fast Path</div>
+        <div class="metric-value" id="metric-latency">&lt; 0.1 ms</div>
+        <div class="metric-sub">Zero Disk / Lock Latency</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Neural Synthesis Speed</div>
+        <div class="metric-value" id="metric-tps" style="color: var(--accent-emerald);">-- tok/s</div>
+        <div class="metric-sub" id="metric-synth-ms">0 ms Synthesis Latency</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Active State Registers</div>
+        <div class="metric-value" id="metric-active-count">0</div>
+        <div class="metric-sub">LMDB O(1) Key-Value Overwrite</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">History Log Audit Entries</div>
+        <div class="metric-value" id="metric-history-count">0</div>
+        <div class="metric-sub">Chronological UUIDv7 Records</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Background Scribe Queue</div>
+        <div class="metric-value" id="metric-queue-size">0 Turns</div>
+        <div class="metric-sub">Out-of-Band Event Queue</div>
+      </div>
+    </div>
+
+    <!-- Main Two-Column Layout -->
+    <div class="layout-grid">
+      
+      <!-- Left Column: DUME Web Terminal & Live Scribe Feed -->
+      <div class="panel">
+        <div class="panel-header" style="flex-wrap: wrap; gap: 0.5rem;">
+          <div class="panel-title">🖥️ DUME Web Terminal</div>
+          <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; margin-left: auto;">
+            <span id="scratchpad-badge" style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: #c084fc; padding: 0.15rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600;">
+              🧠 0/4 Turns
+            </span>
+            <span id="terminal-speed-badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 0.15rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; font-family: var(--font-mono); font-weight: 600;">
+              ⚡ -- tok/s
+            </span>
+            <button class="btn-secondary" id="btn-flush-scratchpad" style="background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.3); color: #f87171; font-weight: 600; padding: 0.2rem 0.5rem; font-size: 0.72rem; border-radius: 6px;">
+              🧹 Flush
+            </button>
+            <button class="btn-secondary" id="btn-wake-nostra" style="background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); font-weight: 500; padding: 0.2rem 0.5rem; font-size: 0.72rem; border-radius: 6px; cursor: pointer;">
+              Waiting for Client...
+            </button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 1.3fr 1.3fr; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="form-group" style="margin: 0;">
+            <label for="select-entity">Active Entity UUID</label>
+            <div style="display: flex; gap: 0.35rem;">
+              <select id="select-entity" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.45rem; border-radius: 6px; flex: 1; font-size: 0.85rem;">
+                <option value="DemoUser-01" selected>DemoUser-01</option>
+              </select>
+              <button type="button" id="btn-toggle-new-entity" class="btn-secondary" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; white-space: nowrap;">
+                ➕ New
+              </button>
+            </div>
+            <div id="new-entity-container" style="display: none; margin-top: 0.35rem;">
+              <div style="display: flex; gap: 0.35rem;">
+                <input type="text" id="new-entity-name" placeholder="Name or UUID (e.g. DemoUser-02)..." style="font-size: 0.8rem; padding: 0.35rem 0.6rem; flex: 1;">
+                <button type="button" id="btn-create-entity" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; background: var(--accent-purple); color: white; border: none; font-weight: 600;">Create</button>
+              </div>
+            </div>
+            <input type="hidden" id="entity_id" value="DemoUser-01">
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label for="select-provider">Model Engine</label>
+            <select id="select-provider" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.45rem; border-radius: 6px; width: 100%; font-size: 0.85rem;">
+              <option value="proxy" selected>Awaiting External Client (Port 8090)...</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin: 0;">
+            <label for="input-api-key">Cloud API Key (Stored in LocalStorage)</label>
+            <input type="password" id="input-api-key" placeholder="Paste GEMINI_API_KEY here..." autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Interactive Web Terminal Log -->
+        <div class="terminal-container" id="terminal-log">
+          <div class="terminal-line system-line">
+            <span class="terminal-prefix">[SYSTEM]</span> DUME Studio Web Terminal Initialized. Ready.
+          </div>
+        </div>
+
+        <!-- Terminal Input Form -->
+        <form id="chat-turn-form" style="margin-top: 0.75rem;">
+          <div class="terminal-input-wrapper">
+            <span class="terminal-prompt-symbol">&gt;</span>
+            <input type="text" id="turn-input" placeholder="Connect an external client to http://localhost:8090/v1 to interact..." required autocomplete="off">
+            <button type="submit" class="btn-send">Send</button>
+          </div>
+        </form>
+
+        <div class="panel-header" style="margin-top: 1rem;">
+          <div class="panel-title">📡 Live Background Scribe Activity Feed</div>
+        </div>
+        <div class="scribe-feed-container" id="scribe-feed-view">
+          <div style="color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem;">
+            Awaiting background scribe commits over WebSocket...
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Raw Binary Hex Inspector & Grounded Context -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">🔬 Raw 32-Byte Binary Hex Inspector</div>
+          <button class="btn-secondary" id="btn-refresh-inspector">Refresh Dump</button>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><div class="legend-swatch" style="background: #60a5fa;"></div> UUID (16B)</div>
+          <div class="legend-item"><div class="legend-swatch" style="background: #fbbf24;"></div> Opcode (2B)</div>
+          <div class="legend-item"><div class="legend-swatch" style="background: #34d399;"></div> Value (8B)</div>
+          <div class="legend-item"><div class="legend-swatch" style="background: #c084fc;"></div> Timestamp (4B)</div>
+          <div class="legend-item"><div class="legend-swatch" style="background: #f87171;"></div> Flags (2B)</div>
+        </div>
+
+        <div class="hex-dump-container" id="hex-dump-view">
+          <div style="color: var(--text-muted);">Select or dispatch a turn to view hardware-aligned binary record bytes.</div>
+        </div>
+
+        <div class="panel-header" style="margin-top: 1rem;">
+          <div class="panel-title">🤖 Grounded Register Context Prefix</div>
+        </div>
+
+        <div class="form-group">
+          <label>Injected Discrete State Registers (≤ 50 Tokens)</label>
+          <div class="prompt-preview" id="prompt-register-preview">No active entity loaded.</div>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label>Foreground LLM Stream Response</label>
+          <div class="prompt-preview" id="chat-output-preview" style="color: var(--text-main); border-color: var(--border-color);">
+            Awaiting conversation turn...
+          </div>
+        </div>
+
+      </div> <!-- End right panel-column -->
+
+    </div> <!-- End layout-grid -->
+  </div> <!-- End view-inspector -->
+
+  <!-- Schema Manager View -->
+    <div id="view-schema-manager" class="main-view" style="display: none;">
+      <!-- Preset Domain Packs Gallery -->
+      <div class="panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header">
+          <div class="panel-title">📦 Preset Domain Packs (1-Click Workflow Ingestion)</div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Range: 1100–1499</span>
+        </div>
+        <div class="preset-packs-grid" id="preset-packs-grid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- Live Opcode Registry & Custom Minting -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">📚 Live Opcode Registry & Schema Minting</div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" id="btn-open-custom-opcode-modal" class="btn-secondary" style="background: var(--accent-purple); color: white; border: none; font-weight: 600; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 8px; cursor: pointer;">
+              ➕ New Custom Opcode
+            </button>
+            <a id="btn-export-schema-json" href="/api/schema/export" download="dume_schema_export.json" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.85rem; font-size: 0.85rem; border-radius: 8px;">
+              📥 Export JSON
+            </a>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
+          <input type="text" id="input-schema-search" placeholder="Search opcodes by name, ID, or description..." style="flex: 1; max-width: 400px; font-size: 0.85rem;">
+          <div class="filter-pill-group">
+            <button type="button" class="filter-pill active" data-filter="all">All</button>
+            <button type="button" class="filter-pill" data-filter="preset">Presets (1xxx)</button>
+            <button type="button" class="filter-pill" data-filter="auto">Auto (2xxx)</button>
+            <button type="button" class="filter-pill" data-filter="custom">Custom (3xxx)</button>
+          </div>
+        </div>
+
+        <table class="data-table" id="schema-manager-table">
+          <thead>
+            <tr>
+              <th>Origin</th>
+              <th>Opcode ID</th>
+              <th>Opcode Name</th>
+              <th>Data Type</th>
+              <th>Description & Details</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="schema-manager-tbody">
+            <!-- Schema rows loaded via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- End Schema Manager View -->
+  </main>
+
+  <!-- New Custom Opcode Modal -->
+  <div class="modal-overlay" id="custom-opcode-modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 520px;">
+      <div class="modal-header">
+        <div class="modal-title">✨ Mint New Custom Opcode (3xxx Range)</div>
+        <button type="button" class="modal-close-btn" id="btn-close-custom-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="custom-opcode-form">
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="custom-opcode-name">Opcode Name</label>
+            <input type="text" id="custom-opcode-name" placeholder="e.g. CAMPAIGN_BUDGET_USD" required style="text-transform: uppercase;">
+          </div>
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="custom-opcode-type">Data Type</label>
+            <select id="custom-opcode-type" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.5rem; border-radius: 6px; width: 100%;">
+              <option value="INT">INT (64-bit Signed Integer)</option>
+              <option value="FLOAT">FLOAT (32-bit Floating Point)</option>
+              <option value="BOOL">BOOL (Boolean Flag)</option>
+              <option value="ENUM">ENUM (Mapped Enumeration)</option>
+              <option value="STRING_REF">STRING_REF (Off-bus Hash Pointer)</option>
+            </select>
+          </div>
+          <div class="form-group" id="custom-opcode-enum-group" style="display: none; margin-bottom: 0.75rem;">
+            <label for="custom-opcode-enum-text">Enum Map (Key: Value pairs, e.g. "1: LOW, 2: MED, 3: HIGH")</label>
+            <input type="text" id="custom-opcode-enum-text" placeholder="1: LOW, 2: MED, 3: HIGH">
+          </div>
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label for="custom-opcode-desc">Description</label>
+            <input type="text" id="custom-opcode-desc" placeholder="Brief description of this state register...">
+          </div>
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="custom-opcode-unit">Unit (Optional)</label>
+            <input type="text" id="custom-opcode-unit" placeholder="e.g. USD, ms, %">
+          </div>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+            <button type="button" class="btn-secondary" id="btn-cancel-custom-modal">Cancel</button>
+            <button type="submit" style="background: var(--accent-purple); color: white; border: none; font-weight: 600;">Mint Opcode</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connect External Client Quick-Start Modal -->
+  <div class="modal-overlay" id="connect-modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">🔌 Connect External Client</div>
+        <button type="button" class="modal-close-btn" id="btn-close-connect-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Connect any OpenAI API-compatible CLI, IDE (Cursor, VS Code, Antigravity), or custom agent to DUMEdb middleware with zero friction.
+        </p>
+
+        <!-- Key Credentials Section -->
+        <div class="connect-field-group">
+          <div class="connect-field">
+            <label>Base URL</label>
+            <div class="copy-input-row">
+              <input type="text" value="http://localhost:8090/v1" readonly id="input-copy-baseurl">
+              <button type="button" class="btn-copy" data-copy-target="input-copy-baseurl">Copy</button>
+            </div>
+          </div>
+          <div class="connect-field">
+            <label>API Key</label>
+            <div class="copy-input-row">
+              <input type="text" value="dume" readonly id="input-copy-apikey">
+              <button type="button" class="btn-copy" data-copy-target="input-copy-apikey">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabbed Snippets Section -->
+        <div class="tab-header" style="margin-top: 1.25rem;">
+          <button type="button" class="tab-btn active" data-tab="tab-env">PowerShell / Bash</button>
+          <button type="button" class="tab-btn" data-tab="tab-ide">Cursor / IDEs</button>
+          <button type="button" class="tab-btn" data-tab="tab-python">Python SDK</button>
+        </div>
+
+        <div class="tab-content-container">
+          <!-- Tab 1: PowerShell / Bash -->
+          <div class="tab-pane active" id="tab-env">
+            <div class="snippet-box">
+              <div class="snippet-label">PowerShell (Windows)</div>
+              <div class="code-wrapper">
+                <pre id="code-ps1">$env:OPENAI_BASE_URL="http://localhost:8090/v1"
+$env:OPENAI_API_KEY="dume"</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-ps1">Copy</button>
+              </div>
+            </div>
+            <div class="snippet-box" style="margin-top: 0.75rem;">
+              <div class="snippet-label">Bash / Zsh (Linux & macOS)</div>
+              <div class="code-wrapper">
+                <pre id="code-bash">export OPENAI_BASE_URL="http://localhost:8090/v1"
+export OPENAI_API_KEY="dume"</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-bash">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Cursor / IDEs -->
+          <div class="tab-pane" id="tab-ide">
+            <div class="ide-guide-box">
+              <div class="guide-step">
+                <span class="step-num">1</span>
+                <span>Open <b>Cursor Settings</b> &rarr; <b>Models</b> (or VS Code AI extension settings).</span>
+              </div>
+              <div class="guide-step">
+                <span class="step-num">2</span>
+                <span>Set <b>OpenAI Base URL / Override</b> to: <code>http://localhost:8090/v1</code></span>
+              </div>
+              <div class="guide-step">
+                <span class="step-num">3</span>
+                <span>Set <b>OpenAI API Key</b> to: <code>dume</code></span>
+              </div>
+              <div class="guide-step">
+                <span class="step-num">4</span>
+                <span>All turns will automatically be grounded by DUMEdb LMDB state registers!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Python SDK -->
+          <div class="tab-pane" id="tab-python">
+            <div class="snippet-box">
+              <div class="snippet-label">OpenAI Python SDK Integration</div>
+              <div class="code-wrapper">
+                <pre id="code-py">from openai import OpenAI
+
+client = OpenAI(
+    base_url="http://localhost:8090/v1",
+    api_key="dume"
+)
+
+response = client.chat.completions.create(
+    model="qwen2.5:0.5b",
+    messages=[{"role": "user", "content": "Hello DUME!"}]
+)
+
+print(response.choices[0].message.content)</pre>
+                <button type="button" class="btn-copy-code" data-copy-target="code-py">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intake Modal Tray -->
+  <div class="modal-overlay" id="intake-modal" style="display: none;">
+    <div class="modal-card" style="max-width: 720px;">
+      <div class="modal-header">
+        <div class="modal-title">📥 State Intake & Batch Document Hydration</div>
+        <button type="button" class="modal-close-btn" id="btn-close-intake-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Paste unformatted project notes, call sheets, or task dumps. DUMEdb will distill facts into discrete LMDB state registers and auto-mint schema opcodes as needed.
+        </p>
+
+        <form id="intake-form">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="intake-target-entity">Target Entity</label>
+            <select id="intake-target-entity" style="width: 100%;">
+              <option value="DemoUser-01">DemoUser-01</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="intake-doc-text">Ingestion Document Payload (or raw project notes)</label>
+            <textarea id="intake-doc-text" rows="8" placeholder="e.g.: Director is Sarah, wrap time is 1900, CAMERA_TYPE=RED V-Raptor, SCENE_COUNT=14..." style="width: 100%; font-family: var(--font-mono); font-size: 0.85rem; padding: 0.75rem;" required></textarea>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.85rem; color: var(--text-main);">
+              <input type="checkbox" id="intake-flush-scratchpad" checked style="width: auto;">
+              🧹 Flush conversational scratchpad context buffer after commit
+            </label>
+            <button type="submit" class="btn-send" id="btn-submit-intake" style="background: linear-gradient(135deg, var(--accent-cyan), var(--primary));">
+              🚀 Run Ingestion
+            </button>
+          </div>
+        </form>
+
+        <div id="intake-result-container" style="display: none; margin-top: 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+          <div style="font-weight: 600; font-size: 0.88rem; color: var(--accent-emerald); margin-bottom: 0.5rem;" id="intake-result-title">
+            ✅ Ingestion Complete
+          </div>
+          <div id="intake-diff-view" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-main);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

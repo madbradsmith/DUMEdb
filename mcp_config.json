@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "dumedb": {
+      "command": "C:/Users/c6182/Desktop/folders/DUMEdb-WORK/.venv/Scripts/python.exe",
+      "args": [
+        "-m",
+        "dume.mcp_server"
+      ],
+      "cwd": "C:/Users/c6182/Desktop/folders/DUMEdb-WORK",
+      "env": {
+        "PYTHONPATH": "C:/Users/c6182/Desktop/folders/DUMEdb-WORK"
+      }
+    }
+  }
+}

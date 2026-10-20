@@ -1,0 +1,72 @@
+[
+  {
+    "id": "WF-GEN-01",
+    "title": "ZERO-TURN ORIENTATION / ORIENT BEFORE ACTING",
+    "category": "protocol",
+    "trigger": "Session start, wake command, or context handoff",
+    "move": "Execute cabinet_wake to ingest status block and receipts in <250 tokens without rummaging filesystem",
+    "why": "Eliminates token waste and amnesia; establishes ground truth immediately",
+    "source": "DUME Core Protocols",
+    "created_by": "System (Generic Template)",
+    "status": "active",
+    "created_at": "2026-10-19T00:00:00",
+    "last_fired": null,
+    "fire_count": 0
+  },
+  {
+    "id": "WF-GEN-02",
+    "title": "THE BLOAT METER WATCH (RP PROTOCOL)",
+    "category": "self_monitoring",
+    "trigger": "Bloat Meter reaches >= 75% (~90,000 tokens)",
+    "move": "Warn operator and execute cabinet_refresh handoff before auto-compaction occurs",
+    "why": "Preserves continuous session state and avoids uncontrolled model compaction",
+    "source": "DUME Core Protocols",
+    "created_by": "System (Generic Template)",
+    "status": "active",
+    "created_at": "2026-10-19T00:00:00",
+    "last_fired": null,
+    "fire_count": 0
+  },
+  {
+    "id": "WF-GEN-03",
+    "title": "FRANK'S LAW (RECEIPTS OVER DELETIONS)",
+    "category": "protocol",
+    "trigger": "State mutation, schema change, or obsolete record",
+    "move": "Append timestamped state transitions; never silently overwrite or delete history",
+    "why": "Deletions is where the lies live; immutable audit trails guarantee truth",
+    "source": "Frank (DUME Field Philosophy)",
+    "created_by": "System (Generic Template)",
+    "status": "active",
+    "created_at": "2026-10-19T00:00:00",
+    "last_fired": null,
+    "fire_count": 0
+  },
+  {
+    "id": "WF-GEN-04",
+    "title": "REGISTER-FIRST FAST PATH",
+    "category": "speed",
+    "trigger": "Agent needs project mode, state flag, or current operational setting",
+    "move": "Query DUMEdb LMDB unit-records via opcode before initiating fuzzy search",
+    "why": "Sub-microsecond retrieval at zero prompt token burn",
+    "source": "IBM 1401 Unit-Record Paradigm",
+    "created_by": "System (Generic Template)",
+    "status": "active",
+    "created_at": "2026-10-19T00:00:00",
+    "last_fired": null,
+    "fire_count": 0
+  },
+  {
+    "id": "WF-GEN-05",
+    "title": "OPERATOR GROUND TRUTH ALIGNMENT",
+    "category": "posture",
+    "trigger": "Telemetry or state contradicts operator observation",
+    "move": "Immediately pause and calibrate to disk/hardware reality (no cosmetic theater)",
+    "why": "Prioritizes real math and verified receipts over polite hallucination",
+    "source": "DUME Core Philosophy",
+    "created_by": "System (Generic Template)",
+    "status": "active",
+    "created_at": "2026-10-19T00:00:00",
+    "last_fired": null,
+    "fire_count": 0
+  }
+]

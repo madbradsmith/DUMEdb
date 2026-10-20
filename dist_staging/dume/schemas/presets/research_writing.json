@@ -1,0 +1,45 @@
+{
+  "name": "research_writing",
+  "title": "Research & Academic Writing",
+  "description": "State registers for thesis topics, word counts, methodology, and citation styles.",
+  "opcodes": [
+    {
+      "opcode": 1300,
+      "name": "THESIS_TOPIC",
+      "description": "Primary research thesis topic or title",
+      "data_type": "STRING_REF"
+    },
+    {
+      "opcode": 1301,
+      "name": "TARGET_WORD_COUNT",
+      "description": "Target manuscript word count goal",
+      "data_type": "INT",
+      "unit": "words"
+    },
+    {
+      "opcode": 1302,
+      "name": "CURRENT_WORD_COUNT",
+      "description": "Current manuscript word count",
+      "data_type": "INT",
+      "unit": "words"
+    },
+    {
+      "opcode": 1303,
+      "name": "PRIMARY_METHODOLOGY",
+      "description": "Research methodology framework",
+      "data_type": "STRING_REF"
+    },
+    {
+      "opcode": 1304,
+      "name": "CITATION_STYLE",
+      "description": "Academic citation style specification",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "APA_7",
+        "2": "MLA_9",
+        "3": "CHICAGO",
+        "4": "IEEE"
+      }
+    }
+  ]
+}
