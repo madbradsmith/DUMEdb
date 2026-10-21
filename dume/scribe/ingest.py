@@ -199,6 +199,11 @@ class BatchIngestionEngine:
         ts = timestamp if timestamp is not None else (int(time.time()) & 0xFFFFFFFF)
         records_to_commit: List[Tuple[UnitRecord, Optional[bytes]]] = []
 
+        if isinstance(registers, list):
+            registers = {r["key"]: r["value"] for r in registers if isinstance(r, dict) and "key" in r}
+
+        new_opcodes_registered = False
+
         for key, raw_val in registers.items():
             clean_name = re.sub(r'[^A-Za-z0-9_]', '_', key.strip()).upper()
             clean_name = re.sub(r'_+', '_', clean_name).strip('_')
@@ -226,7 +231,8 @@ class BatchIngestionEngine:
                             f = float(raw_val)
                             dt = "FLOAT" if "." in raw_val else "INT"
                         except ValueError:
-                            if len(raw_val) > 64:
+                            # Strings containing path separators, spaces, symbols, or length > 24 -> STRING_REF
+                            if any(c in str(raw_val) for c in ("/", "\\", "\n", " ", ":", ".", "-", "_")) or len(str(raw_val)) > 24:
                                 dt = "STRING_REF"
                             else:
                                 dt = "ENUM"
@@ -241,9 +247,21 @@ class BatchIngestionEngine:
                 if dt == "ENUM":
                     spec.enum_values = {1: str(raw_val)}
 
-                self.schema_dict.register_opcode(spec, persist=True, is_custom=True)
+                self.schema_dict.register_opcode(spec, persist=False, is_custom=True)
+                new_opcodes_registered = True
 
             cleaned_value = clean_extracted_value(str(raw_val)) if isinstance(raw_val, str) else raw_val
+
+            # Dynamically expand auto-minted enum values if a novel enum string arrives
+            existing_spec = self.schema_dict.get_spec_by_name(clean_name)
+            if existing_spec and existing_spec.data_type == "ENUM" and existing_spec.is_auto:
+                allowed_vals = [str(v).lower() for v in (existing_spec.enum_values or {}).values()]
+                if str(cleaned_value).lower() not in allowed_vals:
+                    next_idx = max(existing_spec.enum_values.keys(), default=0) + 1 if existing_spec.enum_values else 1
+                    existing_spec.enum_values[next_idx] = str(cleaned_value)
+                    self.schema_dict.register_opcode(existing_spec, persist=False, is_custom=True)
+                    new_opcodes_registered = True
+
             try:
                 rec, payload_bytes = self.ingestion_engine.validate_and_parse(
                     entity_id=canonical_uuid_bytes,
@@ -254,6 +272,9 @@ class BatchIngestionEngine:
                 records_to_commit.append((rec, payload_bytes))
             except IngestionError as err:
                 print(f"[BatchIngestionEngine] Warning skipping invalid key '{key}': {err}")
+
+        if new_opcodes_registered:
+            self.schema_dict.save_to_disk()
 
         # Atomic commit in a single write transaction
         if records_to_commit:

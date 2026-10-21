@@ -2706,6 +2706,94 @@ function setupIntakeModal() {
       }
     });
   }
+
+  // Directory Ingestion Handler
+  const btnIngestDir = document.getElementById("btn-ingest-directory");
+  const inputDir = document.getElementById("input-directory-path");
+  const statusDir = document.getElementById("directory-ingest-status");
+
+  if (btnIngestDir && inputDir && !btnIngestDir.dataset.bound) {
+    btnIngestDir.dataset.bound = "true";
+
+    const triggerDirectoryIngest = async () => {
+      const dirPath = inputDir.value.trim();
+      if (!dirPath) {
+        if (statusDir) {
+          statusDir.style.display = "block";
+          statusDir.style.color = "var(--accent-amber, #f59e0b)";
+          statusDir.innerHTML = "⚠️ Please enter or paste a valid folder path (e.g. <code>C:\\Users\\c6182\\Desktop\\folders\\safe</code>).";
+        }
+        inputDir.focus();
+        inputDir.style.borderColor = "var(--accent-amber, #f59e0b)";
+        setTimeout(() => {
+          inputDir.style.borderColor = "var(--border-color)";
+        }, 2500);
+        return;
+      }
+
+      const targetEntity = activeEntityId || "MadBrad-Nostra-01";
+      btnIngestDir.disabled = true;
+      btnIngestDir.textContent = "⏳ Scanning...";
+      if (statusDir) {
+        statusDir.style.display = "block";
+        statusDir.style.color = "var(--text-muted)";
+        statusDir.textContent = `Scanning & hashing directory: ${dirPath}...`;
+      }
+
+      try {
+        const resp = await fetch("/dume/ingest/directory", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Entity-ID": targetEntity
+          },
+          body: JSON.stringify({
+            directory_path: dirPath,
+            entity_id: targetEntity,
+            recursive: true
+          })
+        });
+
+        const data = await resp.json();
+        btnIngestDir.disabled = false;
+        btnIngestDir.textContent = "⚡ Ingest Folder";
+
+        if (resp.ok && data.commit_status === "success") {
+          if (statusDir) {
+            statusDir.style.color = "var(--accent-emerald)";
+            statusDir.textContent = `✅ Ingested ${data.files_ingested} files (${data.committed_registers_count} registers committed in ${data.duration_ms}ms, ${data.files_skipped_duplicate} duplicates skipped).`;
+          }
+          appendTerminalLine("system", `Directory '${data.directory_name}' ingested into '${targetEntity}': ${data.committed_registers_count} registers written to LMDB in ${data.duration_ms}ms.`);
+          inspectEntity(targetEntity);
+          loadHealth();
+        } else {
+          const errMsg = data.detail || JSON.stringify(data);
+          if (statusDir) {
+            statusDir.style.color = "var(--accent-rose)";
+            statusDir.textContent = `❌ Ingestion failed: ${errMsg}`;
+          }
+          appendTerminalLine("error", `Directory ingestion error: ${errMsg}`);
+        }
+      } catch (err) {
+        if (statusDir) {
+          statusDir.style.color = "var(--accent-rose)";
+          statusDir.textContent = `❌ Network error: ${err.message}`;
+        }
+        appendTerminalLine("error", `Directory ingestion request failed: ${err.message}`);
+      } finally {
+        btnIngestDir.disabled = false;
+        btnIngestDir.textContent = "⚡ Ingest Folder";
+      }
+    };
+
+    btnIngestDir.addEventListener("click", triggerDirectoryIngest);
+    inputDir.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        triggerDirectoryIngest();
+      }
+    });
+  }
 }
 
 // Dynamic Port Resolution & Update Helpers

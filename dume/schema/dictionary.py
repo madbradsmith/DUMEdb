@@ -244,17 +244,21 @@ class SchemaDictionary:
 
     def get_next_available_opcode(self) -> int:
         """Calculates and returns the next unused integer opcode ID (starting from 2001)."""
-        auto_keys = [k for k in self._opcodes.keys() if 2000 <= k <= 2999]
-        if not auto_keys:
-            return 2001
-        return max(auto_keys) + 1
+        candidate = 2001
+        while candidate in self._opcodes and candidate <= 0xFFFE:
+            candidate += 1
+        if candidate > 0xFFFE:
+            raise ValueError("All available opcode slots (2001-65534) are exhausted.")
+        return candidate
 
     def get_next_available_custom_opcode(self) -> int:
         """Calculates and returns the next unused custom integer opcode ID (starting from 3001)."""
-        custom_keys = [k for k in self._opcodes.keys() if 3000 <= k <= 3999]
-        if not custom_keys:
-            return 3001
-        return max(custom_keys) + 1
+        candidate = 3001
+        while candidate in self._opcodes and candidate <= 0xFFFE:
+            candidate += 1
+        if candidate > 0xFFFE:
+            raise ValueError("All available opcode slots (3001-65534) are exhausted.")
+        return candidate
 
     def promote_auto_opcode(self, opcode_id: int) -> OpcodeSpec:
         """Promotes an auto-discovered [AUTO] opcode (2xxx) to a permanent registered schema."""

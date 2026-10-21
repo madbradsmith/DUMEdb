@@ -18,7 +18,7 @@ class DUMEMemoryEngine:
     Hardware-Aligned Zero-Copy Storage Substrate backed by LMDB (mmap).
     Manages active_state (O(1) latest registers), history_log (O(K) timeline), and payload_store.
     """
-    def __init__(self, db_path: Union[str, Path], map_size: int = 10 * 1024 * 1024 * 1024):  # 10GB default map
+    def __init__(self, db_path: Union[str, Path], map_size: int = 100 * 1024 * 1024):  # 100MB default map (supports ~3M unit records)
         self.db_path = Path(db_path).resolve()
         self.db_path.mkdir(parents=True, exist_ok=True)
         self.map_size = map_size
@@ -29,15 +29,38 @@ class DUMEMemoryEngine:
         if key in _ENV_CACHE:
             self.env = _ENV_CACHE[key]
         else:
-            self.env = lmdb.open(
-                key,
-                map_size=self.map_size,
-                max_dbs=5,
-                sync=True,
-                metasync=True,
-                readahead=True,
-                writemap=False
-            )
+            try:
+                self.env = lmdb.open(
+                    key,
+                    map_size=self.map_size,
+                    max_dbs=5,
+                    sync=True,
+                    metasync=True,
+                    readahead=True,
+                    writemap=False
+                )
+            except lmdb.Error as e:
+                if "user-mapped section open" in str(e).lower():
+                    # Multi-process LMDB on Windows requires identical map_size across all attached processes
+                    for alt_size in [10 * 1024 * 1024 * 1024, 100 * 1024 * 1024, 1024 * 1024 * 1024]:
+                        try:
+                            self.env = lmdb.open(
+                                key,
+                                map_size=alt_size,
+                                max_dbs=5,
+                                sync=True,
+                                metasync=True,
+                                readahead=True,
+                                writemap=False
+                            )
+                            self.map_size = alt_size
+                            break
+                        except Exception:
+                            continue
+                    else:
+                        raise e
+                else:
+                    raise e
             _ENV_CACHE[key] = self.env
 
         # Open named databases

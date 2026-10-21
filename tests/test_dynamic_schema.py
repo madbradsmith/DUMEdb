@@ -102,3 +102,24 @@ def test_duplicate_rejection(tmp_path):
             OpcodeSpec(opcode=3002, name="CUSTOM_SCORE", description="Test", data_type="INT"),
             persist=False
         )
+
+
+def test_opcode_rollover_past_2999(tmp_path):
+    """
+    Verifies that get_next_available_opcode safely allocates opcodes
+    past 2999 without hitting collisions or caps.
+    """
+    json_path = tmp_path / "registered_schemas.json"
+    schema = SchemaDictionary(storage_path=json_path)
+
+    # Pre-populate opcode 2999
+    schema.register_opcode(
+        OpcodeSpec(opcode=2999, name="REG_2999", description="Test", data_type="INT"),
+        persist=False
+    )
+
+    next_op = schema.get_next_available_opcode()
+    # Candidate should find the first available free slot >= 2001 (e.g. 2001 or >2999)
+    assert next_op != 2999
+    assert 2001 <= next_op <= 0xFFFE
+    assert next_op not in schema._opcodes

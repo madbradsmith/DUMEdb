@@ -1028,17 +1028,34 @@ print(response.choices[0].message.content)</pre>
 
         <!-- Drag & Drop Multimodal File Upload Zone -->
         <div id="intake-dropzone" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 1.5rem; text-align: center; margin-bottom: 1.25rem; background: rgba(255, 255, 255, 0.02); cursor: pointer; transition: all 0.2s ease;">
-          <input type="file" id="intake-file-input" style="display: none;" accept=".md,.markdown,.mdown,.txt,.pdf,.docx,.doc,.json,.yaml,.yml,.csv,.xlsx,.xls,.png,.jpg,.jpeg,.webp">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄 📁 📥</div>
+          <input type="file" id="intake-file-input" style="display: none;" accept=".zip,.md,.markdown,.mdown,.txt,.pdf,.docx,.doc,.json,.yaml,.yml,.csv,.xlsx,.xls,.png,.jpg,.jpeg,.webp">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄 📁 🗄️ 📥</div>
           <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.25rem;">
-            Drag & Drop Files Here (.md, .pdf, .docx, .txt, .json, .csv, .xlsx)
+            Drag & Drop Files or Chat Archives (.zip, .pdf, .docx, .txt, .json, .csv, .xlsx)
           </div>
           <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-            DUMEdb extracts candidate registers & hashes raw asset to disk for 0 token cost
+            <b>Recuperum Support:</b> Drop ChatGPT or Claude export (.zip / .json) to extract operator profile into registers in &lt;300ms
           </div>
           <button type="button" id="btn-browse-intake-file" onclick="document.getElementById('intake-file-input').click()" class="btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.85rem; background: linear-gradient(135deg, var(--accent-cyan), var(--primary)); color: white; border: none; font-weight: 600; border-radius: 6px; cursor: pointer;">
             📂 Browse Files
           </button>
+        </div>
+
+        <!-- Directory Ingestion Card -->
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <div style="font-size: 0.88rem; font-weight: 600; color: var(--accent-cyan); display: flex; align-items: center; gap: 0.35rem;">
+              <span>📁</span> Crawl &amp; Ingest Directory
+            </div>
+            <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Recursive • Deduplicated • LMDB Atomic</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="input-directory-path" placeholder="e.g. C:\Users\c6182\Desktop\folders\safe or /opt/my-project" style="flex: 1; font-family: var(--font-mono); font-size: 0.85rem; padding: 0.45rem 0.65rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; color: #fff;">
+            <button type="button" id="btn-ingest-directory" class="btn-primary" style="padding: 0.45rem 1rem; font-size: 0.85rem; font-weight: 600; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: none; border-radius: 6px; cursor: pointer; white-space: nowrap;">
+              ⚡ Ingest Folder
+            </button>
+          </div>
+          <div id="directory-ingest-status" style="display: none; margin-top: 0.5rem; font-size: 0.78rem; font-family: var(--font-mono);"></div>
         </div>
 
         <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">

@@ -43,6 +43,14 @@ class BatchStateRequest(BaseModel):
     flush_scratchpad: bool = False
 
 
+class DirectoryIngestRequest(BaseModel):
+    directory_path: str
+    entity_id: Optional[str] = None
+    recursive: bool = True
+    max_files: int = 2000
+    ignore_patterns: Optional[List[str]] = None
+
+
 def get_server_dependencies(request: Request):
     """Retrieves core DUME engine instances from FastAPI app state."""
     app_state = request.app.state
@@ -175,6 +183,61 @@ async def batch_state_commit(
     )
 
     return JSONResponse(content=result)
+
+
+@proxy_router.post("/dume/ingest/directory")
+async def ingest_directory_endpoint(
+    request: Request,
+    body: DirectoryIngestRequest,
+    x_entity_id: Optional[str] = Header(None, alias="x-entity-id"),
+    entity_id: Optional[str] = Query(None)
+):
+    """
+    Directory Ingestion Endpoint.
+    Recursively scans directory tree, hashes files for deduplication,
+    distills files into deterministic registers, and commits atomically to LMDB.
+    """
+    from dume.intake.directory_reducer import DirectoryReducer
+
+    raw_entity, canonical_uuid = resolve_entity_id(
+        request,
+        header_entity=x_entity_id,
+        query_entity=entity_id,
+        body_entity=body.entity_id
+    )
+
+    deps = get_server_dependencies(request)
+    memory_engine = deps.get("memory_engine")
+    schema_dict = deps.get("schema_dict")
+    scribe_committer = deps.get("scribe_committer")
+    session_dispatcher = deps.get("session_dispatcher")
+    context_mgr = session_dispatcher.context_manager if session_dispatcher else None
+
+    batch_engine = deps.get("batch_ingestion_engine")
+    if not batch_engine:
+        if not memory_engine or not schema_dict:
+            raise HTTPException(status_code=500, detail="Storage or schema engine unavailable")
+        batch_engine = BatchIngestionEngine(
+            memory_engine=memory_engine,
+            schema_dict=schema_dict,
+            scribe_committer=scribe_committer,
+            context_manager=context_mgr
+        )
+
+    try:
+        result = DirectoryReducer.ingest_directory_to_lmdb(
+            directory_path=body.directory_path,
+            entity_id=canonical_uuid,
+            batch_engine=batch_engine,
+            recursive=body.recursive,
+            max_files=body.max_files,
+            ignore_patterns=body.ignore_patterns
+        )
+        return JSONResponse(content=result)
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Directory ingestion failed: {e}")
 
 
 @proxy_router.post("/chat/completions")
@@ -330,8 +393,8 @@ async def chat_completions(
                 yield b"data: [DONE]\n\n"
             return StreamingResponse(sse_generator(), media_type="text/event-stream")
 
-    # Determine upstream timeout (2.0s in prod)
-    timeout_sec = 2.0
+    # Determine upstream timeout (configurable via UPSTREAM_TIMEOUT, default 60.0s for local models)
+    timeout_sec = float(os.environ.get("UPSTREAM_TIMEOUT", "60.0"))
 
     # Non-streaming Response Path
     if not stream:

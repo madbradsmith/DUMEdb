@@ -253,26 +253,68 @@ class FileReducer:
         synthesizer: Any = None,
         entity_config: Optional[Dict[str, Any]] = None
     ) -> List[Dict[str, str]]:
-        """Parses Adobe PDF (.pdf) documents."""
+        """Parses Adobe PDF (.pdf) documents using PyMuPDF (fitz), pdfplumber, or pypdf."""
         results = []
         clean_name = Path(filename).stem.upper().replace(" ", "_")
         results.append({"key": f"{prefix}FILE_NAME", "value": clean_name})
-        try:
-            import pypdf
-            reader = pypdf.PdfReader(io.BytesIO(file_bytes))
-            num_pages = len(reader.pages)
-            results.append({"key": f"{prefix}PAGE_COUNT", "value": str(num_pages)})
+        
+        extracted_text = ""
+        num_pages = 0
 
-            extracted = []
-            for i in range(min(num_pages, 6)):
-                page_text = reader.pages[i].extract_text() or ""
-                if page_text:
-                    extracted.append(page_text)
-            sample_text = "\n".join(extracted)
-            sub = FileReducer.reduce_text(sample_text.encode("utf-8"), filename, prefix=prefix, synthesizer=synthesizer, entity_config=entity_config)
-            results.extend([r for r in sub if not r["key"].endswith("FILE_NAME")])
+        # Primary Fast Engine: PyMuPDF (fitz)
+        try:
+            import fitz
+            doc = fitz.open(stream=file_bytes, filetype="pdf")
+            num_pages = len(doc)
+            results.append({"key": f"{prefix}PAGE_COUNT", "value": str(num_pages)})
+            pages_to_read = min(num_pages, 25)
+            extracted = [doc[i].get_text() for i in range(pages_to_read)]
+            extracted_text = "\n".join(extracted)
+        except ImportError:
+            pass
         except Exception as e:
-            results.append({"key": f"{prefix}PDF_PARSE", "value": str(e)})
+            results.append({"key": f"{prefix}FITZ_ERROR", "value": str(e)})
+
+        # Fallback 1: pdfplumber
+        if not extracted_text:
+            try:
+                import pdfplumber
+                with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
+                    num_pages = len(pdf.pages)
+                    if f"{prefix}PAGE_COUNT" not in [r["key"] for r in results]:
+                        results.append({"key": f"{prefix}PAGE_COUNT", "value": str(num_pages)})
+                    pages_to_read = min(num_pages, 25)
+                    extracted = [p.extract_text() or "" for p in pdf.pages[:pages_to_read]]
+                    extracted_text = "\n".join(extracted)
+            except ImportError:
+                pass
+            except Exception as e:
+                results.append({"key": f"{prefix}PDFPLUMBER_ERROR", "value": str(e)})
+
+        # Fallback 2: pypdf
+        if not extracted_text:
+            try:
+                import pypdf
+                reader = pypdf.PdfReader(io.BytesIO(file_bytes))
+                num_pages = len(reader.pages)
+                if f"{prefix}PAGE_COUNT" not in [r["key"] for r in results]:
+                    results.append({"key": f"{prefix}PAGE_COUNT", "value": str(num_pages)})
+                pages_to_read = min(num_pages, 25)
+                extracted = [reader.pages[i].extract_text() or "" for i in range(pages_to_read)]
+                extracted_text = "\n".join(extracted)
+            except Exception as e:
+                results.append({"key": f"{prefix}PDF_PARSE", "value": str(e)})
+
+        if extracted_text:
+            sub = FileReducer.reduce_text(
+                extracted_text.encode("utf-8"),
+                filename,
+                prefix=prefix,
+                synthesizer=synthesizer,
+                entity_config=entity_config
+            )
+            results.extend([r for r in sub if not r["key"].endswith("FILE_NAME")])
+
         return results
 
     @staticmethod
@@ -324,6 +366,90 @@ class FileReducer:
             results.append({"key": f"{prefix}DATA_ERROR", "value": str(e)})
         return results
 
+    @staticmethod
+    def reduce_chat_archive(file_bytes: bytes, filename: str, prefix: str = "") -> List[Dict[str, str]]:
+        """
+        Recuperum Chat Archive & Profile Ingest Engine.
+        Parses ChatGPT/Claude export archives (ZIP, conversations.json, memories.json).
+        Extracts user identity, operational maxims, recurrent entities, and projects.
+        """
+        results = []
+        clean_name = Path(filename).stem.upper().replace(" ", "_")
+        results.append({"key": f"{prefix}FILE_NAME", "value": clean_name})
+        
+        ext = Path(filename).suffix.lower()
+        if ext == ".zip":
+            import zipfile
+            try:
+                with zipfile.ZipFile(io.BytesIO(file_bytes)) as z:
+                    namelist = z.namelist()
+                    results.append({"key": f"{prefix}ARCHIVE_ENTRIES", "value": str(len(namelist))})
+                    
+                    # 1. Parse users.json
+                    if "users.json" in namelist:
+                        try:
+                            users_data = json.loads(z.read("users.json").decode("utf-8", errors="replace"))
+                            if isinstance(users_data, list) and users_data:
+                                u0 = users_data[0]
+                                if "full_name" in u0:
+                                    results.append({"key": f"{prefix}OPERATOR_NAME", "value": str(u0["full_name"])})
+                                if "email_address" in u0:
+                                    results.append({"key": f"{prefix}OPERATOR_EMAIL", "value": str(u0["email_address"])})
+                        except Exception:
+                            pass
+
+                    # 2. Parse memories.json
+                    if "memories.json" in namelist:
+                        try:
+                            mem_raw = z.read("memories.json").decode("utf-8", errors="replace")
+                            mem_data = json.loads(mem_raw)
+                            results.append({"key": f"{prefix}MEMORIES_COUNT", "value": str(len(mem_data) if isinstance(mem_data, list) else 1)})
+                            
+                            mem_text = json.dumps(mem_data)
+                            if "voice-to-text" in mem_text.lower():
+                                results.append({"key": f"{prefix}INPUT_MODE", "value": "Voice-to-text exclusively"})
+                            if "append-only" in mem_text.lower() or "deletions are where the lies live" in mem_text.lower():
+                                results.append({"key": f"{prefix}CORE_MAXIM", "value": "Append-only honesty; transcript is the book"})
+                            if "evolum" in mem_text.lower():
+                                results.append({"key": f"{prefix}PRIMARY_PLATFORM", "value": "EVOLUM Studio (evolumstudio.com)"})
+                            
+                            entities = [e for e in ["Frank", "Bob", "Nostra", "Prue", "Morty", "Sync", "Guy"] if e.lower() in mem_text.lower()]
+                            if entities:
+                                results.append({"key": f"{prefix}AI_LINEAGE", "value": ", ".join(entities)})
+                        except Exception:
+                            pass
+
+                    # 3. Parse conversations.json
+                    if "conversations.json" in namelist:
+                        try:
+                            info = z.getinfo("conversations.json")
+                            results.append({"key": f"{prefix}CONVERSATIONS_SIZE_MB", "value": str(round(info.file_size / (1024 * 1024), 1))})
+                            conv_raw = z.read("conversations.json")
+                            conv_data = json.loads(conv_raw.decode("utf-8", errors="replace"))
+                            if isinstance(conv_data, list):
+                                results.append({"key": f"{prefix}TOTAL_CONVERSATIONS", "value": str(len(conv_data))})
+                                titles = [c.get("title", "").strip() for c in conv_data if c.get("title") and c.get("title").strip()][:3]
+                                if titles:
+                                    results.append({"key": f"{prefix}RECENT_CHATS", "value": " | ".join(titles)})
+                        except Exception:
+                            pass
+            except Exception as e:
+                results.append({"key": f"{prefix}ZIP_ERROR", "value": str(e)})
+
+        elif ext == ".json":
+            try:
+                data = json.loads(file_bytes.decode("utf-8", errors="replace"))
+                if isinstance(data, list) and data and "title" in data[0]:
+                    results.append({"key": f"{prefix}TOTAL_CONVERSATIONS", "value": str(len(data))})
+                    titles = [c.get("title", "").strip() for c in data if c.get("title") and c.get("title").strip()][:3]
+                    results.append({"key": f"{prefix}RECENT_CHATS", "value": " | ".join(titles)})
+                else:
+                    results.extend(FileReducer.reduce_json_yaml(file_bytes, filename, prefix=prefix))
+            except Exception as e:
+                results.append({"key": f"{prefix}JSON_ERROR", "value": str(e)})
+
+        return results
+
     @classmethod
     def reduce_file(
         cls,
@@ -347,7 +473,9 @@ class FileReducer:
             {"key": f"{pfx}ASSET_PATH", "value": asset_path}
         ]
 
-        if ext == ".csv":
+        if ext == ".zip" or "conversations" in filename.lower() or "memories" in filename.lower():
+            registers.extend(cls.reduce_chat_archive(file_bytes, filename, prefix=pfx))
+        elif ext == ".csv":
             registers.extend(cls.reduce_csv(file_bytes, filename, prefix=pfx))
         elif ext in (".xlsx", ".xls"):
             registers.extend(cls.reduce_xlsx(file_bytes, filename, prefix=pfx))
@@ -364,7 +492,6 @@ class FileReducer:
         elif ext in (".txt", ".md", ".markdown", ".rst", ".log", ".py", ".js", ".html", ".css"):
             registers.extend(cls.reduce_text(file_bytes, filename, prefix=pfx, synthesizer=synthesizer, entity_config=entity_config))
         else:
-            # Fallback for arbitrary text-readable files
             try:
                 registers.extend(cls.reduce_text(file_bytes, filename, prefix=pfx, synthesizer=synthesizer, entity_config=entity_config))
             except Exception:

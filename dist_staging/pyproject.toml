@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dumedb"
-version = "1.0.0"
+version = "1.1.0"
 description = "Hardware-Aligned Zero-Copy Byte-Structured Memory Engine"
 readme = "README.md"
 requires-python = ">=3.9"

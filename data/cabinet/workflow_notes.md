@@ -1,6 +1,6 @@
 ---
 # WORKFLOW-NOTES — THE LIVING CABINET
-# Last Synced: 2026-10-20 14:55:31
+# Last Synced: 2026-10-20 18:29:23
 # Managed by DUMEdb Cabinet Engine
 ---
 
@@ -74,3 +74,7 @@ OPERATIONAL PROTOCOLS
 [WF-R2] Public Site Jury Resolution & Deployment Protocol
   Trigger: When addressing public website credibility, jury reviews, or landing page positioning
   Move: Implement site jury enhancements (honest comparison table, published benchmark disclosures, plain-English hero callout, and enterprise roadmap) then deploy via deploy_website.py.
+
+[WF-R3] [WF-ART-01] IN-UNIVERSE ARTIFACT LOOKBOOK PROTOCOL
+  Trigger: When designing, generating, or upgrading Hollywood film/TV pitch decks, series bibles, or sales lookbooks
+  Move: Design pitch presentations as tactile in-universe artifacts (e.g. illuminated vellum manuscript for historical satire, impounded police evidence file for neo-noir thriller) using 70% full-bleed 16:9 visual framing, 30% narrative copy cap, and dark atmospheric lighting.

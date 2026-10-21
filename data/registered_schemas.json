@@ -20,7 +20,9 @@
       "enum_values": {
         "1": "PLANNING",
         "2": "EXECUTING",
-        "3": "REVIEW"
+        "3": "REVIEW",
+        "4": "Active & Fully Operational",
+        "5": "Session Finalized via Refresh Protocol (RP)"
       },
       "unit": null,
       "is_auto": true
@@ -213,7 +215,8 @@
       "description": "Auto-registered via batch ingestion for FUNCTION",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "Browser-level zero-trust family protection"
+        "1": "Browser-level zero-trust family protection",
+        "2": "Desktop WYSIWYG visual page manager to edit, preview, and save site HTML in real-time."
       },
       "unit": null,
       "is_auto": true
@@ -301,7 +304,8 @@
       "description": "Auto-registered via batch ingestion for ENGINE_CORE",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "https://developumaiengine.com"
+        "1": "https://developumaiengine.com",
+        "2": "`developumaiengine.com` (Single FastAPI codebase, tenant-aware routing `tenants/__init__.py`, TOML prompt configs)."
       },
       "unit": null,
       "is_auto": true
@@ -1662,7 +1666,8 @@
       "description": "Auto-registered via batch ingestion for SAY",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "the work you"
+        "1": "the work you",
+        "2": "I need you to give me that context back."
       },
       "unit": null,
       "is_auto": true
@@ -1970,7 +1975,8 @@
       "description": "Auto-registered via batch ingestion for NAME",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "taken from Maxwell Perkins, the Scribner"
+        "1": "taken from Maxwell Perkins, the Scribner",
+        "2": "`\"TheOperation\"`"
       },
       "unit": null,
       "is_auto": true
@@ -2156,7 +2162,8 @@
       "description": "Auto-registered via batch ingestion for MOVE",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "now protocol."
+        "1": "now protocol.",
+        "2": "read the top of Context first. The status block exists for exactly this. Do not reconstruct the work from scattered"
       },
       "unit": null,
       "is_auto": true
@@ -2911,7 +2918,8 @@
       "description": "Auto-registered via batch ingestion for PLATFORM",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "paused. Frank"
+        "1": "paused. Frank",
+        "2": "https://developumaiengine.com"
       },
       "unit": null,
       "is_auto": true
@@ -3312,7 +3320,8 @@
       "description": "Auto-registered via batch ingestion for MADBRAD",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "doing) ran research and commercialization in parallel."
+        "1": "doing) ran research and commercialization in parallel.",
+        "2": "researcher, filmmaker, first AD."
       },
       "unit": null,
       "is_auto": true
@@ -4127,7 +4136,8 @@
       "description": "Auto-registered via batch ingestion for SUBJECT",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "comm room test passed end-to-end"
+        "1": "comm room test passed end-to-end",
+        "2": "Service visit 6/24 \u2014 RESCHEDULED"
       },
       "unit": null,
       "is_auto": true
@@ -4320,7 +4330,8 @@
       "description": "Auto-registered via batch ingestion for SECOND",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "here, at"
+        "1": "here, at",
+        "2": "Look at screenshot 2 (image_8.png). You met Dr. Chen! The comms channel opened, the"
       },
       "unit": null,
       "is_auto": true
@@ -5050,6 +5061,652 @@
       "is_auto": false
     },
     {
+      "opcode": 2495,
+      "name": "TEXT",
+      "description": "Auto-registered via batch ingestion for TEXT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2496,
+      "name": "IDENTIFIER",
+      "description": "Auto-registered via batch ingestion for IDENTIFIER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "** DADS-SPEC-V1.0"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2497,
+      "name": "PUBLICATION",
+      "description": "Auto-registered via batch ingestion for PUBLICATION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "** July 3, 2026"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2498,
+      "name": "ENGINE",
+      "description": "Auto-registered via batch ingestion for ENGINE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "** The Empire Architecture Squad (4x Opus-Family Nodes)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2499,
+      "name": "CONTRADICTION",
+      "description": "Auto-registered via batch ingestion for CONTRADICTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2500,
+      "name": "LANGUAGE",
+      "description": "Auto-registered via batch ingestion for LANGUAGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2501,
+      "name": "INGESTION",
+      "description": "Auto-registered via batch ingestion for INGESTION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "TheGP ] \u2500\u2500\u25ba [ 2. Compilation: De-coupler ]"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2502,
+      "name": "SERVER",
+      "description": "Auto-registered via batch ingestion for SERVER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "nginx"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2503,
+      "name": "DATE",
+      "description": "Auto-registered via batch ingestion for DATE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Fri, 03 Jul 2026 22:55:00 GMT",
+        "2": "August 2026",
+        "3": "Thu, 19 Jun 2025 14:03:55 -0500"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2504,
+      "name": "ETAG",
+      "description": "Auto-registered via batch ingestion for ETAG",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "68e3b0c44298fc1c"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2505,
+      "name": "DISSECTOR",
+      "description": "Auto-registered via batch ingestion for DISSECTOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2506,
+      "name": "MINT",
+      "description": "Auto-registered via batch ingestion for MINT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2507,
+      "name": "LOCK",
+      "description": "Auto-registered via batch ingestion for LOCK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2508,
+      "name": "POSTURE",
+      "description": "Auto-registered via batch ingestion for POSTURE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2509,
+      "name": "IDENTITIES",
+      "description": "Auto-registered via batch ingestion for IDENTITIES",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`[PI (MadBrad), Guy, Boswell, Florence, Hawks]`."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2510,
+      "name": "MITIGATION",
+      "description": "Auto-registered via batch ingestion for MITIGATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2511,
+      "name": "SUSPICION",
+      "description": "Auto-registered via batch ingestion for SUSPICION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2512,
+      "name": "ANCHORING",
+      "description": "Auto-registered via batch ingestion for ANCHORING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2513,
+      "name": "GATE",
+      "description": "Auto-registered via batch ingestion for GATE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2514,
+      "name": "CHECKPOINTS",
+      "description": "Auto-registered via batch ingestion for CHECKPOINTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2515,
+      "name": "VALIDATION",
+      "description": "Auto-registered via batch ingestion for VALIDATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2516,
+      "name": "OPERATIONAL_EXPENSE",
+      "description": "Auto-registered via batch ingestion for OPERATIONAL_EXPENSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2517,
+      "name": "DATA_LEAK_LIABILITY",
+      "description": "Auto-registered via batch ingestion for DATA_LEAK_LIABILITY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Sensitive PII/data streaming to cloud servers."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2518,
+      "name": "SYSTEM_RELIABILITY",
+      "description": "Auto-registered via batch ingestion for SYSTEM_RELIABILITY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Hallucinations, model drift, API downtime."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2519,
+      "name": "CHANGE_MANAGEMENT",
+      "description": "Auto-registered via batch ingestion for CHANGE_MANAGEMENT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Subjective documentation of prompt updates.",
+        "2": "How do you test and deploy code updates to your AI agents?"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2520,
+      "name": "ACCESS_CONTROL",
+      "description": "Auto-registered via batch ingestion for ACCESS_CONTROL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Software authenticators or SMS boundaries.",
+        "2": "Who can access the engine, and how? (MFA is non-negotiable)."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2521,
+      "name": "HOOK",
+      "description": "Auto-registered via batch ingestion for HOOK",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "The Room is the Instrument"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2522,
+      "name": "INFRASTRUCTURE",
+      "description": "Auto-registered via batch ingestion for INFRASTRUCTURE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "a multi-billion-dollar architecture built entirely on sand."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2523,
+      "name": "NETWORK",
+      "description": "Auto-registered via batch ingestion for NETWORK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2524,
+      "name": "GOVERNANCE",
+      "description": "Auto-registered via batch ingestion for GOVERNANCE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "officially over."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2525,
+      "name": "SIMUTUM",
+      "description": "Auto-registered via batch ingestion for SIMUTUM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2526,
+      "name": "SOVEREIGNTY",
+      "description": "Auto-registered via batch ingestion for SOVEREIGNTY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2527,
+      "name": "MARKUPS",
+      "description": "Auto-registered via batch ingestion for MARKUPS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2528,
+      "name": "CASE_NO",
+      "description": "Auto-registered via MCP tool for CASE_NO",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "2026-L-004821"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2529,
+      "name": "PLAINTIFF",
+      "description": "Auto-registered via MCP tool for PLAINTIFF",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Taylor Renee Morgan"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2530,
+      "name": "DEFENDANT",
+      "description": "Auto-registered via MCP tool for DEFENDANT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Lakeshore Freight & Logistics, Inc."
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2531,
+      "name": "SMOKING_GUN",
+      "description": "Auto-registered via MCP tool for SMOKING_GUN",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "LFL-EM-00871 5mo overdue"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2532,
+      "name": "CLAIM",
+      "description": "Auto-registered via MCP tool for CLAIM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Negligence - premises liability (dock-4 leveler plate)",
+        "2": "Negligence \u2014 premises liability (dock-4 leveler plate, Elk Grove Village facility, 2025-09-12)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2533,
+      "name": "TRIAL_DATE",
+      "description": "Auto-registered via MCP tool for TRIAL_DATE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "2026-09-08"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2534,
+      "name": "EXPERT_DUE",
+      "description": "Auto-registered via MCP tool for EXPERT_DUE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "2026-08-02 (Rule 213(f))"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2535,
+      "name": "SPECIALS_TOTAL",
+      "description": "Auto-registered via MCP tool for SPECIALS_TOTAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "$148,212.40 across 77 docs"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2536,
+      "name": "BINDER_GAP",
+      "description": "Auto-registered via MCP tool for BINDER_GAP",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "LFL-ML-1300-1911 missing pp. 1622-1640 (3 wks pre-incident)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2537,
+      "name": "CAMERA_7_SPOLIATION",
+      "description": "Auto-registered via MCP tool for CAMERA_7_SPOLIATION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Pulled 2025-09-13 per IR-2025-091; claimed not retained; pres ltr 2025-09-29"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2538,
+      "name": "OPERATOR_NAME",
+      "description": "Auto-registered via MCP tool for OPERATOR_NAME",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "MadBrad"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2539,
+      "name": "INPUT_MODE",
+      "description": "Auto-registered via MCP tool for INPUT_MODE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Voice-to-text exclusively"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2540,
+      "name": "CORE_MAXIM",
+      "description": "Auto-registered via MCP tool for CORE_MAXIM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Append-only honesty; transcript is the book"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2541,
+      "name": "AI_LINEAGE",
+      "description": "Auto-registered via MCP tool for AI_LINEAGE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Frank, Bob, Nostra, Prue, Morty, Sync, Guy"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2542,
+      "name": "PRIMARY_PLATFORM",
+      "description": "Auto-registered via MCP tool for PRIMARY_PLATFORM",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "EVOLUM Studio (evolumstudio.com)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2543,
+      "name": "DIR_DUME_DIR_TEST_Y3DK0IWN_PATH",
+      "description": "Auto-registered via batch ingestion for DIR_DUME_DIR_TEST_Y3DK0IWN_PATH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_y3dk0iwn"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2544,
+      "name": "PATH_README",
+      "description": "Auto-registered via batch ingestion for PATH_README",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "README.md",
+        "2": "00_Case_Info/README.txt"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2545,
+      "name": "OPERATOR",
+      "description": "Auto-registered via batch ingestion for OPERATOR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "MadBrad"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2546,
+      "name": "PATH_MAIN",
+      "description": "Auto-registered via batch ingestion for PATH_MAIN",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "main.py"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2547,
+      "name": "PATH_METRICS",
+      "description": "Auto-registered via batch ingestion for PATH_METRICS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "metrics.csv"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2548,
+      "name": "ROW_COUNT",
+      "description": "Auto-registered via batch ingestion for ROW_COUNT",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2549,
+      "name": "COLUMNS",
+      "description": "Auto-registered via batch ingestion for COLUMNS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "metric,value",
+        "2": "# FICTIONAL SAMPLE DATA - FOR DEMONSTRATION ONLY"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2550,
+      "name": "SAMPLE_METRIC",
+      "description": "Auto-registered via batch ingestion for SAMPLE_METRIC",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "latency"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2551,
+      "name": "SAMPLE_VALUE",
+      "description": "Auto-registered via batch ingestion for SAMPLE_VALUE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "1.5ms"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2552,
+      "name": "PATH_ARCHITECTURE",
+      "description": "Auto-registered via batch ingestion for PATH_ARCHITECTURE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "docs/architecture.md"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2553,
+      "name": "PRINCIPLE",
+      "description": "Auto-registered via batch ingestion for PRINCIPLE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Zero Bloat"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2554,
+      "name": "DIR_DUME_DIR_TES_PATH",
+      "description": "Auto-registered via batch ingestion for DIR_DUME_DIR_TES_PATH",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_ijlhl1k4",
+        "2": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_c3hwfvxf",
+        "3": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_19r5bkvc",
+        "4": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_2gsrh6o5",
+        "5": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_e8ftadqv",
+        "6": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_bzz20vba",
+        "7": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_2h8egj3y",
+        "8": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_aw7ey68g",
+        "9": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_xp_yauxk"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2555,
+      "name": "DIR_DUME_DIR_TES_FILES",
+      "description": "Auto-registered via batch ingestion for DIR_DUME_DIR_TES_FILES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
       "opcode": 1500,
       "name": "GAME_STATE",
       "description": "Active game loop state",
@@ -5116,6 +5773,4145 @@
       "enum_values": {},
       "unit": null,
       "is_auto": false
+    },
+    {
+      "opcode": 2556,
+      "name": "DIR_SAFE_PATH",
+      "description": "Auto-registered via batch ingestion for DIR_SAFE_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2557,
+      "name": "DIR_SAFE_FILES",
+      "description": "Auto-registered via batch ingestion for DIR_SAFE_FILES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2558,
+      "name": "PATH_ADD_FILES_SERVER",
+      "description": "Auto-registered via batch ingestion for PATH_ADD_FILES_SERVER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2559,
+      "name": "PATH_AI_BOOK_QUERY_LE",
+      "description": "Auto-registered via batch ingestion for PATH_AI_BOOK_QUERY_LE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2560,
+      "name": "PATH_AI_GOVERNANCE_OU",
+      "description": "Auto-registered via batch ingestion for PATH_AI_GOVERNANCE_OU",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2561,
+      "name": "RESEARCH_PORTFOLIO",
+      "description": "Auto-registered via batch ingestion for RESEARCH_PORTFOLIO",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2562,
+      "name": "PATH_AI_BOOK_COMPILE",
+      "description": "Auto-registered via batch ingestion for PATH_AI_BOOK_COMPILE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2563,
+      "name": "CHUNK_6_PAT",
+      "description": "Auto-registered via batch ingestion for CHUNK_6_PAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2564,
+      "name": "CHUNK_8_THE_COHORT",
+      "description": "Auto-registered via batch ingestion for CHUNK_8_THE_COHORT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2565,
+      "name": "CHUNK_10_TIME_JUMP",
+      "description": "Auto-registered via batch ingestion for CHUNK_10_TIME_JUMP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2566,
+      "name": "CHUNK_11_TABLE_READ",
+      "description": "Auto-registered via batch ingestion for CHUNK_11_TABLE_READ",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2567,
+      "name": "CHUNK_14_FINISH_COOKING",
+      "description": "Auto-registered via batch ingestion for CHUNK_14_FINISH_COOKING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2568,
+      "name": "SHELL_PHASE_FOUR",
+      "description": "Auto-registered via batch ingestion for SHELL_PHASE_FOUR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2569,
+      "name": "PATH_AI_BOOK_V4_FULL",
+      "description": "Auto-registered via batch ingestion for PATH_AI_BOOK_V4_FULL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2570,
+      "name": "PATH_AI_BOOK_V5_EDITE",
+      "description": "Auto-registered via batch ingestion for PATH_AI_BOOK_V5_EDITE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2571,
+      "name": "PATH_AGENTIC_FIREWALL",
+      "description": "Auto-registered via batch ingestion for PATH_AGENTIC_FIREWALL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2572,
+      "name": "PILLAR_1",
+      "description": "Auto-registered via batch ingestion for PILLAR_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2573,
+      "name": "PILLAR_2",
+      "description": "Auto-registered via batch ingestion for PILLAR_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2574,
+      "name": "PILLAR_3",
+      "description": "Auto-registered via batch ingestion for PILLAR_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2575,
+      "name": "PILLAR_4",
+      "description": "Auto-registered via batch ingestion for PILLAR_4",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2576,
+      "name": "WHAT_IT_DOES",
+      "description": "Auto-registered via batch ingestion for WHAT_IT_DOES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2577,
+      "name": "PATH_BOOK_NOTES_V001",
+      "description": "Auto-registered via batch ingestion for PATH_BOOK_NOTES_V001",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2578,
+      "name": "ORDER_IS",
+      "description": "Auto-registered via batch ingestion for ORDER_IS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2579,
+      "name": "DIDN_T_ADD_UP_SYNC",
+      "description": "Auto-registered via batch ingestion for DIDN_T_ADD_UP_SYNC",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2580,
+      "name": "AND_FORTY_MINUTES_BOB",
+      "description": "Auto-registered via batch ingestion for AND_FORTY_MINUTES_BOB",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2581,
+      "name": "THE_12",
+      "description": "Auto-registered via batch ingestion for THE_12",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2582,
+      "name": "THE_WALKED",
+      "description": "Auto-registered via batch ingestion for THE_WALKED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2583,
+      "name": "FRANK_S_RESPONSE",
+      "description": "Auto-registered via batch ingestion for FRANK_S_RESPONSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2584,
+      "name": "FRANK_12",
+      "description": "Auto-registered via batch ingestion for FRANK_12",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2585,
+      "name": "PATH_BACKUP_SKILLET_W",
+      "description": "Auto-registered via batch ingestion for PATH_BACKUP_SKILLET_W",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2586,
+      "name": "PATH_BOOK_VAULT_06082",
+      "description": "Auto-registered via batch ingestion for PATH_BOOK_VAULT_06082",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2587,
+      "name": "ARCHIVE_ENTRIES",
+      "description": "Auto-registered via batch ingestion for ARCHIVE_ENTRIES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2588,
+      "name": "PATH_BOOK_VAULT",
+      "description": "Auto-registered via batch ingestion for PATH_BOOK_VAULT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2589,
+      "name": "PATH_CD_BUILD_SCHEMEA",
+      "description": "Auto-registered via batch ingestion for PATH_CD_BUILD_SCHEMEA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2590,
+      "name": "THE_SCHEMATIC",
+      "description": "Auto-registered via batch ingestion for THE_SCHEMATIC",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2591,
+      "name": "STEP_1",
+      "description": "Auto-registered via batch ingestion for STEP_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2592,
+      "name": "USER_ACTION",
+      "description": "Auto-registered via batch ingestion for USER_ACTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2593,
+      "name": "SYSTEM_ACTION",
+      "description": "Auto-registered via batch ingestion for SYSTEM_ACTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2594,
+      "name": "STEP_2",
+      "description": "Auto-registered via batch ingestion for STEP_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2595,
+      "name": "AGENT_1_THE_SCRAPER",
+      "description": "Auto-registered via batch ingestion for AGENT_1_THE_SCRAPER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2596,
+      "name": "AGENT_2_THE_ANALYST",
+      "description": "Auto-registered via batch ingestion for AGENT_2_THE_ANALYST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2597,
+      "name": "AGENT_3_THE_ARCHITECT",
+      "description": "Auto-registered via batch ingestion for AGENT_3_THE_ARCHITECT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2598,
+      "name": "AGENT_4_THE_QA_AUDITOR",
+      "description": "Auto-registered via batch ingestion for AGENT_4_THE_QA_AUDITOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2599,
+      "name": "STEP_3",
+      "description": "Auto-registered via batch ingestion for STEP_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2600,
+      "name": "DELIVERABLES",
+      "description": "Auto-registered via batch ingestion for DELIVERABLES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2601,
+      "name": "STEP_4",
+      "description": "Auto-registered via batch ingestion for STEP_4",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2602,
+      "name": "PATH_CONTEXT_OLLAMA_V",
+      "description": "Auto-registered via batch ingestion for PATH_CONTEXT_OLLAMA_V",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2603,
+      "name": "FRANK_HAD_THE_12",
+      "description": "Auto-registered via batch ingestion for FRANK_HAD_THE_12",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2604,
+      "name": "PATH_CELERFIDUS_BRIEF",
+      "description": "Auto-registered via batch ingestion for PATH_CELERFIDUS_BRIEF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2605,
+      "name": "VISUAL_LANGUAGE",
+      "description": "Auto-registered via batch ingestion for VISUAL_LANGUAGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2606,
+      "name": "PERSISTENT_UI_ELEMENTS",
+      "description": "Auto-registered via batch ingestion for PERSISTENT_UI_ELEMENTS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2607,
+      "name": "THE_TELEMETRY_DASHBOARD",
+      "description": "Auto-registered via batch ingestion for THE_TELEMETRY_DASHBOARD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2608,
+      "name": "SECURITY_STATUS",
+      "description": "Auto-registered via batch ingestion for SECURITY_STATUS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2609,
+      "name": "ARTIFACT_COUNTER",
+      "description": "Auto-registered via batch ingestion for ARTIFACT_COUNTER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2610,
+      "name": "THE_BUCKET_SERVER_ICONS",
+      "description": "Auto-registered via batch ingestion for THE_BUCKET_SERVER_ICONS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2611,
+      "name": "THE_CLEAN_ROOM_PROMISE",
+      "description": "Auto-registered via batch ingestion for THE_CLEAN_ROOM_PROMISE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2612,
+      "name": "GOAL",
+      "description": "Auto-registered via batch ingestion for GOAL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2613,
+      "name": "THE_HOOK",
+      "description": "Auto-registered via batch ingestion for THE_HOOK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2614,
+      "name": "INTERACTION",
+      "description": "Auto-registered via batch ingestion for INTERACTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2615,
+      "name": "2_THE_INTAKE",
+      "description": "Auto-registered via batch ingestion for 2_THE_INTAKE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2616,
+      "name": "THE_DESIGN_PHILOSOPHY",
+      "description": "Auto-registered via batch ingestion for THE_DESIGN_PHILOSOPHY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2617,
+      "name": "PATH_CREWAI_PROJECT_B",
+      "description": "Auto-registered via batch ingestion for PATH_CREWAI_PROJECT_B",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2618,
+      "name": "CREWAI_PROJECT_BRIEF",
+      "description": "Auto-registered via batch ingestion for CREWAI_PROJECT_BRIEF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2619,
+      "name": "AGENT_1",
+      "description": "Auto-registered via batch ingestion for AGENT_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2620,
+      "name": "ROLE",
+      "description": "Auto-registered via batch ingestion for ROLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2621,
+      "name": "OUTPUT",
+      "description": "Auto-registered via batch ingestion for OUTPUT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2622,
+      "name": "AGENT_2",
+      "description": "Auto-registered via batch ingestion for AGENT_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2623,
+      "name": "AGENT_3",
+      "description": "Auto-registered via batch ingestion for AGENT_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2624,
+      "name": "PATH_D_AI_SERVER_STAR",
+      "description": "Auto-registered via batch ingestion for PATH_D_AI_SERVER_STAR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2625,
+      "name": "DEVELOPUM",
+      "description": "Auto-registered via batch ingestion for DEVELOPUM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2626,
+      "name": "CD_C",
+      "description": "Auto-registered via batch ingestion for CD_C",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2627,
+      "name": "PYTHON_M_UVICORN_MAIN",
+      "description": "Auto-registered via batch ingestion for PYTHON_M_UVICORN_MAIN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2628,
+      "name": "PATH_DEFENSE_STRIPE",
+      "description": "Auto-registered via batch ingestion for PATH_DEFENSE_STRIPE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2629,
+      "name": "FILE_SIZE_KB",
+      "description": "Auto-registered via batch ingestion for FILE_SIZE_KB",
+      "data_type": "FLOAT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2630,
+      "name": "IMAGE_TYPE",
+      "description": "Auto-registered via batch ingestion for IMAGE_TYPE",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "PNG"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2631,
+      "name": "PATH_DOOR_I_THE_START",
+      "description": "Auto-registered via batch ingestion for PATH_DOOR_I_THE_START",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2632,
+      "name": "DOOR_I",
+      "description": "Auto-registered via batch ingestion for DOOR_I",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2633,
+      "name": "1_ENVIRONMENT",
+      "description": "Auto-registered via batch ingestion for 1_ENVIRONMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2634,
+      "name": "AUDIO_INTERACTION",
+      "description": "Auto-registered via batch ingestion for AUDIO_INTERACTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2635,
+      "name": "CORE_UI",
+      "description": "Auto-registered via batch ingestion for CORE_UI",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2636,
+      "name": "2_THE_PERSONA",
+      "description": "Auto-registered via batch ingestion for 2_THE_PERSONA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2637,
+      "name": "TONE",
+      "description": "Auto-registered via batch ingestion for TONE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2638,
+      "name": "ANTI_FRICTION_FIRST",
+      "description": "Auto-registered via batch ingestion for ANTI_FRICTION_FIRST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2639,
+      "name": "THE_WTF_PROTOCOL",
+      "description": "Auto-registered via batch ingestion for THE_WTF_PROTOCOL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2640,
+      "name": "PROACTIVE_SCOUT",
+      "description": "Auto-registered via batch ingestion for PROACTIVE_SCOUT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2641,
+      "name": "IDENTITY_VAULT",
+      "description": "Auto-registered via batch ingestion for IDENTITY_VAULT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2642,
+      "name": "BASELINE_TRACKER",
+      "description": "Auto-registered via batch ingestion for BASELINE_TRACKER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2643,
+      "name": "PERSISTENCE",
+      "description": "Auto-registered via batch ingestion for PERSISTENCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2644,
+      "name": "VIBE",
+      "description": "Auto-registered via batch ingestion for VIBE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2645,
+      "name": "COLOR_PALETTE",
+      "description": "Auto-registered via batch ingestion for COLOR_PALETTE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2646,
+      "name": "TYPOGRAPHY",
+      "description": "Auto-registered via batch ingestion for TYPOGRAPHY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2647,
+      "name": "VISUAL_METAPHOR",
+      "description": "Auto-registered via batch ingestion for VISUAL_METAPHOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2648,
+      "name": "DOOR_II",
+      "description": "Auto-registered via batch ingestion for DOOR_II",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2649,
+      "name": "DOOR_III",
+      "description": "Auto-registered via batch ingestion for DOOR_III",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2650,
+      "name": "PATH_DOOR_II_THE_BUIL",
+      "description": "Auto-registered via batch ingestion for PATH_DOOR_II_THE_BUIL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2651,
+      "name": "AESTHETIC",
+      "description": "Auto-registered via batch ingestion for AESTHETIC",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2652,
+      "name": "SIMULATE_THEN_EXECUTE",
+      "description": "Auto-registered via batch ingestion for SIMULATE_THEN_EXECUTE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2653,
+      "name": "LIABILITY_DEFENSE",
+      "description": "Auto-registered via batch ingestion for LIABILITY_DEFENSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2654,
+      "name": "SENTIMENT_DEFENSE",
+      "description": "Auto-registered via batch ingestion for SENTIMENT_DEFENSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2655,
+      "name": "LIABILITY_LEDGER",
+      "description": "Auto-registered via batch ingestion for LIABILITY_LEDGER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2656,
+      "name": "ENTITY_WATCHDOG",
+      "description": "Auto-registered via batch ingestion for ENTITY_WATCHDOG",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2657,
+      "name": "COST_BENEFIT_ENGINE",
+      "description": "Auto-registered via batch ingestion for COST_BENEFIT_ENGINE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2658,
+      "name": "PATH_DOOR_III_THE_LEG",
+      "description": "Auto-registered via batch ingestion for PATH_DOOR_III_THE_LEG",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2659,
+      "name": "INTENT_LOCK",
+      "description": "Auto-registered via batch ingestion for INTENT_LOCK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2660,
+      "name": "BIOMETRIC_VIGILANCE",
+      "description": "Auto-registered via batch ingestion for BIOMETRIC_VIGILANCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2661,
+      "name": "SUCCESSION_EXECUTION",
+      "description": "Auto-registered via batch ingestion for SUCCESSION_EXECUTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2662,
+      "name": "THE_POA_BRIDGE",
+      "description": "Auto-registered via batch ingestion for THE_POA_BRIDGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2663,
+      "name": "THE_LIVING_VOICE",
+      "description": "Auto-registered via batch ingestion for THE_LIVING_VOICE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2664,
+      "name": "6G_GUARDIAN_WATCH",
+      "description": "Auto-registered via batch ingestion for 6G_GUARDIAN_WATCH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2665,
+      "name": "PATH_EMMA_FIVERR_REPL",
+      "description": "Auto-registered via batch ingestion for PATH_EMMA_FIVERR_REPL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2666,
+      "name": "1_AGENT_COGNITIVE_AUDIT",
+      "description": "Auto-registered via batch ingestion for 1_AGENT_COGNITIVE_AUDIT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2667,
+      "name": "PATH_FULL_CONTEXT_060",
+      "description": "Auto-registered via batch ingestion for PATH_FULL_CONTEXT_060",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2668,
+      "name": "LAST_UPDATED",
+      "description": "Auto-registered via batch ingestion for LAST_UPDATED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2669,
+      "name": "THE_CABINET_PROTOCOL",
+      "description": "Auto-registered via batch ingestion for THE_CABINET_PROTOCOL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2670,
+      "name": "THE_RESEARCH_QUESTION",
+      "description": "Auto-registered via batch ingestion for THE_RESEARCH_QUESTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2671,
+      "name": "HE_SAID",
+      "description": "Auto-registered via batch ingestion for HE_SAID",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2672,
+      "name": "WRITTEN_BY",
+      "description": "Auto-registered via batch ingestion for WRITTEN_BY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2673,
+      "name": "READ_BY",
+      "description": "Auto-registered via batch ingestion for READ_BY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2674,
+      "name": "PENDING",
+      "description": "Auto-registered via batch ingestion for PENDING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2675,
+      "name": "WHEN_YOU_WAKE_UP",
+      "description": "Auto-registered via batch ingestion for WHEN_YOU_WAKE_UP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2676,
+      "name": "THE_BOOK",
+      "description": "Auto-registered via batch ingestion for THE_BOOK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2677,
+      "name": "PATH_FIELD_NOTE_GEMV1",
+      "description": "Auto-registered via batch ingestion for PATH_FIELD_NOTE_GEMV1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2678,
+      "name": "FIELD_BRIEF",
+      "description": "Auto-registered via batch ingestion for FIELD_BRIEF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2679,
+      "name": "IT_IS_3",
+      "description": "Auto-registered via batch ingestion for IT_IS_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2680,
+      "name": "2_HTTPS",
+      "description": "Auto-registered via batch ingestion for 2_HTTPS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2681,
+      "name": "PATH_FOUNDERSDAY_IP_P",
+      "description": "Auto-registered via batch ingestion for PATH_FOUNDERSDAY_IP_P",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2682,
+      "name": "TITLE",
+      "description": "Auto-registered via batch ingestion for TITLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2683,
+      "name": "REDACTION_POLICY",
+      "description": "Auto-registered via batch ingestion for REDACTION_POLICY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2684,
+      "name": "3_INVENTOR_DETAILS",
+      "description": "Auto-registered via batch ingestion for 3_INVENTOR_DETAILS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2685,
+      "name": "5_DOCUMENTS_UPLOAD",
+      "description": "Auto-registered via batch ingestion for 5_DOCUMENTS_UPLOAD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2686,
+      "name": "3_TYPE_OF_WORK",
+      "description": "Auto-registered via batch ingestion for 3_TYPE_OF_WORK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2687,
+      "name": "5_FILING_FEE",
+      "description": "Auto-registered via batch ingestion for 5_FILING_FEE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2688,
+      "name": "PATH_GP_ARRIVE_LINK",
+      "description": "Auto-registered via batch ingestion for PATH_GP_ARRIVE_LINK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2689,
+      "name": "PATH_HOSTINGER_SERVER",
+      "description": "Auto-registered via batch ingestion for PATH_HOSTINGER_SERVER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2690,
+      "name": "SSH_HOSTNAME_IP",
+      "description": "Auto-registered via batch ingestion for SSH_HOSTNAME_IP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2691,
+      "name": "SSH_SFTP_PORT",
+      "description": "Auto-registered via batch ingestion for SSH_SFTP_PORT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2692,
+      "name": "USERNAME",
+      "description": "Auto-registered via batch ingestion for USERNAME",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2693,
+      "name": "SSH_CONFIG_ALIAS",
+      "description": "Auto-registered via batch ingestion for SSH_CONFIG_ALIAS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2694,
+      "name": "1_FASTAPI_BACKEND",
+      "description": "Auto-registered via batch ingestion for 1_FASTAPI_BACKEND",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2695,
+      "name": "2_UNIX_DOMAIN_SOCKET",
+      "description": "Auto-registered via batch ingestion for 2_UNIX_DOMAIN_SOCKET",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2696,
+      "name": "SSH_KEY_PATH",
+      "description": "Auto-registered via batch ingestion for SSH_KEY_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2697,
+      "name": "DOMAIN_DIRECTORY",
+      "description": "Auto-registered via batch ingestion for DOMAIN_DIRECTORY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2698,
+      "name": "PATH_MADBRAD_BUDGET",
+      "description": "Auto-registered via batch ingestion for PATH_MADBRAD_BUDGET",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2699,
+      "name": "TOTAL_MONTHLY",
+      "description": "Auto-registered via batch ingestion for TOTAL_MONTHLY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "$2600"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2700,
+      "name": "TOTAL",
+      "description": "Auto-registered via batch ingestion for TOTAL",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "$12,265"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2701,
+      "name": "PATH_MODELFILE_NOSTRA",
+      "description": "Auto-registered via batch ingestion for PATH_MODELFILE_NOSTRA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2702,
+      "name": "THE_CODEWORD",
+      "description": "Auto-registered via batch ingestion for THE_CODEWORD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2703,
+      "name": "AI_COLLABORATOR",
+      "description": "Auto-registered via batch ingestion for AI_COLLABORATOR",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "Nostra",
+        "2": "AG / Sentinel Harness"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2704,
+      "name": "CURRENT_MODE",
+      "description": "Auto-registered via batch ingestion for CURRENT_MODE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2705,
+      "name": "CODEWORD",
+      "description": "Auto-registered via batch ingestion for CODEWORD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2706,
+      "name": "NEXT_MOVE",
+      "description": "Auto-registered via batch ingestion for NEXT_MOVE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2707,
+      "name": "TRIGGER",
+      "description": "Auto-registered via batch ingestion for TRIGGER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2708,
+      "name": "FAILURE_MODE_IT_PREVENTS",
+      "description": "Auto-registered via batch ingestion for FAILURE_MODE_IT_PREVENTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2709,
+      "name": "SOURCE",
+      "description": "Auto-registered via batch ingestion for SOURCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2710,
+      "name": "FROM_MINIMAX_M3",
+      "description": "Auto-registered via batch ingestion for FROM_MINIMAX_M3",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "cloud"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2711,
+      "name": "FROM_QWEN2_5",
+      "description": "Auto-registered via batch ingestion for FROM_QWEN2_5",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "3b"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2712,
+      "name": "PATH_MODELFILE_SKILLE",
+      "description": "Auto-registered via batch ingestion for PATH_MODELFILE_SKILLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2713,
+      "name": "FROM_QWEN3_CODER",
+      "description": "Auto-registered via batch ingestion for FROM_QWEN3_CODER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "30b"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2714,
+      "name": "1_THE_HAND",
+      "description": "Auto-registered via batch ingestion for 1_THE_HAND",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2715,
+      "name": "1_SERVER_1",
+      "description": "Auto-registered via batch ingestion for 1_SERVER_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2716,
+      "name": "8000",
+      "description": "Auto-registered via batch ingestion for 8000",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2717,
+      "name": "8007",
+      "description": "Auto-registered via batch ingestion for 8007",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2718,
+      "name": "8002",
+      "description": "Auto-registered via batch ingestion for 8002",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2719,
+      "name": "8004",
+      "description": "Auto-registered via batch ingestion for 8004",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2720,
+      "name": "8005",
+      "description": "Auto-registered via batch ingestion for 8005",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2721,
+      "name": "CADDYFILE_PATH",
+      "description": "Auto-registered via batch ingestion for CADDYFILE_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2722,
+      "name": "2_SERVER_2",
+      "description": "Auto-registered via batch ingestion for 2_SERVER_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2723,
+      "name": "PORT_8001",
+      "description": "Auto-registered via batch ingestion for PORT_8001",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2724,
+      "name": "RESTART_SERVICES",
+      "description": "Auto-registered via batch ingestion for RESTART_SERVICES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2725,
+      "name": "PATH_NIMS",
+      "description": "Auto-registered via batch ingestion for PATH_NIMS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2726,
+      "name": "TOTAL_FATALITIES",
+      "description": "Auto-registered via batch ingestion for TOTAL_FATALITIES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2727,
+      "name": "DISPLACED_POPULATION",
+      "description": "Auto-registered via batch ingestion for DISPLACED_POPULATION",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "50000+"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2728,
+      "name": "ECONOMIC_DAMAGE",
+      "description": "Auto-registered via batch ingestion for ECONOMIC_DAMAGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2729,
+      "name": "TIMESTAMP",
+      "description": "Auto-registered via batch ingestion for TIMESTAMP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2730,
+      "name": "FAILURE_VECTOR",
+      "description": "Auto-registered via batch ingestion for FAILURE_VECTOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2731,
+      "name": "CIVILIAN_STATUS",
+      "description": "Auto-registered via batch ingestion for CIVILIAN_STATUS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2732,
+      "name": "METRIC_ROUTE_CAPACITY",
+      "description": "Auto-registered via batch ingestion for METRIC_ROUTE_CAPACITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2733,
+      "name": "COMM_COLLAPSE",
+      "description": "Auto-registered via batch ingestion for COMM_COLLAPSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2734,
+      "name": "PATH_NIMS_CONTEXT_09",
+      "description": "Auto-registered via batch ingestion for PATH_NIMS_CONTEXT_09",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2735,
+      "name": "TAB_1",
+      "description": "Auto-registered via batch ingestion for TAB_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2736,
+      "name": "TAB_2",
+      "description": "Auto-registered via batch ingestion for TAB_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2737,
+      "name": "TAB_3",
+      "description": "Auto-registered via batch ingestion for TAB_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2738,
+      "name": "TAB_4",
+      "description": "Auto-registered via batch ingestion for TAB_4",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2739,
+      "name": "MOVE_HEADING",
+      "description": "Auto-registered via batch ingestion for MOVE_HEADING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2740,
+      "name": "9_12_26_10",
+      "description": "Auto-registered via batch ingestion for 9_12_26_10",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2741,
+      "name": "LEFT_RAIL_320PX",
+      "description": "Auto-registered via batch ingestion for LEFT_RAIL_320PX",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2742,
+      "name": "CENTER_STAGE_FLEXIBLE",
+      "description": "Auto-registered via batch ingestion for CENTER_STAGE_FLEXIBLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2743,
+      "name": "RIGHT_RAIL_380PX",
+      "description": "Auto-registered via batch ingestion for RIGHT_RAIL_380PX",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2744,
+      "name": "PHYSICAL_LINK_MISSING",
+      "description": "Auto-registered via batch ingestion for PHYSICAL_LINK_MISSING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2745,
+      "name": "CORE_OBJECTIVE",
+      "description": "Auto-registered via batch ingestion for CORE_OBJECTIVE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2746,
+      "name": "THE_INTEROPERABILITY_GOAL",
+      "description": "Auto-registered via batch ingestion for THE_INTEROPERABILITY_GOAL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2747,
+      "name": "9_12_26_9",
+      "description": "Auto-registered via batch ingestion for 9_12_26_9",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2748,
+      "name": "ACTION",
+      "description": "Auto-registered via batch ingestion for ACTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2749,
+      "name": "THE_HANDSHAKE_BRIEFING",
+      "description": "Auto-registered via batch ingestion for THE_HANDSHAKE_BRIEFING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2750,
+      "name": "THE_ACTION",
+      "description": "Auto-registered via batch ingestion for THE_ACTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2751,
+      "name": "THE_REALITY_CHECK",
+      "description": "Auto-registered via batch ingestion for THE_REALITY_CHECK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2752,
+      "name": "PATH_NOSTRA_CABINET_O",
+      "description": "Auto-registered via batch ingestion for PATH_NOSTRA_CABINET_O",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2753,
+      "name": "TARGET_DIRECTORY",
+      "description": "Auto-registered via batch ingestion for TARGET_DIRECTORY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2754,
+      "name": "PANE_1_LEFT",
+      "description": "Auto-registered via batch ingestion for PANE_1_LEFT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2755,
+      "name": "PANE_2_TOP_RIGHT",
+      "description": "Auto-registered via batch ingestion for PANE_2_TOP_RIGHT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2756,
+      "name": "PANE_3_BOTTOM_RIGHT",
+      "description": "Auto-registered via batch ingestion for PANE_3_BOTTOM_RIGHT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2757,
+      "name": "PATH_NOTES_TO_SELF_OL",
+      "description": "Auto-registered via batch ingestion for PATH_NOTES_TO_SELF_OL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2758,
+      "name": "A_FIX_THE_POSTURE_IS",
+      "description": "Auto-registered via batch ingestion for A_FIX_THE_POSTURE_IS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2759,
+      "name": "V_001",
+      "description": "Auto-registered via batch ingestion for V_001",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2760,
+      "name": "V_002",
+      "description": "Auto-registered via batch ingestion for V_002",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2761,
+      "name": "V_006",
+      "description": "Auto-registered via batch ingestion for V_006",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2762,
+      "name": "PATH_NONPROFIT_OUTREA",
+      "description": "Auto-registered via batch ingestion for PATH_NONPROFIT_OUTREA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2763,
+      "name": "PATH_PAXEN_STACK_0805",
+      "description": "Auto-registered via batch ingestion for PATH_PAXEN_STACK_0805",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2764,
+      "name": "PATH_PAXEN_STACK",
+      "description": "Auto-registered via batch ingestion for PATH_PAXEN_STACK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2765,
+      "name": "PATH_PAXEN_STACK_MAST",
+      "description": "Auto-registered via batch ingestion for PATH_PAXEN_STACK_MAST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2766,
+      "name": "TIER_1",
+      "description": "Auto-registered via batch ingestion for TIER_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2767,
+      "name": "11_SOC2_COMPLIANCE",
+      "description": "Auto-registered via batch ingestion for 11_SOC2_COMPLIANCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2768,
+      "name": "14_THE_AGENCY",
+      "description": "Auto-registered via batch ingestion for 14_THE_AGENCY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2769,
+      "name": "16_FOUNDERS_DAY",
+      "description": "Auto-registered via batch ingestion for 16_FOUNDERS_DAY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2770,
+      "name": "17_UNION_ACCELERATOR",
+      "description": "Auto-registered via batch ingestion for 17_UNION_ACCELERATOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2771,
+      "name": "20_THE_PROGRAM",
+      "description": "Auto-registered via batch ingestion for 20_THE_PROGRAM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2772,
+      "name": "21_SENTINEL_GUARD",
+      "description": "Auto-registered via batch ingestion for 21_SENTINEL_GUARD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2773,
+      "name": "DADS_SPEC_ORG",
+      "description": "Auto-registered via batch ingestion for DADS_SPEC_ORG",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2774,
+      "name": "PATH_PROJECT_COLLAB_I",
+      "description": "Auto-registered via batch ingestion for PATH_PROJECT_COLLAB_I",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2775,
+      "name": "PROPRIETARY_ASSET_NAME",
+      "description": "Auto-registered via batch ingestion for PROPRIETARY_ASSET_NAME",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2776,
+      "name": "FOUNDER_INVENTOR",
+      "description": "Auto-registered via batch ingestion for FOUNDER_INVENTOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2777,
+      "name": "ASSIGNEE_ENTITY",
+      "description": "Auto-registered via batch ingestion for ASSIGNEE_ENTITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2778,
+      "name": "SYSTEM_TYPE",
+      "description": "Auto-registered via batch ingestion for SYSTEM_TYPE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2779,
+      "name": "PRODUCT_ID",
+      "description": "Auto-registered via batch ingestion for PRODUCT_ID",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2780,
+      "name": "COMPILER_BUILD",
+      "description": "Auto-registered via batch ingestion for COMPILER_BUILD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2781,
+      "name": "ARCHITECTURE_TYPE",
+      "description": "Auto-registered via batch ingestion for ARCHITECTURE_TYPE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2782,
+      "name": "TPM_2_0_BINDING",
+      "description": "Auto-registered via batch ingestion for TPM_2_0_BINDING",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "true,"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2783,
+      "name": "USB_HOTPLUG_LOCKOUT",
+      "description": "Auto-registered via batch ingestion for USB_HOTPLUG_LOCKOUT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "true,"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2784,
+      "name": "VOLATILE_RAM_DISK_ONLY",
+      "description": "Auto-registered via batch ingestion for VOLATILE_RAM_DISK_ONLY",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "true,"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2785,
+      "name": "PHASE_SHIELD_INTERVAL",
+      "description": "Auto-registered via batch ingestion for PHASE_SHIELD_INTERVAL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2786,
+      "name": "DATA_TRANSFER_PROTOCOL",
+      "description": "Auto-registered via batch ingestion for DATA_TRANSFER_PROTOCOL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2787,
+      "name": "PATH_RPG_PWA_09_09_20",
+      "description": "Auto-registered via batch ingestion for PATH_RPG_PWA_09_09_20",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2788,
+      "name": "SETTLEMENT_DENIED",
+      "description": "Auto-registered via batch ingestion for SETTLEMENT_DENIED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2789,
+      "name": "THE_GIG_SAYS",
+      "description": "Auto-registered via batch ingestion for THE_GIG_SAYS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2790,
+      "name": "THE_BUG",
+      "description": "Auto-registered via batch ingestion for THE_BUG",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2791,
+      "name": "GIG_ID",
+      "description": "Auto-registered via batch ingestion for GIG_ID",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "gigId,"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2792,
+      "name": "LAT",
+      "description": "Auto-registered via batch ingestion for LAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2793,
+      "name": "LNG",
+      "description": "Auto-registered via batch ingestion for LNG",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2794,
+      "name": "9_9_26_3",
+      "description": "Auto-registered via batch ingestion for 9_9_26_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2795,
+      "name": "GIG_ID_LAT",
+      "description": "Auto-registered via batch ingestion for GIG_ID_LAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2796,
+      "name": "PATH_RPG_PWA_09_12_20",
+      "description": "Auto-registered via batch ingestion for PATH_RPG_PWA_09_12_20",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2797,
+      "name": "PROGRESSION",
+      "description": "Auto-registered via batch ingestion for PROGRESSION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2798,
+      "name": "SURVIVAL_NEEDS_ENGINE",
+      "description": "Auto-registered via batch ingestion for SURVIVAL_NEEDS_ENGINE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2799,
+      "name": "AUDIOHANDLER",
+      "description": "Auto-registered via batch ingestion for AUDIOHANDLER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2800,
+      "name": "BROWSER_AT_HTTP",
+      "description": "Auto-registered via batch ingestion for BROWSER_AT_HTTP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2801,
+      "name": "CORE_THEME",
+      "description": "Auto-registered via batch ingestion for CORE_THEME",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2802,
+      "name": "NETWORK_PORT",
+      "description": "Auto-registered via batch ingestion for NETWORK_PORT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2803,
+      "name": "9_12_26_7",
+      "description": "Auto-registered via batch ingestion for 9_12_26_7",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2804,
+      "name": "THEME_ACCENT",
+      "description": "Auto-registered via batch ingestion for THEME_ACCENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2805,
+      "name": "DEFAULT_3D_DIORAMA_THEME",
+      "description": "Auto-registered via batch ingestion for DEFAULT_3D_DIORAMA_THEME",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "`\"blueprint\"`"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2806,
+      "name": "REAL_STREET_DELTA",
+      "description": "Auto-registered via batch ingestion for REAL_STREET_DELTA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2807,
+      "name": "LEG_2_ROUTING",
+      "description": "Auto-registered via batch ingestion for LEG_2_ROUTING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2808,
+      "name": "PATH_SNAPPING",
+      "description": "Auto-registered via batch ingestion for PATH_SNAPPING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2809,
+      "name": "THE_MISSING_RESET",
+      "description": "Auto-registered via batch ingestion for THE_MISSING_RESET",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2810,
+      "name": "THE_GHOST_STATE",
+      "description": "Auto-registered via batch ingestion for THE_GHOST_STATE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2811,
+      "name": "ISSUE",
+      "description": "Auto-registered via batch ingestion for ISSUE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2812,
+      "name": "PATH_RSS_FEED_SITES",
+      "description": "Auto-registered via batch ingestion for PATH_RSS_FEED_SITES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2813,
+      "name": "PATH_SLOW_RISE_BOOK_E",
+      "description": "Auto-registered via batch ingestion for PATH_SLOW_RISE_BOOK_E",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2814,
+      "name": "MAY_6_2026_2",
+      "description": "Auto-registered via batch ingestion for MAY_6_2026_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2815,
+      "name": "MATCHES_THE_TONE",
+      "description": "Auto-registered via batch ingestion for MATCHES_THE_TONE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2816,
+      "name": "WHAT_I_CAN_SAY",
+      "description": "Auto-registered via batch ingestion for WHAT_I_CAN_SAY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2817,
+      "name": "LET_ME_ALSO_NOTE",
+      "description": "Auto-registered via batch ingestion for LET_ME_ALSO_NOTE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2818,
+      "name": "ACTUALLY_LOOKING_AGAIN",
+      "description": "Auto-registered via batch ingestion for ACTUALLY_LOOKING_AGAIN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2819,
+      "name": "CONTINUITY",
+      "description": "Auto-registered via batch ingestion for CONTINUITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2820,
+      "name": "ALSO",
+      "description": "Auto-registered via batch ingestion for ALSO",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2821,
+      "name": "PATH_SOC_2_COMPLIANCE",
+      "description": "Auto-registered via batch ingestion for PATH_SOC_2_COMPLIANCE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2822,
+      "name": "PHASE_1",
+      "description": "Auto-registered via batch ingestion for PHASE_1",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2823,
+      "name": "IDENTIFY_YOUR_ASSETS",
+      "description": "Auto-registered via batch ingestion for IDENTIFY_YOUR_ASSETS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2824,
+      "name": "PHASE_2",
+      "description": "Auto-registered via batch ingestion for PHASE_2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2825,
+      "name": "INCIDENT_RESPONSE",
+      "description": "Auto-registered via batch ingestion for INCIDENT_RESPONSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2826,
+      "name": "ONBOARDING_OFFBOARDING",
+      "description": "Auto-registered via batch ingestion for ONBOARDING_OFFBOARDING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2827,
+      "name": "DATA_ENCRYPTION",
+      "description": "Auto-registered via batch ingestion for DATA_ENCRYPTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2828,
+      "name": "PHASE_3",
+      "description": "Auto-registered via batch ingestion for PHASE_3",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2829,
+      "name": "IMPLEMENT_MFA",
+      "description": "Auto-registered via batch ingestion for IMPLEMENT_MFA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2830,
+      "name": "PHASE_4",
+      "description": "Auto-registered via batch ingestion for PHASE_4",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2831,
+      "name": "TYPE_I_READINESS",
+      "description": "Auto-registered via batch ingestion for TYPE_I_READINESS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2832,
+      "name": "PATH_SALESOUTREACH_EN",
+      "description": "Auto-registered via batch ingestion for PATH_SALESOUTREACH_EN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2833,
+      "name": "CONNECT_HUBSPOT",
+      "description": "Auto-registered via batch ingestion for CONNECT_HUBSPOT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2834,
+      "name": "TEST_WITH_SAMPLE_INPUTS",
+      "description": "Auto-registered via batch ingestion for TEST_WITH_SAMPLE_INPUTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2835,
+      "name": "PATH_SECTOR_01_THE_ST",
+      "description": "Auto-registered via batch ingestion for PATH_SECTOR_01_THE_ST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2836,
+      "name": "SECTOR_01",
+      "description": "Auto-registered via batch ingestion for SECTOR_01",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2837,
+      "name": "CORE_IDENTITY",
+      "description": "Auto-registered via batch ingestion for CORE_IDENTITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2838,
+      "name": "CONTRACTUAL_COMMITMENTS",
+      "description": "Auto-registered via batch ingestion for CONTRACTUAL_COMMITMENTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2839,
+      "name": "THE_BASELINE_FINANCIALS",
+      "description": "Auto-registered via batch ingestion for THE_BASELINE_FINANCIALS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2840,
+      "name": "VERIFICATION_TOKENS",
+      "description": "Auto-registered via batch ingestion for VERIFICATION_TOKENS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2841,
+      "name": "SECTOR_02",
+      "description": "Auto-registered via batch ingestion for SECTOR_02",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2842,
+      "name": "CORPORATE_INFRASTRUCTURE",
+      "description": "Auto-registered via batch ingestion for CORPORATE_INFRASTRUCTURE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2843,
+      "name": "TECHNICAL_EPHEMERA",
+      "description": "Auto-registered via batch ingestion for TECHNICAL_EPHEMERA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2844,
+      "name": "STRATEGY_SIMULATIONS",
+      "description": "Auto-registered via batch ingestion for STRATEGY_SIMULATIONS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2845,
+      "name": "SECTOR_03",
+      "description": "Auto-registered via batch ingestion for SECTOR_03",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2846,
+      "name": "ESTATE_INFRASTRUCTURE",
+      "description": "Auto-registered via batch ingestion for ESTATE_INFRASTRUCTURE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2847,
+      "name": "PATH_TODO_ADD_A_RECOR",
+      "description": "Auto-registered via batch ingestion for PATH_TODO_ADD_A_RECOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2848,
+      "name": "PATH_THE_BOSS_LEVEL_L",
+      "description": "Auto-registered via batch ingestion for PATH_THE_BOSS_LEVEL_L",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2849,
+      "name": "FILTER_JOB_TITLES_BY",
+      "description": "Auto-registered via batch ingestion for FILTER_JOB_TITLES_BY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2850,
+      "name": "PATH_THE_BUILDER",
+      "description": "Auto-registered via batch ingestion for PATH_THE_BUILDER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2851,
+      "name": "THE_IGNITION_SWITCH",
+      "description": "Auto-registered via batch ingestion for THE_IGNITION_SWITCH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2852,
+      "name": "PATH_THEGP_PERSISTS",
+      "description": "Auto-registered via batch ingestion for PATH_THEGP_PERSISTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2853,
+      "name": "PATH_TO_DO_SITES",
+      "description": "Auto-registered via batch ingestion for PATH_TO_DO_SITES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2854,
+      "name": "PATH_ULTRAVOX_AI_YOU",
+      "description": "Auto-registered via batch ingestion for PATH_ULTRAVOX_AI_YOU",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2855,
+      "name": "STANFORD_HAI_HTTPS",
+      "description": "Auto-registered via batch ingestion for STANFORD_HAI_HTTPS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2856,
+      "name": "MIT_CSAIL_HTTPS",
+      "description": "Auto-registered via batch ingestion for MIT_CSAIL_HTTPS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2857,
+      "name": "BERKELEY_CHAI_HTTPS",
+      "description": "Auto-registered via batch ingestion for BERKELEY_CHAI_HTTPS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2858,
+      "name": "PATH_WORFLOW_NOTES",
+      "description": "Auto-registered via batch ingestion for PATH_WORFLOW_NOTES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2859,
+      "name": "WHY",
+      "description": "Auto-registered via batch ingestion for WHY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2860,
+      "name": "OFTEN",
+      "description": "Auto-registered via batch ingestion for OFTEN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2861,
+      "name": "DEFAULT",
+      "description": "Auto-registered via batch ingestion for DEFAULT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2862,
+      "name": "AVOID",
+      "description": "Auto-registered via batch ingestion for AVOID",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2863,
+      "name": "PATH_WORFLOW_NOTES_V0",
+      "description": "Auto-registered via batch ingestion for PATH_WORFLOW_NOTES_V0",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2864,
+      "name": "PATH_WHITE_LABEL_HOST",
+      "description": "Auto-registered via batch ingestion for PATH_WHITE_LABEL_HOST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2865,
+      "name": "CORE_PRODUCT",
+      "description": "Auto-registered via batch ingestion for CORE_PRODUCT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2866,
+      "name": "WHITE_LABEL_READY",
+      "description": "Auto-registered via batch ingestion for WHITE_LABEL_READY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2867,
+      "name": "DATABASE_INTEGRATION",
+      "description": "Auto-registered via batch ingestion for DATABASE_INTEGRATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2868,
+      "name": "INSTALLATION_MANUAL",
+      "description": "Auto-registered via batch ingestion for INSTALLATION_MANUAL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2869,
+      "name": "MULTI_LANGUAGE_SUPPORT",
+      "description": "Auto-registered via batch ingestion for MULTI_LANGUAGE_SUPPORT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2870,
+      "name": "ENTERPRISE_TEAMS",
+      "description": "Auto-registered via batch ingestion for ENTERPRISE_TEAMS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2871,
+      "name": "REQUIREMENTS_GATHERING",
+      "description": "Auto-registered via batch ingestion for REQUIREMENTS_GATHERING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2872,
+      "name": "DEVELOPMENT",
+      "description": "Auto-registered via batch ingestion for DEVELOPMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2873,
+      "name": "TESTING_INTEGRATION",
+      "description": "Auto-registered via batch ingestion for TESTING_INTEGRATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2874,
+      "name": "STARTUP_TEAMS",
+      "description": "Auto-registered via batch ingestion for STARTUP_TEAMS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2875,
+      "name": "MVP_DEVELOPMENT",
+      "description": "Auto-registered via batch ingestion for MVP_DEVELOPMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2876,
+      "name": "INTEGRATION_TESTING",
+      "description": "Auto-registered via batch ingestion for INTEGRATION_TESTING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2877,
+      "name": "PATH_BICENTINENIAL_NO",
+      "description": "Auto-registered via batch ingestion for PATH_BICENTINENIAL_NO",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2878,
+      "name": "THE_LESSON_FROM_ANDREW_IS",
+      "description": "Auto-registered via batch ingestion for THE_LESSON_FROM_ANDREW_IS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2879,
+      "name": "THE_OTHER_LESSON",
+      "description": "Auto-registered via batch ingestion for THE_OTHER_LESSON",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2880,
+      "name": "PATH_GP_SERVER_RUN_IN",
+      "description": "Auto-registered via batch ingestion for PATH_GP_SERVER_RUN_IN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2881,
+      "name": "NOTE",
+      "description": "Auto-registered via batch ingestion for NOTE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2882,
+      "name": "LOCALHOST",
+      "description": "Auto-registered via batch ingestion for LOCALHOST",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2883,
+      "name": "GP_LOCALHOST",
+      "description": "Auto-registered via batch ingestion for GP_LOCALHOST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2884,
+      "name": "LAB_LOCALHOST",
+      "description": "Auto-registered via batch ingestion for LAB_LOCALHOST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2885,
+      "name": "FOREMAN_LOCALHOST",
+      "description": "Auto-registered via batch ingestion for FOREMAN_LOCALHOST",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2886,
+      "name": "ALL_ELSE_LOCALHOST",
+      "description": "Auto-registered via batch ingestion for ALL_ELSE_LOCALHOST",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2887,
+      "name": "ROOT_5_78_157_222",
+      "description": "Auto-registered via batch ingestion for ROOT_5_78_157_222",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2888,
+      "name": "GP_IS_THEN_AT_HTTP",
+      "description": "Auto-registered via batch ingestion for GP_IS_THEN_AT_HTTP",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2889,
+      "name": "PATH_LIPSUM_UNKNOWN",
+      "description": "Auto-registered via batch ingestion for PATH_LIPSUM_UNKNOWN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2890,
+      "name": "NEW_PAT",
+      "description": "Auto-registered via batch ingestion for NEW_PAT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2891,
+      "name": "PATH_LIPSUM",
+      "description": "Auto-registered via batch ingestion for PATH_LIPSUM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2892,
+      "name": "PATH_MATRIX_NOTES",
+      "description": "Auto-registered via batch ingestion for PATH_MATRIX_NOTES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2893,
+      "name": "PATH_MUTATUM_STRIPE_O",
+      "description": "Auto-registered via batch ingestion for PATH_MUTATUM_STRIPE_O",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2894,
+      "name": "PATH_MUTATUM_STRIPE_V",
+      "description": "Auto-registered via batch ingestion for PATH_MUTATUM_STRIPE_V",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2895,
+      "name": "PATH_PAGE_MANAGER_INF",
+      "description": "Auto-registered via batch ingestion for PATH_PAGE_MANAGER_INF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2896,
+      "name": "LOCATION",
+      "description": "Auto-registered via batch ingestion for LOCATION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2897,
+      "name": "HOW_TO_USE_IT",
+      "description": "Auto-registered via batch ingestion for HOW_TO_USE_IT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2898,
+      "name": "3_RUN_IT",
+      "description": "Auto-registered via batch ingestion for 3_RUN_IT",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2899,
+      "name": "4_OPEN_YOUR_BROWSER",
+      "description": "Auto-registered via batch ingestion for 4_OPEN_YOUR_BROWSER",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2900,
+      "name": "PATH_RSS_LINKS",
+      "description": "Auto-registered via batch ingestion for PATH_RSS_LINKS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2901,
+      "name": "LIVE_PODCAST_RSS_XML",
+      "description": "Auto-registered via batch ingestion for LIVE_PODCAST_RSS_XML",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2902,
+      "name": "STAGING_WEB_FEED",
+      "description": "Auto-registered via batch ingestion for STAGING_WEB_FEED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2903,
+      "name": "STAGING_PODCAST_RSS_XML",
+      "description": "Auto-registered via batch ingestion for STAGING_PODCAST_RSS_XML",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2904,
+      "name": "PATH_SKILLET_LAUNCHER",
+      "description": "Auto-registered via batch ingestion for PATH_SKILLET_LAUNCHER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2905,
+      "name": "PATH_THEGP_INVITE",
+      "description": "Auto-registered via batch ingestion for PATH_THEGP_INVITE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2906,
+      "name": "APIKEYHELPER",
+      "description": "Auto-registered via batch ingestion for APIKEYHELPER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2907,
+      "name": "ANTHROPIC_API_KEY",
+      "description": "Auto-registered via batch ingestion for ANTHROPIC_API_KEY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2908,
+      "name": "PATH_VERTS_ADDYS",
+      "description": "Auto-registered via batch ingestion for PATH_VERTS_ADDYS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2909,
+      "name": "DIR_MORGAN_V_LAK_PATH",
+      "description": "Auto-registered via batch ingestion for DIR_MORGAN_V_LAK_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2910,
+      "name": "DIR_MORGAN_V_LAK_FILES",
+      "description": "Auto-registered via batch ingestion for DIR_MORGAN_V_LAK_FILES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2911,
+      "name": "PATH_MORGAN_V_LAKESHO",
+      "description": "Auto-registered via batch ingestion for PATH_MORGAN_V_LAKESHO",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2912,
+      "name": "WRAP_MAX_WIDTH",
+      "description": "Auto-registered via batch ingestion for WRAP_MAX_WIDTH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2913,
+      "name": "HEADER_TITLE_FONT_FAMILY",
+      "description": "Auto-registered via batch ingestion for HEADER_TITLE_FONT_FAMILY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2914,
+      "name": "H1_FONT_SIZE",
+      "description": "Auto-registered via batch ingestion for H1_FONT_SIZE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2915,
+      "name": "LEDE_COLOR",
+      "description": "Auto-registered via batch ingestion for LEDE_COLOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2916,
+      "name": "CARD_BACKGROUND",
+      "description": "Auto-registered via batch ingestion for CARD_BACKGROUND",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2917,
+      "name": "GRID_4_DISPLAY",
+      "description": "Auto-registered via batch ingestion for GRID_4_DISPLAY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2918,
+      "name": "GRID_2_DISPLAY",
+      "description": "Auto-registered via batch ingestion for GRID_2_DISPLAY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2919,
+      "name": "MONO_FONT_FAMILY",
+      "description": "Auto-registered via batch ingestion for MONO_FONT_FAMILY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2920,
+      "name": "SECTION_H_FONT_SIZE",
+      "description": "Auto-registered via batch ingestion for SECTION_H_FONT_SIZE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2921,
+      "name": "P_BODY_FONT_SIZE",
+      "description": "Auto-registered via batch ingestion for P_BODY_FONT_SIZE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2922,
+      "name": "TABLE_WIDTH",
+      "description": "Auto-registered via batch ingestion for TABLE_WIDTH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2923,
+      "name": "TH_TD_TEXT_ALIGN",
+      "description": "Auto-registered via batch ingestion for TH_TD_TEXT_ALIGN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2924,
+      "name": "2026_07_14_02",
+      "description": "Auto-registered via batch ingestion for 2026_07_14_02",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2925,
+      "name": "DUPLICATES_AUTO_COLLAPSED",
+      "description": "Auto-registered via batch ingestion for DUPLICATES_AUTO_COLLAPSED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2926,
+      "name": "STATES",
+      "description": "Auto-registered via batch ingestion for STATES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2927,
+      "name": "9_ROGS_STAGED_02",
+      "description": "Auto-registered via batch ingestion for 9_ROGS_STAGED_02",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2928,
+      "name": "TOPIC_7",
+      "description": "Auto-registered via batch ingestion for TOPIC_7",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2929,
+      "name": "2_PP_STAGED_02",
+      "description": "Auto-registered via batch ingestion for 2_PP_STAGED_02",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2930,
+      "name": "6_PP_STAGED_02",
+      "description": "Auto-registered via batch ingestion for 6_PP_STAGED_02",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2931,
+      "name": "CLIENT",
+      "description": "Auto-registered via batch ingestion for CLIENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2932,
+      "name": "ADVERSE",
+      "description": "Auto-registered via batch ingestion for ADVERSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2933,
+      "name": "FILED",
+      "description": "Auto-registered via batch ingestion for FILED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2934,
+      "name": "STAT_PADDING",
+      "description": "Auto-registered via batch ingestion for STAT_PADDING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2935,
+      "name": "STAT_N_FONT_FAMILY",
+      "description": "Auto-registered via batch ingestion for STAT_N_FONT_FAMILY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2936,
+      "name": "JUROR_JNAME_FONT_WEIGHT",
+      "description": "Auto-registered via batch ingestion for JUROR_JNAME_FONT_WEIGHT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2937,
+      "name": "JUROR_JSEAT_FONT_FAMILY",
+      "description": "Auto-registered via batch ingestion for JUROR_JSEAT_FONT_FAMILY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2938,
+      "name": "PATH_PROBATUM_SAMPLE",
+      "description": "Auto-registered via batch ingestion for PATH_PROBATUM_SAMPLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2939,
+      "name": "TABS_DISPLAY",
+      "description": "Auto-registered via batch ingestion for TABS_DISPLAY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2940,
+      "name": "TAB_ACTIVE_COLOR",
+      "description": "Auto-registered via batch ingestion for TAB_ACTIVE_COLOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2941,
+      "name": "TAB_BODY_BACKGROUND",
+      "description": "Auto-registered via batch ingestion for TAB_BODY_BACKGROUND",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2942,
+      "name": "TAB_PANEL_DISPLAY",
+      "description": "Auto-registered via batch ingestion for TAB_PANEL_DISPLAY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2943,
+      "name": "PATH_MATTER_INTELLIGE",
+      "description": "Auto-registered via batch ingestion for PATH_MATTER_INTELLIGE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2944,
+      "name": "PATH_2025_11_21_COMPL",
+      "description": "Auto-registered via batch ingestion for PATH_2025_11_21_COMPL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2945,
+      "name": "PATH_2026_01_15_ANSWE",
+      "description": "Auto-registered via batch ingestion for PATH_2026_01_15_ANSWE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2946,
+      "name": "PATH_2026_02_10_CASE",
+      "description": "Auto-registered via batch ingestion for PATH_2026_02_10_CASE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2947,
+      "name": "3_FACT_DISCOVERY_CLOSES",
+      "description": "Auto-registered via batch ingestion for 3_FACT_DISCOVERY_CLOSES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2948,
+      "name": "5_TRIAL_FIRM",
+      "description": "Auto-registered via batch ingestion for 5_TRIAL_FIRM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2949,
+      "name": "ENTERED",
+      "description": "Auto-registered via batch ingestion for ENTERED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2950,
+      "name": "PATH_2026_02_01_PLTF",
+      "description": "Auto-registered via batch ingestion for PATH_2026_02_01_PLTF",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2951,
+      "name": "INTERROGATORY_NO_12",
+      "description": "Auto-registered via batch ingestion for INTERROGATORY_NO_12",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2952,
+      "name": "INTERROGATORY_NO_13",
+      "description": "Auto-registered via batch ingestion for INTERROGATORY_NO_13",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2953,
+      "name": "INTERROGATORY_NO_14",
+      "description": "Auto-registered via batch ingestion for INTERROGATORY_NO_14",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2954,
+      "name": "INTERROGATORY_NO_15",
+      "description": "Auto-registered via batch ingestion for INTERROGATORY_NO_15",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2955,
+      "name": "SERVED",
+      "description": "Auto-registered via batch ingestion for SERVED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2956,
+      "name": "PATH_2026_03_05_DEF_A",
+      "description": "Auto-registered via batch ingestion for PATH_2026_03_05_DEF_A",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2957,
+      "name": "VERIFIED_AND_SERVED",
+      "description": "Auto-registered via batch ingestion for VERIFIED_AND_SERVED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2958,
+      "name": "PATH_2026_03_05_DEF_R",
+      "description": "Auto-registered via batch ingestion for PATH_2026_03_05_DEF_R",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2959,
+      "name": "REQUEST_NO_7",
+      "description": "Auto-registered via batch ingestion for REQUEST_NO_7",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2960,
+      "name": "REQUEST_NO_9",
+      "description": "Auto-registered via batch ingestion for REQUEST_NO_9",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2961,
+      "name": "PATH_2026_04_22_OKAFO",
+      "description": "Auto-registered via batch ingestion for PATH_2026_04_22_OKAFO",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2962,
+      "name": "PATH_2026_05_11_MORGA",
+      "description": "Auto-registered via batch ingestion for PATH_2026_05_11_MORGA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2963,
+      "name": "PATH_PRIVILEGE_LOG",
+      "description": "Auto-registered via batch ingestion for PATH_PRIVILEGE_LOG",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2964,
+      "name": "PATH_LFL_EM_00644_202",
+      "description": "Auto-registered via batch ingestion for PATH_LFL_EM_00644_202",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2965,
+      "name": "FROM",
+      "description": "Auto-registered via batch ingestion for FROM",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2966,
+      "name": "PATH_LFL_EM_00871_202",
+      "description": "Auto-registered via batch ingestion for PATH_LFL_EM_00871_202",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2967,
+      "name": "PATH_BINDER_INDEX_LFL",
+      "description": "Auto-registered via batch ingestion for PATH_BINDER_INDEX_LFL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2968,
+      "name": "SAMPLE_FICTIONAL_SAMPLE_DATA",
+      "description": "Auto-registered via batch ingestion for SAMPLE_FICTIONAL_SAMPLE_DATA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2969,
+      "name": "PATH_LFL_ML_0412_2023",
+      "description": "Auto-registered via batch ingestion for PATH_LFL_ML_0412_2023",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2970,
+      "name": "FACILITY",
+      "description": "Auto-registered via batch ingestion for FACILITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2971,
+      "name": "DOCKS_1_3_5_6",
+      "description": "Auto-registered via batch ingestion for DOCKS_1_3_5_6",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2972,
+      "name": "DOCK_4",
+      "description": "Auto-registered via batch ingestion for DOCK_4",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2973,
+      "name": "DISPOSITION",
+      "description": "Auto-registered via batch ingestion for DISPOSITION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2974,
+      "name": "PATH_LFL_ML_1598_2025",
+      "description": "Auto-registered via batch ingestion for PATH_LFL_ML_1598_2025",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2975,
+      "name": "VENDOR",
+      "description": "Auto-registered via batch ingestion for VENDOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2976,
+      "name": "RESULT",
+      "description": "Auto-registered via batch ingestion for RESULT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2977,
+      "name": "NEXT_DUE",
+      "description": "Auto-registered via batch ingestion for NEXT_DUE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2978,
+      "name": "PATH_MED_AB_0001_2025",
+      "description": "Auto-registered via batch ingestion for PATH_MED_AB_0001_2025",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2979,
+      "name": "PATIENT",
+      "description": "Auto-registered via batch ingestion for PATIENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2980,
+      "name": "ATTENDING",
+      "description": "Auto-registered via batch ingestion for ATTENDING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2981,
+      "name": "CHIEF_COMPLAINT",
+      "description": "Auto-registered via batch ingestion for CHIEF_COMPLAINT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2982,
+      "name": "FINDINGS",
+      "description": "Auto-registered via batch ingestion for FINDINGS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2983,
+      "name": "L5_S1_SHOULDER_XR",
+      "description": "Auto-registered via batch ingestion for L5_S1_SHOULDER_XR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2984,
+      "name": "PATH_MED_OR_0031_2025",
+      "description": "Auto-registered via batch ingestion for PATH_MED_OR_0031_2025",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2985,
+      "name": "MRI_REVIEW",
+      "description": "Auto-registered via batch ingestion for MRI_REVIEW",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2986,
+      "name": "ASSESSMENT",
+      "description": "Auto-registered via batch ingestion for ASSESSMENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2987,
+      "name": "PATH_MED_PT_0212_2026",
+      "description": "Auto-registered via batch ingestion for PATH_MED_PT_0212_2026",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2988,
+      "name": "RESULTS",
+      "description": "Auto-registered via batch ingestion for RESULTS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2989,
+      "name": "VALIDITY",
+      "description": "Auto-registered via batch ingestion for VALIDITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2990,
+      "name": "PATH_SPECIALS_SUMMARY",
+      "description": "Auto-registered via batch ingestion for PATH_SPECIALS_SUMMARY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2991,
+      "name": "PATH_IR_2025_091_INCI",
+      "description": "Auto-registered via batch ingestion for PATH_IR_2025_091_INCI",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2992,
+      "name": "DATE_OF_INCIDENT",
+      "description": "Auto-registered via batch ingestion for DATE_OF_INCIDENT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2993,
+      "name": "REPORTED_BY",
+      "description": "Auto-registered via batch ingestion for REPORTED_BY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2994,
+      "name": "DESCRIPTION",
+      "description": "Auto-registered via batch ingestion for DESCRIPTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2995,
+      "name": "WITNESSES",
+      "description": "Auto-registered via batch ingestion for WITNESSES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2996,
+      "name": "FOLLOW_UP_2025_09_13",
+      "description": "Auto-registered via batch ingestion for FOLLOW_UP_2025_09_13",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2997,
+      "name": "REVIEWED_BY",
+      "description": "Auto-registered via batch ingestion for REVIEWED_BY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2998,
+      "name": "PATH_PHOTO_LOG_2025_0",
+      "description": "Auto-registered via batch ingestion for PATH_PHOTO_LOG_2025_0",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2999,
+      "name": "PATH_2026_06_15_DEMAN",
+      "description": "Auto-registered via batch ingestion for PATH_2026_06_15_DEMAN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 3000,
+      "name": "PATH_2026_07_05_RECOR",
+      "description": "Auto-registered via batch ingestion for PATH_2026_07_05_RECOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2001,
+      "name": "DIR_MEMORY_PATH",
+      "description": "Auto-registered via batch ingestion for DIR_MEMORY_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2002,
+      "name": "DIR_MEMORY_FILES",
+      "description": "Auto-registered via batch ingestion for DIR_MEMORY_FILES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2036,
+      "name": "PATH_LAST_SESSION",
+      "description": "Auto-registered via batch ingestion for PATH_LAST_SESSION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2037,
+      "name": "PATH_STATUS_BLOCK",
+      "description": "Auto-registered via batch ingestion for PATH_STATUS_BLOCK",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2038,
+      "name": "CASE_FILE",
+      "description": "Auto-registered via batch ingestion for CASE_FILE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2039,
+      "name": "OPS_MANAGER_EMAIL",
+      "description": "Auto-registered via batch ingestion for OPS_MANAGER_EMAIL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2040,
+      "name": "PATH_CORR_0044_2025_0",
+      "description": "Auto-registered via batch ingestion for PATH_CORR_0044_2025_0",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2041,
+      "name": "ATTN",
+      "description": "Auto-registered via batch ingestion for ATTN",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2042,
+      "name": "PATH_2026_07_DRAFT_21",
+      "description": "Auto-registered via batch ingestion for PATH_2026_07_DRAFT_21",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2043,
+      "name": "BASES",
+      "description": "Auto-registered via batch ingestion for BASES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2044,
+      "name": "PATH_WITNESS_LIST",
+      "description": "Auto-registered via batch ingestion for PATH_WITNESS_LIST",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
     }
   ]
 }

@@ -98,5 +98,20 @@
     "created_by": "Agent (RP Session Handoff)",
     "created_at": "2026-10-20T14:55:31.866756",
     "updated_at": "2026-10-20T14:55:31.866756"
+  },
+  {
+    "id": "WF-R3",
+    "title": "[WF-ART-01] IN-UNIVERSE ARTIFACT LOOKBOOK PROTOCOL",
+    "category": "protocol",
+    "trigger": "When designing, generating, or upgrading Hollywood film/TV pitch decks, series bibles, or sales lookbooks",
+    "move": "Design pitch presentations as tactile in-universe artifacts (e.g. illuminated vellum manuscript for historical satire, impounded police evidence file for neo-noir thriller) using 70% full-bleed 16:9 visual framing, 30% narrative copy cap, and dark atmospheric lighting.",
+    "why": "",
+    "source": "",
+    "status": "active",
+    "fire_count": 1,
+    "last_fired_at": "2026-10-20T18:29:23.709253",
+    "created_by": "Agent (RP Session Handoff)",
+    "created_at": "2026-10-20T18:29:23.709253",
+    "updated_at": "2026-10-20T18:29:23.709253"
   }
 ]

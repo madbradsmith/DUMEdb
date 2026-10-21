@@ -157,10 +157,11 @@ app.state.scribe_committer = scribe_committer
 app.state.batch_ingestion_engine = batch_ingestion_engine
 
 # Mount OpenAI Universal Proxy Router (/v1)
-from dume.proxy.routes import proxy_router
+from dume.proxy.routes import proxy_router, ingest_directory_endpoint
 from dume.proxy.config import get_proxy_config, set_proxy_config
 
 app.include_router(proxy_router)
+app.add_api_route("/dume/ingest/directory", ingest_directory_endpoint, methods=["POST"])
 
 # Static UI Mount
 UI_DIR = BASE_DIR / "dume" / "ui" / "inspector"
