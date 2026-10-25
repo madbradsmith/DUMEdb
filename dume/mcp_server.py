@@ -34,32 +34,66 @@ context_manager = BoundedBufferManager()
 _DUME_NS = uuid.UUID("6ba7b810-9dad-11d1-80b4-00c04fd430c8")
 
 
-def ensure_server_running(host: str = "127.0.0.1", port: int = 8090) -> bool:
-    """Checks if DUMEdb HTTP server is active on port 8090. If not, silently auto-spawns it."""
+def resolve_server_port(port: Optional[int] = None) -> int:
+    """Resolves target port: explicit arg > DUME_PORT/PORT env > config > 8095 default."""
+    if port:
+        return int(port)
     try:
-        with socket.create_connection((host, port), timeout=0.15):
+        from dume.__main__ import resolve_port
+        return resolve_port()
+    except Exception:
+        env_port = os.environ.get("DUME_PORT") or os.environ.get("PORT")
+        if env_port:
+            try:
+                return int(env_port)
+            except ValueError:
+                pass
+        return 8095
+
+
+def ensure_server_running(host: str = "127.0.0.1", port: Optional[int] = None) -> bool:
+    """Checks if DUMEdb HTTP server is active on the configured port (default 8095). If not, silently auto-spawns it."""
+    target_port = resolve_server_port(port)
+    try:
+        with socket.create_connection((host, target_port), timeout=0.15):
             return True
     except (ConnectionRefusedError, OSError, socket.timeout):
         pass
 
     try:
         project_root = Path(__file__).resolve().parent.parent
-        venv_python = project_root / ".venv" / "Scripts" / "pythonw.exe"
-        exe = str(venv_python) if venv_python.exists() else sys.executable
+
+        # Prefer pythonw.exe to completely eliminate console window / ConPTY pipe popups on Windows
+        candidate_exe = None
+        if sys.platform == "win32":
+            venv_pythonw = project_root / ".venv" / "Scripts" / "pythonw.exe"
+            if venv_pythonw.exists():
+                candidate_exe = str(venv_pythonw)
+            else:
+                sys_pythonw = Path(sys.executable).with_name("pythonw.exe")
+                if sys_pythonw.exists():
+                    candidate_exe = str(sys_pythonw)
+
+        if not candidate_exe:
+            candidate_exe = sys.executable
 
         creationflags = 0
         if sys.platform == "win32":
-            # CREATE_NO_WINDOW (0x08000000) | DETACHED_PROCESS (0x00000008)
-            creationflags = 0x08000000 | 0x00000008
+            # CREATE_NO_WINDOW (0x08000000) prevents console window creation.
+            # Do NOT combine with DETACHED_PROCESS (0x00000008), which conflicts with CREATE_NO_WINDOW
+            # and causes Windows Terminal / ConPTY error 0x800700e8 (pipe closed) on Windows 11.
+            creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)
 
+        cmd = [candidate_exe, "-m", "dume", "-p", str(target_port), "--host", host]
         subprocess.Popen(
-            [exe, "-m", "dume"],
+            cmd,
             cwd=str(project_root),
+            stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             creationflags=creationflags,
         )
-        logger.info("Auto-spawned DUMEdb HTTP background server on %s:%d", host, port)
+        logger.info("Auto-spawned DUMEdb HTTP background server on %s:%d", host, target_port)
         return True
     except Exception as e:
         logger.warning("Failed to auto-spawn DUMEdb server: %s", e)
