@@ -9912,6 +9912,51 @@
       "enum_values": {},
       "unit": null,
       "is_auto": true
+    },
+    {
+      "opcode": 3047,
+      "name": "2026-07-14_\u00b7_02",
+      "description": "Auto-registered intake key 2026-07-14_\u00b7_02",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3048,
+      "name": "DUPLICATES_AUTO-COLLAPSED",
+      "description": "Auto-registered intake key DUPLICATES_AUTO-COLLAPSED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3049,
+      "name": "9_ROGS_\u00b7_STAGED_02",
+      "description": "Auto-registered intake key 9_ROGS_\u00b7_STAGED_02",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3050,
+      "name": "2_PP._\u00b7_STAGED_02",
+      "description": "Auto-registered intake key 2_PP._\u00b7_STAGED_02",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3051,
+      "name": "6_PP._\u00b7_STAGED_02",
+      "description": "Auto-registered intake key 6_PP._\u00b7_STAGED_02",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
     }
   ]
 }

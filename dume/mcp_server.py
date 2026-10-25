@@ -7,7 +7,10 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Dict, Any, List, Union, Optional
-from mcp.server.mcpserver import MCPServer
+try:
+    from mcp.server.mcpserver import MCPServer
+except (ImportError, ModuleNotFoundError):
+    from mcp.server.fastmcp import FastMCP as MCPServer
 
 from dume.core.record import UnitRecord, uuid_to_hex, hex_to_uuid_bytes
 from dume.schema.dictionary import SchemaDictionary, OpcodeSpec
@@ -18,6 +21,7 @@ from dume.intake.pr_reducer import PRReducer
 from dume.intake.error_reducer import ErrorReducer
 from dume.intake.incident_reducer import IncidentReducer
 
+logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 logger = logging.getLogger("dume.mcp_server")
 
 # Base Paths & In-Process Instances
@@ -102,6 +106,87 @@ def dume_read_state(entity_id: str = "MadBrad-AG-01") -> Dict[str, Any]:
         state_dict[name] = formatted_val
 
     return state_dict
+
+
+@mcp.tool()
+def dume_query(
+    query: str,
+    entity_id: Optional[str] = None,
+    limit: int = 10
+) -> Dict[str, Any]:
+    """
+    High-speed associative search across active state registers and extension payloads in DUMEdb.
+    Scans hardware-aligned LMDB state without touching raw filesystem documents or burning token context.
+    Matches opcodes, enum values, structured register names, and text payloads.
+    """
+    if not query or not query.strip():
+        return {"query": query, "total_hits": 0, "returned": 0, "matches": [], "error": "Query cannot be empty."}
+
+    schema_dict.load_from_disk()
+    q_tokens = [t.lower() for t in query.strip().split() if t.strip()]
+
+    target_bytes: Optional[bytes] = None
+    if entity_id and entity_id.strip().lower() not in ("all", "*"):
+        try:
+            target_bytes = normalize_entity_id(entity_id)
+        except Exception:
+            target_bytes = None
+
+    matches = []
+    memory_engine._ensure_open()
+
+    with memory_engine.env.begin(db=memory_engine.db_active, write=False, buffers=True) as txn:
+        cursor = txn.cursor()
+        if target_bytes:
+            has_data = cursor.set_range(target_bytes)
+        else:
+            has_data = cursor.first()
+
+        while has_data:
+            key_bytes = bytes(cursor.key())
+            if target_bytes and not key_bytes.startswith(target_bytes):
+                break
+
+            rec = UnitRecord.unpack(bytes(cursor.value()))
+            if rec.is_active:
+                spec = schema_dict.get_spec(rec.opcode)
+                name = spec.name if spec else f"OPCODE_{rec.opcode}"
+                formatted_val = schema_dict.format_value(rec.opcode, rec)
+                if "PAYLOAD_HASH" in str(formatted_val) or rec.has_extension_payload:
+                    text = memory_engine.get_payload_text(rec.value)
+                    if text:
+                        formatted_val = text
+
+                cand_str = f"{name} {formatted_val}".lower()
+                matched_tokens = [t for t in q_tokens if t in cand_str]
+                if matched_tokens:
+                    is_exact = len(matched_tokens) == len(q_tokens)
+                    val_str = str(formatted_val)
+                    if len(val_str) > 800:
+                        val_str = val_str[:800] + "... [truncated]"
+
+                    matches.append({
+                        "entity_id": uuid_to_hex(rec.entity_id),
+                        "opcode": rec.opcode,
+                        "name": name,
+                        "value": val_str,
+                        "score": len(matched_tokens),
+                        "exact_match": is_exact,
+                        "timestamp": rec.timestamp
+                    })
+
+            has_data = cursor.next()
+
+    # Sort matches: exact match first, then by match score, then newest timestamp
+    matches.sort(key=lambda m: (m["exact_match"], m["score"], m["timestamp"]), reverse=True)
+    top_matches = matches[:limit]
+
+    return {
+        "query": query,
+        "total_hits": len(matches),
+        "returned": len(top_matches),
+        "matches": top_matches
+    }
 
 
 @mcp.tool()

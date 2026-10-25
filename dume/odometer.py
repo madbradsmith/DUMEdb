@@ -202,6 +202,20 @@ def calculate_real_context_metrics(transcript_path: Optional[Path] = None) -> Di
     active_chars = sum(len(json.dumps(s)) for s in active_window)
     active_tokens = active_chars // 4
 
+    compaction_recent = False
+    compaction_alert = ""
+    if checkpoints:
+        steps_since_cp = len(lines) - 1 - last_cp_idx
+        if steps_since_cp <= 30:
+            compaction_recent = True
+            compaction_alert = (
+                f"⚠️ **DUMEdb Sentinel Alert: Context Compaction Event Detected**\n"
+                f"IDE context auto-compaction occurred. Session transitioned to Epoch {epoch} "
+                f"(active transcript window reset to {active_tokens:,} tok / "
+                f"{round(min(100.0, (active_tokens / ceiling) * 100), 1)}%). "
+                f"Full pre-compaction history remains safely archived on disk in transcript.jsonl."
+            )
+
     # Extract hardware telemetry from conversation db if present for accurate turn deltas
     telemetry = extract_db_token_telemetry(db_path) if db_path else []
 
@@ -285,6 +299,8 @@ def calculate_real_context_metrics(transcript_path: Optional[Path] = None) -> Di
         "zone_icon": zone_icon,
         "bar": bar,
         "formatted": formatted,
+        "compaction_recent": compaction_recent,
+        "compaction_alert": compaction_alert,
         "transcript_path": str(path) if path else None,
         "db_path": str(db_path) if db_path else None,
         "telemetry_source": "transcript_payload_with_hardware_deltas" if telemetry else "transcript_char_estimate",

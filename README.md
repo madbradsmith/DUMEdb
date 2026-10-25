@@ -1,6 +1,7 @@
 # ⚡ DUMEdb (Deterministic Unit-Record Memory Engine)
 
 [![Release](https://img.shields.io/badge/release-v1.1.0-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
+[![YouTube](https://img.shields.io/badge/YouTube-Watch%20Masterclass-red?style=flat-square&logo=youtube)](https://youtu.be/nO5vozUhqyU)
 [![Python](https://img.shields.io/badge/python-3.9+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![LMDB](https://img.shields.io/badge/storage-LMDB%20Mmap-00ADD8.svg?style=flat-square)](https://symas.com/lmdb/)
 [![Latency](https://img.shields.io/badge/read%20latency-%3C%200.8%20%CE%BCs-brightgreen.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb)
@@ -8,6 +9,9 @@
 [![Status](https://img.shields.io/badge/architecture-Hardware--Aligned%20Zero--Copy-purple.svg?style=flat-square)](https://dumedb.developumaiengine.com)
 
 > **Hardware-aligned, zero-prompt-bloat, byte-structured memory engine and drop-in OpenAI-compatible proxy gateway for autonomous AI agents.**
+
+> 🎬 **Watch the Official Masterclass on YouTube:**  
+> [**Stop Force-Feeding Your AI 40,000 Tokens (DUMEdb Masterclass)**](https://youtu.be/nO5vozUhqyU) — *Featuring Frank, The Sentinel, and real-time live benchmarks.*
 
 ---
 
@@ -226,6 +230,29 @@ DUMEdb includes a comprehensive pytest suite covering the core memory engine, LM
 ```bash
 pytest tests/
 ```
+
+---
+
+## ☕ Support & GitHub Sponsors
+
+If DUMEdb has saved your AI agents from context rot, slashed your API token bills, or improved your autonomous workflows, please consider supporting the project:
+
+- ❤️ **[Sponsor MadBrad on GitHub](https://github.com/sponsors/madbradsmith)**
+- ⭐ **Star this repository** to help other engineers discover deterministic memory
+- 🗣️ **Share the Masterclass** with teams building production agent architectures
+
+---
+
+## 💼 Custom Features & Enterprise Deployments
+
+Need DUMEdb tailored for a specialized agent framework, private cloud, or enterprise pipeline?
+
+**MadBrad is available for hire on a consulting / fee basis for:**
+- **Custom Agent Substrates**: Custom MCP servers, IDE integrations (Cursor, Claude Code, Windsurf, Antigravity), or tailored schema mappings for your proprietary data.
+- **Enterprise Deployments**: Hardened on-premise LMDB memory clusters, automated multi-agent synchronization, and deterministic hydration bridges.
+- **High-Throughput Optimizations**: Sub-microsecond binary state architectures for demanding production workloads.
+
+To inquire about custom feature development or enterprise support, reach out via **[GitHub Sponsors](https://github.com/sponsors/madbradsmith)** or open a discussion thread on the repository.
 
 ---
 

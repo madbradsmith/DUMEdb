@@ -9,4 +9,6 @@
    `---`
    `📊 **Context Odometer (Real Math)**: [██░░░░░░░░] <pct>% (<active_tokens> / ~<ceiling> tok) | Epoch <epoch> (Turn +<steps>) | Runway: ~<runway> tok | Last Turn: +<delta> tok (📥 <in> in | 📤 <out> out) | Zone: <icon> <zone>`
    If context consumption reaches >= 75% (~90,000 tokens), warn the operator immediately and trigger `cabinet_refresh` to hand off cleanly before auto-compaction occurs.
-
+5. **Compaction Detection Alert**: Whenever an IDE auto-compaction occurs (indicated by an epoch increment, resuming from a compaction, or working context percentage dropping between turns), the Sentinel MUST explicitly alert the operator:
+   `⚠️ **DUMEdb Sentinel Alert: Context Compaction Event Detected**`
+   `IDE context auto-compaction occurred. Session transitioned to Epoch <epoch>. Working context was condensed to <active_tokens> tok (<pct>%), with historical transcript safely preserved on disk.`

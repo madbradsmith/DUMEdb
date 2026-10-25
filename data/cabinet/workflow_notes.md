@@ -1,12 +1,12 @@
 ---
 # WORKFLOW-NOTES — THE LIVING CABINET
-# Last Synced: 2026-10-20 18:29:23
+# Last Synced: 2026-10-25 10:38:13
 # Managed by DUMEdb Cabinet Engine
 ---
 
 ```
 WORKFLOW-NOTES
-10202026
+10252026
 ================================================
 FILE 3 OF 3 — THE CABINET (LIVING HEURISTICS)
 ================================================
@@ -78,3 +78,20 @@ OPERATIONAL PROTOCOLS
 [WF-R3] [WF-ART-01] IN-UNIVERSE ARTIFACT LOOKBOOK PROTOCOL
   Trigger: When designing, generating, or upgrading Hollywood film/TV pitch decks, series bibles, or sales lookbooks
   Move: Design pitch presentations as tactile in-universe artifacts (e.g. illuminated vellum manuscript for historical satire, impounded police evidence file for neo-noir thriller) using 70% full-bleed 16:9 visual framing, 30% narrative copy cap, and dark atmospheric lighting.
+
+[WF-R4] DUMEDB TTS PHONETIC PRONUNCIATION (DOOM DB)
+  Trigger: Writing or synthesizing voiceover scripts, ElevenLabs prompts, or audio dialogue for DUMEdb
+  Move: Always spell DUMEdb as 'Doom DB' and DUME as 'Doom' (e.g. 'Doom Studio') in voiceover and TTS scripts so speech synthesis engines pronounce it as 'doom' rather than spelling out 'D-U-M-E'.
+  Why: TTS models spell out acronyms letter-by-letter unless written phonetically as 'Doom DB'.
+
+[WF-R5] Receipts must come from the claimed path
+  Trigger: Before using any demo result as proof of DUMEdb in promo material
+  Move: Confirm the answer was served by a DUMEdb register read (dume_read_state non-empty for the entity) and that no source file was opened in-session; otherwise label it as direct file read.
+
+[WF-R6] Preserve Position Sticky with Overflow Clip
+  Trigger: Adding mobile overflow protection to a site with sticky headers
+  Move: Always use overflow-x: clip rather than overflow-x: hidden on body/html when position: sticky headers are used, to prevent breaking viewport-level sticky positioning.
+
+[WF-R7] Associative Zero-Disk Query Handshake
+  Trigger: Operator asks direct factual or entity question without wake phrase
+  Move: Execute dume_query to search active state registers and payloads before touching filesystem
