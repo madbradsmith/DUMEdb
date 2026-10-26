@@ -8,6 +8,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/architecture-Hardware--Aligned%20Zero--Copy-purple.svg?style=flat-square)](https://dumedb.developumaiengine.com)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-blueviolet.svg?style=flat-square)](https://modelcontextprotocol.io)
+[![Glama MCP Server](https://glama.ai/mcp/servers/madbradsmith/DUMEdb/badge)](https://glama.ai/mcp/servers/madbradsmith/DUMEdb)
 
 > **Hardware-aligned, zero-prompt-bloat, byte-structured memory engine, production Model Context Protocol (MCP) server, and drop-in OpenAI-compatible proxy gateway for autonomous AI agents.**
 
