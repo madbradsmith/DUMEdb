@@ -11,7 +11,7 @@
 > **Hardware-aligned, zero-prompt-bloat, byte-structured memory engine and drop-in OpenAI-compatible proxy gateway for autonomous AI agents.**
 
 > 🎬 **Watch the Official Masterclass on YouTube:**  
-> [**Stop Force-Feeding Your AI 40,000 Tokens (DUMEdb Masterclass)**](https://youtu.be/nO5vozUhqyU) — *Featuring Frank, The Sentinel, and real-time live benchmarks.*
+> [**Stop Force-Feeding Your AI 30,000 Tokens just to remind them who you are!**](https://youtu.be/nO5vozUhqyU) — *Featuring Frank, The Sentinel, and real-time live benchmarks.*
 
 ---
 
