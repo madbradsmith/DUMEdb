@@ -1,6 +1,6 @@
 /**
  * DUME Studio — Deterministic Unit-Record Memory Engine
- * Client-side interactive engine: Live Simulator, Odometer Calculator, Gallery Lightbox
+ * Client-side interactive engine: Main Tab System, Live Simulator, Odometer Calculator, Gallery Lightbox
  */
 
 (function () {
@@ -26,7 +26,7 @@
     const copyInstallBtn = document.getElementById('btn-copy-install');
     if (copyInstallBtn) {
       copyInstallBtn.addEventListener('click', () => {
-        const text = copyInstallBtn.getAttribute('data-copy') || 'pip install dumedb';
+        const text = copyInstallBtn.getAttribute('data-copy') || 'pip install dumedb && python -m dume';
         navigator.clipboard.writeText(text).then(() => {
           showToast('✓ Copied to clipboard: ' + text);
         });
@@ -54,7 +54,6 @@
   const termInput = document.getElementById('terminal-input');
   const termShell = document.getElementById('studio-terminal');
   const btnClear = document.getElementById('btn-clear-term');
-  const btnScanlines = document.getElementById('btn-scanlines-toggle');
 
   function appendTermLine(content, className = '') {
     if (!termOutput) return;
@@ -85,7 +84,7 @@
         appendTermLine('• Next Move: Clean database on 8095 to fresh empty generic version whenever ready.', 'resp-wake');
         appendTermLine('----------------------------------------------------', 'sys');
         appendTermLine('⚡ <strong>DUMEDB HARDWARE STATUS</strong>', 'resp-header');
-        appendTermLine('• Active Registers: <strong>112 Immutable Entries</strong>', 'resp-wake');
+        appendTermLine('• Active Registers: <strong>307 Immutable Entries</strong>', 'resp-wake');
         appendTermLine('• KV-Cache Overhead: <strong>~220 tokens (0.2%)</strong>', 'resp-wake');
         appendTermLine('• Clean Runway: <strong>99.8% (~119,780 tok)</strong>', 'resp-wake');
         appendTermLine('• Execution Latency: <strong>0.18s (Zero filesystem traversal)</strong>', 'resp-wake');
@@ -95,12 +94,12 @@
       setTimeout(() => {
         appendTermLine('--- REAL MATHEMATICAL CONTEXT ODOMETER ---', 'sys');
         appendTermLine('Transcript Audit: transcript.jsonl (Direct post-compaction measurement)', 'sys');
-        appendTermLine('Epoch: 2 | Active Steps: 4', 'sys');
-        appendTermLine('Active Context Footprint: <strong>767 / ~120,000 tokens (0.6%)</strong>', 'resp-wake');
-        appendTermLine('Clean Runway Remaining: <strong>~119,233 tokens</strong>', 'resp-wake');
-        appendTermLine('Last Turn Delta: +1,864 tokens (📥 1,481 in | 📤 383 out)', 'sys');
+        appendTermLine('Epoch: 2 | Active Steps: 24', 'sys');
+        appendTermLine('Active Context Footprint: <strong>3,928 / ~120,000 tokens (3.3%)</strong>', 'resp-wake');
+        appendTermLine('Clean Runway Remaining: <strong>~116,072 tokens</strong>', 'resp-wake');
+        appendTermLine('Last Turn Delta: +3,183 tokens (📥 2,855 in | 📤 328 out)', 'sys');
         appendTermLine('Zone: 🟢 Nominal (Safe buffer &gt; 75% limit)', 'resp-wake');
-        appendTermLine('📊 <strong>Context Odometer (Real Math)</strong>: [░░░░░░░░░░] 0.6% (767 / ~120,000 tok) | Runway: ~119k tok', 'odometer-box');
+        appendTermLine('📊 <strong>Context Odometer (Real Math)</strong>: [░░░░░░░░░░] 3.3% (3,928 / ~120,000 tok) | Runway: ~116k tok', 'odometer-box');
       }, 120);
     } else if (lower === 'dume.status' || lower === 'status') {
       setTimeout(() => {
@@ -111,7 +110,7 @@
       }, 100);
     } else if (lower === 'dume.registers' || lower === 'registers' || lower === 'list registers') {
       setTimeout(() => {
-        appendTermLine('[REGISTERS] Sample of 112 Active Immutable Keys:', 'resp-header');
+        appendTermLine('[REGISTERS] Sample of 307 Active Immutable Keys:', 'resp-header');
         const sampleRegisters = [
           { key: "operator_alias", val: "AG", type: "string" },
           { key: "session_handshake", val: "RP_FINALIZED", type: "enum" },
@@ -124,9 +123,9 @@
     } else if (lower === 'dume.compare' || lower === 'compare') {
       setTimeout(() => {
         appendTermLine('=== BENCHMARK: REPLAY BLOAT vs DUMEDB REGISTER MEMORY ===', 'resp-header');
-        appendTermLine('Traditional Chat History Replay: 85,000+ tokens (~71% context eaten, $1.40/wake)', 'term-line danger');
+        appendTermLine('Traditional Chat History Replay: 30,000+ tokens (~25% context eaten, $0.60/wake)', 'term-line danger');
         appendTermLine('DUMEdb Unit-Record Wake: 220 tokens (~0.2% context eaten, $0.0003/wake)', 'term-line resp-wake');
-        appendTermLine('Efficiency Gain: <strong>99.7% reduction in prompt bloat. Zero amnesia.</strong>', 'odometer-box');
+        appendTermLine('Efficiency Gain: <strong>99.3% reduction in prompt bloat. Zero amnesia.</strong>', 'odometer-box');
       }, 150);
     } else if (lower === 'clear') {
       if (termOutput) termOutput.innerHTML = '';
@@ -173,13 +172,6 @@
         termOutput.innerHTML = '<div class="term-line sys">[CLEARED] Console ready. Type "box is the game" to wake.</div>';
       });
     }
-
-    // Scanlines Toggle
-    if (btnScanlines && termShell) {
-      btnScanlines.addEventListener('click', () => {
-        termShell.classList.toggle('crt');
-      });
-    }
   }
 
   // --- CONTEXT RUNWAY CALCULATOR (REAL MATH) ---
@@ -199,8 +191,6 @@
     const valDumePct = document.getElementById('val-dume-pct');
     const valDumeRunway = document.getElementById('val-dume-runway');
     const sampleString = document.getElementById('sample-odometer-string');
-    const zoneBadge = document.getElementById('calc-zone-badge');
-    const zoneText = document.getElementById('calc-zone-text');
 
     function updateCalculations() {
       if (!sliderTurns || !sliderCeiling) return;
@@ -215,7 +205,7 @@
       const tradTokens = Math.min(ceiling, turns * 7800);
       const tradPct = Math.min(100, (tradTokens / ceiling) * 100).toFixed(1);
 
-      // DUMEdb: 220 baseline wake + only ~200 tokens delta per turn (unit records only)
+      // DUMEdb: 220 baseline wake + only ~210 tokens delta per turn (unit records only)
       const dumeTokens = Math.min(ceiling, 220 + (turns * 210));
       const dumePct = ((dumeTokens / ceiling) * 100).toFixed(1);
       const runwayTokens = Math.max(0, ceiling - dumeTokens);
@@ -263,10 +253,118 @@
     }
   }
 
-  // --- INTEGRATION TABS ---
-  function setupTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanels = document.querySelectorAll('.tab-panel');
+  // --- MAIN TAB EXPLORATION SYSTEM ---
+  function setupMainTabs() {
+    const tabButtons = document.querySelectorAll('.tab-nav-btn');
+    const tabPanels = document.querySelectorAll('.main-tab-panel');
+    const studioSection = document.getElementById('studio-section');
+
+    function activateTab(tabKey, shouldScroll = false) {
+      if (!tabKey) return;
+      let cleanKey = tabKey.replace(/^#/, '').replace(/^tab-/, '').replace(/^panel-/, '');
+      if (cleanKey === 'masterclass') cleanKey = 'walkthrough';
+      
+      let matchedBtn = null;
+      let matchedPanel = document.getElementById('panel-' + cleanKey);
+
+      tabButtons.forEach(btn => {
+        const btnKey = btn.getAttribute('data-tab');
+        if (btnKey === cleanKey) {
+          matchedBtn = btn;
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      if (matchedPanel) {
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        matchedPanel.classList.add('active');
+
+        // Update nav links active state
+        document.querySelectorAll('.nav-item').forEach(item => {
+          const itemHref = item.getAttribute('href') || '';
+          if (itemHref === '#' + cleanKey) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+
+        if (shouldScroll && studioSection) {
+          const yOffset = -75;
+          const y = studioSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    }
+
+    // Tab button click
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabKey = btn.getAttribute('data-tab');
+        activateTab(tabKey, false);
+        if (history.pushState) {
+          history.pushState(null, null, '#' + tabKey);
+        }
+      });
+    });
+
+    // Top navbar links routing to tabs
+    document.querySelectorAll('.nav-item').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href !== '#hero') {
+          e.preventDefault();
+          const targetKey = href.substring(1);
+          activateTab(targetKey, true);
+          if (history.pushState) {
+            history.pushState(null, null, href);
+          }
+        }
+      });
+    });
+
+    // Hero action CTAs routing to tabs
+    document.querySelectorAll('.hero-cta-group a[href^="#"]').forEach(cta => {
+      cta.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetKey = cta.getAttribute('href').substring(1);
+        activateTab(targetKey, true);
+        if (history.pushState) {
+          history.pushState(null, null, '#' + targetKey);
+        }
+      });
+    });
+
+    // Handle initial URL hash on page load
+    if (window.location.hash) {
+      const initialKey = window.location.hash.substring(1);
+      if (document.getElementById('panel-' + initialKey)) {
+        activateTab(initialKey, false);
+      }
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash) {
+        const hashKey = window.location.hash.substring(1);
+        if (document.getElementById('panel-' + hashKey)) {
+          activateTab(hashKey, false);
+        }
+      }
+    });
+  }
+
+  // --- QUICKSTART INNER TABS ---
+  function setupQuickstartTabs() {
+    const qsCard = document.querySelector('.quickstart-card');
+    if (!qsCard) return;
+
+    const tabBtns = qsCard.querySelectorAll('.tab-btn');
+    const tabPanels = qsCard.querySelectorAll('.tab-panel');
 
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -321,40 +419,14 @@
     });
   }
 
-  // --- SMOOTH SCROLL ACTIVE HIGHLIGHT ---
-  function setupNavHighlight() {
-    const sections = document.querySelectorAll('section[id]');
-    const navItems = document.querySelectorAll('.nav-item');
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      const scrollY = window.pageYOffset;
-
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        const sectionHeight = section.offsetHeight;
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href') === '#' + current) {
-          item.classList.add('active');
-        }
-      });
-    });
-  }
-
   // --- INITIALIZATION ---
   document.addEventListener('DOMContentLoaded', () => {
     setupClipboard();
     setupTerminal();
     setupOdometerCalculator();
-    setupTabs();
+    setupMainTabs();
+    setupQuickstartTabs();
     setupLightbox();
-    setupNavHighlight();
   });
 
 })();
