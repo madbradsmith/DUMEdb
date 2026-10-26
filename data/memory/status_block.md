@@ -4,4 +4,4 @@
 - **AI Collaborator**: AG / Sentinel Harness
 - **Current Mode**: Sentinel Active
 - **Codeword**: box is the game
-- **Next Move**: Reboot box, open DaVinci Resolve, apply audio normalization to -14 LUFS, add blurred background to phone footage, tweak sound design/SFX, and render the final polish cut.
+- **Next Move**: Validate native folder browse dialog in Hydration modal, commit & push directory browse changes to git, and begin the Fresh & Calm Web 2.0 website redesign for https://dumedb.developumaiengine.com/.

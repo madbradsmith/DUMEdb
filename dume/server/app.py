@@ -163,6 +163,160 @@ from dume.proxy.config import get_proxy_config, set_proxy_config
 app.include_router(proxy_router)
 app.add_api_route("/dume/ingest/directory", ingest_directory_endpoint, methods=["POST"])
 
+
+@app.get("/api/fs/list")
+async def list_filesystem_directories(path: Optional[str] = None):
+    """
+    Fast, safe directory listing endpoint for the in-modal folder browser.
+    Returns subdirectories, parent path, and quick-jump shortcuts (Desktop, Workspace, Home, Drives).
+    Zero subprocesses, zero blocking, instant execution.
+    """
+    from pathlib import Path
+    import os
+
+    user_home = Path.home()
+    workspace = BASE_DIR
+    desktop_folders = user_home / "Desktop" / "folders"
+
+    # Quick jump shortcuts
+    quick_links = []
+    if desktop_folders.is_dir():
+        quick_links.append({"label": "📁 Desktop/folders", "path": str(desktop_folders.resolve())})
+    if workspace.is_dir():
+        quick_links.append({"label": "💻 DUMEdb-WORK", "path": str(workspace.resolve())})
+    if (user_home / "Desktop").is_dir():
+        quick_links.append({"label": "🖥️ Desktop", "path": str((user_home / "Desktop").resolve())})
+    quick_links.append({"label": "🏠 Home", "path": str(user_home.resolve())})
+
+    # Add Windows drive letters if on Windows
+    if os.name == "nt":
+        import string
+        from ctypes import windll
+        try:
+            bitmask = windll.kernel32.GetLogicalDrives()
+            for letter in string.ascii_uppercase:
+                if bitmask & 1:
+                    drive_path = f"{letter}:\\"
+                    if os.path.exists(drive_path):
+                        quick_links.append({"label": f"💾 {letter}:", "path": drive_path})
+                bitmask >>= 1
+        except Exception:
+            pass
+
+    # Resolve target directory
+    if not path or not path.strip():
+        if desktop_folders.is_dir():
+            target = desktop_folders
+        elif workspace.is_dir():
+            target = workspace
+        else:
+            target = user_home
+    else:
+        try:
+            target = Path(path.strip()).resolve()
+            if not target.is_dir():
+                if target.parent.is_dir():
+                    target = target.parent
+                else:
+                    target = desktop_folders if desktop_folders.is_dir() else workspace
+        except Exception:
+            target = desktop_folders if desktop_folders.is_dir() else workspace
+
+    dirs = []
+    try:
+        with os.scandir(str(target)) as entries:
+            for entry in entries:
+                try:
+                    if entry.is_dir(follow_symlinks=False):
+                        name = entry.name
+                        # Filter out system/hidden directories
+                        if name.startswith(".") or name.startswith("$") or name.lower() in ("__pycache__", "node_modules", "system volume information", "recovery"):
+                            continue
+                        dirs.append({
+                            "name": name,
+                            "path": str(Path(entry.path).resolve())
+                        })
+                except (PermissionError, OSError):
+                    continue
+    except (PermissionError, OSError) as e:
+        return {
+            "status": "error",
+            "error": f"Access denied: {e}",
+            "current_path": str(target),
+            "parent_path": str(target.parent) if target.parent != target else None,
+            "directories": [],
+            "quick_links": quick_links
+        }
+
+    dirs.sort(key=lambda d: d["name"].lower())
+    parent_path = str(target.parent) if target.parent != target else None
+
+    return {
+        "status": "ok",
+        "current_path": str(target),
+        "parent_path": parent_path,
+        "directories": dirs,
+        "quick_links": quick_links
+    }
+
+
+@app.get("/api/utils/browse_directory")
+@app.post("/api/utils/browse_directory")
+async def browse_directory_endpoint(req: Optional[dict] = None):
+    """Fallback endpoint redirecting callers to the fs/list API."""
+    return await list_filesystem_directories()
+
+
+@app.get("/api/utils/resolve_directory")
+async def resolve_directory_endpoint(name: str):
+    """
+    Given a directory name (from client webkitdirectory picker),
+    resolves the full local filesystem path across common user workspace paths.
+    """
+    from pathlib import Path
+    import sys
+
+    name_clean = name.strip().strip("/\\")
+    if not name_clean:
+        return {"found": False, "path": None}
+
+    try:
+        p = Path(name_clean)
+        if p.is_dir():
+            return {"found": True, "path": str(p.resolve())}
+    except Exception:
+        pass
+
+    user_home = Path.home()
+    candidates = [
+        BASE_DIR.parent / name_clean,
+        BASE_DIR / name_clean,
+        user_home / "Desktop" / "folders" / name_clean,
+        user_home / "Desktop" / name_clean,
+        user_home / "Downloads" / name_clean,
+        user_home / "Documents" / name_clean,
+        user_home / name_clean,
+    ]
+
+    for cand in candidates:
+        try:
+            if cand.is_dir() and cand.name.lower() == name_clean.lower():
+                return {"found": True, "path": str(cand.resolve())}
+        except Exception:
+            pass
+
+    try:
+        folders_dir = user_home / "Desktop" / "folders"
+        if folders_dir.is_dir():
+            for child in folders_dir.iterdir():
+                if child.is_dir() and child.name.lower() == name_clean.lower():
+                    return {"found": True, "path": str(child.resolve())}
+    except Exception:
+        pass
+
+    return {"found": False, "path": None}
+
+
 # Static UI Mount
 UI_DIR = BASE_DIR / "dume" / "ui" / "inspector"
 if UI_DIR.exists():

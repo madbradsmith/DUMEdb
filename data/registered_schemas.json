@@ -22,7 +22,8 @@
         "2": "EXECUTING",
         "3": "REVIEW",
         "4": "Active & Fully Operational",
-        "5": "Session Finalized via Refresh Protocol (RP)"
+        "5": "Session Finalized via Refresh Protocol (RP)",
+        "6": "** Draft \u2014 pending FOIA items 1\u20132 (actual MOU texts); all other sections complete"
       },
       "unit": null,
       "is_auto": true
@@ -227,7 +228,8 @@
       "description": "Auto-registered via batch ingestion for PATH",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "`/workspace/sample_project`"
+        "1": "`/workspace/sample_project`",
+        "2": "** Senate first (KOSA passed 91-3 \u2014 coalition is real) \u2192 House companion bill moving in parallel"
       },
       "unit": null,
       "is_auto": true
@@ -1626,7 +1628,8 @@
       "description": "Auto-registered via batch ingestion for WAS",
       "data_type": "ENUM",
       "enum_values": {
-        "1": "*I should put my MPC on the stage.*"
+        "1": "*I should put my MPC on the stage.*",
+        "2": "**"
       },
       "unit": null,
       "is_auto": true
@@ -5692,7 +5695,8 @@
         "6": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_bzz20vba",
         "7": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_2h8egj3y",
         "8": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_aw7ey68g",
-        "9": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_xp_yauxk"
+        "9": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_xp_yauxk",
+        "10": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_pe1w3ini"
       },
       "unit": null,
       "is_auto": true
@@ -9957,6 +9961,327 @@
       "enum_values": {},
       "unit": null,
       "is_auto": false
+    },
+    {
+      "opcode": 2045,
+      "name": "DIR_FAIA_BILL_PATH",
+      "description": "Auto-registered via batch ingestion for DIR_FAIA_BILL_PATH",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2046,
+      "name": "DIR_FAIA_BILL_FILES",
+      "description": "Auto-registered via batch ingestion for DIR_FAIA_BILL_FILES",
+      "data_type": "INT",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2047,
+      "name": "PATH_00_INDEX",
+      "description": "Auto-registered via batch ingestion for PATH_00_INDEX",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2048,
+      "name": "COMPILED",
+      "description": "Auto-registered via batch ingestion for COMPILED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2049,
+      "name": "LEAD_SPONSORS",
+      "description": "Auto-registered via batch ingestion for LEAD_SPONSORS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2050,
+      "name": "COMMITTEE",
+      "description": "Auto-registered via batch ingestion for COMMITTEE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2051,
+      "name": "CREDIBILITY_ANCHOR",
+      "description": "Auto-registered via batch ingestion for CREDIBILITY_ANCHOR",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2052,
+      "name": "PATH_BRIEF_KIP_CAISI",
+      "description": "Auto-registered via batch ingestion for PATH_BRIEF_KIP_CAISI",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2053,
+      "name": "TYPE",
+      "description": "Auto-registered via batch ingestion for TYPE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2054,
+      "name": "PATH_BRIEF_KIP_THE_TA",
+      "description": "Auto-registered via batch ingestion for PATH_BRIEF_KIP_THE_TA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2055,
+      "name": "IF_AVAILABLE",
+      "description": "Auto-registered via batch ingestion for IF_AVAILABLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2056,
+      "name": "PATH_BRIEF_KIP_WATCHE",
+      "description": "Auto-registered via batch ingestion for PATH_BRIEF_KIP_WATCHE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2057,
+      "name": "TAG_KEYWORD_MATCHING",
+      "description": "Auto-registered via batch ingestion for TAG_KEYWORD_MATCHING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2058,
+      "name": "CONTRADICTION_PAIRS",
+      "description": "Auto-registered via batch ingestion for CONTRADICTION_PAIRS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2059,
+      "name": "PATH_FAIA_BILL_BLUEPA",
+      "description": "Auto-registered via batch ingestion for PATH_FAIA_BILL_BLUEPA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2060,
+      "name": "DOCUMENT_TYPE",
+      "description": "Auto-registered via batch ingestion for DOCUMENT_TYPE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2061,
+      "name": "LEGEND",
+      "description": "Auto-registered via batch ingestion for LEGEND",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2062,
+      "name": "REVISED_WAS",
+      "description": "Auto-registered via batch ingestion for REVISED_WAS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2063,
+      "name": "WAS_CAISI",
+      "description": "Auto-registered via batch ingestion for WAS_CAISI",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2064,
+      "name": "NOW_FAIA",
+      "description": "Auto-registered via batch ingestion for NOW_FAIA",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "**"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2065,
+      "name": "PATH_FAIA_PASS_FAIL_C",
+      "description": "Auto-registered via batch ingestion for PATH_FAIA_PASS_FAIL_C",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2066,
+      "name": "FAIL",
+      "description": "Auto-registered via batch ingestion for FAIL",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2067,
+      "name": "PASS",
+      "description": "Auto-registered via batch ingestion for PASS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2068,
+      "name": "EVERY_SAFETY_GATE",
+      "description": "Auto-registered via batch ingestion for EVERY_SAFETY_GATE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2069,
+      "name": "EVERY_CAPABILITY",
+      "description": "Auto-registered via batch ingestion for EVERY_CAPABILITY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2070,
+      "name": "EVERY_GRADED_DISCLOSURE",
+      "description": "Auto-registered via batch ingestion for EVERY_GRADED_DISCLOSURE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2071,
+      "name": "THE_REPRODUCTION_KIT",
+      "description": "Auto-registered via batch ingestion for THE_REPRODUCTION_KIT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2072,
+      "name": "PATH_LEGISLATIVE_STRA",
+      "description": "Auto-registered via batch ingestion for PATH_LEGISLATIVE_STRA",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2073,
+      "name": "PURPOSE",
+      "description": "Auto-registered via batch ingestion for PURPOSE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2074,
+      "name": "ANNUAL_OPERATING_BUDGET",
+      "description": "Auto-registered via batch ingestion for ANNUAL_OPERATING_BUDGET",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2075,
+      "name": "SETUP_INFRASTRUCTURE",
+      "description": "Auto-registered via batch ingestion for SETUP_INFRASTRUCTURE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2076,
+      "name": "PATH_NOTE_KIP_PHASE2",
+      "description": "Auto-registered via batch ingestion for PATH_NOTE_KIP_PHASE2",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2077,
+      "name": "PATH_NOTE_KIP_WATCHER",
+      "description": "Auto-registered via batch ingestion for PATH_NOTE_KIP_WATCHER",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2078,
+      "name": "3_STATE_PLAINLY",
+      "description": "Auto-registered via batch ingestion for 3_STATE_PLAINLY",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2079,
+      "name": "PATH_THE_WHOLE_THING",
+      "description": "Auto-registered via batch ingestion for PATH_THE_WHOLE_THING",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": true
     }
   ]
 }

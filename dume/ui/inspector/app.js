@@ -2793,6 +2793,193 @@ function setupIntakeModal() {
         triggerDirectoryIngest();
       }
     });
+
+    // Interactive In-Modal Folder Browser Controller
+    const btnBrowseDir = document.getElementById("btn-browse-directory");
+    const browserPanel = document.getElementById("folder-browser-panel");
+    const browserCurrentPath = document.getElementById("browser-current-path");
+    const browserQuickLinks = document.getElementById("browser-quick-links");
+    const browserFilterInput = document.getElementById("browser-filter-input");
+    const browserDirList = document.getElementById("browser-dir-list");
+    const btnBrowserNavUp = document.getElementById("btn-browser-nav-up");
+    const btnBrowserClose = document.getElementById("btn-browser-close");
+    const btnSelectCurrentDir = document.getElementById("btn-select-current-dir");
+
+    let activeBrowserPath = "";
+    let activeBrowserParent = null;
+    let currentDirItems = [];
+
+    const selectDirectoryPath = (selectedPath) => {
+      if (!selectedPath) return;
+      inputDir.value = selectedPath;
+      inputDir.style.borderColor = "var(--accent-emerald, #10b981)";
+      setTimeout(() => {
+        inputDir.style.borderColor = "var(--border-color)";
+      }, 2500);
+
+      if (browserPanel) browserPanel.style.display = "none";
+      if (statusDir) {
+        statusDir.style.display = "block";
+        statusDir.style.color = "var(--accent-emerald, #10b981)";
+        statusDir.textContent = `📁 Ready: ${selectedPath} — Click "⚡ Ingest Folder" to crawl & sync.`;
+      }
+    };
+
+    const renderDirectoryList = (filter = "") => {
+      if (!browserDirList) return;
+      browserDirList.innerHTML = "";
+      const query = filter.trim().toLowerCase();
+      const filtered = query
+        ? currentDirItems.filter(d => d.name.toLowerCase().includes(query))
+        : currentDirItems;
+
+      if (filtered.length === 0) {
+        const emptyMsg = document.createElement("div");
+        emptyMsg.style.cssText = "font-size: 0.75rem; color: #64748b; padding: 0.6rem; text-align: center;";
+        emptyMsg.textContent = query ? "No matching subfolders found." : "No accessible subfolders in this directory.";
+        browserDirList.appendChild(emptyMsg);
+        return;
+      }
+
+      filtered.forEach(dir => {
+        const item = document.createElement("div");
+        item.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 0.5rem; margin-bottom: 2px; border-radius: 4px; transition: background 0.15s ease; cursor: pointer;";
+        item.className = "browser-dir-item";
+        item.onmouseenter = () => item.style.background = "rgba(59, 130, 246, 0.12)";
+        item.onmouseleave = () => item.style.background = "transparent";
+
+        const label = document.createElement("div");
+        label.style.cssText = "display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: #e2e8f0; font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;";
+        label.innerHTML = `<span style="font-size: 0.9rem;">📁</span> <span title="${dir.path}">${dir.name}</span>`;
+        label.onclick = (e) => {
+          e.stopPropagation();
+          loadDirectory(dir.path);
+        };
+
+        const pickBtn = document.createElement("button");
+        pickBtn.type = "button";
+        pickBtn.style.cssText = "font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.5rem; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 4px; color: #34d399; cursor: pointer; white-space: nowrap;";
+        pickBtn.textContent = "Select";
+        pickBtn.onclick = (e) => {
+          e.stopPropagation();
+          selectDirectoryPath(dir.path);
+        };
+
+        item.appendChild(label);
+        item.appendChild(pickBtn);
+        browserDirList.appendChild(item);
+      });
+    };
+
+    const loadDirectory = async (targetPath = "") => {
+      if (!browserDirList) return;
+      browserDirList.innerHTML = '<div style="font-size: 0.75rem; color: #64748b; padding: 0.6rem; text-align: center;">Scanning folder...</div>';
+
+      try {
+        const url = targetPath
+          ? `/api/fs/list?path=${encodeURIComponent(targetPath)}`
+          : "/api/fs/list";
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        if (data.status === "ok") {
+          activeBrowserPath = data.current_path;
+          activeBrowserParent = data.parent_path;
+          currentDirItems = data.directories || [];
+
+          if (browserCurrentPath) {
+            browserCurrentPath.textContent = activeBrowserPath;
+            browserCurrentPath.title = activeBrowserPath;
+          }
+
+          if (btnBrowserNavUp) {
+            btnBrowserNavUp.disabled = !activeBrowserParent;
+            btnBrowserNavUp.style.opacity = activeBrowserParent ? "1" : "0.4";
+            btnBrowserNavUp.style.cursor = activeBrowserParent ? "pointer" : "default";
+          }
+
+          if (browserQuickLinks && data.quick_links) {
+            browserQuickLinks.innerHTML = "";
+            data.quick_links.forEach(ql => {
+              const chip = document.createElement("button");
+              chip.type = "button";
+              chip.style.cssText = "font-size: 0.72rem; padding: 0.2rem 0.45rem; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 4px; color: #94a3b8; cursor: pointer; transition: all 0.15s ease;";
+              chip.textContent = ql.label;
+              chip.title = ql.path;
+              chip.onmouseenter = () => { chip.style.color = "#38bdf8"; chip.style.borderColor = "#38bdf8"; };
+              chip.onmouseleave = () => { chip.style.color = "#94a3b8"; chip.style.borderColor = "rgba(255, 255, 255, 0.12)"; };
+              chip.onclick = () => loadDirectory(ql.path);
+              browserQuickLinks.appendChild(chip);
+            });
+          }
+
+          if (browserFilterInput) browserFilterInput.value = "";
+          renderDirectoryList();
+        } else {
+          browserDirList.innerHTML = `<div style="font-size: 0.75rem; color: #f87171; padding: 0.6rem; text-align: center;">${data.error || "Could not read directory."}</div>`;
+        }
+      } catch (err) {
+        browserDirList.innerHTML = `<div style="font-size: 0.75rem; color: #f87171; padding: 0.6rem; text-align: center;">Error: ${err.message}</div>`;
+      }
+    };
+
+    if (btnBrowseDir && browserPanel && !btnBrowseDir.dataset.bound) {
+      btnBrowseDir.dataset.bound = "true";
+      btnBrowseDir.addEventListener("click", () => {
+        const isVisible = browserPanel.style.display !== "none";
+        if (isVisible) {
+          browserPanel.style.display = "none";
+        } else {
+          browserPanel.style.display = "block";
+          const currentVal = inputDir.value.trim();
+          loadDirectory(currentVal || "");
+        }
+      });
+    }
+
+    if (btnBrowserClose && browserPanel) {
+      btnBrowserClose.addEventListener("click", () => {
+        browserPanel.style.display = "none";
+      });
+    }
+
+    if (btnBrowserNavUp) {
+      btnBrowserNavUp.addEventListener("click", () => {
+        if (activeBrowserParent) {
+          loadDirectory(activeBrowserParent);
+        }
+      });
+    }
+
+    if (btnSelectCurrentDir) {
+      btnSelectCurrentDir.addEventListener("click", () => {
+        selectDirectoryPath(activeBrowserPath);
+      });
+    }
+
+    if (browserFilterInput) {
+      browserFilterInput.addEventListener("input", (e) => {
+        renderDirectoryList(e.target.value);
+      });
+    }
+
+    // Drag-and-drop path onto the input field
+    inputDir.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      inputDir.style.borderColor = "var(--primary, #3b82f6)";
+    });
+    inputDir.addEventListener("dragleave", (e) => {
+      e.preventDefault();
+      inputDir.style.borderColor = "var(--border-color)";
+    });
+    inputDir.addEventListener("drop", (e) => {
+      e.preventDefault();
+      inputDir.style.borderColor = "var(--border-color)";
+      const droppedText = e.dataTransfer.getData("text/plain");
+      if (droppedText) {
+        inputDir.value = droppedText.trim().replace(/^["']|["']$/g, "");
+      }
+    });
   }
 }
 

@@ -1049,12 +1049,50 @@ print(response.choices[0].message.content)</pre>
             </div>
             <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Recursive • Deduplicated • LMDB Atomic</span>
           </div>
-          <div style="display: flex; gap: 0.5rem;">
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
             <input type="text" id="input-directory-path" placeholder="e.g. C:\Users\c6182\Desktop\folders\safe or /opt/my-project" style="flex: 1; font-family: var(--font-mono); font-size: 0.85rem; padding: 0.45rem 0.65rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 6px; color: #fff;">
+            <button type="button" id="btn-browse-directory" class="btn-secondary" style="padding: 0.45rem 0.85rem; font-size: 0.85rem; font-weight: 600; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border-color); border-radius: 6px; color: #fff; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 0.35rem; transition: all 0.15s ease;" title="Click to browse and choose a folder">
+              📂 Browse...
+            </button>
             <button type="button" id="btn-ingest-directory" class="btn-primary" style="padding: 0.45rem 1rem; font-size: 0.85rem; font-weight: 600; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: none; border-radius: 6px; cursor: pointer; white-space: nowrap;">
               ⚡ Ingest Folder
             </button>
           </div>
+
+          <!-- Interactive Folder Browser Drawer / Panel -->
+          <div id="folder-browser-panel" style="display: none; margin-top: 0.75rem; background: rgba(10, 14, 26, 0.95); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 0.85rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.65rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem;">
+              <div style="font-size: 0.82rem; font-weight: 600; color: #38bdf8; display: flex; align-items: center; gap: 0.4rem;">
+                <span>📂</span> Local Folder Navigator
+              </div>
+              <div style="display: flex; gap: 0.4rem;">
+                <button type="button" id="btn-browser-nav-up" title="Navigate up one level" style="font-size: 0.75rem; padding: 0.2rem 0.5rem; background: rgba(255,255,255,0.08); border: 1px solid var(--border-color); border-radius: 4px; color: #cbd5e1; cursor: pointer;">⬆️ Up</button>
+                <button type="button" id="btn-browser-close" style="font-size: 0.95rem; line-height: 1; padding: 0.15rem 0.45rem; background: transparent; border: none; color: #94a3b8; cursor: pointer;">&times;</button>
+              </div>
+            </div>
+
+            <!-- Quick Jump Shortcuts -->
+            <div id="browser-quick-links" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.65rem;"></div>
+
+            <!-- Current Path Display & Quick Filter -->
+            <div style="display: flex; gap: 0.4rem; margin-bottom: 0.65rem; align-items: center;">
+              <div id="browser-current-path" style="flex: 1; font-family: var(--font-mono); font-size: 0.76rem; color: #94a3b8; background: rgba(0,0,0,0.4); padding: 0.35rem 0.5rem; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="Current Directory">...</div>
+              <input type="text" id="browser-filter-input" placeholder="🔍 Filter folders..." style="width: 130px; font-size: 0.75rem; padding: 0.3rem 0.5rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 4px; color: #fff;">
+            </div>
+
+            <!-- Directory Items List -->
+            <div id="browser-dir-list" style="max-height: 190px; overflow-y: auto; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 0.25rem; margin-bottom: 0.65rem;">
+              <div style="font-size: 0.75rem; color: #64748b; padding: 0.5rem; text-align: center;">Loading folders...</div>
+            </div>
+
+            <!-- Select Current Directory Action -->
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+              <button type="button" id="btn-select-current-dir" style="flex: 1; font-size: 0.8rem; font-weight: 600; padding: 0.45rem 0.75rem; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                <span>✓ Select This Folder</span>
+              </button>
+            </div>
+          </div>
+
           <div id="directory-ingest-status" style="display: none; margin-top: 0.5rem; font-size: 0.78rem; font-family: var(--font-mono);"></div>
         </div>
 
