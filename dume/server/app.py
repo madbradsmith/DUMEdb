@@ -322,6 +322,10 @@ UI_DIR = BASE_DIR / "dume" / "ui" / "inspector"
 if UI_DIR.exists():
     app.mount("/inspector", StaticFiles(directory=str(UI_DIR), html=True), name="inspector")
 
+WEBSITE_DIR = BASE_DIR / "website"
+if WEBSITE_DIR.exists():
+    app.mount("/site", StaticFiles(directory=str(WEBSITE_DIR), html=True), name="website")
+
 class MutationRequest(BaseModel):
     entity_id: str
     opcode: Any

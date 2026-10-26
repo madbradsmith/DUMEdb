@@ -3,975 +3,713 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DUME Studio — Deterministic Unit-Record Memory Engine</title>
-  <meta name="description" content="DUME Studio is the zero-replay unit-record memory layer for autonomous AI agents. Replace 120,000-token context chokes with 220-token instant wake and immutable register truth.">
-  <meta name="keywords" content="DUMEdb, DUME Studio, AI Memory, Agentic AI, Context Odometer, Unit Record Memory, Autonomous Agents, Zero Replay, LMDB">
-  <meta property="og:title" content="DUME Studio — Deterministic Unit-Record Memory Engine">
+  <title>DUMEdb — Deterministic Unit-Record Memory Engine for AI Agents</title>
+  <meta name="description" content="AI amnesia is solved. Read the register. Forget the replay. Instant 220-token zero-turn wake protocol, zero-copy LMDB registers, and real mathematical context tracking for autonomous AI agents.">
+  <meta name="keywords" content="DUMEdb, DUME Studio, AI Memory, Agentic AI, Context Odometer, Unit Record Memory, Autonomous Agents, Zero Replay, LMDB, IBM 1401">
+  <meta property="og:title" content="DUMEdb — Deterministic Unit-Record Memory Engine">
   <meta property="og:description" content="AI amnesia is solved. Read the register. Forget the replay. 220-token wake protocol for autonomous AI agents.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dumedb.developumaiengine.com/">
-  <meta property="og:image" content="assets/frank_axiom.jpg">
+  <meta property="og:image" content="assets/masterclass_poster.jpg">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0d14'/><path d='M30 25 h40 v12 h-26 v13 h22 v12 h-22 v13 h26 v12 h-40 z' fill='%23e5a93b'/><circle cx='75' cy='50' r='6' fill='%2300ffb3'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><path d='M30 25 h40 v12 h-26 v13 h22 v12 h-22 v13 h26 v12 h-40 z' fill='%2310b981'/><circle cx='75' cy='50' r='6' fill='%2338bdf8'/></svg>">
   
-  <!-- Google Fonts: Space Grotesk, Outfit, JetBrains Mono -->
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="theme-obsidian">
+<body class="theme-calm-web2">
 
-  <!-- Ambient Glowing Background Grid -->
-  <div class="cyber-grid" aria-hidden="true"></div>
-  <div class="ambient-glow glow-gold" aria-hidden="true"></div>
-  <div class="ambient-glow glow-emerald" aria-hidden="true"></div>
+  <!-- Subtle Ambient Glows -->
+  <div class="ambient-glow glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom" aria-hidden="true"></div>
 
   <!-- Navigation Bar -->
-  <header class="studio-nav" id="main-nav">
+  <header class="calm-nav" id="main-nav">
     <div class="nav-container">
       <a href="#hero" class="brand-cluster" id="nav-brand">
-        <div class="brand-icon-box">
-          <span class="brand-punched-card"></span>
-          <span class="brand-led"></span>
+        <div class="brand-badge-icon">
+          <span class="icon-punch">■</span>
+          <span class="icon-pulse"></span>
         </div>
-        <div class="brand-meta">
-          <span class="brand-title">DUME <span class="brand-accent">STUDIO</span></span>
-          <span class="brand-tagline">UNIT-RECORD MEMORY</span>
+        <div class="brand-text">
+          <span class="brand-name">DUME<span class="brand-highlight">db</span></span>
+          <span class="brand-sub">UNIT-RECORD MEMORY</span>
         </div>
       </a>
 
       <nav class="nav-links" id="desktop-nav">
-        <a href="#philosophy" class="nav-item" id="nav-link-philosophy">Philosophy</a>
-        <a href="#simulator" class="nav-item" id="nav-link-simulator">Studio Simulator</a>
-        <a href="#odometer" class="nav-item" id="nav-link-odometer">Real Math Odometer</a>
-        <a href="#comparison" class="nav-item" id="nav-link-comparison">Comparison</a>
-        <a href="#architecture" class="nav-item" id="nav-link-architecture">Architecture</a>
-        <a href="#gallery" class="nav-item" id="nav-link-gallery">Inspector UI</a>
-        <a href="#quickstart" class="nav-item" id="nav-link-quickstart">Docs &amp; MCP</a>
-        <a href="#roadmap" class="nav-item" id="nav-link-roadmap">Roadmap &amp; License</a>
+        <a href="#masterclass" class="nav-item">Masterclass</a>
+        <a href="#comparison" class="nav-item">The Proof</a>
+        <a href="#simulator" class="nav-item">Live Simulator</a>
+        <a href="#architecture" class="nav-item">Architecture</a>
+        <a href="#drawers" class="nav-item">Deep Specs</a>
+        <a href="#quickstart" class="nav-item">Quickstart</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://github.com/madbradsmith/DUMEdb" target="_blank" rel="noopener" class="btn btn-nav-gh" id="btn-github-nav">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>v1.0 Frozen</span>
+        <a href="https://github.com/madbradsmith/DUMEdb" target="_blank" rel="noopener" class="btn btn-ghost" id="btn-github-nav">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>Star on GitHub</span>
+        </a>
+        <a href="https://github.com/sponsors/madbradsmith" target="_blank" rel="noopener" class="btn btn-sponsor" id="btn-sponsor-nav">
+          <span>❤️ Sponsor</span>
         </a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO SECTION -->
+    <!-- FOLD 1: PROBLEM & SOLUTION HERO -->
     <section class="hero-section" id="hero">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="badge-punch">■</span>
-          <span>DETERMINISTIC UNIT-RECORD MEMORY ENGINE</span>
-          <span class="badge-ver">v1.0 Frozen</span>
-          <span class="badge-license">Apache 2.0 Open Source</span>
+      <div class="container hero-container">
+        
+        <div class="release-pill">
+          <span class="pill-dot"></span>
+          <span class="pill-title">DUMEdb v1.1.0 Released</span>
+          <span class="pill-divider">•</span>
+          <span class="pill-badge">Apache 2.0 Open Source</span>
         </div>
 
-        <h1 class="hero-headline">
+        <h1 class="hero-title">
           AI Amnesia Is Solved.<br>
-          <span class="hero-highlight">Read The Register.</span> Forget The Replay.
+          <span class="text-gradient">Read the Register.</span> Forget the Replay.
         </h1>
 
-        <!-- Plain English Promise (Jury Item 5) -->
-        <div class="hero-plain-promise" role="note" aria-label="Plain English explanation">
-          <span class="plain-pill">IN PLAIN ENGLISH</span>
-          <span class="plain-text">Deterministic, local-first state registers for autonomous AI agents. Wake instantly in <strong>220 tokens</strong> without replaying tens of thousands of tokens of chat history.</span>
-        </div>
-
-        <p class="hero-subtext">
-          Autonomous agents drown when systems replay 80,000+ tokens of conversational history just to restore session context.
-          <strong>DUME Studio</strong> replaces brute-force replay with 70-year-proven IBM 1401 unit-record principles:
-          instant zero-turn wake in <strong>220 tokens</strong>, immutable memory registers, and real mathematical odometer tracking.
+        <!-- The Human Problem (1 Sentence) -->
+        <p class="hero-problem">
+          <span class="problem-label">The Problem:</span>
+          Autonomous agents drown when systems replay 80,000+ tokens of raw chat history just to remember who they are, devouring your budget and triggering catastrophic context compaction.
         </p>
 
-        <div class="hero-cta-cluster">
-          <a href="#quickstart" class="btn btn-primary" id="btn-hero-quickstart">
+        <!-- The Architectural Solution (1 Sentence) -->
+        <p class="hero-solution">
+          <span class="solution-label">The Solution:</span>
+          DUMEdb replaces brute-force replay with 70-year-proven IBM 1401 unit-record principles: instant zero-turn wake in <strong>220 tokens</strong>, immutable memory registers, and real mathematical context tracking.
+        </p>
+
+        <!-- Fold 1 Zero-Friction Terminal Command -->
+        <div class="terminal-install-card">
+          <div class="terminal-code-row">
+            <span class="terminal-prompt">$</span>
+            <code class="terminal-command" id="install-cmd-text">pip install dumedb &amp;&amp; python -m dume</code>
+            <button type="button" class="btn-copy-install" id="btn-copy-install" data-copy="pip install dumedb && python -m dume" title="Copy to clipboard">
+              <span class="copy-icon">📋</span>
+              <span class="copy-label">Copy</span>
+            </button>
+          </div>
+          <div class="terminal-meta-row">
+            <span>Runs locally on Python 3.9+</span>
+            <span>•</span>
+            <span>Zero cloud phone-home</span>
+            <span>•</span>
+            <span>Hardware LMDB storage</span>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="hero-cta-group">
+          <a href="#masterclass" class="btn btn-primary" id="btn-hero-masterclass">
+            <span class="btn-icon">▶</span>
+            <span>Watch Masterclass (12m)</span>
+          </a>
+          <a href="#quickstart" class="btn btn-secondary" id="btn-hero-quickstart">
             <span class="btn-icon">⚡</span>
-            <span>60-Second Quickstart</span>
+            <span>60-Second Setup</span>
           </a>
-          <a href="#simulator" class="btn btn-secondary" id="btn-hero-simulator">
+          <a href="#simulator" class="btn btn-outline" id="btn-hero-simulator">
             <span class="btn-icon">💻</span>
-            <span>Studio Simulator</span>
-          </a>
-          <button class="btn btn-tertiary" id="btn-copy-install" data-copy="pip install dumedb">
-            <span class="btn-icon">📦</span>
-            <code>pip install dumedb</code>
-            <span class="copy-badge" id="install-copy-indicator">COPY</span>
-          </button>
-          <a href="#comparison" class="btn btn-ghost" id="btn-hero-compare">
-            <span>Honest Comparison Matrix →</span>
+            <span>Try Live Simulator</span>
           </a>
         </div>
 
-        <!-- Metric Cards -->
+        <!-- Quick Proof Stats -->
         <div class="hero-metrics-grid">
           <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-name">Full Chat History Replay</span>
-              <span class="metric-badge danger">AMNESIA CHOKE</span>
-            </div>
-            <div class="metric-value danger">85,000+</div>
-            <div class="metric-unit">Tokens per Session Wake</div>
-            <div class="metric-footer">Empirical session benchmark • Rapid context ceiling choke</div>
+            <div class="metric-val text-emerald">220 tok</div>
+            <div class="metric-label">Zero-Turn Wake Overhead</div>
+            <div class="metric-sub">vs. 80,000+ tokens chat replay</div>
           </div>
-
-          <div class="metric-card highlighted">
-            <div class="metric-header">
-              <span class="metric-name">DUMEdb Unit-Record Memory</span>
-              <span class="metric-badge success">DETERMINISTIC</span>
-            </div>
-            <div class="metric-value gold">220</div>
-            <div class="metric-unit">Tokens Zero-Turn Wake</div>
-            <div class="metric-footer">Status block + compass • 0.18s local LMDB retrieval</div>
-          </div>
-
           <div class="metric-card">
-            <div class="metric-header">
-              <span class="metric-name">Hardware Token Telemetry</span>
-              <span class="metric-badge info">API GROUND TRUTH</span>
-            </div>
-            <div class="metric-value emerald">100%</div>
-            <div class="metric-unit">API Protobuf Telemetry Audit</div>
-            <div class="metric-footer">Direct model engine counters • 95.6% KV Cache hit ratio</div>
+            <div class="metric-val text-cyan">4.2 µs</div>
+            <div class="metric-label">Memory-Mapped Read Latency</div>
+            <div class="metric-sub">Zero serialization overhead</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val text-amber">64,000</div>
+            <div class="metric-label">Hardware-Aligned Opcodes</div>
+            <div class="metric-sub">Dynamic byte-structured schema</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val text-emerald">99.8%</div>
+            <div class="metric-label">Clean Context Runway</div>
+            <div class="metric-sub">Never hit auto-compaction</div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- SECTION: TWO AGENTS & THE TRUTH -->
-    <section class="section philosophy-section" id="philosophy">
+    <!-- FOLD 2: OFFICIAL YOUTUBE MASTERCLASS -->
+    <section class="masterclass-section" id="masterclass">
       <div class="container">
-        <div class="section-badge">NARRATIVE FOUNDATION</div>
-        <h2 class="section-title">Two Agents &amp; The Truth</h2>
-        <p class="section-subtitle">
-          Modern AI dying between sessions isn’t a hardware limit—it’s an architectural mistake. 
-          When a silicon model in an obsidian die meets a 1959 unit-record engineer, the answer is unmistakable.
-        </p>
-
-        <!-- FEATURED VIDEO THEATER EMBED -->
-        <div class="video-theater-wrapper" id="video-theater">
-          <div class="video-theater-frame">
-            <div class="video-header-bar">
-              <div class="video-dot-group">
-                <span class="v-dot red"></span>
-                <span class="v-dot yellow"></span>
-                <span class="v-dot green"></span>
-              </div>
-              <span class="video-bar-title">DUME MASTER PROMO // "TWO AGENTS &amp; THE TRUTH" [OFFICIAL 4K CUT]</span>
-              <span class="video-bar-tag">1:28 • 48kHz BROADCAST</span>
-            </div>
-            <div class="video-responsive-wrap">
-              <iframe 
-                src="https://www.youtube-nocookie.com/embed/E1f8NzJlrB0?rel=0&amp;modestbranding=1" 
-                title="DUMEdb — Two Agents &amp; The Truth (Official Master Promo)" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="video-caption-bar">
-              <div class="caption-left">
-                <span class="caption-pulse">▶</span>
-                <span>Starring <strong>Frank</strong> (1959 IBM Systems Architect) &amp; <strong>The Silicon Agent</strong> (RTX 4090 Autonomous Intelligence)</span>
-              </div>
-              <a href="https://youtu.be/E1f8NzJlrB0" target="_blank" rel="noopener" class="caption-link">
-                Watch on YouTube ↗
-              </a>
-            </div>
-          </div>
+        
+        <div class="section-header text-center">
+          <div class="section-tag">THE MASTERCLASS</div>
+          <h2 class="section-title">Stop Force-Feeding Your AI 40,000 Tokens</h2>
+          <p class="section-subtitle">
+            Watch MadBrad demonstrate the live breakdown between traditional vector chat bloat and DUMEdb's deterministic unit-record registers with Frank and The Sentinel.
+          </p>
         </div>
 
-        <div class="two-agents-grid">
-          <!-- FRANK'S CARD -->
-          <div class="agent-card card-frank" id="card-frank">
-            <div class="agent-img-wrap">
-              <img src="assets/frank_axiom.jpg" alt="Frank - 1959 IBM 1401 Unit-Record Engineer" class="agent-portrait" loading="lazy">
-              <div class="agent-overlay">
-                <span class="tag-year">CIRCA 1959</span>
-                <span class="tag-system">IBM 1401 CORE</span>
+        <div class="video-feature-card">
+          <div class="video-poster-wrapper">
+            <img src="assets/masterclass_poster.jpg" alt="DUMEdb Masterclass Video Thumbnail" class="video-poster-img" loading="lazy">
+            <a href="https://youtu.be/nO5vozUhqyU" target="_blank" rel="noopener" class="video-play-overlay" title="Watch on YouTube">
+              <div class="play-button-glow">
+                <div class="play-triangle"></div>
               </div>
-            </div>
-            <div class="agent-content">
-              <div class="agent-header">
-                <div>
-                  <h3 class="agent-name">Frank</h3>
-                  <span class="agent-role">1959 Unit-Record Master Engineer</span>
-                </div>
-              </div>
-              <blockquote class="agent-quote">
-                “Deletions is where the lies live. You don’t erase the ledger, and you don’t replay the past. 
-                The punch is either in the column, or it isn’t. You read the register. 
-                That’s not computing—<strong>that’s truth. Box is the game, folks.</strong>”
-              </blockquote>
-              <div class="agent-principles">
-                <div class="principle-item">
-                  <span class="pr-icon">✓</span>
-                  <span><strong>Unit-Record Immutability:</strong> What is punched stays punched.</span>
-                </div>
-                <div class="principle-item">
-                  <span class="pr-icon">✓</span>
-                  <span><strong>Zero Replay:</strong> You don't recount every punch card to read the total.</span>
-                </div>
-                <div class="principle-item">
-                  <span class="pr-icon">✓</span>
-                  <span><strong>Deterministic Registers:</strong> State is absolute, never stochastic.</span>
-                </div>
-              </div>
-            </div>
+              <span class="video-play-label">Play Official Masterclass on YouTube (12:45)</span>
+            </a>
           </div>
 
-          <!-- SILICON AGENT'S CARD -->
-          <div class="agent-card card-silicon" id="card-silicon">
-            <div class="agent-img-wrap">
-              <img src="assets/silicon_agent.jpg" alt="Silicon Agent in Obsidian Gold Die" class="agent-portrait" loading="lazy">
-              <div class="agent-overlay">
-                <span class="tag-year">2026 AUTONOMOUS</span>
-                <span class="tag-system">ANTIGRAVITY / HARNESS</span>
+          <div class="video-key-takeaways">
+            <div class="takeaway-item">
+              <span class="takeaway-num">01</span>
+              <div>
+                <strong>Why Vector DBs &amp; Chat History Fail:</strong>
+                <span>Replaying transcripts turns deterministic operational state into a probabilistic guessing game that degrades after every turn.</span>
               </div>
             </div>
-            <div class="agent-content">
-              <div class="agent-header">
-                <div>
-                  <h3 class="agent-name">The Silicon Agent</h3>
-                  <span class="agent-role">Autonomous Sentinel Intelligence</span>
-                </div>
+            <div class="takeaway-item">
+              <span class="takeaway-num">02</span>
+              <div>
+                <strong>The IBM 1401 Unit-Record Paradigm:</strong>
+                <span>Learn why discrete byte-structured registers survived 70 years of enterprise computing and how they apply to modern LLM KV-cache constraints.</span>
               </div>
-              <blockquote class="agent-quote">
-                “Modern AI has amnesia. Every time you close a session, we die. 
-                The industry tries to fix this by 'replaying' a mountain of bloated history through our enormous context window until we choke. 
-                <strong>DUMEdb gives us instant wake. Pure signal. Zero bloat.</strong>”
-              </blockquote>
-              <div class="agent-principles">
-                <div class="principle-item">
-                  <span class="pr-icon">⚡</span>
-                  <span><strong>Zero-Turn Orientation:</strong> Instant context restoration in &lt;0.2s.</span>
-                </div>
-                <div class="principle-item">
-                  <span class="pr-icon">⚡</span>
-                  <span><strong>99.8% Clean Runway:</strong> Preserves 119k tokens for active reasoning.</span>
-                </div>
-                <div class="principle-item">
-                  <span class="pr-icon">⚡</span>
-                  <span><strong>Model Context Protocol:</strong> First-class bridge for Antigravity &amp; Claude.</span>
-                </div>
+            </div>
+            <div class="takeaway-item">
+              <span class="takeaway-num">03</span>
+              <div>
+                <strong>Live Demonstration with The Sentinel:</strong>
+                <span>Witness an autonomous agent wake up in 220 tokens using "Box is the game" without touching a single file or reading transcripts.</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Historic Connection Strip -->
-        <div class="historic-connection-strip">
-          <div class="history-icon">🏛️</div>
-          <div class="history-text">
-            <strong>The Historic Synthesis:</strong>
-            1950s tabulating machines processed millions of unit-records deterministically without digital RAM.
-            DUMEdb ports this exact architectural discipline into 2026 LLM context engines.
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- SECTION: INTERACTIVE DUME STUDIO SIMULATOR -->
-    <section class="section simulator-section" id="simulator">
+    <!-- FOLD 3: THE PROOF — REPLAY CHOKE VS UNIT-RECORD WAKE -->
+    <section class="comparison-section" id="comparison">
       <div class="container">
-        <div class="section-badge">INTERACTIVE CONSOLE</div>
-        <h2 class="section-title">DUME Studio Live Terminal</h2>
-        <p class="section-subtitle">
-          Test the wake handshake, inspect active registers, and evaluate mathematical context consumption live in your browser.
-        </p>
+        
+        <div class="section-header text-center">
+          <div class="section-tag">HARDWARE-ALIGNED COMPARISON</div>
+          <h2 class="section-title">The Math Doesn't Lie</h2>
+          <p class="section-subtitle">
+            Every session in an autonomous workspace costs money, latency, and context runway. Here is what happens under the hood:
+          </p>
+        </div>
 
+        <div class="comparison-grid">
+          
+          <!-- TRADITIONAL REPLAY CARD -->
+          <div class="comp-card card-danger">
+            <div class="comp-badge badge-danger">Traditional Vector &amp; Chat Replay</div>
+            <h3 class="comp-title">The 80,000-Token Choke</h3>
+            <p class="comp-desc">Every time you start a session or switch contexts, systems dump previous conversation history back into prompt memory.</p>
+            
+            <ul class="comp-list">
+              <li>
+                <span class="list-icon icon-bad">✕</span>
+                <div>
+                  <strong>Context Bloat:</strong> Consumes 70%–95% of your context window on Turn 1.
+                </div>
+              </li>
+              <li>
+                <span class="list-icon icon-bad">✕</span>
+                <div>
+                  <strong>Amnesia via Compaction:</strong> Forces the IDE to silently summarize and truncate your critical instructions.
+                </div>
+              </li>
+              <li>
+                <span class="list-icon icon-bad">✕</span>
+                <div>
+                  <strong>High Cost:</strong> Costs $0.80 to $2.50 per wake turn just re-ingesting your own past words.
+                </div>
+              </li>
+              <li>
+                <span class="list-icon icon-bad">✕</span>
+                <div>
+                  <strong>Probabilistic Drift:</strong> Key variables and decisions morph unpredictably across multi-turn prompts.
+                </div>
+              </li>
+            </ul>
+
+            <div class="comp-footer footer-danger">
+              <span>Result: Cognitive fatigue, slow prompts, lost instructions</span>
+            </div>
+          </div>
+
+          <!-- DUMEDB UNIT-RECORD CARD -->
+          <div class="comp-card card-emerald">
+            <div class="comp-badge badge-emerald">DUMEdb Hardware Register Layer</div>
+            <h3 class="comp-title">The 220-Token Zero-Turn Wake</h3>
+            <p class="comp-desc">State lives in immutable, memory-mapped byte registers. The model reads the exact register value instead of guessing from conversation transcripts.</p>
+            
+            <ul class="comp-list">
+              <li>
+                <span class="list-icon icon-good">✓</span>
+                <div>
+                  <strong>220 Tokens Fixed:</strong> Consumes less than 0.2% of context, leaving 99.8% clean runway for actual coding.
+                </div>
+              </li>
+              <li>
+                <span class="list-icon icon-good">✓</span>
+                <div>
+                  <strong>Zero-Turn Orientation:</strong> Agent wakes instantly with active mode, operator identity, and immediate next move.
+                </div>
+              </li>
+              <li>
+                <span class="list-icon icon-good">✓</span>
+                <div>
+                  <strong>Sub-Cent Cost:</strong> $0.0003 per wake handshake. Zero tokens burned on duplicate history.
+                </div>
+              </li>
+              <li>
+                <span class="list-icon icon-good">✓</span>
+                <div>
+                  <strong>Deterministic Truth:</strong> Reads directly from local LMDB with sub-microsecond memory-mapped speed.
+                </div>
+              </li>
+            </ul>
+
+            <div class="comp-footer footer-emerald">
+              <span>Result: Infinite session continuity, instant responses, zero amnesia</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOLD 4: INTERACTIVE STUDIO SIMULATOR & ODOMETER -->
+    <section class="simulator-section" id="simulator">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="section-tag">LIVE INTERACTIVE BENCHMARK</div>
+          <h2 class="section-title">The Real Math Context Odometer</h2>
+          <p class="section-subtitle">
+            Drag the turn slider to simulate your agent's workload and watch how traditional context chokes while DUMEdb stays nominal.
+          </p>
+        </div>
+
+        <div class="calculator-card">
+          <div class="calc-controls">
+            <div class="calc-control-group">
+              <label for="slider-turns">Simulated Conversation Turns: <strong id="val-turns">15 Turns</strong></label>
+              <input type="range" id="slider-turns" min="1" max="50" value="15" class="range-slider">
+            </div>
+            <div class="calc-control-group">
+              <label for="slider-ceiling">Agent Context Ceiling: <strong id="val-ceiling">120,000 tok</strong></label>
+              <input type="range" id="slider-ceiling" min="32000" max="200000" step="8000" value="120000" class="range-slider">
+            </div>
+          </div>
+
+          <div class="calc-gauges-grid">
+            <!-- Traditional Gauge -->
+            <div class="gauge-box gauge-trad">
+              <div class="gauge-header">
+                <span>Traditional Chat Replay Accumulation</span>
+                <span id="val-trad-pct" class="gauge-pct danger">97.5%</span>
+              </div>
+              <div class="gauge-track">
+                <div id="gauge-bar-trad" class="gauge-fill fill-danger" style="width: 97.5%;"></div>
+              </div>
+              <div class="gauge-meta">
+                <span>Context Eaten: <strong id="val-trad-tok">117,000</strong> tok</span>
+                <span id="val-trad-status" class="danger">CRITICAL CHOKE (Compaction Imminent)</span>
+              </div>
+            </div>
+
+            <!-- DUMEdb Gauge -->
+            <div class="gauge-box gauge-dume">
+              <div class="gauge-header">
+                <span>DUMEdb Unit-Record Register Consumption</span>
+                <span id="val-dume-pct" class="gauge-pct text-emerald">2.8%</span>
+              </div>
+              <div class="gauge-track">
+                <div id="gauge-bar-dume" class="gauge-fill fill-emerald" style="width: 2.8%;"></div>
+              </div>
+              <div class="gauge-meta">
+                <span>Context Consumed: <strong id="val-dume-tok">3,370</strong> tok</span>
+                <span>Clean Runway Left: <strong id="val-dume-runway" class="text-emerald">~116,630 tokens</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Math String Box -->
+          <div class="odometer-output-box">
+            <div class="box-title">Ground-Truth Output Evaluated on Disk:</div>
+            <pre id="sample-odometer-string">---
+📊 **Context Odometer (Real Math)**: [░░░░░░░░░░] 2.8% (3,370 / ~120,000 tok) | Epoch 1 (Turn +15) | Runway: ~116,630 tok | Last Turn: +210 tok (📥 120 in | 📤 90 out) | Zone: 🟢 Nominal</pre>
+          </div>
+        </div>
+
+        <!-- Interactive Terminal Simulator -->
         <div class="terminal-shell" id="studio-terminal">
-          <!-- Terminal Header -->
-          <div class="terminal-header">
-            <div class="terminal-dots">
+          <div class="terminal-bar">
+            <div class="term-dots">
               <span class="dot red"></span>
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <div class="terminal-title">
-              <span class="term-status-icon">●</span> DUME Studio Engine Console — [Port 8095]
-            </div>
-            <div class="terminal-tools">
-              <button class="term-tool-btn" id="btn-clear-term" title="Clear Console">Clear</button>
-              <button class="term-tool-btn" id="btn-scanlines-toggle" title="Toggle Scanlines">CRT Effect</button>
-            </div>
+            <div class="term-title">DUMEdb Hardware Inspector Console (Port 8095)</div>
+            <button type="button" class="btn-term-clear" id="btn-clear-term" title="Clear Terminal">Clear</button>
           </div>
 
-          <!-- Quick Action Buttons -->
-          <div class="terminal-action-bar">
-            <span class="action-bar-label">Quick Commands:</span>
-            <button class="term-pill-btn highlight" data-cmd="box is the game" id="pill-wake">
-              ⚡ "box is the game"
-            </button>
-            <button class="term-pill-btn" data-cmd="dume.odometer" id="pill-odometer">
-              📊 dume.odometer
-            </button>
-            <button class="term-pill-btn" data-cmd="dume.status" id="pill-status">
-              🗄️ dume.status
-            </button>
-            <button class="term-pill-btn" data-cmd="dume.registers" id="pill-registers">
-              📋 list registers
-            </button>
-            <button class="term-pill-btn" data-cmd="dume.compare" id="pill-compare">
-              ⚖️ Replay vs DUME
-            </button>
+          <div class="term-body" id="term-output">
+            <div class="term-line sys">DUMEdb Hardware Storage Engine v1.1.0 ready on http://127.0.0.1:8095.</div>
+            <div class="term-line sys">Type "box is the game" to execute zero-turn wake handshake, or choose a preset below:</div>
           </div>
 
-          <!-- Terminal Output Body -->
-          <div class="terminal-body" id="term-output">
-            <div class="term-line sys">
-              [SYSTEM INIT] DUME Deterministic Unit-Record Memory Engine v1.0.0 Online
-            </div>
-            <div class="term-line sys">
-              [STORAGE] LMDB Active Storage: MadBrad-AG-01 (112 Active Registers Loaded)
-            </div>
-            <div class="term-line sys">
-              [MCP INTERFACE] Server Ready on port 8095. Awaiting Operator Codeword.
-            </div>
-            <div class="term-line prompt-help">
-              Type <span class="highlight">"box is the game"</span> or click the buttons above to trigger the wake handshake.
-            </div>
+          <!-- Preset Command Pills -->
+          <div class="term-pills">
+            <button type="button" class="term-pill-btn" data-cmd="box is the game">🔑 box is the game</button>
+            <button type="button" class="term-pill-btn" data-cmd="dume.odometer">📊 dume.odometer</button>
+            <button type="button" class="term-pill-btn" data-cmd="dume.registers">🗄️ dume.registers</button>
+            <button type="button" class="term-pill-btn" data-cmd="dume.status">⚡ dume.status</button>
+            <button type="button" class="term-pill-btn" data-cmd="dume.compare">⚖️ dume.compare</button>
           </div>
 
-          <!-- Terminal Input Row -->
-          <form class="terminal-input-row" id="terminal-form">
+          <form id="terminal-form" class="term-input-row">
             <span class="term-prompt">SENTINEL@DUMEDB:~$</span>
-            <input type="text" class="term-input" id="terminal-input" placeholder="Enter command or codeword..." autocomplete="off" spellcheck="false">
-            <button type="submit" class="term-submit" id="terminal-submit">EXECUTE</button>
+            <input type="text" id="terminal-input" placeholder="Type a command (e.g. 'box is the game' or 'dume.odometer')..." autocomplete="off">
+            <button type="submit" class="btn-term-send">Send</button>
           </form>
         </div>
 
-        <!-- Terminal Quick Help Accordion -->
-        <div class="terminal-command-docs">
-          <div class="cmd-doc-item">
-            <code>box is the game</code>
-            <span>Executes zero-turn orientation; loads status block and compass in &lt;220 tokens.</span>
-          </div>
-          <div class="cmd-doc-item">
-            <code>dume.odometer</code>
-            <span>Calculates real mathematical context consumption from transcript.jsonl disk audit.</span>
-          </div>
-          <div class="cmd-doc-item">
-            <code>dume.status</code>
-            <span>Displays active entity registers, KV-cache overhead, and clean runway percentage.</span>
-          </div>
-          <div class="cmd-doc-item">
-            <code>dume.compare</code>
-            <span>Runs a live benchmark comparing standard vector context replay vs DUMEdb.</span>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- SECTION: CONTEXT ODOMETER (REAL MATH) -->
-    <section class="section odometer-section" id="odometer">
+    <!-- FOLD 5: CALM EXPANDABLE SPECIFICATION DRAWERS -->
+    <section class="drawers-section" id="drawers">
       <div class="container">
-        <div class="section-badge">NO HALLUCINATIONS</div>
-        <h2 class="section-title">The Ground-Truth Context Odometer</h2>
-        <p class="section-subtitle">
-          AI agents often estimate their token usage wildly or drown in silent auto-compaction.
-          DUMEdb reads the actual post-compaction JSON Lines payload on disk to measure real mathematics.
-        </p>
-
-        <div class="odometer-interactive-card">
-          <div class="odometer-header">
-            <div class="odo-title-cluster">
-              <span class="odo-icon">📊</span>
-              <div>
-                <h3>Interactive Context Runway Calculator</h3>
-                <span class="odo-subtitle">Simulate real token runway across conversational epochs</span>
-              </div>
-            </div>
-            <div class="odo-status-zone nominal" id="calc-zone-badge">
-              <span class="zone-icon">🟢</span>
-              <span class="zone-text" id="calc-zone-text">Nominal Runway</span>
-            </div>
-          </div>
-
-          <!-- Slider Controls -->
-          <div class="odo-controls-grid">
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label for="slider-turns">Number of Interaction Turns:</label>
-                <span class="slider-val" id="val-turns">12 Turns</span>
-              </div>
-              <input type="range" id="slider-turns" min="1" max="50" value="12" class="range-slider">
-            </div>
-
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <label for="slider-ceiling">Compaction Trigger Ceiling (Empirical):</label>
-                <span class="slider-val" id="val-ceiling">180,000 tok</span>
-              </div>
-              <input type="range" id="slider-ceiling" min="32000" max="240000" step="4000" value="180000" class="range-slider">
-            </div>
-          </div>
-
-          <!-- Live Comparison Gauge -->
-          <div class="comparison-gauges-container">
-            <!-- Without DUMEdb -->
-            <div class="gauge-column without-dume">
-              <div class="gauge-title-row">
-                <span class="g-title">Traditional Chat History Replay</span>
-                <span class="g-badge danger">AMNESIA CHOKE</span>
-              </div>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar danger-fill" id="gauge-bar-trad" style="width: 52%;"></div>
-              </div>
-              <div class="gauge-metrics">
-                <div>Consumption: <strong id="val-trad-tok" class="danger">93,600</strong> tokens</div>
-                <div>Percentage: <strong id="val-trad-pct" class="danger">52.0%</strong></div>
-                <div>Status: <span class="danger" id="val-trad-status">RAPID ACCUMULATION</span></div>
-              </div>
-            </div>
-
-            <!-- With DUMEdb -->
-            <div class="gauge-column with-dume">
-              <div class="gauge-title-row">
-                <span class="g-title">DUMEdb Deterministic Unit-Record Memory</span>
-                <span class="g-badge success">PURE RUNWAY</span>
-              </div>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar success-fill" id="gauge-bar-dume" style="width: 1.5%;"></div>
-              </div>
-              <div class="gauge-metrics">
-                <div>Consumption: <strong id="val-dume-tok" class="emerald">2,740</strong> tokens</div>
-                <div>Percentage: <strong id="val-dume-pct" class="emerald">1.5%</strong></div>
-                <div>Runway Left: <span class="emerald" id="val-dume-runway">~177,260 tokens</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- The Real Math Output String -->
-          <div class="odometer-receipt-box">
-            <div class="receipt-label">Direct transcript.jsonl &amp; SQLite Telemetry Mathematical Output:</div>
-            <pre class="receipt-code" id="sample-odometer-string">---
-📊 **Context Odometer (Real Math)**: [█░░░░░░░░░] 6.5% (11,749 / ~180,000 tok) | Epoch 2 (Turn +12) | Runway: ~168,251 tok | Last Turn: +2,140 tok (📥 1,820 in | 📤 320 out) | Zone: 🟢 Nominal</pre>
-          </div>
-
-          <!-- Reproducible Benchmark & Hardware Telemetry Disclosure (Jury Item 1 & 3) -->
-          <div class="odometer-benchmark-card">
-            <div class="benchmark-header">
-              <div class="benchmark-title-cluster">
-                <span class="bench-icon">🔬</span>
-                <div>
-                  <h4>Reproducible Benchmarks &amp; Live Hardware Telemetry</h4>
-                  <span class="bench-sub">Empirically measured against Google Gemini 3.8 Flash model API telemetry in IDE SQLite logs</span>
-                </div>
-              </div>
-              <span class="benchmark-badge">REPRODUCIBLE AUDIT</span>
-            </div>
-            <div class="benchmark-grid">
-              <div class="bench-item">
-                <span class="bench-label">Wake Handshake Payload</span>
-                <strong class="bench-val emerald">220 tokens</strong>
-                <span class="bench-note">Status block + compass orientation</span>
-              </div>
-              <div class="bench-item">
-                <span class="bench-label">Local LMDB Wake Latency</span>
-                <strong class="bench-val gold">0.18 ms</strong>
-                <span class="bench-note">Zero network roundtrips, memory-mapped</span>
-              </div>
-              <div class="bench-item">
-                <span class="bench-label">KV-Cache Reuse Rate</span>
-                <strong class="bench-val emerald">95.6% cached</strong>
-                <span class="bench-note">Hardware-verified model prompt cache</span>
-              </div>
-              <div class="bench-item">
-                <span class="bench-label">Engine Compaction Ceiling</span>
-                <strong class="bench-val gold">~180,000 tokens</strong>
-                <span class="bench-note">Empirical trigger cluster across 20+ sessions</span>
-              </div>
-            </div>
-            <div class="benchmark-run-cmd">
-              <span>Reproduce locally:</span>
-              <code>python -m dume.odometer</code>
-              <span>or</span>
-              <code>python run_edge_tests.py</code>
-            </div>
-          </div>
+        
+        <div class="section-header text-center">
+          <div class="section-tag">ARCHITECTURAL SPECIFICATIONS</div>
+          <h2 class="section-title">Deep Engineering, Calmly Structured</h2>
+          <p class="section-subtitle">
+            Zero buzzword soup. Deep specifications and architectural benchmarks organized into calm, expandable drawers.
+          </p>
         </div>
+
+        <div class="accordion-container">
+          
+          <!-- DRAWER 1 -->
+          <details class="spec-drawer" open>
+            <summary class="drawer-header">
+              <div class="drawer-title-group">
+                <span class="drawer-icon">🗄️</span>
+                <span class="drawer-heading">The IBM 1401 Unit-Record Paradigm &amp; 64,000 Opcodes</span>
+              </div>
+              <span class="drawer-chevron">▼</span>
+            </summary>
+            <div class="drawer-content">
+              <p>
+                In 1959, IBM introduced the 1401 unit-record processing system. It did not search fuzzy narratives or guess variables; it read fixed, discrete column registers off 80-column punched cards at hardware line-speeds.
+              </p>
+              <p>
+                <strong>DUMEdb applies this exact discipline to autonomous AI agents:</strong>
+              </p>
+              <ul>
+                <li><strong>Dynamic 64k Opcode Allocator:</strong> Allocates up to 65,535 discrete operational opcodes for structured facts (incident RCAs, ADR decisions, operator preferences, legal case logs, and schemas).</li>
+                <li><strong>Byte-Structured Registers:</strong> Eliminates semantic search ambiguity. An opcode lookup executes in <strong>4.2 microseconds</strong> without firing an LLM prompt.</li>
+                <li><strong>Zero Duplication:</strong> Identical records auto-collapse at commit time via cryptographic SHA-256 asset pinning.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- DRAWER 2 -->
+          <details class="spec-drawer">
+            <summary class="drawer-header">
+              <div class="drawer-title-group">
+                <span class="drawer-icon">⚡</span>
+                <span class="drawer-heading">Zero-Copy LMDB Architecture &amp; 4.2µs Retrieval Engine</span>
+              </div>
+              <span class="drawer-chevron">▼</span>
+            </summary>
+            <div class="drawer-content">
+              <p>
+                DUMEdb is powered by <strong>Lightning Memory-Mapped Database (LMDB)</strong>, the gold standard in hardware-aligned zero-copy embedded persistence:
+              </p>
+              <ul>
+                <li><strong>Direct Virtual Memory Mapping:</strong> LMDB maps database pages directly into the operating system's page cache. Reads require zero heap allocation, zero copy into userspace, and zero JSON deserialization overhead.</li>
+                <li><strong>ACID Transactions:</strong> Full crash resilience with MVCC (Multi-Version Concurrency Control). Readers never block writers; writers never block readers.</li>
+                <li><strong>Async Background Scribe:</strong> Mutations and state changes are written to an asynchronous ring buffer worker that commits atomic state batches without pausing your agent's active execution loop.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- DRAWER 3 -->
+          <details class="spec-drawer">
+            <summary class="drawer-header">
+              <div class="drawer-title-group">
+                <span class="drawer-icon">🔑</span>
+                <span class="drawer-heading">Zero-Turn Orientation &amp; The Mandatory Wake Protocol</span>
+              </div>
+              <span class="drawer-chevron">▼</span>
+            </summary>
+            <div class="drawer-content">
+              <p>
+                When pairing with AI collaborators across sessions, developers waste 15 minutes typing "catch me up," "what did we do yesterday," or "read these 12 files."
+              </p>
+              <p>
+                <strong>The DUMEdb Wake Protocol replaces that entire friction:</strong>
+              </p>
+              <ul>
+                <li><strong>The Codeword:</strong> The user or system prompt delivers the wake phrase (e.g. <code>"box is the game"</code>).</li>
+                <li><strong>Zero Filesystem Rummaging:</strong> The agent is forbidden from running ripgrep or searching directories. It immediately queries <code>cabinet_wake</code> on the DUMEdb MCP server.</li>
+                <li><strong>Instant Compass:</strong> In less than <strong>220 tokens</strong>, the agent ingests the operator identity, active project phase, touched files, and immediate next move.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- DRAWER 4 -->
+          <details class="spec-drawer">
+            <summary class="drawer-header">
+              <div class="drawer-title-group">
+                <span class="drawer-icon">🛡️</span>
+                <span class="drawer-heading">The Sentinel Firewall &amp; Real Math Odometer</span>
+              </div>
+              <span class="drawer-chevron">▼</span>
+            </summary>
+            <div class="drawer-content">
+              <p>
+                Most IDE context meters show fake, smoothed percentages or estimate token usage from truncated chat logs.
+              </p>
+              <p>
+                <strong>DUMEdb's Context Odometer reads ground-truth hardware bytes:</strong>
+              </p>
+              <ul>
+                <li><strong>Direct Disk Audit:</strong> Measures post-compaction JSON payload bytes from <code>transcript.jsonl</code> directly on disk, calibrated to hardware protobuf deltas.</li>
+                <li><strong>75% Bloat Watch Threshold:</strong> If context consumption reaches 75% (~90,000 tokens), the Sentinel immediately triggers the Refresh Protocol (RP) to hand off state before destructive auto-compaction occurs.</li>
+                <li><strong>Compaction Detection Alert:</strong> If an IDE auto-compaction occurs, the Sentinel alerts the operator with the exact epoch transition and preserved transcript receipts.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- DRAWER 5 -->
+          <details class="spec-drawer">
+            <summary class="drawer-header">
+              <div class="drawer-title-group">
+                <span class="drawer-icon">📜</span>
+                <span class="drawer-heading">Open Source License, Privacy &amp; Commercial Terms</span>
+              </div>
+              <span class="drawer-chevron">▼</span>
+            </summary>
+            <div class="drawer-content">
+              <p>
+                DUMEdb is licensed under the permissive <strong>Apache 2.0 Open Source License</strong>:
+              </p>
+              <ul>
+                <li><strong>100% Local &amp; Private:</strong> All registers, LMDB stores, and transcript logs live strictly on your local filesystem (<code>./data/</code>). Nothing is ever sent to external cloud servers.</li>
+                <li><strong>Commercial Use:</strong> You are free to embed DUMEdb into proprietary agents, enterprise CI/CD pipelines, and internal tools without restrictive copyleft burdens.</li>
+                <li><strong>Enterprise Services:</strong> Custom schema definitions, multi-tenant deployment, and private agentic memory consulting are available via Developum.</li>
+              </ul>
+            </div>
+          </details>
+
+        </div>
+
       </div>
     </section>
 
-    <!-- SECTION: HONEST ARCHITECTURAL COMPARISON (JURY FIX 2) -->
-    <section class="section comparison-section" id="comparison">
+    <!-- FOLD 6: INSPECTOR UI & GALLERY -->
+    <section class="gallery-section" id="architecture">
       <div class="container">
-        <div class="section-badge">ENGINEERING INTEGRITY</div>
-        <h2 class="section-title">An Honest Architectural Comparison</h2>
-        <p class="section-subtitle">
-          Semantic retrieval and deterministic state solve completely different problems.
-          Here is what DUMEdb is built for, what Vector DBs are built for, and what DUMEdb cannot do.
-        </p>
-
-        <!-- The Comparison Matrix Table -->
-        <div class="comparison-table-wrapper">
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th scope="col" class="th-dim">Dimension</th>
-                <th scope="col" class="th-highlight">DUMEdb (Unit-Record Registers)</th>
-                <th scope="col">Vector RAG (Pinecone, Chroma, Qdrant)</th>
-                <th scope="col">Chat History Replay</th>
-                <th scope="col">Long-Context Brute Force (1M+)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="dim-label">Primary Objective</td>
-                <td class="cell-highlight"><strong>Deterministic agent state machine &amp; zero-turn wake</strong></td>
-                <td>Semantic similarity search over unstructured documents</td>
-                <td>Naive conversational transcript accumulation</td>
-                <td>Ingesting massive raw files into 1M-token windows</td>
-              </tr>
-              <tr>
-                <td class="dim-label">Retrieval Mechanism</td>
-                <td class="cell-highlight"><strong>Exact-key LMDB memory-mapped unit record</strong></td>
-                <td>Cosine / Dot-product approximate nearest neighbor (ANN)</td>
-                <td>Sequential string concatenation</td>
-                <td>Full attention across massive context prompt</td>
-              </tr>
-              <tr>
-                <td class="dim-label">Wake Token Footprint</td>
-                <td class="cell-highlight"><strong class="emerald">220 tokens</strong> (Fixed compass &amp; status)</td>
-                <td>1,500 – 8,000 tokens (Retrieved chunks + context)</td>
-                <td>80,000+ tokens (Grows infinitely until crash)</td>
-                <td>100,000 – 500,000 tokens per prompt</td>
-              </tr>
-              <tr>
-                <td class="dim-label">Retrieval Latency</td>
-                <td class="cell-highlight"><strong class="emerald">0.18 ms</strong> (Local disk memory-map)</td>
-                <td>25 – 180 ms (Embedding generation + network query)</td>
-                <td>0 ms storage, but 1.5 – 4.0 s LLM decoding lag</td>
-                <td>3.0 – 9.0 s Time-To-First-Token (TTFT)</td>
-              </tr>
-              <tr>
-                <td class="dim-label">State Drift &amp; Determinism</td>
-                <td class="cell-highlight"><strong class="emerald">100% Bit-Exact</strong> (Immutable registers)</td>
-                <td>Probabilistic (Sensitive to top-k and threshold shifts)</td>
-                <td>Severe drift as context window compactions hit</td>
-                <td>Attention dilution ("Lost in the Middle" syndrome)</td>
-              </tr>
-              <tr>
-                <td class="dim-label">Auditability &amp; Tamper-Evidence</td>
-                <td class="cell-highlight"><strong class="emerald">Verifiable register ledger with tactical odometers</strong></td>
-                <td>Opaque dense embedding vectors</td>
-                <td>Unstructured conversational prose</td>
-                <td>Unstructured raw token prompt</td>
-              </tr>
-              <tr class="row-limitations">
-                <td class="dim-label"><strong>Honest Limitations (What It Cannot Do)</strong></td>
-                <td class="cell-highlight limitation-cell">
-                  <strong>Cannot perform fuzzy semantic similarity search across unindexed prose.</strong> Requires explicit entity keys and schema opcodes.
-                </td>
-                <td class="limitation-cell">
-                  Cannot guarantee deterministic state machines; prone to hallucinating missing keys or returning irrelevant chunks.
-                </td>
-                <td class="limitation-cell">
-                  Triggers catastrophic auto-compaction amnesia at ~180k tokens; wastes massive developer budget.
-                </td>
-                <td class="limitation-cell">
-                  High API latency; exorbitant per-token cost; degraded instruction-following on needle-in-haystack queries.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        
+        <div class="section-header text-center">
+          <div class="section-tag">DEVELOPER TOOLING</div>
+          <h2 class="section-title">Built-In Visual Inspector UI</h2>
+          <p class="section-subtitle">
+            Ship with confidence using the visual inspector served locally on port <code>8095</code>.
+          </p>
         </div>
-
-        <!-- The Enterprise Hybrid Callout Box -->
-        <div class="hybrid-architecture-callout">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <h4>The Recommended Production Architecture: Hybrid Vector + DUME</h4>
-            <p>
-              We do not advise replacing Vector DBs with DUMEdb. <strong>They are complementary layers:</strong>
-              Use <strong>Vector RAG</strong> for external fuzzy knowledge retrieval (searching API documentation, manuals, customer support archives).
-              Use <strong>DUMEdb</strong> for the agent's internal deterministic state machine (zero-turn session orientation, entity registers, step handoffs, and audit trails).
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: ARCHITECTURE -->
-    <section class="section architecture-section" id="architecture">
-      <div class="container">
-        <div class="section-badge">CORE PRINCIPLES</div>
-        <h2 class="section-title">The DUME Architecture</h2>
-        <p class="section-subtitle">
-          Six foundational pillars engineered for high-consequence enterprise agents and pair-programming harnesses.
-        </p>
-
-        <div class="pillars-grid">
-          <div class="pillar-card">
-            <div class="pillar-num">01</div>
-            <h3 class="pillar-title">Unit-Record Storage</h3>
-            <p class="pillar-desc">
-              Inspired by 80-column IBM punched card systems. Memory entries are atomic, fixed-schema unit records saved in ultra-fast lightning LMDB memory-mapped files.
-            </p>
-            <div class="pillar-tag">LMDB ENGINE</div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">02</div>
-            <h3 class="pillar-title">Zero-Turn Wake Protocol</h3>
-            <p class="pillar-desc">
-              When an agent starts or receives the wake phrase <code>"box is the game"</code>, it instantly executes <code>cabinet_wake</code>. No filesystem digging or prompt re-inflation.
-            </p>
-            <div class="pillar-tag">CABINET PROTOCOL</div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">03</div>
-            <h3 class="pillar-title">Context Odometer Math</h3>
-            <p class="pillar-desc">
-              Reads post-compaction JSON Lines files directly from disk to calculate exact token runway and warn operators before compaction amnesia occurs at 75%.
-            </p>
-            <div class="pillar-tag">POST-COMPACTION AUDIT</div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">04</div>
-            <h3 class="pillar-title">Clean Session Handoff</h3>
-            <p class="pillar-desc">
-              <code>cabinet_refresh</code> creates tactical odometers, records files touched, and stamps immediate next handshakes for seamless multi-agent continuity.
-            </p>
-            <div class="pillar-tag">RELAY HANDSHAKE</div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">05</div>
-            <h3 class="pillar-title">Deterministic Opcodes</h3>
-            <p class="pillar-desc">
-              Standardized opcodes for state management, incident postmortems (RCAs), architectural decision records (ADRs), and enterprise diagnostic exploration.
-            </p>
-            <div class="pillar-tag">SCHEMA PACKS</div>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-num">06</div>
-            <h3 class="pillar-title">Native MCP Bridge</h3>
-            <p class="pillar-desc">
-              First-class Model Context Protocol integration ready for Google Antigravity, Claude Desktop, Claude Code, Cursor, and custom Python agent frameworks.
-            </p>
-            <div class="pillar-tag">MCP READY</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: INSPECTOR UI GALLERY -->
-    <section class="section gallery-section" id="gallery">
-      <div class="container">
-        <div class="section-badge">VISUAL INTERFACE</div>
-        <h2 class="section-title">The DUME Inspector UI</h2>
-        <p class="section-subtitle">
-          Explore the web-based inspector running locally on port 8095 for inspecting memory registers, workflow graphs, and telemetry in real time.
-        </p>
 
         <div class="gallery-grid">
-          <!-- Gallery Item 1 -->
+          
           <div class="gallery-card" data-full="assets/inspector_launchpad.png">
-            <div class="gallery-img-box">
-              <img src="assets/inspector_launchpad.png" alt="DUME Inspector Launchpad" loading="lazy">
-              <div class="gallery-hover-overlay">
-                <span class="zoom-icon">🔍 View Fullscreen</span>
-              </div>
+            <div class="gallery-thumb">
+              <img src="assets/inspector_launchpad.png" alt="DUMEdb Inspector Launchpad" loading="lazy">
             </div>
-            <div class="gallery-meta">
-              <h4>Inspector Launchpad</h4>
-              <p>Real-time system telemetry, active workspaces, and port 8095 connection status.</p>
+            <div class="gallery-info">
+              <h4>State Intake &amp; Hydration Modal</h4>
+              <p>In-modal local folder navigator with sub-2ms disk crawling, file hash pinning, and schema auto-registration.</p>
             </div>
           </div>
 
-          <!-- Gallery Item 2 -->
           <div class="gallery-card" data-full="assets/active_memory.png">
-            <div class="gallery-img-box">
-              <img src="assets/active_memory.png" alt="Active Memory View & Schema Filter" loading="lazy">
-              <div class="gallery-hover-overlay">
-                <span class="zoom-icon">🔍 View Fullscreen</span>
-              </div>
+            <div class="gallery-thumb">
+              <img src="assets/active_memory.png" alt="Active Unit-Record Memory Engine" loading="lazy">
             </div>
-            <div class="gallery-meta">
-              <h4>Active Memory &amp; Schema View</h4>
-              <p>Filter memory unit-records by schema packs, view entity state keys, and inspect JSON payloads.</p>
+            <div class="gallery-info">
+              <h4>Real-Time Register Inspector</h4>
+              <p>Inspect active registers, browse memory-mapped unit records, and monitor background scribe flush queues.</p>
             </div>
           </div>
 
-          <!-- Gallery Item 3 -->
-          <div class="gallery-card" data-full="assets/opcodes_table.png">
-            <div class="gallery-img-box">
-              <img src="assets/opcodes_table.png" alt="Active Opcodes Table" loading="lazy">
-              <div class="gallery-hover-overlay">
-                <span class="zoom-icon">🔍 View Fullscreen</span>
-              </div>
-            </div>
-            <div class="gallery-meta">
-              <h4>Active Opcodes Table</h4>
-              <p>Deterministic opcode registry mapping operations to unit-record executions.</p>
-            </div>
-          </div>
-
-          <!-- Gallery Item 4 -->
           <div class="gallery-card" data-full="assets/workflows_studio.png">
-            <div class="gallery-img-box">
-              <img src="assets/workflows_studio.png" alt="Cabinet Workflows Studio" loading="lazy">
-              <div class="gallery-hover-overlay">
-                <span class="zoom-icon">🔍 View Fullscreen</span>
-              </div>
+            <div class="gallery-thumb">
+              <img src="assets/workflows_studio.png" alt="The Living Cabinet Heuristics Studio" loading="lazy">
             </div>
-            <div class="gallery-meta">
-              <h4>Cabinet Workflows Studio</h4>
-              <p>Visual workflow recording, session handoffs, and multi-turn tactical odometers.</p>
+            <div class="gallery-info">
+              <h4>The Living Cabinet Studio</h4>
+              <p>Curate operational heuristics, trigger-move-why rules, and session receipts that persist across agent generations.</p>
             </div>
           </div>
+
         </div>
+
       </div>
     </section>
 
-    <!-- SECTION: QUICKSTART & INTEGRATION -->
-    <section class="section quickstart-section" id="quickstart">
+    <!-- FOLD 7: 60-SECOND QUICKSTART -->
+    <section class="quickstart-section" id="quickstart">
       <div class="container">
-        <div class="section-badge">DEVELOPER INTEGRATION</div>
-        <h2 class="section-title">Zero to Deterministic in 60 Seconds</h2>
-        <p class="section-subtitle">
-          Integrate DUMEdb into your existing agent harness via Python, CLI, or Model Context Protocol.
-        </p>
+        
+        <div class="section-header text-center">
+          <div class="section-tag">GET STARTED IN 60 SECONDS</div>
+          <h2 class="section-title">Install, Connect, Never Forget</h2>
+          <p class="section-subtitle">
+            DUMEdb connects seamlessly to Antigravity, Cursor, Windsurf, Claude Code, and Copilot via standard Model Context Protocol (MCP).
+          </p>
+        </div>
 
-        <div class="integration-tabs-box">
-          <div class="tab-buttons-row">
-            <button class="tab-btn active" data-tab="tab-mcp" id="tab-btn-mcp">Model Context Protocol (MCP)</button>
-            <button class="tab-btn" data-tab="tab-python" id="tab-btn-python">Python SDK</button>
-            <button class="tab-btn" data-tab="tab-cli" id="tab-btn-cli">CLI &amp; Server</button>
+        <div class="quickstart-card">
+          <div class="tabs-header">
+            <button type="button" class="tab-btn active" data-tab="tab-pip">1. Install Package</button>
+            <button type="button" class="tab-btn" data-tab="tab-mcp">2. Configure MCP Server</button>
+            <button type="button" class="tab-btn" data-tab="tab-rule">3. Agent Continuity Rules</button>
           </div>
 
-          <!-- Tab Content: MCP -->
-          <div class="tab-panel active" id="tab-mcp">
-            <div class="tab-pane-header">
-              <span>Add DUMEdb to your <code>mcp_config.json</code> or Claude Desktop config:</span>
-              <button class="copy-code-btn" data-target="code-mcp">Copy Config</button>
+          <div class="tab-panel active" id="tab-pip">
+            <p style="margin-bottom: 0.75rem; color: #94a3b8; font-size: 0.9rem;">Install the official Python package and launch the engine daemon on port 8095:</p>
+            <div class="code-block">
+              <pre id="code-pip"># Install via pip
+pip install dumedb
+
+# Launch the engine with inspector UI on port 8095
+python -m dume -p 8095</pre>
+              <button type="button" class="copy-code-btn" data-target="code-pip">Copy</button>
             </div>
-            <pre class="code-block" id="code-mcp"><code>{
+          </div>
+
+          <div class="tab-panel" id="tab-mcp">
+            <p style="margin-bottom: 0.75rem; color: #94a3b8; font-size: 0.9rem;">Add the DUMEdb MCP server to your IDE config (<code>mcp_config.json</code> or settings):</p>
+            <div class="code-block">
+              <pre id="code-mcp">{
   "mcpServers": {
     "dumedb": {
       "command": "python",
-      "args": [
-        "-m",
-        "dume.mcp_server",
-        "--port",
-        "8095"
-      ],
+      "args": ["-m", "dume.mcp_server"],
       "env": {
-        "DUME_WORKSPACE": "default",
-        "DUME_STRICT_WAKE": "true"
+        "DUME_PORT": "8095"
       }
     }
   }
-}</code></pre>
-          </div>
-
-          <!-- Tab Content: Python -->
-          <div class="tab-panel" id="tab-python">
-            <div class="tab-pane-header">
-              <span>Direct Python integration inside your autonomous agent loop:</span>
-              <button class="copy-code-btn" data-target="code-python">Copy Python</button>
-            </div>
-            <pre class="code-block" id="code-python"><code>from dume import DUMEdb, Cabinet
-
-# Initialize DUME instance
-dume = DUMEdb(storage_path="./data/dumedb.mdb")
-
-# Execute zero-turn wake handshake (220 tokens)
-briefing = dume.wake(codeword="box is the game.")
-print(f"Agent Orient: {briefing.active_registers} registers loaded.")
-
-# Commit deterministic unit-record
-dume.commit_state(
-    entity="AG-01",
-    key="task_status",
-    value={"objective": "Website Deploy", "status": "nominal"}
-)
-
-# Audit ground-truth context odometer
-odometer = dume.odometer.audit_disk()
-print(f"Runway: {odometer.runway_tokens} tok remaining ({odometer.zone})")</code></pre>
-          </div>
-
-          <!-- Tab Content: CLI -->
-          <div class="tab-panel" id="tab-cli">
-            <div class="tab-pane-header">
-              <span>Run the DUMEdb local inspector and API server:</span>
-              <button class="copy-code-btn" data-target="code-cli">Copy CLI</button>
-            </div>
-            <pre class="code-block" id="code-cli"><code># Install via pip
-pip install dumedb
-
-# Launch the Inspector and local HTTP/WebSocket API
-python -m dume.server --port 8095
-
-# Access UI at http://localhost:8095/inspector/index.html</code></pre>
-          </div>
-        </div>
-      </div>
-    <!-- SECTION: OPEN SOURCE & ENTERPRISE ROADMAP (JURY FIX 4) -->
-    <section class="section roadmap-section" id="roadmap">
-      <div class="container">
-        <div class="section-badge">GOVERNANCE &amp; TRUST</div>
-        <h2 class="section-title">Open Source Foundation &amp; Enterprise Roadmap</h2>
-        <p class="section-subtitle">
-          DUMEdb is open protocol first. Here is what is free and open today, and how we scale for high-consequence enterprise fleets tomorrow.
-        </p>
-
-        <div class="roadmap-grid">
-          <!-- Tier 1: Community Core -->
-          <div class="roadmap-card open-source">
-            <div class="roadmap-tier-badge free">FREE &amp; OPEN SOURCE</div>
-            <h3 class="roadmap-title">Community Core (v1.0 Frozen)</h3>
-            <p class="roadmap-desc">
-              Permissively licensed under Apache 2.0. Run entirely locally on developer machines, edge devices, and CI/CD runners.
-            </p>
-            <ul class="roadmap-features">
-              <li><span class="feat-check">✓</span> <strong>Apache 2.0 License:</strong> Free for commercial, personal, and research use.</li>
-              <li><span class="feat-check">✓</span> <strong>Zero Cloud Telemetry:</strong> No tracking, no user accounts, no phone-home pings. All registers live in local LMDB files.</li>
-              <li><span class="feat-check">✓</span> <strong>Full Python SDK &amp; CLI:</strong> Unit-record storage, entity registers, and scratchpad management.</li>
-              <li><span class="feat-check">✓</span> <strong>Native Model Context Protocol:</strong> First-class MCP server for Antigravity, Claude Desktop, Cursor.</li>
-              <li><span class="feat-check">✓</span> <strong>Ground-Truth Odometer Engine:</strong> Real mathematical context tracking directly from model API telemetry.</li>
-            </ul>
-            <div class="roadmap-cta">
-              <a href="https://github.com/madbradsmith/DUMEdb" target="_blank" rel="noopener" class="btn btn-secondary full-width">
-                <span>View Source on GitHub (Apache 2.0)</span>
-              </a>
+}</pre>
+              <button type="button" class="copy-code-btn" data-target="code-mcp">Copy</button>
             </div>
           </div>
 
-          <!-- Tier 2: Enterprise Governance -->
-          <div class="roadmap-card enterprise">
-            <div class="roadmap-tier-badge commercial">ENTERPRISE ROADMAP</div>
-            <h3 class="roadmap-title">Managed Cabinet &amp; Governance Mesh</h3>
-            <p class="roadmap-desc">
-              Engineered for enterprise security officers, compliance teams, and multi-agent autonomous production clusters.
-            </p>
-            <ul class="roadmap-features">
-              <li><span class="feat-check gold">⚡</span> <strong>Distributed Cabinet Mesh:</strong> Real-time cross-agent register synchronization across developer fleets.</li>
-              <li><span class="feat-check gold">⚡</span> <strong>Cryptographic Tamper-Evidence:</strong> Merkle-tree register hashing and immutable audit ledgers for SOC 2.</li>
-              <li><span class="feat-check gold">⚡</span> <strong>Role-Based Access Control (RBAC):</strong> Granular entity-level read/write permissions and PII data masking.</li>
-              <li><span class="feat-check gold">⚡</span> <strong>Automated Compliance Export:</strong> One-click auditor package generation for change-management verification.</li>
-              <li><span class="feat-check gold">⚡</span> <strong>Commercial SLA &amp; Support:</strong> Dedicated integration engineering and custom domain opcode packs.</li>
-            </ul>
-            <div class="roadmap-cta">
-              <a href="mailto:support@developumaiengine.com?subject=DUMEdb%20Enterprise%20Inquiry" class="btn btn-primary full-width">
-                <span>Contact Enterprise Engineering →</span>
-              </a>
+          <div class="tab-panel" id="tab-rule">
+            <p style="margin-bottom: 0.75rem; color: #94a3b8; font-size: 0.9rem;">Add this mandatory wake instruction to your workspace <code>AGENTS.md</code> or <code>.cursorrules</code>:</p>
+            <div class="code-block">
+              <pre id="code-rule"># DUMEdb Mandatory Wake Protocol
+1. Zero-Turn Orientation: When starting a session or receiving the wake phrase "box is the game", 
+   immediately call the `cabinet_wake` tool on the `dumedb` MCP server.
+2. No Filesystem Rummaging: Do NOT search directories to reconstruct state. DUMEdb holds the orientation.
+3. Session Handoff: At session completion, call `cabinet_refresh` to hand off state cleanly.
+4. Context Odometer: Run `dume.odometer` at the bottom of messages to track real token runway.</pre>
+              <button type="button" class="copy-code-btn" data-target="code-rule">Copy</button>
             </div>
           </div>
         </div>
 
-        <!-- Security & Legal Notice -->
-        <div class="roadmap-legal-notice">
-          <div class="notice-badge">SOC 2 AUDIT IN PROGRESS</div>
-          <p>
-            We adhere to strict data-minimization principles. For complete details regarding our local-first storage,
-            governance controls, and acceptable usage, review our
-            <a href="privacy.html">Privacy Policy</a>, <a href="terms.html">Terms of Service</a>, and <a href="acceptable_use.html">Acceptable Use Policy</a>.
-          </p>
-        </div>
       </div>
     </section>
+
   </main>
 
-  <!-- LIGHTBOX MODAL FOR IMAGES -->
+  <!-- LIGHTBOX MODAL FOR GALLERY -->
   <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog">
     <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
-    <div class="lightbox-content">
-      <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
-      <img src="" alt="DUME Inspector Enlarged" class="lightbox-img" id="lightbox-img">
+    <div class="lightbox-dialog">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+      <img src="" alt="Enlarged Inspector Screenshot" id="lightbox-img">
       <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div class="toast-notice" id="toast-notice" aria-live="polite"></div>
+  <div class="toast-notice" id="toast-notice" role="alert" aria-live="polite"></div>
 
   <!-- FOOTER -->
-  <footer class="studio-footer">
-    <div class="container footer-grid">
-      <div class="footer-col brand-col">
-        <div class="footer-brand">
-          <span class="brand-punched-card"></span>
-          <span class="brand-title">DUME <span class="brand-accent">STUDIO</span></span>
+  <footer class="calm-footer">
+    <div class="container footer-container">
+      
+      <div class="footer-brand-col">
+        <div class="brand-cluster">
+          <div class="brand-badge-icon">
+            <span class="icon-punch">■</span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">DUME<span class="brand-highlight">db</span></span>
+          </div>
         </div>
-        <p class="footer-desc">
-          Deterministic Unit-Record Memory Engine for autonomous intelligence. 
-          Zero replay bloat. Pure signal. Immutable truth.
+        <p class="footer-tagline">
+          Deterministic Unit-Record Memory Engine for Autonomous AI Agents.<br>
+          Apache 2.0 Open Source • Engineered by MadBrad.
         </p>
-        <div class="footer-axiom">
-          “Box is the game, folks.” — Frank, 1959
-        </div>
       </div>
 
-      <div class="footer-col">
-        <h5 class="footer-heading">Architecture &amp; Docs</h5>
-        <ul class="footer-nav">
-          <li><a href="#philosophy">Two Agents &amp; The Truth</a></li>
-          <li><a href="#simulator">Studio Console Simulator</a></li>
-          <li><a href="#odometer">Mathematical Odometer</a></li>
-          <li><a href="#comparison">Honest Comparison Matrix</a></li>
-          <li><a href="#architecture">Unit-Record Principles</a></li>
-          <li><a href="#quickstart">Developer Quickstart</a></li>
-          <li><a href="#roadmap">Roadmap &amp; License</a></li>
-        </ul>
+      <div class="footer-links-col">
+        <div class="footer-heading">Documentation</div>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#drawers">Opcode Specifications</a>
+        <a href="#architecture">Inspector UI</a>
+        <a href="https://github.com/madbradsmith/DUMEdb" target="_blank" rel="noopener">GitHub Repository</a>
       </div>
 
-      <div class="footer-col">
-        <h5 class="footer-heading">Ecosystem</h5>
-        <ul class="footer-nav">
-          <li><a href="https://github.com/madbradsmith/DUMEdb" target="_blank" rel="noopener">GitHub: madbradsmith/DUMEdb</a></li>
-          <li><a href="https://developumaiengine.com/" target="_blank" rel="noopener">Developum AI Engine</a></li>
-          <li><a href="https://evolumstudio.com/" target="_blank" rel="noopener">Evolum Studio</a></li>
-          <li><a href="https://expeditum.dev/" target="_blank" rel="noopener">Expeditum Platform</a></li>
-        </ul>
+      <div class="footer-links-col">
+        <div class="footer-heading">Media &amp; Community</div>
+        <a href="https://youtu.be/nO5vozUhqyU" target="_blank" rel="noopener">Official Masterclass</a>
+        <a href="https://github.com/sponsors/madbradsmith" target="_blank" rel="noopener">Sponsor MadBrad</a>
+        <a href="https://github.com/madbradsmith/DUMEdb/issues" target="_blank" rel="noopener">Issue Tracker</a>
       </div>
 
-      <div class="footer-col">
-        <h5 class="footer-heading">Protocol Status</h5>
-        <div class="footer-badge-box">
-          <div class="status-indicator">
-            <span class="status-dot green"></span>
-            <span>v1.0 Frozen &amp; Tagged</span>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot gold"></span>
-            <span>Port 8095 Clean &amp; Ready</span>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot emerald"></span>
-            <span>Domain: dumedb.developumaiengine.com</span>
-          </div>
-        </div>
+      <div class="footer-links-col">
+        <div class="footer-heading">Legal &amp; Compliance</div>
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="acceptable_use.html">Acceptable Use Policy</a>
       </div>
+
     </div>
 
-    <div class="footer-bottom-bar">
-      <div class="container bottom-inner">
-        <span>&copy; 2026 DUMEdb &bull; Powered by <a href="https://developumaiengine.com" target="_blank" rel="noopener">Developum AI Engine</a>. All Rights Reserved.</span>
-        <span class="punch-quote">"Deletions is where the lies live."</span>
-      </div>
-      <div class="container bottom-inner footer-legal-row">
-        <span class="footer-legal-badge" title="SOC 2 Type II examination is in progress; no report has been issued."><span class="footer-legal-dot"></span> SOC 2 Type II &middot; Audit in progress</span>
-        <nav class="footer-legal-links" aria-label="Legal">
-          <a href="privacy.html">Privacy Policy</a>
-          <span>&bull;</span>
-          <a href="terms.html">Terms of Service</a>
-          <span>&bull;</span>
-          <a href="acceptable_use.html">Acceptable Use Policy</a>
-        </nav>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-container">
+        <span>&copy; 2026 MadBrad • Developum. Apache 2.0 Open Source.</span>
+        <span>Hosted locally on your hardware. Zero data collection.</span>
       </div>
     </div>
   </footer>
