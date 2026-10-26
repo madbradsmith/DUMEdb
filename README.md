@@ -7,8 +7,9 @@
 [![Latency](https://img.shields.io/badge/read%20latency-%3C%200.8%20%CE%BCs-brightgreen.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/architecture-Hardware--Aligned%20Zero--Copy-purple.svg?style=flat-square)](https://dumedb.developumaiengine.com)
+[![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-blueviolet.svg?style=flat-square)](https://modelcontextprotocol.io)
 
-> **Hardware-aligned, zero-prompt-bloat, byte-structured memory engine and drop-in OpenAI-compatible proxy gateway for autonomous AI agents.**
+> **Hardware-aligned, zero-prompt-bloat, byte-structured memory engine, production Model Context Protocol (MCP) server, and drop-in OpenAI-compatible proxy gateway for autonomous AI agents.**
 
 > 🎬 **Watch the Official Masterclass on YouTube:**  
 > [**Stop Force-Feeding Your AI 30,000 Tokens just to remind them who you are!**](https://youtu.be/nO5vozUhqyU) — *Featuring Frank, The Sentinel, and real-time live benchmarks.*
@@ -73,7 +74,14 @@ At the hardware core of DUMEdb is the **Unit Record**—a strictly aligned, 32-b
 
 ## ⚡ Core Subsystems
 
-### 1. 📁 Recursive Directory Ingestion Engine
+### 1. 🔌 Model Context Protocol (MCP) Server (`dume.mcp_server`)
+Full compliance with Anthropic's **Model Context Protocol (MCP)** specification over standard I/O (`stdio`):
+- **15 First-Class MCP Tools**: Provides direct tools for state reading (`dume_read_state`), transactional register mutation (`dume_commit_state`), filtered queries (`dume_query`), and dynamic schema cataloging (`dume_list_schemas`).
+- **Autonomous Session Orientation**: Full Cabinet integration (`cabinet_wake`, `cabinet_refresh`) enabling zero-turn workspace context hydration.
+- **Plug-and-Play IDE Compatibility**: Plugs directly into Claude Desktop, Cursor, Antigravity, Windsurf, and Cline with zero external network dependencies.
+- **Self-Healing Background Daemon**: Automatically ensures local memory substrates and HTTP inspectors are active whenever the MCP harness starts.
+
+### 2. 📁 Recursive Directory Ingestion Engine
 Ingest entire software repositories, project documentation, or knowledge folders into deterministic state registers with a single call:
 - **Recursive Directory Crawler**: Discovers and digests file trees while pruning noise (`.git`, `node_modules`, `.venv`, binaries).
 - **SHA-256 Content Deduplication**: Identical files across locations are deduplicated in memory.
@@ -140,7 +148,46 @@ Open your browser to: **[http://localhost:8095/inspector/index.html](http://loca
 
 ## 🔌 Connecting to Your Agent Tools
 
-### Cursor / VS Code (Cline / Continue)
+### 1. Model Context Protocol (MCP) — Claude Desktop, Cursor, Antigravity
+DUMEdb is a native MCP server exposing deterministic memory tools over `stdio`. Add it to your client configuration:
+
+**Claude Desktop** (`claude_desktop_config.json`) or **Cursor** (`~/.cursor/mcp.json`):
+```json
+{
+  "mcpServers": {
+    "dumedb": {
+      "command": "python",
+      "args": ["-m", "dume.mcp_server"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+```
+
+**Or via Docker:**
+```json
+{
+  "mcpServers": {
+    "dumedb": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "madbradsmith/dumedb"]
+    }
+  }
+}
+```
+
+#### Key MCP Tools Included:
+- `dume_read_state`: Reads active registers for an entity directly from LMDB with zero prompt bloat.
+- `dume_commit_state`: Transactionally writes 32-byte unit-record registers.
+- `dume_query`: Queries memory registers with opcode and entity filtering.
+- `cabinet_wake`: Zero-turn workspace orientation and memory retrieval.
+- `cabinet_refresh`: Flushes session progress and odometers to disk for the next agent instance.
+
+---
+
+### 2. OpenAI Proxy Gateway — Cursor / VS Code (Cline / Continue)
 Point your model base URL to the DUMEdb local proxy gateway:
 
 ```json
