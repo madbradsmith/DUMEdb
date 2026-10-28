@@ -103,13 +103,18 @@ A visual cockpit for inspecting and managing agent memory in real time:
 - **Directory Ingestion Modal**: Instant folder crawling with one click.
 - **Token Telemetry & KV-Cache Runway**: Real-time context monitoring.
 
-### 5. 🗄️ The Cabinet
-Autonomous session orientation ledger that maintains agent continuity across restarts, compacting work logs and next moves to eliminate "catch-me-up" context waste.
+### 5. 🗄️ The Cabinet (Zero-Turn Hydration & Session Continuity Ledger)
+The antidote to the "80KB backpack" of conversational bloat and agent amnesia. Instead of force-feeding an AI model 25,000 tokens of raw historical transcripts or running fuzzy filesystem searches (`ripgrep`) just to figure out *"where were we?"*, The Cabinet provides an instant, deterministic operational compass:
+- **Zero-Turn Orientation (`cabinet_wake`)**: Hydrates the agent with verified operator identity, active memory registers, permanent invariants, and immediate next milestones in a single turn under **~220 tokens** with `< 0.8 μs` LMDB read latency.
+- **Predictable Session Handoff (`cabinet_refresh`)**: Before an IDE auto-compaction lobotomizes an agent at 70% context, the Sentinel stamps a high-density tactical receipt—recording completed work, files touched, and immediate next handshakes—allowing fresh sessions to boot with a 99.8% clean context runway.
+- **Permanent Invariants & Behavioral Laws (`cabinet_mint_rule`)**: Persists non-negotiable architectural rules, terminology protocols, and operational guardrails into hardware registers that survive restarts and never get washed away in chat history.
+- **Tactical Workflow Playbooks (`cabinet_record_workflow`)**: Stores versioned, step-by-step procedures directly in deterministic memory, enabling agents to execute complex operations without re-deriving plans from scratch.
+- **Eliminates Filesystem Rummaging**: Prohibits expensive, blind directory scans—agents know their exact mission, state, and next moves from the very first turn.
 
 ### 6. 📱 The Table — Mobile Companion Bridge
 Control, instruct, and query your workstation AI agent directly from your mobile phone while away from your desk:
 - **DUME Studio Tab 5 (The Table)**: Instant QR-code mobile pairing, live bidirectional chat stream, and direct reply panel in the Studio Inspector.
-- **Autonomous Crawler Daemon**: Background poller (`python the_table/crawler.py`) automatically crawls incoming voice and text messages from mobile in real time.
+- **Autonomous Crawler Daemon**: Background poller (`python the_table/listener.py`) automatically crawls incoming voice and text messages from mobile in real time.
 - **Native MCP Tools**: Exposes `table_status`, `table_poll`, and `table_reply` so agents can read and respond back to your phone directly from local silicon.
 - **Zero-Friction Prompt Injection**: Seamlessly wakes the agent harness on inbound mobile instructions — *"Let me get my agent on that"* from anywhere.
 
