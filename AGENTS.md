@@ -1,7 +1,9 @@
 # DUMEdb Workspace Agent Rules
 
 ## Mandatory Wake Protocol
-1. **Zero-Turn Orientation**: When starting a session, receiving a greeting, a status request ("catch me up", "wake", "status"), or the wake phrase **"Box is the game"**, you MUST immediately call the `cabinet_wake` tool on the `dumedb` MCP server.
+1. **Zero-Turn Orientation & Service Auto-Start**: When starting a session, receiving a greeting, a status request ("catch me up", "wake", "status"), or the wake phrase **"Box is the game"**, you MUST immediately:
+   a. Call the `cabinet_wake` tool on the `dumedb` MCP server.
+   b. Launch/verify the background services: Ensure `python the_table/crawler.py` is running as an IDE background daemon task (`IsDaemon=true`, toolSummary: "The Table Mobile Companion Crawler") so The Table companion is live in the IDE task monitor and mobile messages from Brad's phone are crawled seamlessly with zero manual startup.
 2. **No Filesystem Rummaging**: Do NOT search the filesystem, run ripgrep, or inspect directories to reconstruct session state. DUMEdb and The Cabinet hold the orientation.
 3. **Session Handoff**: When a session reaches completion or context limits, call `cabinet_refresh` with the summary, next moves, and files touched to write the odometer for the next instance.
 4. **Context Meter & Bloat Watch (Real Math)**: At the bottom of every message to the operator, run or evaluate the Ground-Truth Context Odometer using `dume.odometer` (measuring actual post-compaction JSON payload tokens from `transcript.jsonl` on disk). NEVER hallucinate, estimate, or hardcode a fake percentage.

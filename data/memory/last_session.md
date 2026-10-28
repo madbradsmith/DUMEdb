@@ -1,13 +1,13 @@
 # Last Session Log (Tactical Odometer)
-**Timestamp**: 2026-10-28 15:45:06  
+**Timestamp**: 2026-10-28 15:55:43  
 **Operator**: MadBrad  
 **Status**: Session Finalized via Refresh Protocol (RP)  
 
 ## 1. Summary of Completed Work
-Identified Kip/tmux nudge architecture (tmux send-keys into agent pane + append-only file). Fixed .agents/hooks.json Windows path bug. Verified incoming mobile hook injection from Brad phone. Delivered replies to The Table. Mapped out DUME Studio autonomous loop and GitHub release.
+Integrated The Table Mobile Companion Bridge into DUME Studio & MCP. Deployed autonomous background daemon (the_table/bridge_daemon.py). Added Tab 5 (The Table) in DUME Studio UI. Exposed table_status, table_poll, table_reply MCP tools. Created pytest test suite (100% pass). Pushed v1.2.0 release and git tag to GitHub.
 
 ## 2. Files Touched
-.agents/hooks.json, the_table/hook.py, the_table/client.py, dume/ui/inspector/index.html
+the_table/bridge_daemon.py, dume/mcp_server.py, dume/server/app.py, dume/ui/inspector/index.html, dume/ui/inspector/app.js, tests/test_the_table.py, pyproject.toml, dume/__init__.py
 
 ## 3. Immediate Next Handshake
-- **Target**: Wire autonomous background nudger into Antigravity/DUME Studio so phone messages wake agent without manual desktop input; add 5th tab to DUME Studio and cut GitHub release.
+- **Target**: Test live mobile communication through The Table while away from PC; revisit Mutatum hardware-grade UI direction (Titanium Vault vs Monroe/Burroughs VFD).

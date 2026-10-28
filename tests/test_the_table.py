@@ -39,3 +39,4 @@ def test_table_reply_failure():
     with patch("the_table.client.send_reply", return_value=False):
         res = table_reply("Failed message")
         assert "❌ Failed to deliver reply" in res
+

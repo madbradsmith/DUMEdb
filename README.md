@@ -1,6 +1,6 @@
 # ⚡ DUMEdb (Deterministic Unit-Record Memory Engine)
 
-[![Release](https://img.shields.io/badge/release-v1.1.0-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
+[![Release](https://img.shields.io/badge/release-v1.2.0-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
 [![YouTube](https://img.shields.io/badge/YouTube-Watch%20Walkthrough-red?style=flat-square&logo=youtube)](https://youtu.be/nO5vozUhqyU)
 [![Python](https://img.shields.io/badge/python-3.9+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![LMDB](https://img.shields.io/badge/storage-LMDB%20Mmap-00ADD8.svg?style=flat-square)](https://symas.com/lmdb/)
@@ -106,6 +106,13 @@ A visual cockpit for inspecting and managing agent memory in real time:
 ### 4. 🗄️ The Cabinet
 Autonomous session orientation ledger that maintains agent continuity across restarts, compacting work logs and next moves to eliminate "catch-me-up" context waste.
 
+### 5. 📱 The Table — Mobile Companion Bridge
+Control, instruct, and query your workstation AI agent directly from your mobile phone while away from your desk:
+- **DUME Studio Tab 5 (The Table)**: Instant QR-code mobile pairing, live bidirectional chat stream, and direct reply panel in the Studio Inspector.
+- **Autonomous Crawler Daemon**: Background poller (`python the_table/crawler.py`) automatically crawls incoming voice and text messages from mobile in real time.
+- **Native MCP Tools**: Exposes `table_status`, `table_poll`, and `table_reply` so agents can read and respond back to your phone directly from local silicon.
+- **Zero-Friction Prompt Injection**: Seamlessly wakes the agent harness on inbound mobile instructions — *"Let me get my agent on that"* from anywhere.
+
 ---
 
 ## 🚀 Quick Start (60 Seconds)
@@ -137,7 +144,7 @@ Start_DUMEdb_UI.bat
 Console Output:
 ```plaintext
 =======================================================
-🚀 DUMEdb Studio v1.1.0 is Live!
+🚀 DUMEdb Studio v1.2.0 is Live!
 🔗 Web Inspector: http://localhost:8095/inspector/index.html
 ⚡ Proxy Gateway: http://localhost:8095/v1
 =======================================================

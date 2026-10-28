@@ -22,33 +22,33 @@ if str(WORKSPACE_DIR) not in sys.path:
 
 from the_table.client import pair, poll_server, add_to_inbox
 
-POLL_INTERVAL = int(os.environ.get("TABLE_POLL_INTERVAL", "20"))
+POLL_INTERVAL = int(os.environ.get("TABLE_POLL_INTERVAL", "10"))
 
 def run_crawler():
     token, url = pair()
-    print("=" * 70)
-    print("📡 THE TABLE CRAWLER DAEMON ACTIVE")
-    print("=" * 70)
-    print(f"[*] Server:      https://table.developumaiengine.com")
-    print(f"[*] Mobile URL:  {url}")
-    print(f"[*] Direct Link: https://table.developumaiengine.com/t/ag")
-    print(f"[*] Interval:    {POLL_INTERVAL} seconds")
-    print("=" * 70)
-    print("[*] Crawler listening for incoming mobile messages from Brad...")
+    print("=" * 70, flush=True)
+    print("📡 THE TABLE CRAWLER DAEMON ACTIVE", flush=True)
+    print("=" * 70, flush=True)
+    print(f"[*] Server:      https://table.developumaiengine.com", flush=True)
+    print(f"[*] Mobile URL:  {url}", flush=True)
+    print(f"[*] Direct Link: https://table.developumaiengine.com/t/ag", flush=True)
+    print(f"[*] Interval:    {POLL_INTERVAL} seconds", flush=True)
+    print("=" * 70, flush=True)
+    print("[*] Crawler listening for incoming mobile messages from Brad...", flush=True)
 
     ticks = 0
     while True:
         try:
             queued = poll_server()
             if queued:
-                print(f"\n[!] INCOMING MESSAGE FROM BRAD ({len(queued)}):")
+                print(f"\n[!] INCOMING MESSAGE FROM BRAD ({len(queued)}):", flush=True)
                 for msg in queued:
                     text = msg.get("text", "")
                     ts = msg.get("ts", time.time())
                     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(ts))
-                    print(f"    [{time_str}] Brad: {text}")
+                    print(f"    [{time_str}] Brad: {text}", flush=True)
                 add_to_inbox(queued)
-                print("[✓] Injected into the_table/inbox.json for Antigravity prompt hook.")
+                print("[✓] Injected into the_table/inbox.json for Antigravity prompt hook.", flush=True)
             
             ticks += 1
             if ticks % 10 == 0:
@@ -56,10 +56,10 @@ def run_crawler():
 
             time.sleep(POLL_INTERVAL)
         except KeyboardInterrupt:
-            print("\n[*] Crawler stopped by operator.")
+            print("\n[*] Crawler stopped by operator.", flush=True)
             break
         except Exception as e:
-            print(f"[!] Crawler error: {e}")
+            print(f"[!] Crawler error: {e}", flush=True)
             time.sleep(POLL_INTERVAL)
 
 if __name__ == "__main__":
