@@ -89,24 +89,24 @@ Ingest entire software repositories, project documentation, or knowledge folders
 - **Automatic Opcode Minting**: Novel fields and parameters automatically mint clean, schema-typed opcodes in the `2001-65534` space.
 - **Atomic Single-Transaction LMDB Commits**: Thousands of registers are persisted in milliseconds.
 
-### 2. 🔄 OpenAI Universal Proxy Gateway (`/v1`)
+### 3. 🔄 OpenAI Universal Proxy Gateway (`/v1`)
 Drop-in compatibility with **any** AI client: Cursor, Claude Desktop, VS Code (Cline), OpenWebUI, LangChain, or raw cURL.
 - Intercepts requests pointing to `http://localhost:8095/v1`.
 - Injects deterministic state registers (`[DUME_STATE ...]`) into the active prompt prefix with microsecond speed.
 - Passes streaming completions transparently to upstream models (Ollama, vLLM, Groq, OpenAI, Anthropic).
 - Automatically scribes assistant mutations in the background.
 
-### 3. 🎛️ Dual-View Web Inspector
+### 4. 🎛️ Dual-View Web Inspector
 A visual cockpit for inspecting and managing agent memory in real time:
 - **Dual View**: Switch between interactive cards and raw hardware hex dumps.
 - **Real-Time WebSocket Sync**: Live updates as agents commit mutations.
 - **Directory Ingestion Modal**: Instant folder crawling with one click.
 - **Token Telemetry & KV-Cache Runway**: Real-time context monitoring.
 
-### 4. 🗄️ The Cabinet
+### 5. 🗄️ The Cabinet
 Autonomous session orientation ledger that maintains agent continuity across restarts, compacting work logs and next moves to eliminate "catch-me-up" context waste.
 
-### 5. 📱 The Table — Mobile Companion Bridge
+### 6. 📱 The Table — Mobile Companion Bridge
 Control, instruct, and query your workstation AI agent directly from your mobile phone while away from your desk:
 - **DUME Studio Tab 5 (The Table)**: Instant QR-code mobile pairing, live bidirectional chat stream, and direct reply panel in the Studio Inspector.
 - **Autonomous Crawler Daemon**: Background poller (`python the_table/crawler.py`) automatically crawls incoming voice and text messages from mobile in real time.
