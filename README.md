@@ -1,6 +1,6 @@
 # ⚡ DUMEdb (Deterministic Unit-Record Memory Engine)
 
-[![Release](https://img.shields.io/badge/release-v1.2.0-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
+[![Release](https://img.shields.io/badge/release-v1.2.1-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
 [![YouTube](https://img.shields.io/badge/YouTube-Watch%20Walkthrough-red?style=flat-square&logo=youtube)](https://youtu.be/nO5vozUhqyU)
 [![Python](https://img.shields.io/badge/python-3.9+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![LMDB](https://img.shields.io/badge/storage-LMDB%20Mmap-00ADD8.svg?style=flat-square)](https://symas.com/lmdb/)
@@ -144,7 +144,7 @@ Start_DUMEdb_UI.bat
 Console Output:
 ```plaintext
 =======================================================
-🚀 DUMEdb Studio v1.2.0 is Live!
+🚀 DUMEdb Studio v1.2.1 is Live!
 🔗 Web Inspector: http://localhost:8095/inspector/index.html
 ⚡ Proxy Gateway: http://localhost:8095/v1
 =======================================================
