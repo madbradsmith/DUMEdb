@@ -4,4 +4,4 @@
 - **AI Collaborator**: AG / Sentinel Harness
 - **Current Mode**: Sentinel Active
 - **Codeword**: box is the game
-- **Next Move**: Test live mobile communication through The Table while away from PC; revisit Mutatum hardware-grade UI direction (Titanium Vault vs Monroe/Burroughs VFD).
+- **Next Move**: Deploy/test notifications live with Brad's phone on The Table PWA; explore Mutatum hardware-grade UI aesthetic redesign.

@@ -1491,6 +1491,7 @@ function setupEventListeners() {
         loadCabinetWorkflows();
         loadCabinetHealth();
       } else if (targetView === "view-table") {
+        loadTableNotificationSettings();
         loadTableMessages();
       }
     });
@@ -3665,8 +3666,182 @@ async function handleReactivateWorkflow(wfId) {
 }
 
 // ============================================================================
-// The Table Mobile Bridge Handlers
+// The Table Mobile Bridge Handlers & Completion Notifications
 // ============================================================================
+
+let tableAudioCtx = null;
+let lastThinkingState = false;
+let lastKnownMsgCount = 0;
+
+function getTableAudioContext() {
+  if (!tableAudioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) {
+      tableAudioCtx = new AudioContextClass();
+    }
+  }
+  if (tableAudioCtx && tableAudioCtx.state === "suspended") {
+    tableAudioCtx.resume().catch(() => {});
+  }
+  return tableAudioCtx;
+}
+
+function playTableChime() {
+  try {
+    const ctx = getTableAudioContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    // Resonant harmonic chime: C5 (523.25 Hz) -> G5 (783.99 Hz)
+    const tones = [
+      { freq: 523.25, start: 0.0, dur: 0.28, gain: 0.22 },
+      { freq: 783.99, start: 0.12, dur: 0.50, gain: 0.28 }
+    ];
+
+    tones.forEach(t => {
+      const osc = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(t.freq, now + t.start);
+
+      // Smooth exponential envelope
+      gainNode.gain.setValueAtTime(0.0001, now + t.start);
+      gainNode.gain.exponentialRampToValueAtTime(t.gain, now + t.start + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + t.start + t.dur);
+
+      osc.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      osc.start(now + t.start);
+      osc.stop(now + t.start + t.dur);
+    });
+  } catch (err) {
+    console.warn("[The Table] Web Audio chime playback error:", err);
+  }
+}
+
+function triggerTableHaptic() {
+  try {
+    if ("vibrate" in navigator) {
+      // Crisp double-pulse haptic
+      navigator.vibrate([70, 50, 110]);
+    }
+  } catch (err) {
+    console.warn("[The Table] Haptic vibration error:", err);
+  }
+}
+
+async function requestTableNotificationPermission() {
+  if (!("Notification" in window)) return false;
+  if (Notification.permission === "granted") return true;
+  if (Notification.permission !== "denied") {
+    const perm = await Notification.requestPermission();
+    return perm === "granted";
+  }
+  return false;
+}
+
+function triggerTablePushNotification(title, body) {
+  try {
+    if (!("Notification" in window)) return;
+    if (Notification.permission === "granted") {
+      new Notification(title || "DUMEdb Sentinel • The Table", {
+        body: body || "Task completed on The Table mobile bridge.",
+        icon: "/favicon.ico",
+        badge: "/favicon.ico",
+        silent: true
+      });
+    }
+  } catch (err) {
+    console.warn("[The Table] Push notification error:", err);
+  }
+}
+
+async function notifyTableCompletion(title = "Task Complete", text = "Response delivered to The Table.") {
+  const masterToggle = document.getElementById("table-notify-master-toggle");
+  if (masterToggle && !masterToggle.checked) return;
+
+  const soundCheckbox = document.getElementById("table-notify-sound");
+  const vibrateCheckbox = document.getElementById("table-notify-vibrate");
+  const pushCheckbox = document.getElementById("table-notify-push");
+
+  if (!soundCheckbox || soundCheckbox.checked) {
+    playTableChime();
+  }
+  if (!vibrateCheckbox || vibrateCheckbox.checked) {
+    triggerTableHaptic();
+  }
+  if (!pushCheckbox || pushCheckbox.checked) {
+    if (Notification.permission === "granted") {
+      triggerTablePushNotification(title, text);
+    } else if (Notification.permission !== "denied") {
+      const granted = await requestTableNotificationPermission();
+      if (granted) triggerTablePushNotification(title, text);
+    }
+  }
+}
+
+async function loadTableNotificationSettings() {
+  try {
+    // 1. Check localStorage first
+    const saved = localStorage.getItem("dume_table_notifications");
+    let settings = saved ? JSON.parse(saved) : null;
+
+    // 2. Fetch or sync with server settings
+    try {
+      const res = await fetch("/api/table/settings");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.notifications) {
+          settings = { ...(settings || {}), ...data.notifications };
+        }
+      }
+    } catch (_) {}
+
+    if (!settings) {
+      settings = { enabled: true, sound: true, vibrate: true, push: true };
+    }
+
+    const master = document.getElementById("table-notify-master-toggle");
+    const sound = document.getElementById("table-notify-sound");
+    const vibrate = document.getElementById("table-notify-vibrate");
+    const push = document.getElementById("table-notify-push");
+
+    if (master) master.checked = settings.enabled !== false;
+    if (sound) sound.checked = settings.sound !== false;
+    if (vibrate) vibrate.checked = settings.vibrate !== false;
+    if (push) push.checked = settings.push !== false;
+  } catch (err) {
+    console.warn("[The Table] Failed to load notification settings:", err);
+  }
+}
+
+async function saveTableNotificationSettings() {
+  try {
+    const master = document.getElementById("table-notify-master-toggle");
+    const sound = document.getElementById("table-notify-sound");
+    const vibrate = document.getElementById("table-notify-vibrate");
+    const push = document.getElementById("table-notify-push");
+
+    const settings = {
+      enabled: master ? master.checked : true,
+      sound: sound ? sound.checked : true,
+      vibrate: vibrate ? vibrate.checked : true,
+      push: push ? push.checked : true
+    };
+
+    localStorage.setItem("dume_table_notifications", JSON.stringify(settings));
+
+    fetch("/api/table/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(settings)
+    }).catch(() => {});
+  } catch (err) {
+    console.warn("[The Table] Failed to save notification settings:", err);
+  }
+}
 
 async function loadTableMessages() {
   const container = document.getElementById("table-messages-container");
@@ -3685,12 +3860,29 @@ async function loadTableMessages() {
       thinkingInd.style.display = data.thinking ? "inline-block" : "none";
     }
 
-    if (!data.msgs || data.msgs.length === 0) {
+    // Check if thinking just finished (true -> false transition)
+    const isThinking = !!data.thinking;
+    if (lastThinkingState && !isThinking) {
+      notifyTableCompletion("Response Ready", "AG completed formulating response for The Table.");
+    }
+    lastThinkingState = isThinking;
+
+    // Check if new messages arrived from AG
+    const msgs = data.msgs || [];
+    if (lastKnownMsgCount > 0 && msgs.length > lastKnownMsgCount) {
+      const latestMsg = msgs[msgs.length - 1];
+      if (latestMsg && latestMsg.sender !== "operator") {
+        notifyTableCompletion("New Message from AG", latestMsg.text ? latestMsg.text.slice(0, 100) : "Response ready.");
+      }
+    }
+    lastKnownMsgCount = msgs.length;
+
+    if (!msgs || msgs.length === 0) {
       container.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-top: 3rem;">No messages exchanged yet. Send a message to start!</div>`;
       return;
     }
 
-    container.innerHTML = data.msgs.map(m => {
+    container.innerHTML = msgs.map(m => {
       const isBrad = m.sender === "operator";
       const senderName = isBrad ? "Brad (Phone)" : "AG (Studio)";
       const bg = isBrad ? "rgba(56, 189, 248, 0.12)" : "rgba(16, 185, 129, 0.12)";
@@ -3731,6 +3923,7 @@ async function sendTableReply(text) {
     if (data.success) {
       if (input) input.value = "";
       await loadTableMessages();
+      notifyTableCompletion("Reply Dispatched", text.trim().slice(0, 80));
     } else {
       alert("Failed to send reply to mobile server.");
     }
@@ -3769,7 +3962,37 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Bind Completion Notification Toggles and Test Button
+  loadTableNotificationSettings();
+
+  const masterToggle = document.getElementById("table-notify-master-toggle");
+  if (masterToggle) {
+    masterToggle.addEventListener("change", saveTableNotificationSettings);
+  }
+  ["table-notify-sound", "table-notify-vibrate", "table-notify-push"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("change", saveTableNotificationSettings);
+  });
+
+  const btnTest = document.getElementById("btn-test-notification");
+  if (btnTest) {
+    btnTest.addEventListener("click", async () => {
+      getTableAudioContext(); // Unlock audio on user gesture
+      if ("Notification" in window && Notification.permission !== "granted") {
+        await requestTableNotificationPermission();
+      }
+      await notifyTableCompletion("Test Alert", "Web Audio chime & haptic feedback operational.");
+      const statusEl = document.getElementById("notify-test-status");
+      if (statusEl) {
+        statusEl.style.display = "inline";
+        statusEl.textContent = "Alert Played!";
+        setTimeout(() => { statusEl.style.display = "none"; }, 2500);
+      }
+    });
+  }
 });
+
 
 
 

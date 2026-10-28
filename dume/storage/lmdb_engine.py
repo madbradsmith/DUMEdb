@@ -191,9 +191,24 @@ class DUMEMemoryEngine:
 
         with self.env.begin(db=self.db_history, write=False, buffers=True) as txn:
             cursor = txn.cursor()
-            next_prefix = entity_bytes[:-1] + bytes([entity_bytes[-1] + 1])
-            if cursor.set_range(next_prefix):
-                has_key = cursor.prev()
+            # Calculate next prefix safely handling 0xFF byte rollover
+            carry = 1
+            prefix_list = list(entity_bytes)
+            for idx in range(len(prefix_list) - 1, -1, -1):
+                val = prefix_list[idx] + carry
+                if val < 256:
+                    prefix_list[idx] = val
+                    carry = 0
+                    break
+                else:
+                    prefix_list[idx] = 0
+
+            if carry == 0:
+                next_prefix = bytes(prefix_list)
+                if cursor.set_range(next_prefix):
+                    has_key = cursor.prev()
+                else:
+                    has_key = cursor.last()
             else:
                 has_key = cursor.last()
 

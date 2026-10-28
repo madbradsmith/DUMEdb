@@ -1287,6 +1287,54 @@ print(response.choices[0].message.content)</pre>
           </div>
         </div>
 
+        <!-- Completion Notifications Configuration Card -->
+        <div class="table-notify-card" style="background: rgba(18, 22, 31, 0.8); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 1rem;">🔔</span>
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-main); letter-spacing: 0.04em;">COMPLETION ALERTS</span>
+            </div>
+            <!-- Master Toggle Switch -->
+            <label class="switch-toggle" title="Toggle completion alerts on/off">
+              <input type="checkbox" id="table-notify-master-toggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <p style="font-size: 0.73rem; color: var(--text-muted); margin: 0; line-height: 1.4;">
+            One-tap alerts when AG finishes executing commands or replies to The Table.
+          </p>
+
+          <!-- Sub-channels: Web Audio Chime, Haptics, Lockscreen Push -->
+          <div style="display: flex; flex-direction: column; gap: 0.5rem; background: rgba(0,0,0,0.25); border-radius: 6px; padding: 0.65rem 0.75rem; border: 1px solid rgba(255,255,255,0.05);">
+            <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: var(--text-main); cursor: pointer;">
+              <span style="display: flex; align-items: center; gap: 6px;">
+                <span>🎵</span> <span>Web Audio Synth Chime</span>
+              </span>
+              <input type="checkbox" id="table-notify-sound" checked>
+            </label>
+            <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: var(--text-main); cursor: pointer;">
+              <span style="display: flex; align-items: center; gap: 6px;">
+                <span>📳</span> <span>Haptic Vibration</span>
+              </span>
+              <input type="checkbox" id="table-notify-vibrate" checked>
+            </label>
+            <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: var(--text-main); cursor: pointer;">
+              <span style="display: flex; align-items: center; gap: 6px;">
+                <span>📲</span> <span>Lock-Screen Push / System</span>
+              </span>
+              <input type="checkbox" id="table-notify-push" checked>
+            </label>
+          </div>
+
+          <!-- Test Button -->
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" class="btn-secondary" id="btn-test-notification" style="flex: 1; justify-content: center; padding: 0.45rem 0.75rem; font-size: 0.75rem; border-color: rgba(56, 189, 248, 0.4); color: var(--accent-cyan);">
+              ⚡ Test Alert (Sound + Haptic)
+            </button>
+            <span id="notify-test-status" style="font-size: 0.72rem; color: #10b981; font-weight: 600; display: none;">Played!</span>
+          </div>
+        </div>
+
         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
           <button type="button" class="btn-primary" id="btn-table-ping" style="justify-content: center; padding: 0.6rem 1rem; font-size: 0.85rem;">
             📡 Ping Brad's Phone

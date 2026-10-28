@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dumedb"
-version = "1.2.1"
+version = "1.2.2"
 description = "Hardware-Aligned Zero-Copy Byte-Structured Memory Engine for AI Agents"
 readme = "README.md"
 authors = [{ name = "MadBrad", email = "madbradsmith@gmail.com" }]

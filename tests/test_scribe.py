@@ -13,7 +13,7 @@ from dume.scribe.committer import ScribeCommitter
 from dume.scribe.worker import ScribeWorker
 
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_foreground_latency_invariance():
     """Verify foreground fast path dispatch completes in < 1ms."""
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -34,7 +34,7 @@ async def test_foreground_latency_invariance():
             assert dispatcher.queue.qsize() == 1
 
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_scribe_worker_append_only_integrity():
     """
     Verify 3 consecutive updates to the same preference:
@@ -78,7 +78,7 @@ async def test_scribe_worker_append_only_integrity():
             assert len(history_logs) == 3, f"Expected 3 history log entries, got {len(history_logs)}"
 
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_scribe_noise_rejection():
     """Verify general conversational chit-chat generates zero DB mutations."""
     with tempfile.TemporaryDirectory() as tmpdir:

@@ -114,8 +114,13 @@ The antidote to the "80KB backpack" of conversational bloat and agent amnesia. I
 ### 6. 📱 The Table — Mobile Companion Bridge
 Control, instruct, and query your workstation AI agent directly from your mobile phone while away from your desk:
 - **DUME Studio Tab 5 (The Table)**: Instant QR-code mobile pairing, live bidirectional chat stream, and direct reply panel in the Studio Inspector.
-- **Autonomous Crawler Daemon**: Background poller (`python the_table/listener.py`) automatically crawls incoming voice and text messages from mobile in real time.
-- **Native MCP Tools**: Exposes `table_status`, `table_poll`, and `table_reply` so agents can read and respond back to your phone directly from local silicon.
+- **Autonomous Event-Driven Listener**: Background poller (`python the_table/listener.py`) automatically receives incoming voice and text messages from mobile in real time, triggering zero-token reactive IDE wakeups.
+- **Completion Notifications Stack**: Multi-sensory completion alerts for mobile and desktop when agent tasks finish:
+  - **One-Tap Master Toggle**: Enable or mute alerts instantly from DUME Studio Tab 5 with persistent state.
+  - **Web Audio Synthesizer Chime**: Harmonic 2-tone melodic chime (C5 to G5) synthesized via native Web Audio API—100% offline with zero external audio assets.
+  - **Haptic Vibration**: Dual-pulse physical feedback (`navigator.vibrate`) on supported mobile and handheld devices.
+  - **Lock-Screen Push / System Alerts**: HTML5 Web Notification integration alerting you even when browser or IDE is backgrounded.
+- **Native MCP Tools**: Exposes `table_status`, `table_poll`, `table_reply`, and `table_notify` so agents and Sentinel harnesses can read, respond, and trigger completion alerts directly from local silicon.
 - **Zero-Friction Prompt Injection**: Seamlessly wakes the agent harness on inbound mobile instructions — *"Let me get my agent on that"* from anywhere.
 
 ---

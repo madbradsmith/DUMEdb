@@ -931,6 +931,22 @@ def table_reply(text: str) -> str:
         return f"Error sending reply to The Table: {e}"
 
 
+@mcp.tool()
+def table_notify(title: str = "Task Complete", text: str = "DUMEdb operation completed.") -> str:
+    """
+    Triggers an out-of-band completion alert (Web Audio chime, haptic vibration, push notification)
+    to Brad's phone via The Table companion bridge.
+    """
+    try:
+        from the_table.client import notify_completion
+        success = notify_completion(title=title, text=text)
+        if success:
+            return f"🔔 Completion alert sent to The Table: [{title}] {text}"
+        return "⚠️ Notification disabled in settings or failed to send."
+    except Exception as e:
+        return f"Error triggering Table notification: {e}"
+
+
 def main():
     mcp.run(transport="stdio")
 

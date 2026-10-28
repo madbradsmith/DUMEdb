@@ -100,6 +100,61 @@ def _append_outbox(entry: Dict[str, Any]):
     entries.append(entry)
     OUTBOX_FILE.write_text(json.dumps(entries[-200:], indent=2), encoding="utf-8")
 
+DEFAULT_NOTIFICATION_SETTINGS: Dict[str, Any] = {
+    "enabled": True,
+    "sound": True,
+    "vibrate": True,
+    "push": True,
+    "volume": 0.8,
+}
+
+def get_notification_settings() -> Dict[str, Any]:
+    """Retrieves current notification settings from bridge state."""
+    state = {}
+    if STATE_FILE.exists():
+        try:
+            state = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    settings = dict(DEFAULT_NOTIFICATION_SETTINGS)
+    settings.update(state.get("notifications", {}))
+    return settings
+
+def update_notification_settings(updates: Dict[str, Any]) -> Dict[str, Any]:
+    """Updates and persists notification preferences in bridge_state.json."""
+    current = get_notification_settings()
+    current.update(updates)
+    _update_state({"notifications": current})
+    return current
+
+def notify_completion(title: str = "Task Complete", text: str = "DUMEdb Sentinel operation finished.") -> bool:
+    """Dispatches a completion notification event to The Table mobile bridge and outbox."""
+    settings = get_notification_settings()
+    if not settings.get("enabled", True):
+        return False
+    entry = {
+        "ts": time.time(),
+        "sender": AGENT_NAME,
+        "type": "notification",
+        "title": title,
+        "text": text,
+        "settings": settings
+    }
+    _append_outbox(entry)
+    # Also push to server as notification event if supported
+    try:
+        payload = {
+            "agent_id": AGENT_ID,
+            "key": AGENT_KEY,
+            "type": "notification",
+            "title": title,
+            "text": text
+        }
+        _request("/bridge/notify", payload, timeout=3)
+    except Exception:
+        pass
+    return True
+
 def get_unread_messages() -> List[Dict[str, Any]]:
     """Returns unread messages from local inbox and marks them as read."""
     if not INBOX_FILE.exists():

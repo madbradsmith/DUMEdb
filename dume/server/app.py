@@ -1621,6 +1621,19 @@ async def websocket_inspector_feed(websocket: WebSocket):
 class TableReplyRequest(BaseModel):
     text: str
 
+
+class TableNotificationSettingsRequest(BaseModel):
+    enabled: Optional[bool] = None
+    sound: Optional[bool] = None
+    vibrate: Optional[bool] = None
+    push: Optional[bool] = None
+    volume: Optional[float] = None
+
+
+class TableNotifyRequest(BaseModel):
+    title: str = "Task Complete"
+    text: str = "DUMEdb Sentinel finished operation."
+
 @app.get("/api/table/status")
 async def get_table_status():
     """Returns live connection and daemon status for The Table mobile bridge."""
@@ -1674,6 +1687,39 @@ async def post_table_reply(body: TableReplyRequest):
         return {"success": ok}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/table/settings")
+async def get_table_settings():
+    """Returns persistent notification and mobile bridge settings."""
+    try:
+        from the_table.client import get_notification_settings
+        return {"success": True, "notifications": get_notification_settings()}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/table/settings")
+async def update_table_settings(body: TableNotificationSettingsRequest):
+    """Updates persistent notification and mobile bridge settings."""
+    try:
+        from the_table.client import update_notification_settings
+        updates = {k: v for k, v in body.model_dump().items() if v is not None}
+        settings = update_notification_settings(updates)
+        return {"success": True, "notifications": settings}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/table/notify")
+async def trigger_table_notify(body: TableNotifyRequest):
+    """Triggers an out-of-band completion notification on The Table."""
+    try:
+        from the_table.client import notify_completion
+        ok = notify_completion(body.title, body.text)
+        return {"success": ok}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
 
 
 def main():
