@@ -491,6 +491,196 @@ class CabinetManager:
             "last_synced": datetime.now().isoformat()
         }
 
+    def auto_harvest_rules_from_transcript(self, transcript_path: Optional[Path] = None) -> List[Dict[str, Any]]:
+        """
+        Scans the active conversation transcript.jsonl for operator-decreed rules and
+        automatically mints them into The Cabinet and commits them to DUMEdb LMDB unit-record storage.
+        Detects:
+        - Terminology replacements ('replace X with Y', 'use X instead of Y', 'don't say X, say Y')
+        - Explicit rules/laws/invariants/decisions ('rule: ...', 'decision: ...', 'invariant: ...')
+        - Imperatives ('always ...', 'never ...')
+        - Project policies ('from now on ...', 'going forward ...')
+        - Commercial & Pricing constants ('license price is ...')
+        """
+        if not transcript_path:
+            try:
+                from dume.odometer import get_latest_transcript_path
+                t_str = get_latest_transcript_path()
+                if t_str and Path(t_str).exists():
+                    transcript_path = Path(t_str)
+            except Exception:
+                pass
+
+        if not transcript_path or not transcript_path.exists():
+            return []
+
+        minted = []
+        items = self._load_json()
+        existing_moves = [it.get("move", "").lower() for it in items]
+
+        def _is_known(text: str) -> bool:
+            clean = text.lower().strip()
+            for em in existing_moves:
+                if clean in em or em in clean:
+                    return True
+            return False
+
+        try:
+            with open(transcript_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    step = json.loads(line)
+                    if step.get("type") == "USER_INPUT":
+                        content = step.get("content", "")
+                        for l in content.splitlines():
+                            l_clean = l.strip()
+                            if not l_clean or len(l_clean) < 10:
+                                continue
+
+                            # Skip pure user requests asking to build harvester
+                            if "rules in chat need to be identified" in l_clean.lower():
+                                continue
+
+                            entry_candidate = None
+
+                            # Pattern 1: Terminology replacements ('remove/replace X with Y', 'use X instead of Y')
+                            m_replace = re.search(
+                                r"(?:we\s+decided\s+to\s+)?(?:remove|replace)\s+(?:the\s+term\s+)?['\"]?([^'\"\s]+)['\"]?\s+(?:with|and\s+replace\s+it\s+with)\s+['\"]?([^'\"\s.,]+)['\"]?",
+                                l_clean,
+                                re.IGNORECASE
+                            )
+                            if m_replace:
+                                old_term, new_term = m_replace.group(1), m_replace.group(2)
+                                title = f"TERMINOLOGY RULE: {new_term.upper()} OVER {old_term.upper()}"
+                                move = f"Always use the term '{new_term}'. NEVER use the term '{old_term}'. The term '{old_term}' is strictly retired and forbidden."
+                                if not _is_known(move):
+                                    entry_candidate = {
+                                        "title": title,
+                                        "trigger": f"When writing or outputting terminology regarding {new_term}",
+                                        "move": move,
+                                        "category": "nomenclature",
+                                        "why": f"Operator explicitly decreed replacing '{old_term}' with '{new_term}'"
+                                    }
+
+                            # Pattern 2: Explicit prefix ('rule:', 'law:', 'invariant:', 'decision:')
+                            if not entry_candidate:
+                                m_rule = re.search(r"^(?:rule|law|invariant|decision):\s*(.+)$", l_clean, re.IGNORECASE)
+                                if m_rule:
+                                    rule_text = m_rule.group(1).strip()
+                                    title = f"RULE: {rule_text[:45]}"
+                                    if not _is_known(rule_text):
+                                        entry_candidate = {
+                                            "title": title,
+                                            "trigger": "Always active constraint",
+                                            "move": rule_text,
+                                            "category": "protocol",
+                                            "why": "Operator explicitly prefixed rule"
+                                        }
+
+                            # Pattern 3: Imperatives ('always ...', 'never ...')
+                            if not entry_candidate:
+                                m_imp = re.search(r"^(?:from now on,?\s+|make sure to\s+|going forward,?\s+)?(always|never)\s+(.+?)(?:\.|$)", l_clean, re.IGNORECASE)
+                                if m_imp:
+                                    mode, action = m_imp.group(1).upper(), m_imp.group(2).strip()
+                                    if len(action) > 12:
+                                        title = f"INVARIANT: {mode} {action[:40]}"
+                                        move = f"{mode}: {action}"
+                                        if not _is_known(move):
+                                            entry_candidate = {
+                                                "title": title,
+                                                "trigger": "Session invariant constraint",
+                                                "move": move,
+                                                "category": "protocol",
+                                                "why": f"Operator decreed imperative {mode}"
+                                            }
+
+                            # Pattern 4: Policies ('from now on ...', 'going forward ...')
+                            if not entry_candidate:
+                                m_fno = re.search(r"^(?:from now on|going forward),?\s*(.+?)(?:\.|$)", l_clean, re.IGNORECASE)
+                                if m_fno:
+                                    action = m_fno.group(1).strip()
+                                    if len(action) > 12:
+                                        title = f"POLICY: {action[:45]}"
+                                        move = f"Policy (from now on): {action}"
+                                        if not _is_known(move):
+                                            entry_candidate = {
+                                                "title": title,
+                                                "trigger": "Active project policy",
+                                                "move": move,
+                                                "category": "protocol",
+                                                "why": "Operator set forward policy"
+                                            }
+
+                            # Pattern 5: Agreed Decisions ('we decided to / that ...')
+                            if not entry_candidate:
+                                m_dec = re.search(r"(?:we\s+decided\s+(?:to|that))\s+(.+?)(?:\.|$)", l_clean, re.IGNORECASE)
+                                if m_dec:
+                                    action = m_dec.group(1).strip()
+                                    if len(action) > 15:
+                                        title = f"DECISION: {action[:45]}"
+                                        move = f"Agreed decision: {action}"
+                                        if not _is_known(move):
+                                            entry_candidate = {
+                                                "title": title,
+                                                "trigger": "Project decision alignment",
+                                                "move": move,
+                                                "category": "protocol",
+                                                "why": "Agreed decision recorded in chat"
+                                            }
+
+                            if entry_candidate:
+                                entry = self.record_workflow(
+                                    title=entry_candidate["title"],
+                                    trigger=entry_candidate["trigger"],
+                                    move=entry_candidate["move"],
+                                    category=entry_candidate["category"],
+                                    why=entry_candidate.get("why", ""),
+                                    source="Auto-Harvested from Operator Chat",
+                                    created_by="Cabinet Auto-Harvester"
+                                )
+                                minted.append(entry)
+                                existing_moves.append(entry_candidate["move"].lower())
+
+                                # Also commit to DUMEdb LMDB unit-record storage
+                                try:
+                                    import hashlib, uuid
+                                    from dume.onboarding import get_storage_dir
+                                    from dume.storage.lmdb_engine import DUMEMemoryEngine
+                                    from dume.core.record import UnitRecord
+                                    from dume.schema.dictionary import SchemaDictionary, OpcodeSpec
+
+                                    storage_dir = get_storage_dir()
+                                    engine = DUMEMemoryEngine(storage_dir)
+                                    schema = SchemaDictionary()
+
+                                    op = schema.get_opcode_by_name("OPERATOR_LAW_DIRECTIVE")
+                                    if op is None:
+                                        spec = OpcodeSpec(
+                                            opcode=1030,
+                                            name="OPERATOR_LAW_DIRECTIVE",
+                                            description="Active Operator Law / Rule directive committed from chat",
+                                            data_type="STRING_REF"
+                                        )
+                                        schema.register_opcode(spec, persist=True, is_custom=True)
+
+                                    entity_bytes = uuid.uuid5(uuid.UUID("6ba7b810-9dad-11d1-80b4-00c04fd430c8"), "MadBrad-AG-01").bytes
+                                    rule_payload = f"[{entry['id']}] {entry['title']}: {entry['move']}".encode("utf-8")
+                                    payload_hash_int = int.from_bytes(hashlib.sha256(rule_payload).digest()[:8], byteorder="big", signed=True)
+
+                                    rec = UnitRecord.create(
+                                        entity_id=entity_bytes,
+                                        opcode=1030,
+                                        value=payload_hash_int,
+                                        has_extension_payload=True,
+                                        is_active=True
+                                    )
+                                    engine.put_record(rec, payload_bytes=rule_payload)
+                                except Exception:
+                                    pass
+        except Exception:
+            pass
+
+        return minted
+
 
 _CABINET_INSTANCE: Optional[CabinetManager] = None
 

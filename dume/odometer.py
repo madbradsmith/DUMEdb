@@ -122,12 +122,16 @@ def extract_db_token_telemetry(db_path: Path) -> List[Dict[str, int]]:
 
 def get_latest_transcript_path() -> Optional[Path]:
     """Finds the active conversation's transcript.jsonl by latest modification time."""
-    base_brain = Path.home() / ".gemini" / "antigravity-ide" / "brain"
-    if not base_brain.exists():
-        return None
+    candidate_dirs = [
+        Path.home() / ".gemini" / "antigravity" / "brain",
+        Path.home() / ".gemini" / "antigravity-ide" / "brain"
+    ]
+    matched = []
+    for base_brain in candidate_dirs:
+        if base_brain.exists():
+            pattern = str(base_brain / "*" / ".system_generated" / "logs" / "transcript.jsonl")
+            matched.extend(glob.glob(pattern))
 
-    pattern = str(base_brain / "*" / ".system_generated" / "logs" / "transcript.jsonl")
-    matched = glob.glob(pattern)
     if not matched:
         return None
 
@@ -136,19 +140,25 @@ def get_latest_transcript_path() -> Optional[Path]:
 
 def get_conversation_db_path(transcript_path: Optional[Path]) -> Optional[Path]:
     """Finds the SQLite database corresponding to the active conversation."""
-    base_conv = Path.home() / ".gemini" / "antigravity-ide" / "conversations"
-    if not base_conv.exists():
-        return None
+    candidate_conv_dirs = [
+        Path.home() / ".gemini" / "antigravity" / "conversations",
+        Path.home() / ".gemini" / "antigravity-ide" / "conversations"
+    ]
 
     if transcript_path:
         # Transcript is located at: .../brain/<conversation_id>/.system_generated/logs/transcript.jsonl
         conv_id = transcript_path.parents[2].name
-        candidate = base_conv / f"{conv_id}.db"
-        if candidate.exists():
-            return candidate
+        for base_conv in candidate_conv_dirs:
+            candidate = base_conv / f"{conv_id}.db"
+            if candidate.exists():
+                return candidate
 
-    # Fallback to latest modified conversation db
-    dbs = glob.glob(str(base_conv / "*.db"))
+    # Fallback to latest modified conversation db across candidate dirs
+    dbs = []
+    for base_conv in candidate_conv_dirs:
+        if base_conv.exists():
+            dbs.extend(glob.glob(str(base_conv / "*.db")))
+
     if not dbs:
         return None
     return Path(max(dbs, key=os.path.getmtime))

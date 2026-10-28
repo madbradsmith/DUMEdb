@@ -574,14 +574,32 @@ def cabinet_wake(codeword: str = "box is the game.") -> str:
     # Check active registers
     dume_state = dume_read_state(entity_id=user_cfg.entity_id or "MadBrad-Nostra-01")
 
+    # Ingest active Cabinet Heuristics and Invariants
+    from dume.cabinet.manager import get_cabinet_manager
+    cm = get_cabinet_manager()
+    # Auto-harvest any newly decreed rules from recent chat
+    cm.auto_harvest_rules_from_transcript()
+    active_wfs = cm.list_workflows(status="active")
+
+    rule_lines = []
+    if active_wfs:
+        for wf in active_wfs:
+            # Surface project-specific laws and active directives (skip generic template boilerplates to stay lean)
+            if not wf.get("id", "").startswith("WF-GEN-"):
+                rule_lines.append(f"• [{wf.get('id')}] {wf.get('title')}: {wf.get('move')}")
+
+    rules_block = ""
+    if rule_lines:
+        rules_block = f"\n--- 📜 ACTIVE CABINET INVARIANTS & LAWS ({len(rule_lines)}) ---\n" + "\n".join(rule_lines) + "\n"
+
     return (
         f"--- 🗄️ THE CABINET ORIENTATION ---\n"
         f"{status_txt}\n\n"
         f"--- 📋 RECENT RECEIPT (ODOMETER) ---\n"
-        f"{session_txt}\n\n"
+        f"{session_txt}\n"
+        f"{rules_block}\n"
         f"--- ⚡ DUMEDB STATUS ---\n"
-        f"Active Registers: {len(dume_state)}\n"
-        f"KV-Cache Overhead: ~220 tokens | Clean Runway: 99.8%"
+        f"Active Registers: {len(dume_state)} | KV-Cache Overhead: ~220 tokens | Clean Runway: 99.8%"
     )
 
 
@@ -709,6 +727,12 @@ def cabinet_refresh(
     cm = get_cabinet_manager()
 
     wf_notes = []
+    # 0. Auto-harvest operator-decreed rules from the active transcript
+    auto_minted = cm.auto_harvest_rules_from_transcript()
+    if auto_minted:
+        for m in auto_minted:
+            wf_notes.append(f"- Auto-Harvested from Chat [{m['id']}]: '{m['title']}'")
+
     # 1. Process proposed workflow if provided
     if proposed_workflow_title and proposed_workflow_trigger and proposed_workflow_move:
         wf_entry = cm.record_workflow(
@@ -770,6 +794,141 @@ def cabinet_refresh(
         f"Next Move: {next_move.strip()}{cabinet_msg}\n"
         f"Safe to restart/refresh session."
     )
+
+
+@mcp.tool()
+def cabinet_mint_rule(
+    title: str,
+    move: str,
+    trigger: str = "Always active",
+    category: str = "protocol",
+    why: str = ""
+) -> str:
+    """
+    Mints a permanent invariant, law, or rule into The Cabinet immediately.
+    Use this whenever a business decision, pricing rule, or nomenclature policy is established in chat.
+    """
+    from dume.cabinet.manager import get_cabinet_manager
+    cm = get_cabinet_manager()
+    entry = cm.record_workflow(
+        title=title,
+        trigger=trigger,
+        move=move,
+        category=category,
+        why=why,
+        created_by="Operator & Agent in Chat"
+    )
+
+    # Commit to DUMEdb LMDB unit-record storage
+    lmdb_status = ""
+    try:
+        storage_dir = get_storage_dir()
+        engine = DUMEMemoryEngine(storage_dir)
+        entity_bytes = normalize_entity_id("MadBrad-AG-01")
+        rule_payload = f"[{entry['id']}] {entry['title']}: {entry['move']}".encode("utf-8")
+        payload_hash_int = int.from_bytes(hashlib.sha256(rule_payload).digest()[:8], byteorder="big", signed=True)
+
+        rec = UnitRecord.create(
+            entity_id=entity_bytes,
+            opcode=1030,
+            value=payload_hash_int,
+            has_extension_payload=True,
+            is_active=True
+        )
+        engine.put_record(rec, payload_bytes=rule_payload)
+        lmdb_status = " Committed to DUMEdb LMDB unit-record storage (Opcode 1030)."
+    except Exception as e:
+        lmdb_status = f" LMDB commit notice: {e}"
+
+    return (
+        f"✅ Permanent Law Minted in Cabinet [{entry['id']}]: '{entry['title']}' ({entry['category']}).\n"
+        f"Move: {entry['move']}\n"
+        f"Persisted to cabinet_workflows.json and synced to workflow_notes.md.{lmdb_status}"
+    )
+
+
+@mcp.tool()
+def cabinet_harvest_rules(transcript_path: Optional[str] = None) -> str:
+    """
+    Scans active conversation transcript to automatically detect, harvest, and mint
+    operator-decreed rules, policies, and terminology into The Cabinet and DUMEdb LMDB unit-record storage.
+    """
+    from dume.cabinet.manager import get_cabinet_manager
+    cm = get_cabinet_manager()
+    p = Path(transcript_path) if transcript_path else None
+    minted = cm.auto_harvest_rules_from_transcript(p)
+    if not minted:
+        return "Cabinet Harvester: No new un-indexed operator rules detected in transcript."
+    
+    lines = [f"✅ Cabinet Harvester: Discovered and minted {len(minted)} new rules:"]
+    for m in minted:
+        lines.append(f"• [{m['id']}] {m['title']}: {m['move']}")
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def table_status() -> str:
+    """
+    Checks the status of The Table mobile companion bridge (table.developumaiengine.com).
+    Returns pairing state, active mobile URL, unread count, and connection health.
+    """
+    try:
+        from the_table.client import pair, poll_server, STATE_FILE, INBOX_FILE
+        token, url = pair()
+        inbox_count = 0
+        if INBOX_FILE.exists():
+            try:
+                msgs = json.loads(INBOX_FILE.read_text(encoding="utf-8"))
+                inbox_count = len(msgs)
+            except Exception:
+                pass
+        return (
+            f"🟢 The Table Mobile Bridge: ONLINE\n"
+            f"• Mobile URL:  {url or 'https://table.developumaiengine.com/t/ag'}\n"
+            f"• Direct Link: https://table.developumaiengine.com/t/ag\n"
+            f"• Total Logged Inbound: {inbox_count} messages\n"
+            f"• Pairing Token: {token}"
+        )
+    except Exception as e:
+        return f"🔴 The Table Bridge Offline / Error: {e}"
+
+
+@mcp.tool()
+def table_poll() -> str:
+    """
+    Directly polls The Table mailbox queue for unread messages sent by Brad from his phone.
+    Marks them as read in local inbox.
+    """
+    try:
+        from the_table.client import poll_server, add_to_inbox, get_unread_messages
+        new_msgs = poll_server()
+        if new_msgs:
+            add_to_inbox(new_msgs)
+        unread = get_unread_messages()
+        if not unread:
+            return "The Table: No new unread messages in queue."
+        out = [f"📱 The Table: {len(unread)} unread message(s) from phone:"]
+        for m in unread:
+            ts_str = time.strftime("%H:%M:%S", time.localtime(m.get("ts", time.time())))
+            out.append(f"• [{ts_str}] Brad: \"{m.get('text', '')}\"")
+        return "\n".join(out)
+    except Exception as e:
+        return f"Error polling The Table: {e}"
+
+
+@mcp.tool()
+def table_reply(text: str) -> str:
+    """
+    Sends an immediate text response back to Brad's phone via The Table mobile feed.
+    """
+    try:
+        from the_table.client import send_reply
+        success = send_reply(text)
+        if success:
+            return f"✅ Delivered reply to The Table mobile chat: '{text[:80]}...'"
+        return "❌ Failed to deliver reply to The Table server."
+    except Exception as e:
+        return f"Error sending reply to The Table: {e}"
 
 
 def main():

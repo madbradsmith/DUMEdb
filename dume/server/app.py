@@ -1614,6 +1614,68 @@ async def websocket_inspector_feed(websocket: WebSocket):
         ws_manager.disconnect(websocket)
 
 
+# ============================================================================
+# The Table Mobile Bridge Endpoints
+# ============================================================================
+
+class TableReplyRequest(BaseModel):
+    text: str
+
+@app.get("/api/table/status")
+async def get_table_status():
+    """Returns live connection and daemon status for The Table mobile bridge."""
+    try:
+        from the_table.client import pair, INBOX_FILE, OUTBOX_FILE, STATE_FILE
+        token, url = pair()
+        inbox_count = 0
+        if INBOX_FILE.exists():
+            try: inbox_count = len(json.loads(INBOX_FILE.read_text(encoding="utf-8")))
+            except Exception: pass
+        outbox_count = 0
+        if OUTBOX_FILE.exists():
+            try: outbox_count = len(json.loads(OUTBOX_FILE.read_text(encoding="utf-8")))
+            except Exception: pass
+            
+        return {
+            "online": True,
+            "token": token,
+            "url": url or "https://table.developumaiengine.com/t/ag",
+            "direct_url": "https://table.developumaiengine.com/t/ag",
+            "inbox_count": inbox_count,
+            "outbox_count": outbox_count
+        }
+    except Exception as e:
+        return {"online": False, "error": str(e)}
+
+@app.get("/api/table/messages")
+async def get_table_messages(limit: int = 50):
+    """Returns combined inbound/outbound chat stream for The Table."""
+    try:
+        import urllib.request
+        feed_url = "https://table.developumaiengine.com/t/ag/feed"
+        req = urllib.request.Request(feed_url, headers={"User-Agent": "DUME-Studio/1.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            return {
+                "success": True,
+                "msgs": data.get("msgs", [])[-limit:],
+                "online": data.get("online", True),
+                "thinking": data.get("thinking", False)
+            }
+    except Exception as e:
+        return {"success": False, "error": str(e), "msgs": []}
+
+@app.post("/api/table/reply")
+async def post_table_reply(body: TableReplyRequest):
+    """Dispatches a reply message directly from DUME Studio to Brad's phone."""
+    try:
+        from the_table.client import send_reply
+        ok = send_reply(body.text)
+        return {"success": ok}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 def main():
     """CLI Entrypoint for running DUMEdb server."""
     from dume.__main__ import main as run_main

@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUTATUM // Liber Rationum — The Sovereign Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,900;1,400;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --desk-bg: #14110e;
+      --leather-edge: #2c1a11;
+      --gold-foil: #c9a050;
+      --vellum: #fbf7ed;
+      --vellum-shadow: #e8e1cf;
+      --ink-blue: #182638;
+      --ink-red: #8f1d18;
+      --ink-green: #1a4f2a;
+      --rule-blue: rgba(180, 204, 216, 0.65);
+      --rule-red: rgba(190, 40, 35, 0.75);
+      --rule-column: rgba(195, 215, 222, 0.45);
+      --brass: #b8974a;
+      --brass-dark: #7a6128;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--desk-bg);
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(255, 240, 210, 0.05), transparent 70%),
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+      color: var(--ink-blue);
+      font-family: 'Courier Prime', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 60px 16px;
+      overflow-x: hidden;
+    }
+
+    /* Top Control Bar (Desk Rail) */
+    .desk-rail {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(30, 23, 18, 0.9);
+      border: 1px solid rgba(201, 160, 80, 0.25);
+      border-radius: 6px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .rail-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #dfd5c4;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(26, 79, 42, 0.3);
+      border: 1px solid rgba(40, 167, 69, 0.4);
+      color: #62d87e;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .status-pill .dot {
+      width: 8px;
+      height: 8px;
+      background: #39e767;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #39e767;
+    }
+
+    .rail-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brass-btn {
+      background: linear-gradient(180deg, #c9a85c 0%, #8c6f2e 100%);
+      color: #120e06;
+      border: 1px solid #dfc282;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .brass-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .brass-btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+    }
+
+    /* THE LEDGER BOOK CONTAINER */
+    .ledger-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.85));
+    }
+
+    .book-cover {
+      width: 100%;
+      background: var(--leather-edge);
+      border-radius: 12px;
+      padding: 18px 22px 22px 18px;
+      box-shadow: 
+        inset 0 0 30px rgba(0,0,0,0.9),
+        0 10px 30px rgba(0,0,0,0.8);
+      position: relative;
+      display: flex;
+    }
+
+    /* Corner brass brackets */
+    .brass-corner {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-color: var(--gold-foil);
+      border-style: solid;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .brass-corner.tl { top: 6px; left: 6px; border-width: 3px 0 0 3px; }
+    .brass-corner.tr { top: 6px; right: 6px; border-width: 3px 3px 0 0; }
+    .brass-corner.bl { bottom: 6px; left: 6px; border-width: 0 0 3px 3px; }
+    .brass-corner.br { bottom: 6px; right: 6px; border-width: 0 3px 3px 0; }
+
+    /* The Open Folio Spread */
+    .folio-spread {
+      width: 100%;
+      background: var(--vellum);
+      border-radius: 6px;
+      min-height: 760px;
+      display: flex;
+      box-shadow: 
+        inset 0 0 40px rgba(160, 140, 110, 0.3),
+        0 4px 15px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #d4c8af;
+    }
+
+    /* Center Gutter / Stitched Spine */
+    .gutter-spine {
+      width: 36px;
+      background: linear-gradient(90deg, 
+        rgba(0,0,0,0.18) 0%, 
+        rgba(0,0,0,0.35) 45%, 
+        rgba(255,255,255,0.1) 50%, 
+        rgba(0,0,0,0.35) 55%, 
+        rgba(0,0,0,0.18) 100%);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .gutter-spine::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: repeating-linear-gradient(
+        0deg,
+        #f4f0e6,
+        #f4f0e6 6px,
+        #2a1f18 6px,
+        #2a1f18 14px
+      );
+      opacity: 0.65;
+    }
+
+    /* Individual Folio Pages */
+    .folio-page {
+      flex: 1;
+      padding: 24px 28px 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background-image: 
+        repeating-linear-gradient(var(--vellum) 0px, var(--vellum) 27px, var(--rule-blue) 28px);
+      background-attachment: local;
+    }
+
+    .folio-left {
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Columnar Rules Overlay for Accounting Sheets */
+    .folio-page::before {
+      content: "";
+      position: absolute;
+      top: 88px;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      background-image: 
+        /* Red double margin lines */
+        linear-gradient(90deg, 
+          transparent 0px, transparent 65px, 
+          var(--rule-red) 65px, var(--rule-red) 67px, 
+          transparent 67px, transparent 71px, 
+          var(--rule-red) 71px, var(--rule-red) 72px, 
+          transparent 72px),
+        /* Pale cyan column dividers */
+        repeating-linear-gradient(90deg, 
+          transparent 0px, transparent 110px, 
+          var(--rule-column) 110px, var(--rule-column) 111px);
+    }
+
+    /* Folio Header Plate */
+    .folio-header {
+      border-bottom: 2px solid var(--rule-red);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .folio-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: #1a1614;
+      text-transform: uppercase;
+    }
+
+    .folio-sub {
+      font-size: 11px;
+      color: #635848;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+    }
+
+    .folio-meta {
+      text-align: right;
+      font-size: 10px;
+      color: #7a6e5b;
+      line-height: 1.4;
+    }
+
+    /* RIGHT-SIDE BRASS BOOK TABS */
+    .brass-tabs {
+      position: absolute;
+      top: 40px;
+      right: -36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 50;
+    }
+
+    .tab-item {
+      background: linear-gradient(135deg, #dfc072 0%, #997831 100%);
+      border: 1px solid #eed699;
+      border-left: none;
+      border-radius: 0 6px 6px 0;
+      padding: 14px 10px 14px 12px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1e1503;
+      cursor: pointer;
+      box-shadow: 3px 4px 10px rgba(0,0,0,0.4);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      letter-spacing: 0.12em;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .tab-item:hover {
+      padding-right: 15px;
+      color: #000;
+      filter: brightness(1.15);
+    }
+
+    .tab-item.active {
+      background: linear-gradient(135deg, #f7de9c 0%, #c4993d 100%);
+      padding-right: 18px;
+      box-shadow: 4px 5px 14px rgba(0,0,0,0.6);
+      border-color: #fff;
+    }
+
+    .tab-item.active::before {
+      content: "▶";
+      position: absolute;
+      top: 6px;
+      left: -2px;
+      font-size: 8px;
+      color: #70110d;
+    }
+
+    /* TAB PANELS CONTAINER */
+    .tab-content-wrapper {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .tab-content-wrapper.active {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* TAB 1: INTAKE & OCR STYLING */
+    .clipped-receipt {
+      background: #fbf9f4;
+      border: 1px dashed #d0c5b0;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18), 2px 2px 4px rgba(0,0,0,0.08);
+      padding: 16px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      position: relative;
+      transform: rotate(-1.2deg);
+      max-width: 440px;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .receipt-clip {
+      position: absolute;
+      top: -12px;
+      left: 30px;
+      width: 32px;
+      height: 24px;
+      background: linear-gradient(180deg, #333 0%, #111 100%);
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      border: 1px solid #555;
+    }
+
+    .receipt-clip::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 4px;
+      right: 4px;
+      height: 6px;
+      background: #c9a050;
+      border-radius: 1px;
+    }
+
+    .ocr-bracket {
+      border: 1.5px solid var(--ink-red);
+      background: rgba(143, 29, 24, 0.05);
+      padding: 2px 4px;
+      border-radius: 2px;
+      font-weight: 700;
+      color: var(--ink-red);
+      animation: pulse-border 2s infinite;
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { border-color: var(--ink-red); }
+      50% { border-color: #e63946; }
+    }
+
+    /* Accounting Ledger Grid */
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+
+    .ledger-table th {
+      border-bottom: 2px solid var(--ink-red);
+      padding: 6px 8px;
+      text-align: left;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #3e3328;
+    }
+
+    .ledger-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--rule-blue);
+      font-family: 'Courier Prime', monospace;
+    }
+
+    .ledger-table .col-date { width: 85px; }
+    .ledger-table .col-ref { width: 65px; color: #7a6e5b; }
+    .ledger-table .col-desc { }
+    .ledger-table .col-amount { text-align: right; width: 90px; font-weight: 700; }
+    .ledger-table .debit { color: var(--ink-red); }
+    .ledger-table .credit { color: var(--ink-green); }
+
+    /* TAB 2: THE MONTHLY NUT */
+    .nut-hero-banner {
+      background: rgba(143, 29, 24, 0.06);
+      border: 2px dashed var(--ink-red);
+      padding: 16px 20px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nut-metric-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-red);
+      font-weight: 700;
+    }
+
+    .nut-metric-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--ink-red);
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    .nut-line-rule {
+      border: 0;
+      height: 4px;
+      background: repeating-linear-gradient(90deg, var(--ink-red), var(--ink-red) 8px, transparent 8px, transparent 14px);
+      margin: 16px 0;
+    }
+
+    /* Dry Transfer Red Stamp */
+    .rubber-stamp {
+      display: inline-block;
+      padding: 8px 18px;
+      border: 3px double var(--ink-red);
+      color: var(--ink-red);
+      font-family: 'Special Elite', cursive, monospace;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      transform: rotate(-3.5deg);
+      border-radius: 4px;
+      mask-image: radial-gradient(circle, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.3) 100%);
+      box-shadow: 0 0 2px rgba(143, 29, 24, 0.4);
+      user-select: none;
+    }
+
+    .rubber-stamp.green {
+      border-color: var(--ink-green);
+      color: var(--ink-green);
+    }
+
+    /* TAB 3: STATUTORY DEFENSE */
+    .manila-pocket {
+      background: #ecdcb9;
+      border: 2px solid #c7b38d;
+      border-radius: 4px;
+      padding: 20px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.1), 0 6px 16px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .statute-tag {
+      display: inline-block;
+      background: #2b221a;
+      color: #dfc282;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-right: 6px;
+    }
+
+    .dispute-letter-preview {
+      background: #fffdf9;
+      border: 1px solid #d4c8af;
+      padding: 22px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      line-height: 1.6;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 14px;
+      position: relative;
+    }
+
+    .gold-wax-seal {
+      position: absolute;
+      bottom: 20px;
+      right: 25px;
+      width: 65px;
+      height: 65px;
+      background: radial-gradient(circle, #e6b84d 0%, #9e741c 70%, #5a400a 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2b1f06;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 11px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4);
+      border: 2px solid #fce7a1;
+      text-align: center;
+      line-height: 1.1;
+      transform: rotate(5deg);
+    }
+
+    /* TAB 4: BILL OF SALE (LOW FRICTION CHECKOUT) */
+    .bill-of-sale-slip {
+      background: #fffcf4;
+      border: 2px solid #b8974a;
+      border-radius: 6px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .strikethrough-tag {
+      text-decoration: line-through;
+      color: #9c8e7c;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+
+    .price-highlight {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--ink-blue);
+    }
+
+    .checkout-btn-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .apple-pay-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: filter 0.15s;
+    }
+
+    .apple-pay-btn:hover { filter: brightness(1.2); }
+
+    .google-pay-btn {
+      background: #fff;
+      color: #3c4043;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+
+    .google-pay-btn:hover { background: #f8f9fa; }
+
+    /* TAB 5: 3-SEAT REGISTER & SUPPORT */
+    .seat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .seat-card {
+      background: #fbf7ee;
+      border: 1px solid #c9beaa;
+      border-radius: 4px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .seat-card.active {
+      border-top: 4px solid var(--ink-green);
+    }
+
+    .seat-card.open {
+      border-top: 4px dashed #b8974a;
+      opacity: 0.85;
+    }
+
+    .work-order-form input, .work-order-form textarea {
+      width: 100%;
+      background: #fffdf8;
+      border: 1px solid #c4b69c;
+      padding: 8px 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 12px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    /* Modal for CPA Export */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+      background: #fdfaf3;
+      max-width: 720px;
+      width: 100%;
+      border: 2px solid var(--gold-foil);
+      border-radius: 6px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+      font-family: 'Courier Prime', monospace;
+      position: relative;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Desk Rail: Status & Sovereignty -->
+  <header class="desk-rail">
+    <div class="rail-left">
+      <span style="font-weight: 700; color: #eed49b;">MUTATUM // LIBER RATIONUM</span>
+      <span class="status-pill">
+        <span class="dot"></span>
+        AIRPLANE READY · 100% LOCAL SILICON
+      </span>
+      <span style="color: #8c7d6b;">FOLIO NO. 402</span>
+    </div>
+    <div class="rail-right">
+      <button class="brass-btn" onclick="toggleAudio()" id="audioToggleBtn">
+        🔊 AUDIO: ON
+      </button>
+      <button class="brass-btn" onclick="openCpaModal()">
+        📄 EXPORT CPA SCHEDULE
+      </button>
+    </div>
+  </header>
+
+  <!-- The Main Hardbound Ledger Stage -->
+  <main class="ledger-stage">
+    
+    <!-- Outer Leather-Bound Book Cover -->
+    <div class="book-cover">
+      <div class="brass-corner tl"></div>
+      <div class="brass-corner tr"></div>
+      <div class="brass-corner bl"></div>
+      <div class="brass-corner br"></div>
+
+      <!-- Left / Right Folio Paper Spread -->
+      <div class="folio-spread">
+
+        <!-- ================================================================= -->
+        <!-- TAB 1: GENERAL INTAKE & OCR (ACTIVE DEFAULT) -->
+        <!-- ================================================================= -->
+        <div class="tab-content-wrapper active" id="tabContent1">
+          
+          <!-- Left Folio: Receipt Intake & OCR Live Feed -->
+          <div class="folio-page folio-left">
+            <div class="folio-header">
+              <div>
+                <h1 class="folio-title">Intake & Optical Scan</h1>
+                <div class="folio-sub">Browser In-Memory OCR · Zero Network Outbound</div>
+              </div>
+              <div class="folio-meta">
+                OCTOBER 2026<br>
+                REF: V-8821
+              </div>
+            </div>
+
+            <!-- Paperclipped Real Receipt with OCR Brackets -->
+            <div class="clipped-receipt">
+              <div class="receipt-clip"></div>
+              <div style="text-align: center; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.08em;">
+                DETROIT HARDWARE & STEEL SUPPLY CO.<br>
+                <span style="font-size: 9px; font-weight: normal; color: #666;">TERMINAL 04 · TRANSACTION #99318</span>
+              </div>
+              <div style="border-bottom: 1px dashed #aaa; margin: 6px 0;"></div>
+              
+              <div style="display: flex; justify-content: space-between;">
+                <span>1x 12-GAUGE SHIELDING WIRE</span>
+                <span>$42.50</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>4x 1401 RELAY CONTACTS</span>
+                <span>$68.00</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>1x LINEN AUDIT PAPER ROLL</span>
+                <span>$18.50</span>
+              </div>
+              
+              <div style="border-top: 1px dashed #aaa; margin: 8px 0;"></div>
+              <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                <span>TOTAL CHARGE</span>
+                <span class="ocr-bracket">[ $129.00 ]</span>
+              </div>
+              <div style="margin-top: 8px; font-size: 9px; color: #888; text-align: center;">
+                OCR LOCK: LOCAL WASM ENGINE (0.012s LATENCY)
+              </div>
+            </div>
+
+            <div style="margin-top: auto; display: flex; gap: 10px;">
+              <button class="brass-btn" onclick="simulateOcrScan()">
+                📷 SIMULATE CAMERA SCAN
+              </button>
+              <button class="brass-btn" style="background: transparent; color: #554433; border: 1px solid #aa9980;" onclick="clearEntries()">
+                RESET FOLIO
+              </button>
+            </div>
+          </div>
+
+          <!-- Center Stitched Gutter -->
+          <div class="gutter-spine"></div>
+
+          <!-- Right Folio: Columnar Journal Entries -->
+          <div class="folio-page folio-right">
+            <div class="folio-header">
+              <div>
+                <h2 class="folio-title">General Journal</h2>
+                <div class="folio-sub">Sovereign Double-Entry Ledger Sheet</div>
+              </div>
+              <div class="folio-meta">
+                FOLIO: 402-R<br>
+                BALANCE: BALANCED
+              </div>
+            </div>
+
+            <table class="ledger-table" id="journalTable">
+              <thead>
+                <tr>
+                  <th class="col-date">Date</th>
+                  <th class="col-ref">Ref</th>
+                  <th class="col-desc">Account / Payee</th>
+                  <th class="col-amount">Debit</th>
+                  <th class="col-amount">Balance</th>
+                </tr>
+              </thead>
+              <tbody id="journalBody">
+                <tr>
+                  <td class="col-date">24 OCT 26</td>
+                  <td class="col-ref">#8818</td>
+                  <td class="col-desc">Commonwealth Edison (Power)</td>
+                  <td class="col-amount debit">$164.20</td>
+                  <td class="col-amount">$4,835.80</td>
+                </tr>
+                <tr>
+                  <td class="col-date">26 OCT 26</td>
+                  <td class="col-ref">#8819</td>
+                  <td class="col-desc">Midwest Grain & Provisions</td>
+                  <td class="col-amount debit">$92.40</td>
+                  <td class="col-amount">$4,743.40</td>
+                </tr>
+                <tr>
+                  <td class="col-date">28 OCT 26</td>
+                  <td class="col-ref">#8820</td>
+                  <td class="col-desc">Sovereign Fuel Reserve</td>
+                  <td class="col-amount debit">$65.00</td>
+                  <td class="col-amount">$4,678.40</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="margin-top: auto; text-align: right; padding-top: 14px; border-top: 2px solid var(--rule-red);">
+              <span style="font-size: 11px; color: #665544; margin-right: 12px;">CURRENT SOVEREIGN CASH ON HAND:</span>
+              <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--ink-green);">$4,678.40</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 2: THE MONTHLY NUT & SURVIVAL RUNWAY -->
+        <!-- ================================================================= -->
+        <div class="tab-content-wrapper" id="tabContent2">
+          <!-- Left Folio: Envelope Baseline -->
+          <div class="folio-page folio-left">
+            <div class="folio-header">
+              <div>
+                <h1 class="folio-title">The Monthly Nut</h1>
+                <div class="folio-sub">Non-Negotiable Household Survival Baseline</div>
+              </div>
+              <div class="folio-meta">TARGET: $2,450.00</div>
+            </div>
+
+            <div class="nut-hero-banner">
+              <div>
+                <div class="nut-metric-title">Monthly Baseline Nut</div>
+                <div class="nut-metric-value">$2,450.00</div>
+              </div>
+              <div id="nutStampHolder">
+                <div class="rubber-stamp">NUT SECURED</div>
+              </div>
+            </div>
+
+            <div style="font-size: 11px; line-height: 1.7; margin-bottom: 14px;">
+              <strong>SOVEREIGN DIRECTIVE:</strong> Everything above the double-red line is vital survival (Shelter, Power, Food, Transport). All cloud subscriptions and predatory retainers have been zeroed.
+            </div>
+
+            <table class="ledger-table">
+              <thead>
+                <tr>
+                  <th>Survival Envelope</th>
+                  <th>Monthly Cap</th>
+                  <th>Incurred</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Shelter & Ground Rent</td>
+                  <td>$1,400.00</td>
+                  <td>$1,400.00</td>
+                  <td style="color: var(--ink-green); font-weight: 700;">SECURED</td>
+                </tr>
+                <tr>
+                  <td>Thermal & Electric Power</td>
+                  <td>$220.00</td>
+                  <td>$164.20</td>
+                  <td style="color: var(--ink-green);">IN RUNWAY</td>
+                </tr>
+                <tr>
+                  <td>Provisions (Groceries)</td>
+                  <td>$550.00</td>
+                  <td>$340.00</td>
+                  <td style="color: var(--ink-green);">IN RUNWAY</td>
+                </tr>
+                <tr>
+                  <td>Vehicle & Mobility Fuel</td>
+                  <td>$280.00</td>
+                  <td>$180.00</td>
+                  <td style="color: var(--ink-green);">IN RUNWAY</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Center Gutter -->
+          <div class="gutter-spine"></div>
+
+          <!-- Right Folio: Runway Gauge & Reserve Vault -->
+          <div class="folio-page folio-right">
+            <div class="folio-header">
+              <div>
+                <h2 class="folio-title">Sovereign Runway</h2>
+                <div class="folio-sub">Survival Defense Reserve</div>
+              </div>
+              <div class="folio-meta">AUDITED: 28 OCT 26</div>
+            </div>
+
+            <div style="background: rgba(26, 79, 42, 0.05); border: 1px solid rgba(26, 79, 42, 0.3); padding: 18px; border-radius: 4px; margin-bottom: 20px;">
+              <div style="font-size: 11px; color: var(--ink-green); font-weight: 700;">TOTAL DEFENSE RUNWAY:</div>
+              <div style="font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 900; color: var(--ink-green); margin: 6px 0;">
+                128 DAYS (4.2 MONTHS)
+              </div>
+              <div style="font-size: 10px; color: #556655;">
+                Vault funds will sustain all survival envelopes through March 2027 with zero external income.
+              </div>
+            </div>
+
+            <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+              <button class="brass-btn" onclick="applyNutStamp()">
+                ★ RE-STAMP MONTHLY NUT
+              </button>
+              <div class="rubber-stamp green" style="transform: rotate(2deg);">
+                AUDITED & SECURE
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 3: STATUTORY CREDIT DEFENSE -->
+        <!-- ================================================================= -->
+        <div class="tab-content-wrapper" id="tabContent3">
+          <div class="folio-page folio-left">
+            <div class="folio-header">
+              <div>
+                <h1 class="folio-title">Statutory Defense</h1>
+                <div class="folio-sub">15 U.S.C. § 1681 & FDCPA Sovereign Toolkit</div>
+              </div>
+              <div class="folio-meta">ZERO RETAINER FEE</div>
+            </div>
+
+            <div class="manila-pocket">
+              <div style="font-size: 12px; font-weight: 700; color: #3b2b1a; margin-bottom: 8px;">
+                ACTIVE BUREAU INACCURACY AUDIT
+              </div>
+              <table class="ledger-table" style="background: transparent;">
+                <thead>
+                  <tr>
+                    <th>Bureau</th>
+                    <th>Account</th>
+                    <th>Statute Anchor</th>
+                    <th>Clock</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>EXPERIAN</strong></td>
+                    <td>Apex Recovery #902</td>
+                    <td><span class="statute-tag">§ 1681i(a)(5)</span></td>
+                    <td style="color: var(--ink-red); font-weight: 700;">14 DAYS LEFT</td>
+                  </tr>
+                  <tr>
+                    <td><strong>TRANSUNION</strong></td>
+                    <td>Midland Credit #441</td>
+                    <td><span class="statute-tag">§ 1692g(b)</span></td>
+                    <td style="color: var(--ink-green);">CLEARED</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="margin-top: 14px; font-size: 10px; color: #5b4a3a;">
+                Federal law dictates: If unverified within 30 days, derogatory marks must be expunged permanently.
+              </div>
+            </div>
+
+            <div style="margin-top: auto;">
+              <button class="brass-btn" onclick="stampDispute()">
+                ⚖️ GENERATE CERTIFIED AFFIDAVIT
+              </button>
+            </div>
+          </div>
+
+          <div class="gutter-spine"></div>
+
+          <div class="folio-page folio-right">
+            <div class="folio-header">
+              <div>
+                <h2 class="folio-title">Affidavit Preview</h2>
+                <div class="folio-sub">Court-Ready Statutory Notice</div>
+              </div>
+              <div class="folio-meta">READY TO MAIL</div>
+            </div>
+
+            <div class="dispute-letter-preview" id="affidavitText">
+              <strong>NOTICE OF STATUTORY DISPUTE & DEMAND FOR VERIFICATION</strong><br>
+              <strong>SENT VIA CERTIFIED MAIL #7020 0640 0001 8841 9021</strong><br><br>
+              To: Experian Consumer Grievance Bureau<br>
+              Re: Inaccurate Trade Line #902 (Apex Recovery Services)<br><br>
+              Pursuant to the Fair Credit Reporting Act, 15 U.S.C. § 1681i, you are formally required to produce original documentation bearing my signature. Failure to produce verifiable chain-of-title within 30 days mandates immediate deletion.<br><br>
+              <em>Sovereign Seal Affixed & Registered on Local Silicon.</em>
+
+              <div class="gold-wax-seal">
+                MUTATUM<br>SEALED
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 4: BILL OF SALE (LOW-FRICTION $60 CHECKOUT) -->
+        <!-- ================================================================= -->
+        <div class="tab-content-wrapper" id="tabContent4">
+          <div class="folio-page folio-left">
+            <div class="folio-header">
+              <div>
+                <h1 class="folio-title">Perpetual Deed of Sale</h1>
+                <div class="folio-sub">Series 2026 Sovereign Hardware License</div>
+              </div>
+              <div class="folio-meta">NO SUBSCRIPTIONS</div>
+            </div>
+
+            <div class="bill-of-sale-slip">
+              <div style="text-align: center; border-bottom: 2px dashed #b8974a; padding-bottom: 12px; margin-bottom: 14px;">
+                <div style="font-size: 12px; letter-spacing: 0.12em; color: #7a6128; font-weight: 700;">
+                  OFFICIAL PERPETUAL BILL OF SALE
+                </div>
+                <div style="font-size: 10px; color: #887766;">
+                  MUTATUM: THE SOVEREIGN RECORD (V1.0 + LIFETIME UPDATES)
+                </div>
+              </div>
+
+              <div style="margin: 16px 0; text-align: center;">
+                <span class="strikethrough-tag">$15.00 / month ($180/yr)</span><br>
+                <span class="price-highlight">$60.00</span>
+                <span style="font-size: 12px; font-weight: 700; color: #665544;">ONE TIME · YOURS FOR LIFE</span>
+              </div>
+
+              <div style="font-size: 11px; line-height: 1.6; color: #443322; margin-bottom: 16px; border-top: 1px solid #e0d5c0; padding-top: 10px;">
+                ✓ 100% On-Device WASM Engine (Runs local in browser or offline desktop)<br>
+                ✓ 3 Sovereign Household Seats (Self, Spouse, Workstation)<br>
+                ✓ Zero Cloud Telemetry · Your Bank Data Never Leaves Your Device<br>
+                ✓ 30-Day Unconditional Sovereign Money-Back Guarantee
+              </div>
+
+              <!-- 1-Tap Low-Friction Express Pay -->
+              <div class="checkout-btn-stack">
+                <button class="apple-pay-btn" onclick="executeExpressCheckout('Apple Pay')">
+                  Pay (1-Tap Express Checkout)
+                </button>
+                <button class="google-pay-btn" onclick="executeExpressCheckout('Google Pay')">
+                  <span style="color: #4285F4; font-weight: 900;">G</span> Pay (Instant 1-Tap)
+                </button>
+              </div>
+
+              <div style="text-align: center; font-size: 10px; color: #776655;">
+                🔒 256-Bit Encrypted Direct Stripe / Payment Token. No Account Creation Required.
+              </div>
+            </div>
+          </div>
+
+          <div class="gutter-spine"></div>
+
+          <div class="folio-page folio-right">
+            <div class="folio-header">
+              <div>
+                <h2 class="folio-title">Instant Activation</h2>
+                <div class="folio-sub">License Mint & Unlocked Ledger</div>
+              </div>
+              <div class="folio-meta" id="licenseStatusMeta">STATUS: READY TO MINT</div>
+            </div>
+
+            <div id="unlockedPlate" style="padding: 20px; background: rgba(201, 160, 80, 0.08); border: 2px dashed #c9a050; border-radius: 6px; text-align: center;">
+              <div style="font-size: 11px; color: #665533; font-weight: 700; letter-spacing: 0.08em;">
+                MASTER SOVEREIGN HARDWARE SEED:
+              </div>
+              <div style="font-size: 18px; font-weight: 700; color: var(--ink-blue); margin: 10px 0; font-family: 'Courier Prime', monospace;" id="serialDisplay">
+                MUT-2026-8841-BRAD
+              </div>
+              <div class="rubber-stamp" style="font-size: 13px; transform: rotate(-1deg); margin: 10px 0;" id="paidStamp">
+                PERPETUAL LICENSE ACTIVE
+              </div>
+              <div style="font-size: 11px; color: #554433; margin-top: 12px; line-height: 1.6;">
+                Your software license is stored directly in your browser's persistent storage. Download the standalone offline backup or pair your spouse's phone in Tab 05.
+              </div>
+              <div style="margin-top: 16px;">
+                <button class="brass-btn" onclick="downloadOfflineLauncher()">
+                  💾 DOWNLOAD OFFLINE APP BUNDLE (.HTML)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 5: 3-SEAT REGISTER & SUPPORT BUREAU -->
+        <!-- ================================================================= -->
+        <div class="tab-content-wrapper" id="tabContent5">
+          <div class="folio-page folio-left">
+            <div class="folio-header">
+              <div>
+                <h1 class="folio-title">Household Device Register</h1>
+                <div class="folio-sub">3-Seat Sovereign Mesh Cap (Anti-Piracy)</div>
+              </div>
+              <div class="folio-meta">SLOTS: 2 OF 3 USED</div>
+            </div>
+
+            <div class="seat-grid">
+              <div class="seat-card active">
+                <div style="font-size: 9px; font-weight: 700; color: var(--ink-green);">SEAT 01: PRIMARY</div>
+                <div style="font-weight: 700; margin: 4px 0;">iPhone 15 Pro</div>
+                <div style="font-size: 10px; color: #776655;">Bound: 28 Oct 26</div>
+                <div style="margin-top: 6px; font-size: 9px; color: #888;">[THIS DEVICE]</div>
+              </div>
+
+              <div class="seat-card active">
+                <div style="font-size: 9px; font-weight: 700; color: var(--ink-green);">SEAT 02: SPOUSE</div>
+                <div style="font-weight: 700; margin: 4px 0;">Pixel 8 Phone</div>
+                <div style="font-size: 10px; color: #776655;">Bound: 28 Oct 26</div>
+                <button style="margin-top: 6px; font-size: 9px; background: none; border: none; color: var(--ink-red); cursor: pointer; text-decoration: underline;" onclick="revokeSeat('Seat 02')">
+                  Revoke / Free Slot
+                </button>
+              </div>
+
+              <div class="seat-card open">
+                <div style="font-size: 9px; font-weight: 700; color: #b8974a;">SEAT 03: OPEN</div>
+                <div style="font-weight: 700; margin: 4px 0; color: #887766;">Workstation / Laptop</div>
+                <div style="font-size: 10px; color: #887766;">Unclaimed Slot</div>
+                <button class="brass-btn" style="margin-top: 6px; font-size: 9px; padding: 3px 6px;" onclick="showPairingQr()">
+                  + PAIR VIA QR
+                </button>
+              </div>
+            </div>
+
+            <!-- Expiring QR Code Simulator -->
+            <div id="qrSimulator" style="display: none; background: #fff; border: 2px solid #b8974a; padding: 14px; border-radius: 4px; text-align: center; margin-top: 10px;">
+              <div style="font-size: 11px; font-weight: 700; color: #333;">ONE-TIME 60-SEC EXPIRING PAIRING QR</div>
+              <div style="font-family: monospace; font-size: 26px; padding: 10px; background: #eee; margin: 8px auto; width: 140px; border: 2px solid #000;">
+                [ ⚏ ⚏ ⚏ ]
+              </div>
+              <div style="font-size: 10px; color: var(--ink-red);" id="qrTimer">EXPIRES IN: 58s · BURNS AFTER USE</div>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 10px; border-top: 1px dashed #c9beaa; font-size: 11px;">
+              <strong>Lost Device or Key?</strong><br>
+              <button style="background: none; border: none; color: var(--ink-red); font-weight: 700; text-decoration: underline; cursor: pointer; font-size: 11px;" onclick="reissueKeyEmail()">
+                ✉️ Instant 1-Click: Re-issue Master License to Original Purchase Email
+              </button>
+            </div>
+          </div>
+
+          <div class="gutter-spine"></div>
+
+          <div class="folio-page folio-right">
+            <div class="folio-header">
+              <div>
+                <h2 class="folio-title">Workshop Work Order</h2>
+                <div class="folio-sub">Direct Technical Trouble Ticket Dispatch</div>
+              </div>
+              <div class="folio-meta">NO CHATBOT LOOPS</div>
+            </div>
+
+            <form class="work-order-form" onsubmit="submitWorkOrder(event)">
+              <label style="font-size: 10px; font-weight: 700; color: #665544;">YOUR REGISTERED EMAIL:</label>
+              <input type="email" placeholder="brad@evolumstudio.com" required id="workOrderEmail">
+
+              <label style="font-size: 10px; font-weight: 700; color: #665544;">WHAT HAPPENED? (ISSUE DETAILS):</label>
+              <textarea rows="4" placeholder="e.g. Scanned receipt from gas station had blurry print; want to verify line items..." required id="workOrderMsg"></textarea>
+
+              <button class="brass-btn" type="submit">
+                ✉️ DISPATCH WORK ORDER TO ENGINEERING
+              </button>
+            </form>
+
+            <div id="dispatchReceipt" style="display: none; margin-top: 14px; padding: 12px; background: rgba(26, 79, 42, 0.08); border: 1px solid var(--ink-green); border-radius: 4px;">
+              <div style="font-weight: 700; color: var(--ink-green); font-size: 11px;">
+                [✓] WORK ORDER DISPATCHED DIRECTLY TO FRANK & BRAD
+              </div>
+              <div style="font-size: 10px; color: #445544; margin-top: 4px;">
+                Tracking Ref: <strong>#WO-4082</strong>. Delivered to workshop queue. Expect direct human reply to your email.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Brass Book Tabs (Right Margin) -->
+      <nav class="brass-tabs">
+        <div class="tab-item active" onclick="switchTab(1)">01 · INTAKE</div>
+        <div class="tab-item" onclick="switchTab(2)">02 · THE NUT</div>
+        <div class="tab-item" onclick="switchTab(3)">03 · DEFENSE</div>
+        <div class="tab-item" onclick="switchTab(4)">04 · PURCHASE</div>
+        <div class="tab-item" onclick="switchTab(5)">05 · SUPPORT</div>
+      </nav>
+
+    </div>
+  </main>
+
+  <!-- CPA Schedule Modal -->
+  <div class="modal-overlay" id="cpaModal">
+    <div class="modal-box">
+      <button class="close-modal-btn" onclick="closeCpaModal()">&times;</button>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 20px; border-bottom: 2px solid #997831; padding-bottom: 8px;">
+        CERTIFIED CPA COLUMNAR BALANCE REPORT
+      </h2>
+      <div style="font-size: 11px; margin: 12px 0; color: #555;">
+        PERIOD: OCTOBER 2026 · GENERATED FOR IRS SCHEDULE C / PERSONAL AUDIT
+      </div>
+      <pre style="background: #fff; padding: 14px; border: 1px solid #ccc; font-size: 10px; line-height: 1.5; overflow-x: auto;">
+--------------------------------------------------------------------------------
+MUTATUM SOVEREIGN DOUBLE-ENTRY AUDIT SCHEDULE
+ACCOUNT NAME                DEBIT ($)      CREDIT ($)     CATEGORY
+--------------------------------------------------------------------------------
+101. Cash Reserve Vault                    4,678.40       Current Asset
+401. Commonwealth Power     164.20                        Operating Expense
+402. Provisions & Food      432.40                        Household Sustenance
+403. Hardware Tools         129.00                        Capital Equipment
+--------------------------------------------------------------------------------
+TOTALS                      $725.60        $4,678.40      RUNWAY: 128 DAYS
+--------------------------------------------------------------------------------
+CERTIFICATION: Cryptographically verified on local silicon hardware. No cloud intermediaries.
+      </pre>
+      <div style="text-align: right; margin-top: 14px;">
+        <button class="brass-btn" onclick="window.print()">🖨️ PRINT / SAVE TO PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Procedural Web Audio Engine (Zero External Sound Assets)
+    let audioEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
+
+    function playSound(type) {
+      if (!audioEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') ctx.resume();
+
+        if (type === 'page') {
+          // Page rustle / friction noise
+          const bufferSize = ctx.sampleRate * 0.15;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.04));
+          }
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.value = 800;
+          noise.connect(filter);
+          filter.connect(ctx.destination);
+          noise.start();
+        } else if (type === 'stamp') {
+          // Deep mechanical rubber stamp thud
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(140, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(35, ctx.currentTime + 0.18);
+          gain.gain.setValueAtTime(0.6, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.18);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.18);
+        } else if (type === 'clink') {
+          // Burroughs adding machine bell clink
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(2400, ctx.currentTime);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.35);
+        }
+      } catch (e) {
+        console.warn('Audio not available:', e);
+      }
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById('audioToggleBtn');
+      btn.textContent = audioEnabled ? '🔊 AUDIO: ON' : '🔇 AUDIO: OFF';
+      if (audioEnabled) playSound('clink');
+    }
+
+    function switchTab(tabIndex) {
+      playSound('page');
+      document.querySelectorAll('.tab-content-wrapper').forEach((el, idx) => {
+        el.classList.toggle('active', (idx + 1) === tabIndex);
+      });
+      document.querySelectorAll('.tab-item').forEach((el, idx) => {
+        el.classList.toggle('active', (idx + 1) === tabIndex);
+      });
+    }
+
+    function simulateOcrScan() {
+      playSound('clink');
+      const table = document.getElementById('journalBody');
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="col-date">28 OCT 26</td>
+        <td class="col-ref">#8821</td>
+        <td class="col-desc">Detroit Hardware Supply (Tools)</td>
+        <td class="col-amount debit">$129.00</td>
+        <td class="col-amount">$4,549.40</td>
+      `;
+      table.appendChild(row);
+      alert('✓ In-memory OCR parsed 3 line-items and transcribed total ($129.00) directly into Folio 402-R with zero cloud lag!');
+    }
+
+    function clearEntries() {
+      playSound('page');
+      location.reload();
+    }
+
+    function applyNutStamp() {
+      playSound('stamp');
+      const holder = document.getElementById('nutStampHolder');
+      holder.innerHTML = `<div class="rubber-stamp" style="transform: rotate(${Math.random() * 6 - 3}deg)">NUT RE-SECURED</div>`;
+    }
+
+    function stampDispute() {
+      playSound('stamp');
+      alert('⚖️ Court-ready Statutory Dispute Notice #7020 generated and sealed with Gold Sovereign Seal. Ready to print and mail!');
+    }
+
+    function executeExpressCheckout(method) {
+      playSound('stamp');
+      alert(`[✓] Express Checkout via ${method} Authorized ($60.00 Once).\n\nMaster Sovereign Serial stamped: MUT-2026-8841-BRAD\nPerpetual hardware slot active!`);
+      document.getElementById('paidStamp').textContent = 'PAID IN FULL · PERPETUAL';
+      document.getElementById('licenseStatusMeta').textContent = 'STATUS: MINTED & BOUND';
+    }
+
+    function downloadOfflineLauncher() {
+      playSound('clink');
+      alert('💾 Bundling standalone offline Mutatum Ledger into a self-contained HTML archive. Save to your desktop or flash drive!');
+    }
+
+    function showPairingQr() {
+      playSound('page');
+      const qr = document.getElementById('qrSimulator');
+      qr.style.display = 'block';
+      let sec = 59;
+      const timer = setInterval(() => {
+        sec--;
+        document.getElementById('qrTimer').textContent = `EXPIRES IN: ${sec}s · BURNS AFTER USE`;
+        if (sec <= 0) {
+          clearInterval(timer);
+          qr.style.display = 'none';
+        }
+      }, 1000);
+    }
+
+    function revokeSeat(seatName) {
+      if (confirm(`Revoke hardware authorization for ${seatName}? This will burn the seat and open the slot for a new device.`)) {
+        playSound('stamp');
+        alert(`${seatName} revoked. Hardware slot is now OPEN.`);
+      }
+    }
+
+    function reissueKeyEmail() {
+      playSound('clink');
+      const email = prompt('Enter the email address used during purchase:', 'brad@evolumstudio.com');
+      if (email) {
+        alert(`✓ Cryptographic recovery token dispatched to ${email}. Check your inbox for your 1-click unlock link.`);
+      }
+    }
+
+    function submitWorkOrder(e) {
+      e.preventDefault();
+      playSound('stamp');
+      document.getElementById('dispatchReceipt').style.display = 'block';
+    }
+
+    function openCpaModal() {
+      playSound('page');
+      document.getElementById('cpaModal').classList.add('active');
+    }
+
+    function closeCpaModal() {
+      playSound('page');
+      document.getElementById('cpaModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
+

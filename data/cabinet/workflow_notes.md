@@ -1,12 +1,12 @@
 ---
 # WORKFLOW-NOTES — THE LIVING CABINET
-# Last Synced: 2026-10-25 18:31:26
+# Last Synced: 2026-10-27 20:00:17
 # Managed by DUMEdb Cabinet Engine
 ---
 
 ```
 WORKFLOW-NOTES
-10252026
+10272026
 ================================================
 FILE 3 OF 3 — THE CABINET (LIVING HEURISTICS)
 ================================================
@@ -95,3 +95,17 @@ OPERATIONAL PROTOCOLS
 [WF-R7] Associative Zero-Disk Query Handshake
   Trigger: Operator asks direct factual or entity question without wake phrase
   Move: Execute dume_query to search active state registers and payloads before touching filesystem
+
+[WF-R15] DECISION: remove the term "Masterclas" and replace it w
+  Trigger: Project decision alignment
+  Move: Agreed decision: remove the term "Masterclas" and replace it with "walkthrough"
+  Why: Agreed decision recorded in chat
+  Source: Auto-Harvested from Operator Chat
+
+[WF-R16] MUTATUM PHONETIC PRONUNCIATION (MEWTAYTUM)
+  Trigger: When generating voiceover scripts for Mutatum
+  Move: Always spell Mutatum phonetically as Mewtaytum so TTS engines pronounce the long a (Mu-TAY-tum) cleanly.
+
+[WF-R17] FLOW NATIVE VOICE AND VIDEO GENERATION
+  Trigger: When generating talking head clips in Google Flow
+  Move: Embed exact character dialogue in quotation marks within the Flow prompt alongside reference image. Flow natively generates both audio dialogue and photorealistic lip-sync without external TTS.

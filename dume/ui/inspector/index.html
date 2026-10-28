@@ -41,6 +41,9 @@
       <button type="button" class="main-tab-btn" data-view="view-schema-manager">
         📦 Schema &amp; Packs
       </button>
+      <button type="button" class="main-tab-btn" data-view="view-table">
+        📱 The Table <span class="nav-count-badge" id="nav-badge-table" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border-color: rgba(16, 185, 129, 0.4);">LIVE</span>
+      </button>
     </nav>
 
     <!-- Zone 3: Primary Action & Controls -->
@@ -1251,6 +1254,82 @@ print(response.choices[0].message.content)</pre>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- The Table Mobile Bridge View -->
+  <div id="view-table" class="main-view" style="display: none;">
+    <div class="cabinet-layout-grid" style="display: grid; grid-template-columns: 340px 1fr; gap: 1.5rem; margin-top: 1rem;">
+      
+      <!-- Left Column: Pairing & Control Card -->
+      <div class="cabinet-meta-card" style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-cyan); font-weight: 700;">Mobile Link</span>
+            <span class="status-pill" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 4px; padding: 2px 8px;">
+              <span class="indicator-dot" style="background: #10b981; width: 6px; height: 6px;"></span>
+              ONLINE
+            </span>
+          </div>
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">The Table Bridge</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem; line-height: 1.5;">
+            Out-of-band two-way mobile voice &amp; text companion. Speak hands-free while away from your desk.
+          </p>
+        </div>
+
+        <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; text-align: center;">
+          <div style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">DIRECT MOBILE URL</div>
+          <a href="https://table.developumaiengine.com/t/ag" target="_blank" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-cyan); word-break: break-all; text-decoration: none; display: block; padding: 0.5rem; background: rgba(56, 189, 248, 0.08); border-radius: 4px; border: 1px dashed rgba(56, 189, 248, 0.3);">
+            https://table.developumaiengine.com/t/ag
+          </a>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.6rem;">
+            Tip: Open on your iPhone or Android and select <em>"Add to Home Screen"</em> for full PWA voice mode.
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button type="button" class="btn-primary" id="btn-table-ping" style="justify-content: center; padding: 0.6rem 1rem; font-size: 0.85rem;">
+            📡 Ping Brad's Phone
+          </button>
+          <button type="button" class="btn-secondary" id="btn-table-refresh-feed" style="justify-content: center; padding: 0.5rem 1rem; font-size: 0.82rem;">
+            🔄 Refresh Message Feed
+          </button>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+          <strong>Autonomous Nudger Active:</strong> The background daemon polls every 4 seconds. When Brad speaks or texts from the field, DUMEdb responds in real time with zero desktop interaction.
+        </div>
+      </div>
+
+      <!-- Right Column: Live Message Feed -->
+      <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; display: flex; flex-direction: column; height: 680px; overflow: hidden;">
+        
+        <!-- Feed Header -->
+        <div style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15);">
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">Live Mobile Chat Feed</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Real-time stream between Brad (Phone) and AG (Studio)</div>
+          </div>
+          <span id="table-thinking-indicator" style="display: none; font-size: 0.75rem; color: #f59e0b; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 4px; padding: 2px 8px;">
+            AG formulating response...
+          </span>
+        </div>
+
+        <!-- Scrollable Messages Container -->
+        <div id="table-messages-container" style="flex: 1; padding: 1.25rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem;">
+          <div style="color: var(--text-muted); font-size: 0.82rem; text-align: center; margin-top: 2rem;">Loading chat stream...</div>
+        </div>
+
+        <!-- Send Box -->
+        <div style="padding: 1rem 1.25rem; border-top: 1px solid var(--border-color); background: rgba(0,0,0,0.2); display: flex; gap: 0.75rem;">
+          <input type="text" id="table-reply-input" placeholder="Type a message to dispatch directly to Brad's phone..." style="flex: 1; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.6rem 0.85rem; color: var(--text-main); font-size: 0.85rem; font-family: inherit;">
+          <button type="button" class="btn-primary" id="btn-table-send-reply" style="padding: 0.6rem 1.25rem; font-size: 0.85rem;">
+            Send
+          </button>
+        </div>
+
+      </div>
+
     </div>
   </div>
 

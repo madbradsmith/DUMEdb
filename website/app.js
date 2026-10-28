@@ -1,13 +1,38 @@
 /**
- * DUME Studio — Deterministic Unit-Record Memory Engine
- * Client-side interactive engine: Main Tab System, Live Simulator, Odometer Calculator, Gallery Lightbox
+ * IBM 1401 DATA PROCESSING SYSTEM // DUME-CORE OPERATOR CONSOLE CONTROLLER
+ * Architecture: Deterministic Unit-Record Memory Engine
  */
 
 (function () {
   'use strict';
 
-  // --- TOAST NOTIFICATIONS ---
-  const toast = document.getElementById('toast-notice');
+  // --- AUDIO RELAY FEEDBACK SYSTEM ---
+  const sfxRelay = document.getElementById('sfx-relay');
+  const sfxBlip = document.getElementById('sfx-blip');
+  let audioEnabled = true;
+
+  function playRelaySound() {
+    if (!audioEnabled) return;
+    try {
+      if (sfxRelay) {
+        sfxRelay.currentTime = 0;
+        sfxRelay.play().catch(() => {});
+      }
+    } catch (e) {}
+  }
+
+  function playBlipSound() {
+    if (!audioEnabled) return;
+    try {
+      if (sfxBlip) {
+        sfxBlip.currentTime = 0;
+        sfxBlip.play().catch(() => {});
+      }
+    } catch (e) {}
+  }
+
+  // --- CONSOLE TOAST NOTIFICATIONS ---
+  const toast = document.getElementById('console-toast');
   let toastTimer = null;
 
   function showToast(message) {
@@ -17,416 +42,281 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toast.classList.remove('show');
-    }, 2400);
+    }, 2200);
   }
 
-  // --- CLIPBOARD COPYING ---
-  function setupClipboard() {
-    // Hero Install button
-    const copyInstallBtn = document.getElementById('btn-copy-install');
-    if (copyInstallBtn) {
-      copyInstallBtn.addEventListener('click', () => {
-        const text = copyInstallBtn.getAttribute('data-copy') || 'pip install dumedb && python -m dume';
-        navigator.clipboard.writeText(text).then(() => {
-          showToast('✓ Copied to clipboard: ' + text);
-        });
-      });
-    }
-
-    // Code Tab Copy buttons
-    document.querySelectorAll('.copy-code-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-target');
-        const targetEl = document.getElementById(targetId);
-        if (targetEl) {
-          const text = targetEl.innerText.trim();
-          navigator.clipboard.writeText(text).then(() => {
-            showToast('✓ Code snippet copied to clipboard!');
-          });
-        }
+  // --- 80-COLUMN HOLLERITH PUNCH CARD COPY ---
+  const punchCard = document.getElementById('hollerith-card');
+  if (punchCard) {
+    punchCard.addEventListener('click', () => {
+      const cmd = punchCard.getAttribute('data-copy') || 'pip install dumedb && python -m dume.mcp_server';
+      navigator.clipboard.writeText(cmd).then(() => {
+        playRelaySound();
+        showToast('✓ 80-COL PUNCH CARD COPIED TO OPERATOR BUFFER');
+        flashIndicatorLamps();
       });
     });
   }
 
-  // --- INTERACTIVE TERMINAL SIMULATOR ---
-  const termOutput = document.getElementById('term-output');
-  const termForm = document.getElementById('terminal-form');
-  const termInput = document.getElementById('terminal-input');
-  const termShell = document.getElementById('studio-terminal');
-  const btnClear = document.getElementById('btn-clear-term');
-
-  function appendTermLine(content, className = '') {
-    if (!termOutput) return;
-    const line = document.createElement('div');
-    line.className = 'term-line ' + className;
-    line.innerHTML = content;
-    termOutput.appendChild(line);
-    termOutput.scrollTop = termOutput.scrollHeight;
+  // --- INDICATOR LAMP PULSE ENGINE ---
+  function flashIndicatorLamps() {
+    const lamps = [
+      document.getElementById('lamp-speed'),
+      document.getElementById('lamp-wake'),
+      document.getElementById('lamp-lmdb'),
+      document.getElementById('lamp-reg')
+    ];
+    lamps.forEach(l => {
+      if (l) {
+        l.style.filter = 'brightness(1.8)';
+        setTimeout(() => { l.style.filter = ''; }, 300);
+      }
+    });
   }
 
-  function handleCommand(rawCmd) {
-    const cmd = rawCmd.trim();
+  // Subtle ambient pulse for the RUN lamp
+  const lampRun = document.getElementById('lamp-run');
+  if (lampRun) {
+    setInterval(() => {
+      lampRun.style.opacity = lampRun.style.opacity === '0.7' ? '1' : '0.7';
+    }, 1200);
+  }
+
+  // --- MECHANICAL TOGGLE SWITCHES ---
+  const toggleFastpath = document.getElementById('toggle-fastpath');
+  if (toggleFastpath) {
+    toggleFastpath.addEventListener('click', () => {
+      toggleFastpath.classList.toggle('active');
+      playBlipSound();
+      const isActive = toggleFastpath.classList.contains('active');
+      showToast(isActive ? 'FAST-PATH MODE: ARMED (4.2µs MMAP)' : 'STANDARD BUS MODE: ACTIVE');
+    });
+  }
+
+  const toggleAudio = document.getElementById('toggle-audio');
+  if (toggleAudio) {
+    toggleAudio.addEventListener('click', () => {
+      toggleAudio.classList.toggle('active');
+      audioEnabled = toggleAudio.classList.contains('active');
+      playBlipSound();
+      showToast(audioEnabled ? 'MACHINE AUDIO RELAYS: ON' : 'MACHINE AUDIO RELAYS: MUTED');
+    });
+  }
+
+  // --- HOPPER MODE SELECTOR (TERMINAL / VIDEO / MCP) ---
+  const hopperTabs = document.querySelectorAll('.hopper-tab-btn');
+  const boxTerminal = document.getElementById('mode-terminal-box');
+  const boxVideo = document.getElementById('mode-video-box');
+  const boxMcp = document.getElementById('mode-mcp-box');
+  const hollerithCard = document.getElementById('hollerith-card');
+
+  function switchHopperMode(mode) {
+    playBlipSound();
+    hopperTabs.forEach(tab => {
+      tab.classList.toggle('active', tab.getAttribute('data-mode') === mode);
+    });
+
+    if (hollerithCard) {
+      hollerithCard.style.display = (mode === 'terminal') ? 'block' : 'none';
+    }
+    if (boxTerminal) boxTerminal.style.display = (mode === 'terminal') ? 'flex' : 'none';
+    if (boxVideo) {
+      boxVideo.classList.toggle('active', mode === 'video');
+      boxVideo.style.display = (mode === 'video') ? 'flex' : 'none';
+    }
+    if (boxMcp) {
+      boxMcp.classList.toggle('active', mode === 'mcp');
+      boxMcp.style.display = (mode === 'mcp') ? 'flex' : 'none';
+    }
+  }
+
+  hopperTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      switchHopperMode(tab.getAttribute('data-mode'));
+    });
+  });
+
+  // --- HD VIDEO FACADE LOGIC ---
+  const videoFacade = document.getElementById('video-facade');
+  const videoSlot = document.getElementById('video-iframe-slot');
+
+  function playVideo() {
+    if (!videoSlot || !videoFacade) return;
+    videoFacade.style.display = 'none';
+    videoSlot.style.display = 'block';
+    videoSlot.innerHTML = `
+      <iframe 
+        class="crt-iframe"
+        src="https://www.youtube.com/embed/nO5vozUhqyU?autoplay=1&rel=0&modestbranding=1" 
+        title="Stop Force-Feeding Your AI 30,000 Tokens just to remind them who you are! — DUMEdb Walkthrough Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    `;
+    playBlipSound();
+  }
+
+  if (videoFacade) {
+    videoFacade.addEventListener('click', playVideo);
+    videoFacade.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playVideo();
+      }
+    });
+  }
+
+  // --- INTERACTIVE 1402 CARD FEED TERMINAL ---
+  const termLog = document.getElementById('term-log');
+  const termForm = document.getElementById('term-cmd-form');
+  const termInput = document.getElementById('term-cmd-input');
+
+  function appendLog(text, className = 'term-line-sys') {
+    if (!termLog) return;
+    const line = document.createElement('div');
+    line.className = className;
+    line.innerHTML = text;
+    termLog.appendChild(line);
+    termLog.scrollTop = termLog.scrollHeight;
+  }
+
+  function handleCommand(cmdRaw) {
+    const cmd = (cmdRaw || '').trim();
     if (!cmd) return;
+    playRelaySound();
+    flashIndicatorLamps();
 
-    appendTermLine('<span class="term-prompt">SENTINEL@DUMEDB:~$</span> ' + escapeHtml(cmd), 'cmd');
+    appendLog(`&gt; ${escapeHtml(cmd)}`, 'term-line-warn');
 
-    const lower = cmd.toLowerCase().replace(/['"]/g, '').trim();
+    const lower = cmd.toLowerCase();
 
-    if (lower === 'box is the game' || lower === 'wake' || lower === 'cabinet_wake') {
+    if (lower === 'box is the game' || lower === 'wake') {
       setTimeout(() => {
-        appendTermLine('[*] EXECUTING CABINET_WAKE HANDSHAKE PROTOCOL...', 'resp-wake');
-        appendTermLine('[*] Codeword Validated: <span class="highlight">"box is the game"</span>', 'resp-wake');
-        appendTermLine('----------------------------------------------------', 'sys');
-        appendTermLine('🗄️ <strong>THE CABINET ORIENTATION (ZERO-TURN ORIENT)</strong>', 'resp-header');
-        appendTermLine('• Operator: <strong>MadBrad</strong>', 'resp-wake');
-        appendTermLine('• AI Collaborator: <strong>AG / Sentinel Harness</strong>', 'resp-wake');
-        appendTermLine('• Mode: <strong>Sentinel Active</strong>', 'resp-wake');
-        appendTermLine('• Next Move: Clean database on 8095 to fresh empty generic version whenever ready.', 'resp-wake');
-        appendTermLine('----------------------------------------------------', 'sys');
-        appendTermLine('⚡ <strong>DUMEDB HARDWARE STATUS</strong>', 'resp-header');
-        appendTermLine('• Active Registers: <strong>307 Immutable Entries</strong>', 'resp-wake');
-        appendTermLine('• KV-Cache Overhead: <strong>~220 tokens (0.2%)</strong>', 'resp-wake');
-        appendTermLine('• Clean Runway: <strong>99.8% (~119,780 tok)</strong>', 'resp-wake');
-        appendTermLine('• Execution Latency: <strong>0.18s (Zero filesystem traversal)</strong>', 'resp-wake');
-        appendTermLine('[✓] System aligned. Status block cached.', 'resp-wake');
-      }, 150);
+        appendLog('--- 🗄️ THE CABINET ORIENTATION ---', 'term-line-resp');
+        appendLog('STATUS: ZERO-TURN WAKE HANDSHAKE CONFIRMED', 'term-line-resp');
+        appendLog('OPERATOR: MadBrad // HARNESS: Sentinel Active // REGISTERS: 318', 'term-line-sys');
+        appendLog('KV-CACHE OVERHEAD: 220 tokens | Clean Runway: 99.8%', 'term-line-resp');
+        appendLog('NEXT MOVE: Execute unit-record state operations with zero replay amnesia.', 'term-line-sys');
+      }, 120);
     } else if (lower === 'dume.odometer' || lower === 'odometer') {
       setTimeout(() => {
-        appendTermLine('--- REAL MATHEMATICAL CONTEXT ODOMETER ---', 'sys');
-        appendTermLine('Transcript Audit: transcript.jsonl (Direct post-compaction measurement)', 'sys');
-        appendTermLine('Epoch: 2 | Active Steps: 24', 'sys');
-        appendTermLine('Active Context Footprint: <strong>3,928 / ~120,000 tokens (3.3%)</strong>', 'resp-wake');
-        appendTermLine('Clean Runway Remaining: <strong>~116,072 tokens</strong>', 'resp-wake');
-        appendTermLine('Last Turn Delta: +3,183 tokens (📥 2,855 in | 📤 328 out)', 'sys');
-        appendTermLine('Zone: 🟢 Nominal (Safe buffer &gt; 75% limit)', 'resp-wake');
-        appendTermLine('📊 <strong>Context Odometer (Real Math)</strong>: [░░░░░░░░░░] 3.3% (3,928 / ~120,000 tok) | Runway: ~116k tok', 'odometer-box');
-      }, 120);
-    } else if (lower === 'dume.status' || lower === 'status') {
-      setTimeout(() => {
-        appendTermLine('[STORAGE ENGINE] LMDB MMap Storage Active: <code>./data/dumedb.mdb</code>', 'sys');
-        appendTermLine('[WORKSPACE] Active Workspace: <code>MadBrad-AG-01</code> (Tag: <code>v1.0-working-freeze</code>)', 'sys');
-        appendTermLine('[PORT 8095] HTTP API & Inspector WebSocket: LISTENING', 'resp-wake');
-        appendTermLine('[SCHEMAS] Loaded: <code>incident_rca</code>, <code>adr_record</code>, <code>error_fingerprint</code>, <code>unit_record</code>', 'sys');
+        appendLog('--- 📊 CONTEXT ODOMETER (REAL MATH) ---', 'term-line-resp');
+        appendLog('Source: ~/.gemini/.../transcript.jsonl (Hardware Payload Math)', 'term-line-sys');
+        appendLog('Consumption: [░░░░░░░░░░] 3.3% (3,970 / ~120,000 tok)', 'term-line-resp');
+        appendLog('Epoch: 2 | Turn: +25 | Clean Runway: ~116,030 tok', 'term-line-sys');
+        appendLog('Last Turn: +2,380 tok (📥 2,231 in | 📤 149 out) | Zone: 🟢 Nominal', 'term-line-resp');
       }, 100);
-    } else if (lower === 'dume.registers' || lower === 'registers' || lower === 'list registers') {
+    } else if (lower === 'status') {
       setTimeout(() => {
-        appendTermLine('[REGISTERS] Sample of 307 Active Immutable Keys:', 'resp-header');
-        const sampleRegisters = [
-          { key: "operator_alias", val: "AG", type: "string" },
-          { key: "session_handshake", val: "RP_FINALIZED", type: "enum" },
-          { key: "repo_tag", val: "v1.0-working-freeze", type: "git_ref" },
-          { key: "adr_003", val: "Zero-Token Vector Cache Bypass", type: "adr" },
-          { key: "inc_4091", val: "LMDB Lock Contention Resolution", type: "rca" }
-        ];
-        appendTermLine(JSON.stringify(sampleRegisters, null, 2), 'json');
+        appendLog('--- [1401-CPU TELEMETRY] ---', 'term-line-sys');
+        appendLog('STORAGE: LMDB Memory-Mapped Active (./data/dumedb.mdb)', 'term-line-resp');
+        appendLog('READ LATENCY: 4.2 µs direct byte register access', 'term-line-resp');
+        appendLog('PORT 8095: FastMCP HTTP & Inspector listening', 'term-line-sys');
+        appendLog('SCHEMAS: adr_record, incident_rca, unit_record, error_fingerprint', 'term-line-sys');
+      }, 90);
+    } else if (lower === 'registers') {
+      setTimeout(() => {
+        appendLog('--- [DISCRETE REGISTERS: 318 ACTIVE] ---', 'term-line-sys');
+        appendLog('ADDR 0001: operator_alias = "MadBrad"', 'term-line-resp');
+        appendLog('ADDR 0002: session_status = "SENTINEL_ACTIVE"', 'term-line-resp');
+        appendLog('ADDR 0003: wake_codeword = "box is the game"', 'term-line-resp');
+        appendLog('ADDR 0004: memory_engine = "LMDB_MMAP_ZERO_REPLAY"', 'term-line-resp');
+      }, 110);
+    } else if (lower === 'compare') {
+      setTimeout(() => {
+        appendLog('=== REPLAY BLOAT vs DUMEDB UNIT-RECORD ===', 'term-line-warn');
+        appendLog('Chat History Replay: 30,000+ tokens (~25% context eaten, $0.60/wake)', 'term-line-err');
+        appendLog('DUMEdb Unit-Record Wake: 220 tokens (~0.2% context eaten, $0.0003/wake)', 'term-line-resp');
+        appendLog('EFFICIENCY GAIN: 99.3% reduction in prompt bloat. Zero amnesia.', 'term-line-resp');
       }, 120);
-    } else if (lower === 'dume.compare' || lower === 'compare') {
-      setTimeout(() => {
-        appendTermLine('=== BENCHMARK: REPLAY BLOAT vs DUMEDB REGISTER MEMORY ===', 'resp-header');
-        appendTermLine('Traditional Chat History Replay: 30,000+ tokens (~25% context eaten, $0.60/wake)', 'term-line danger');
-        appendTermLine('DUMEdb Unit-Record Wake: 220 tokens (~0.2% context eaten, $0.0003/wake)', 'term-line resp-wake');
-        appendTermLine('Efficiency Gain: <strong>99.3% reduction in prompt bloat. Zero amnesia.</strong>', 'odometer-box');
-      }, 150);
     } else if (lower === 'clear') {
-      if (termOutput) termOutput.innerHTML = '';
-    } else if (lower === 'help') {
-      appendTermLine('AVAILABLE COMMANDS:', 'resp-header');
-      appendTermLine('• <code>box is the game</code> — Execute zero-turn wake handshake', 'sys');
-      appendTermLine('• <code>dume.odometer</code> — Real mathematical context audit on disk', 'sys');
-      appendTermLine('• <code>dume.status</code> — Hardware & storage engine telemetry', 'sys');
-      appendTermLine('• <code>dume.registers</code> — List active unit-record registers', 'sys');
-      appendTermLine('• <code>dume.compare</code> — Benchmark against vector chat replay', 'sys');
-      appendTermLine('• <code>clear</code> — Clear console buffer', 'sys');
+      if (termLog) termLog.innerHTML = '';
+      appendLog('[CLEARED] Hopper buffer reset. Enter opcode command.', 'term-line-sys');
     } else {
-      appendTermLine(`Command not recognized: "${escapeHtml(cmd)}". Try typing <span class="highlight">"box is the game"</span> or <span class="highlight">"help"</span>.`, 'prompt-help');
+      appendLog(`Unrecognized command: "${escapeHtml(cmd)}". Try typing: "box is the game", "dume.odometer", "status", "registers", or "compare".`, 'term-line-sys');
     }
   }
 
   function escapeHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function setupTerminal() {
-    if (termForm && termInput) {
-      termForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const cmd = termInput.value;
-        termInput.value = '';
-        handleCommand(cmd);
-      });
-    }
-
-    // Preset pills
-    document.querySelectorAll('.term-pill-btn').forEach(pill => {
-      pill.addEventListener('click', () => {
-        const cmd = pill.getAttribute('data-cmd');
-        if (cmd) {
-          handleCommand(cmd);
-        }
-      });
-    });
-
-    // Clear Button
-    if (btnClear && termOutput) {
-      btnClear.addEventListener('click', () => {
-        termOutput.innerHTML = '<div class="term-line sys">[CLEARED] Console ready. Type "box is the game" to wake.</div>';
-      });
-    }
-  }
-
-  // --- CONTEXT RUNWAY CALCULATOR (REAL MATH) ---
-  function setupOdometerCalculator() {
-    const sliderTurns = document.getElementById('slider-turns');
-    const sliderCeiling = document.getElementById('slider-ceiling');
-    const valTurns = document.getElementById('val-turns');
-    const valCeiling = document.getElementById('val-ceiling');
-
-    const barTrad = document.getElementById('gauge-bar-trad');
-    const valTradTok = document.getElementById('val-trad-tok');
-    const valTradPct = document.getElementById('val-trad-pct');
-    const valTradStatus = document.getElementById('val-trad-status');
-
-    const barDume = document.getElementById('gauge-bar-dume');
-    const valDumeTok = document.getElementById('val-dume-tok');
-    const valDumePct = document.getElementById('val-dume-pct');
-    const valDumeRunway = document.getElementById('val-dume-runway');
-    const sampleString = document.getElementById('sample-odometer-string');
-
-    function updateCalculations() {
-      if (!sliderTurns || !sliderCeiling) return;
-
-      const turns = parseInt(sliderTurns.value, 10);
-      const ceiling = parseInt(sliderCeiling.value, 10);
-
-      valTurns.textContent = `${turns} Turns`;
-      valCeiling.textContent = `${ceiling.toLocaleString()} tok`;
-
-      // Traditional Replay: ~7,800 tokens accumulated per turn of chat/history
-      const tradTokens = Math.min(ceiling, turns * 7800);
-      const tradPct = Math.min(100, (tradTokens / ceiling) * 100).toFixed(1);
-
-      // DUMEdb: 220 baseline wake + only ~210 tokens delta per turn (unit records only)
-      const dumeTokens = Math.min(ceiling, 220 + (turns * 210));
-      const dumePct = ((dumeTokens / ceiling) * 100).toFixed(1);
-      const runwayTokens = Math.max(0, ceiling - dumeTokens);
-
-      if (barTrad) barTrad.style.width = `${tradPct}%`;
-      if (valTradTok) valTradTok.textContent = tradTokens.toLocaleString();
-      if (valTradPct) valTradPct.textContent = `${tradPct}%`;
-
-      if (tradPct >= 75) {
-        if (valTradStatus) {
-          valTradStatus.textContent = 'CRITICAL CHOKE (Compaction Imminent)';
-          valTradStatus.className = 'danger';
-        }
-      } else if (tradPct >= 50) {
-        if (valTradStatus) {
-          valTradStatus.textContent = 'HIGH BLOAT (Latency Spikes)';
-          valTradStatus.className = 'warning';
-        }
-      } else {
-        if (valTradStatus) {
-          valTradStatus.textContent = 'GROWING ACCUMULATION';
-          valTradStatus.className = '';
-        }
-      }
-
-      if (barDume) barDume.style.width = `${Math.max(1.5, dumePct)}%`;
-      if (valDumeTok) valDumeTok.textContent = dumeTokens.toLocaleString();
-      if (valDumePct) valDumePct.textContent = `${dumePct}%`;
-      if (valDumeRunway) valDumeRunway.textContent = `~${runwayTokens.toLocaleString()} tokens`;
-
-      // Generate visual meter bar
-      const filledBlocks = Math.min(10, Math.floor((dumeTokens / ceiling) * 10));
-      const meterBar = '█'.repeat(filledBlocks) + '░'.repeat(10 - filledBlocks);
-
-      if (sampleString) {
-        sampleString.textContent = `---
-📊 **Context Odometer (Real Math)**: [${meterBar}] ${dumePct}% (${dumeTokens} / ~${ceiling.toLocaleString()} tok) | Epoch ${Math.floor(turns/5)+1} (Turn +${turns}) | Runway: ~${runwayTokens.toLocaleString()} tok | Last Turn: +210 tok (📥 120 in | 📤 90 out) | Zone: 🟢 Nominal`;
-      }
-    }
-
-    if (sliderTurns && sliderCeiling) {
-      sliderTurns.addEventListener('input', updateCalculations);
-      sliderCeiling.addEventListener('input', updateCalculations);
-      updateCalculations();
-    }
-  }
-
-  // --- MAIN TAB EXPLORATION SYSTEM ---
-  function setupMainTabs() {
-    const tabButtons = document.querySelectorAll('.tab-nav-btn');
-    const tabPanels = document.querySelectorAll('.main-tab-panel');
-    const studioSection = document.getElementById('studio-section');
-
-    function activateTab(tabKey, shouldScroll = false) {
-      if (!tabKey) return;
-      let cleanKey = tabKey.replace(/^#/, '').replace(/^tab-/, '').replace(/^panel-/, '');
-      if (cleanKey === 'masterclass') cleanKey = 'walkthrough';
-      
-      let matchedBtn = null;
-      let matchedPanel = document.getElementById('panel-' + cleanKey);
-
-      tabButtons.forEach(btn => {
-        const btnKey = btn.getAttribute('data-tab');
-        if (btnKey === cleanKey) {
-          matchedBtn = btn;
-          btn.classList.add('active');
-          btn.setAttribute('aria-selected', 'true');
-        } else {
-          btn.classList.remove('active');
-          btn.setAttribute('aria-selected', 'false');
-        }
-      });
-
-      if (matchedPanel) {
-        tabPanels.forEach(panel => panel.classList.remove('active'));
-        matchedPanel.classList.add('active');
-
-        // Update nav links active state
-        document.querySelectorAll('.nav-item').forEach(item => {
-          const itemHref = item.getAttribute('href') || '';
-          if (itemHref === '#' + cleanKey) {
-            item.classList.add('active');
-          } else {
-            item.classList.remove('active');
-          }
-        });
-
-        if (shouldScroll && studioSection) {
-          const yOffset = -75;
-          const y = studioSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }
-    }
-
-    // Tab button click
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tabKey = btn.getAttribute('data-tab');
-        activateTab(tabKey, false);
-        if (history.pushState) {
-          history.pushState(null, null, '#' + tabKey);
-        }
-      });
-    });
-
-    // Top navbar links routing to tabs
-    document.querySelectorAll('.nav-item').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#') && href !== '#hero') {
-          e.preventDefault();
-          const targetKey = href.substring(1);
-          activateTab(targetKey, true);
-          if (history.pushState) {
-            history.pushState(null, null, href);
-          }
-        }
-      });
-    });
-
-    // Hero action CTAs routing to tabs
-    document.querySelectorAll('.hero-cta-group a[href^="#"]').forEach(cta => {
-      cta.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetKey = cta.getAttribute('href').substring(1);
-        activateTab(targetKey, true);
-        if (history.pushState) {
-          history.pushState(null, null, '#' + targetKey);
-        }
-      });
-    });
-
-    // Handle initial URL hash on page load
-    if (window.location.hash) {
-      const initialKey = window.location.hash.substring(1);
-      if (document.getElementById('panel-' + initialKey)) {
-        activateTab(initialKey, false);
-      }
-    }
-
-    // Handle browser back/forward buttons
-    window.addEventListener('hashchange', () => {
-      if (window.location.hash) {
-        const hashKey = window.location.hash.substring(1);
-        if (document.getElementById('panel-' + hashKey)) {
-          activateTab(hashKey, false);
-        }
-      }
+  if (termForm && termInput) {
+    termForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = termInput.value;
+      termInput.value = '';
+      handleCommand(val);
     });
   }
 
-  // --- QUICKSTART INNER TABS ---
-  function setupQuickstartTabs() {
-    const qsCard = document.querySelector('.quickstart-card');
-    if (!qsCard) return;
-
-    const tabBtns = qsCard.querySelectorAll('.tab-btn');
-    const tabPanels = qsCard.querySelectorAll('.tab-panel');
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabPanels.forEach(p => p.classList.remove('active'));
-
-        btn.classList.add('active');
-        const targetId = btn.getAttribute('data-tab');
-        const targetPanel = document.getElementById(targetId);
-        if (targetPanel) {
-          targetPanel.classList.add('active');
-        }
-      });
+  // Quick action pills in hopper
+  document.querySelectorAll('.quick-pill[data-cmd]').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const cmd = pill.getAttribute('data-cmd');
+      handleCommand(cmd);
     });
-  }
-
-  // --- LIGHTBOX GALLERY ---
-  function setupLightbox() {
-    const modal = document.getElementById('lightbox-modal');
-    const modalImg = document.getElementById('lightbox-img');
-    const modalCaption = document.getElementById('lightbox-caption');
-    const closeBtn = document.getElementById('lightbox-close');
-    const backdrop = document.getElementById('lightbox-backdrop');
-
-    if (!modal || !modalImg) return;
-
-    document.querySelectorAll('.gallery-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const fullSrc = card.getAttribute('data-full');
-        const captionTitle = card.querySelector('h4')?.textContent || '';
-        const captionDesc = card.querySelector('p')?.textContent || '';
-
-        modalImg.src = fullSrc;
-        modalCaption.innerHTML = `<strong>${captionTitle}</strong> — ${captionDesc}`;
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-      });
-    });
-
-    function closeModal() {
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-      modalImg.src = '';
-    }
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (backdrop) backdrop.addEventListener('click', closeModal);
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
-      }
-    });
-  }
-
-  // --- INITIALIZATION ---
-  document.addEventListener('DOMContentLoaded', () => {
-    setupClipboard();
-    setupTerminal();
-    setupOdometerCalculator();
-    setupMainTabs();
-    setupQuickstartTabs();
-    setupLightbox();
   });
+
+  // Stacker select button
+  const btnStacker = document.getElementById('btn-stacker-dump');
+  if (btnStacker) {
+    btnStacker.addEventListener('click', () => {
+      handleCommand('registers');
+    });
+  }
+
+  // --- REGISTER MATRIX CARDS (BAY 2) INTERACTIVITY ---
+  const regCards = document.querySelectorAll('.register-slot-card');
+  regCards.forEach(card => {
+    card.addEventListener('click', () => {
+      regCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      playBlipSound();
+
+      const addr = card.getAttribute('data-addr');
+      const payload = card.getAttribute('data-payload');
+      switchHopperMode('terminal');
+      appendLog(`[READ-BRUSH] Inspected: ${addr}`, 'term-line-warn');
+      if (payload) {
+        appendLog(payload, 'term-line-resp');
+      }
+    });
+  });
+
+  // --- CONSOLE PUSH BUTTONS (BAY 4) ---
+  const btnRunDemo = document.getElementById('btn-run-demo');
+  if (btnRunDemo) {
+    btnRunDemo.addEventListener('click', () => {
+      switchHopperMode('terminal');
+      handleCommand('box is the game');
+    });
+  }
+
+  const btnViewMcp = document.getElementById('btn-view-mcp');
+  if (btnViewMcp) {
+    btnViewMcp.addEventListener('click', () => {
+      switchHopperMode('mcp');
+    });
+  }
+
+  // --- DIAGNOSTIC TICKER CYCLE ---
+  const tickerEl = document.getElementById('diagnostic-ticker');
+  const tickerMessages = [
+    '02:14:48 SYS_RDY // 1401-CPU ARMED // 318 ACTIVE LMDB REGISTERS // NO CHAT REPLAY BLOAT',
+    'READ_LATENCY: 4.2µs // MMAP_RAM // HARDWARE-ALIGNED BYTE REGISTERS // PARITY: OK',
+    'WAKE PROTOCOL: "BOX IS THE GAME" // PAYLOAD: 220 TOKENS // ZERO-TURN CABIN HYDRATION',
+    'FASTMCP SERVER LISTENING ON 127.0.0.1:8095 // 12 DISCRETE OPCODES VERIFIED',
+    'GROUND-TRUTH ODOMETER // REAL DISK MATH // RUNWAY: 99.8% // AUTO-COMPACTION SHIELD ACTIVE'
+  ];
+  let tickerIdx = 0;
+  if (tickerEl) {
+    setInterval(() => {
+      tickerIdx = (tickerIdx + 1) % tickerMessages.length;
+      tickerEl.textContent = tickerMessages[tickerIdx];
+    }, 4500);
+  }
 
 })();

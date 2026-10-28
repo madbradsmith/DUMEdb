@@ -1490,6 +1490,8 @@ function setupEventListeners() {
       } else if (targetView === "view-cabinet") {
         loadCabinetWorkflows();
         loadCabinetHealth();
+      } else if (targetView === "view-table") {
+        loadTableMessages();
       }
     });
   });
@@ -3661,5 +3663,113 @@ async function handleReactivateWorkflow(wfId) {
     alert("Failed to reactivate workflow: " + err.message);
   }
 }
+
+// ============================================================================
+// The Table Mobile Bridge Handlers
+// ============================================================================
+
+async function loadTableMessages() {
+  const container = document.getElementById("table-messages-container");
+  if (!container) return;
+
+  try {
+    const res = await fetch("/api/table/messages?limit=60");
+    const data = await res.json();
+    if (!data.success) {
+      container.innerHTML = `<div style="color: #f87171; font-size: 0.85rem; padding: 1rem;">Failed to load messages: ${data.error || 'Unknown error'}</div>`;
+      return;
+    }
+
+    const thinkingInd = document.getElementById("table-thinking-indicator");
+    if (thinkingInd) {
+      thinkingInd.style.display = data.thinking ? "inline-block" : "none";
+    }
+
+    if (!data.msgs || data.msgs.length === 0) {
+      container.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-top: 3rem;">No messages exchanged yet. Send a message to start!</div>`;
+      return;
+    }
+
+    container.innerHTML = data.msgs.map(m => {
+      const isBrad = m.sender === "operator";
+      const senderName = isBrad ? "Brad (Phone)" : "AG (Studio)";
+      const bg = isBrad ? "rgba(56, 189, 248, 0.12)" : "rgba(16, 185, 129, 0.12)";
+      const border = isBrad ? "rgba(56, 189, 248, 0.3)" : "rgba(16, 185, 129, 0.3)";
+      const nameColor = isBrad ? "#38bdf8" : "#10b981";
+      const align = isBrad ? "flex-start" : "flex-end";
+      const timeStr = m.ts ? new Date(m.ts * 1000).toLocaleTimeString() : "";
+
+      return `
+        <div style="align-self: ${align}; max-width: 82%; background: ${bg}; border: 1px solid ${border}; border-radius: 8px; padding: 0.65rem 0.85rem; font-size: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 0.25rem;">
+            <strong style="color: ${nameColor}; font-size: 0.78rem;">${senderName}</strong>
+            <span style="color: var(--text-muted); font-size: 0.7rem;">${timeStr}</span>
+          </div>
+          <div style="color: var(--text-main); line-height: 1.5; white-space: pre-wrap;">${m.text}</div>
+        </div>
+      `;
+    }).join("");
+
+    container.scrollTop = container.scrollHeight;
+  } catch (err) {
+    container.innerHTML = `<div style="color: #f87171; font-size: 0.85rem; padding: 1rem;">Connection error: ${err.message}</div>`;
+  }
+}
+
+async function sendTableReply(text) {
+  if (!text || !text.trim()) return;
+  const input = document.getElementById("table-reply-input");
+  if (input) input.disabled = true;
+
+  try {
+    const res = await fetch("/api/table/reply", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text.trim() })
+    });
+    const data = await res.json();
+    if (data.success) {
+      if (input) input.value = "";
+      await loadTableMessages();
+    } else {
+      alert("Failed to send reply to mobile server.");
+    }
+  } catch (err) {
+    alert("Error sending reply: " + err.message);
+  } finally {
+    if (input) {
+      input.disabled = false;
+      input.focus();
+    }
+  }
+}
+
+// Bind Table UI Listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const btnPing = document.getElementById("btn-table-ping");
+  if (btnPing) {
+    btnPing.addEventListener("click", () => {
+      sendTableReply("📡 Ping from DUME Studio PC! Out-of-band bridge is alive and connected.");
+    });
+  }
+
+  const btnRefresh = document.getElementById("btn-table-refresh-feed");
+  if (btnRefresh) {
+    btnRefresh.addEventListener("click", loadTableMessages);
+  }
+
+  const btnSend = document.getElementById("btn-table-send-reply");
+  const inputReply = document.getElementById("table-reply-input");
+  if (btnSend && inputReply) {
+    btnSend.addEventListener("click", () => sendTableReply(inputReply.value));
+    inputReply.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendTableReply(inputReply.value);
+      }
+    });
+  }
+});
+
 
 

@@ -47,6 +47,15 @@ dume/data/
 .pytest_cache/
 .coverage
 htmlcov/
+scratch_test_rules.py
+website/.backup_pre_1401/
+
+
+# The Table local mailbox state
+the_table/*.json
+the_table/*.log
+the_table/daemon.log
+
 
 # Logs
 *.log

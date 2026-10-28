@@ -5696,7 +5696,9 @@
         "7": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_2h8egj3y",
         "8": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_aw7ey68g",
         "9": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_xp_yauxk",
-        "10": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_pe1w3ini"
+        "10": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_pe1w3ini",
+        "11": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_ieubpcja",
+        "12": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_8id8rgcq"
       },
       "unit": null,
       "is_auto": true
@@ -10282,6 +10284,114 @@
       "enum_values": {},
       "unit": null,
       "is_auto": true
+    },
+    {
+      "opcode": 3052,
+      "name": "NAME-FORMS",
+      "description": "Auto-registered intake key NAME-FORMS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3053,
+      "name": "AT_`HTTPS",
+      "description": "Auto-registered intake key AT_`HTTPS",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3054,
+      "name": "\u2014_ENDING_LOCKED",
+      "description": "Auto-registered intake key \u2014_ENDING_LOCKED",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3055,
+      "name": "\u2014_TITLE",
+      "description": "Auto-registered intake key \u2014_TITLE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3056,
+      "name": "\u2014_HELD_QUESTION",
+      "description": "Auto-registered intake key \u2014_HELD_QUESTION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3057,
+      "name": "\u2014_TEST_RESULT",
+      "description": "Auto-registered intake key \u2014_TEST_RESULT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3058,
+      "name": "AI_BOOK_\u2014_MILESTONE",
+      "description": "Auto-registered intake key AI_BOOK_\u2014_MILESTONE",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3059,
+      "name": "\u2014_BUILD_SCRIPT_SAVED_AT",
+      "description": "Auto-registered intake key \u2014_BUILD_SCRIPT_SAVED_AT",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3060,
+      "name": "\u2014_METHOD",
+      "description": "Auto-registered intake key \u2014_METHOD",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3061,
+      "name": "CASTING_/_VOICES",
+      "description": "Auto-registered intake key CASTING_/_VOICES",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 3062,
+      "name": "\u2014_NEXT_SESSION",
+      "description": "Auto-registered intake key \u2014_NEXT_SESSION",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
+    },
+    {
+      "opcode": 1030,
+      "name": "OPERATOR_LAW_DIRECTIVE",
+      "description": "Active Operator Law / Rule directive committed from chat",
+      "data_type": "STRING_REF",
+      "enum_values": {},
+      "unit": null,
+      "is_auto": false
     }
   ]
 }

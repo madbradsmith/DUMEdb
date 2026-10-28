@@ -1,0 +1,18 @@
+{
+  "the-table-mobile-bridge": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python C:\\Users\\c6182\\Desktop\\folders\\DUMEdb-WORK\\the_table\\hook.py",
+        "timeout": 15
+      }
+    ],
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python C:\\Users\\c6182\\Desktop\\folders\\DUMEdb-WORK\\the_table\\hook.py",
+        "timeout": 15
+      }
+    ]
+  }
+}

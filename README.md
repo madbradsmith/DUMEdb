@@ -1,7 +1,7 @@
 # ⚡ DUMEdb (Deterministic Unit-Record Memory Engine)
 
 [![Release](https://img.shields.io/badge/release-v1.1.0-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
-[![YouTube](https://img.shields.io/badge/YouTube-Watch%20Masterclass-red?style=flat-square&logo=youtube)](https://youtu.be/nO5vozUhqyU)
+[![YouTube](https://img.shields.io/badge/YouTube-Watch%20Walkthrough-red?style=flat-square&logo=youtube)](https://youtu.be/nO5vozUhqyU)
 [![Python](https://img.shields.io/badge/python-3.9+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![LMDB](https://img.shields.io/badge/storage-LMDB%20Mmap-00ADD8.svg?style=flat-square)](https://symas.com/lmdb/)
 [![Latency](https://img.shields.io/badge/read%20latency-%3C%200.8%20%CE%BCs-brightgreen.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb)
@@ -12,7 +12,7 @@
 
 > **Hardware-aligned, zero-prompt-bloat, byte-structured memory engine, production Model Context Protocol (MCP) server, and drop-in OpenAI-compatible proxy gateway for autonomous AI agents.**
 
-> 🎬 **Watch the Official Masterclass on YouTube:**  
+> 🎬 **Watch the Official Walkthrough on YouTube:**  
 > [**Stop Force-Feeding Your AI 30,000 Tokens just to remind them who you are!**](https://youtu.be/nO5vozUhqyU) — *Featuring Frank, The Sentinel, and real-time live benchmarks.*
 
 ---
