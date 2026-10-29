@@ -63,10 +63,31 @@ def poll_server() -> List[Dict[str, Any]]:
         return data.get("queued", [])
     return []
 
-def send_reply(text: str, audio_url: Optional[str] = None) -> bool:
-    """Sends a reply message back to The Table mobile chat."""
+def get_odometer_payload() -> Optional[Dict[str, Any]]:
+    """Calculates ground-truth hardware context metrics for mobile telemetry."""
+    try:
+        from dume.odometer import calculate_real_context_metrics
+        m = calculate_real_context_metrics()
+        return {
+            "pct": float(m.get("pct", 0.0)),
+            "active_tokens": int(m.get("active_tokens", 0)),
+            "ceiling": int(m.get("ceiling", 120000)),
+            "epoch": int(m.get("epoch", 1)),
+            "runway": int(m.get("runway_tokens", 0)),
+            "zone": str(m.get("zone", "Nominal")),
+            "bar": str(m.get("bar", "")),
+            "turn": int(m.get("active_steps", 0)),
+            "delta": int(m.get("turn_delta_tokens", 0))
+        }
+    except Exception:
+        return None
+
+def send_reply(text: str, audio_url: Optional[str] = None, odometer: Optional[Dict[str, Any]] = None) -> bool:
+    """Sends a reply message back to The Table mobile chat along with live context telemetry."""
     if not text.strip():
         return False
+    if odometer is None:
+        odometer = get_odometer_payload()
     payload = {
         "agent_id": AGENT_ID,
         "key": AGENT_KEY,
@@ -74,11 +95,27 @@ def send_reply(text: str, audio_url: Optional[str] = None) -> bool:
     }
     if audio_url:
         payload["audio_url"] = audio_url
+    if odometer:
+        payload["odometer"] = odometer
     code, data = _request("/bridge/reply", payload)
     if code == 200 and data.get("ok"):
-        _append_outbox({"ts": time.time(), "sender": AGENT_NAME, "text": text.strip()})
+        _append_outbox({"ts": time.time(), "sender": AGENT_NAME, "text": text.strip(), "odometer": odometer})
         return True
     return False
+
+def send_odometer(odometer: Optional[Dict[str, Any]] = None) -> bool:
+    """Dispatches standalone context odometer telemetry to The Table mobile feed."""
+    if odometer is None:
+        odometer = get_odometer_payload()
+    if not odometer:
+        return False
+    payload = {
+        "agent_id": AGENT_ID,
+        "key": AGENT_KEY,
+        "odometer": odometer
+    }
+    code, data = _request("/bridge/odometer", payload)
+    return code == 200 and data.get("ok", False)
 
 def _update_state(updates: Dict[str, Any]):
     state = {}
