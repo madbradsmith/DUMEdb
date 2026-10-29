@@ -29,7 +29,7 @@ if str(WORKSPACE_DIR) not in sys.path:
 from the_table.client import pair, poll_server, add_to_inbox
 
 POLL_INTERVAL = int(os.environ.get("TABLE_POLL_INTERVAL", "3"))
-MAX_WAIT_SECONDS = int(os.environ.get("TABLE_MAX_WAIT", "1800"))  # 30 minute max per task
+MAX_WAIT_SECONDS = int(os.environ.get("TABLE_MAX_WAIT", "0"))  # 0 = infinite wait until message arrives
 
 def listen():
     token, url = pair()
@@ -51,7 +51,7 @@ def listen():
                 # Exit cleanly so Antigravity resumes execution
                 sys.exit(0)
             
-            if time.time() - start_time > MAX_WAIT_SECONDS:
+            if MAX_WAIT_SECONDS > 0 and time.time() - start_time > MAX_WAIT_SECONDS:
                 print("[*] Listener reached cycle timeout. Exiting to allow clean re-arm.", flush=True)
                 sys.exit(0)
 
