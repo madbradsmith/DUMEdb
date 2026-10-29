@@ -1,6 +1,6 @@
 # ⚡ DUMEdb (Deterministic Unit-Record Memory Engine)
 
-[![Release](https://img.shields.io/badge/release-v1.2.1-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
+[![Release](https://img.shields.io/badge/release-v1.2.2-blue.svg?style=flat-square)](https://github.com/madbradsmith/DUMEdb/releases)
 [![YouTube](https://img.shields.io/badge/YouTube-Watch%20Walkthrough-red?style=flat-square&logo=youtube)](https://youtu.be/nO5vozUhqyU)
 [![Python](https://img.shields.io/badge/python-3.9+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![LMDB](https://img.shields.io/badge/storage-LMDB%20Mmap-00ADD8.svg?style=flat-square)](https://symas.com/lmdb/)
@@ -115,7 +115,9 @@ The antidote to the "80KB backpack" of conversational bloat and agent amnesia. I
 Control, instruct, and query your workstation AI agent directly from your mobile phone while away from your desk:
 - **DUME Studio Tab 5 (The Table)**: Instant QR-code mobile pairing, live bidirectional chat stream, and direct reply panel in the Studio Inspector.
 - **Autonomous Event-Driven Listener**: Background poller (`python the_table/listener.py`) automatically receives incoming voice and text messages from mobile in real time, triggering zero-token reactive IDE wakeups.
+- **Multi-Agent Zero-Collision Routing**: Independent namespaced lanes (`TABLE_AGENT_NAME`, `TABLE_AGENT_ID`) routing into isolated inboxes (`inbox_<agent>.json`) and outboxes (`outbox_<agent>.json`), allowing multiple concurrent IDE agent sessions (e.g. AG and BeastMode) to operate simultaneously without queue interference or message cross-talk.
 - **Completion Notifications Stack**: Multi-sensory completion alerts for mobile and desktop when agent tasks finish:
+  - **Mobile Header Notification Bell (`#btn-bell`)**: Toggle alerts directly from the mobile browser header on `table.developumaiengine.com`.
   - **One-Tap Master Toggle**: Enable or mute alerts instantly from DUME Studio Tab 5 with persistent state.
   - **Web Audio Synthesizer Chime**: Harmonic 2-tone melodic chime (C5 to G5) synthesized via native Web Audio API—100% offline with zero external audio assets.
   - **Haptic Vibration**: Dual-pulse physical feedback (`navigator.vibrate`) on supported mobile and handheld devices.
@@ -154,7 +156,7 @@ Start_DUMEdb_UI.bat
 Console Output:
 ```plaintext
 =======================================================
-🚀 DUMEdb Studio v1.2.1 is Live!
+🚀 DUMEdb Studio v1.2.2 is Live!
 🔗 Web Inspector: http://localhost:8095/inspector/index.html
 ⚡ Proxy Gateway: http://localhost:8095/v1
 =======================================================

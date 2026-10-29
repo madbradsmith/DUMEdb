@@ -59,8 +59,10 @@ def listen():
         except KeyboardInterrupt:
             print("[*] Listener stopped by user.", flush=True)
             sys.exit(0)
-        except Exception as e:
-            print(f"[!] Listener poll error: {e}", flush=True)
+        except BaseException as e:
+            if isinstance(e, SystemExit):
+                raise
+            print(f"[!] Listener recovered from error: {e}", flush=True)
             time.sleep(POLL_INTERVAL)
 
 if __name__ == "__main__":

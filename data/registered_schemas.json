@@ -5698,7 +5698,8 @@
         "9": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_xp_yauxk",
         "10": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_pe1w3ini",
         "11": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_ieubpcja",
-        "12": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_8id8rgcq"
+        "12": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_8id8rgcq",
+        "13": "C:\\Users\\c6182\\AppData\\Local\\Temp\\dume_dir_test_qqn2eqs2"
       },
       "unit": null,
       "is_auto": true
@@ -10392,6 +10393,28 @@
       "enum_values": {},
       "unit": null,
       "is_auto": false
+    },
+    {
+      "opcode": 2080,
+      "name": "DUAL_DELIVERABLE_STATUS",
+      "description": "Auto-registered via MCP tool for DUAL_DELIVERABLE_STATUS",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "BUILT_VERIFIED: Deliverable_A_Story_Cut (121,974w 6 Vols MD+EPUB) + Deliverable_B_Receipt_Vault (135,515w 64 Ticks + Seed/Scorecard) + LOT_Studio_Dual_Reader.html (1.86MB)"
+      },
+      "unit": null,
+      "is_auto": true
+    },
+    {
+      "opcode": 2081,
+      "name": "CHARACTER_VAULT_CANON",
+      "description": "Auto-registered via MCP tool for CHARACTER_VAULT_CANON",
+      "data_type": "ENUM",
+      "enum_values": {
+        "1": "ALL_12_LOCKED: Frank, Bob, Max (30yo strict vest/tie High-Tech), Alex (ancient spry Mid-African Adidas joggers flying/Lo-Fi Pi), Pat (Hindu Indian biker moms basement), Florence (2000yo tortoise schoolteacher glasses-on-string cave), Hawks (50s MGySgt SF comms), Prue (Erykah Badu hippie smart), Boswell (Big Forest Whitaker British Euro library), Evie (soulful soccer mom camper van view), Guy (50s Black man above Chinese spot new tech), Kip (Assassins Creed hood nomadic face shadowed)"
+      },
+      "unit": null,
+      "is_auto": true
     }
   ]
 }

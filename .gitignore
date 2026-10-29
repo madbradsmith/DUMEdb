@@ -63,6 +63,7 @@ the_table/daemon.log
 # IDE & OS
 .idea/
 .vscode/
+.gemini/
 .DS_Store
 Thumbs.db
 

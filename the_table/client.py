@@ -18,9 +18,9 @@ AGENT_KEY = os.environ.get("TABLE_AGENT_KEY", "evolum_super_secret_key_brad_ag_2
 AGENT_NAME = os.environ.get("TABLE_AGENT_NAME", "AG")
 
 TABLE_DIR = Path(__file__).resolve().parent
-INBOX_FILE = TABLE_DIR / "inbox.json"
-OUTBOX_FILE = TABLE_DIR / "outbox.json"
-STATE_FILE = TABLE_DIR / "bridge_state.json"
+INBOX_FILE = Path(os.environ.get("TABLE_INBOX_FILE", TABLE_DIR / f"inbox_{AGENT_NAME.lower()}.json"))
+OUTBOX_FILE = Path(os.environ.get("TABLE_OUTBOX_FILE", TABLE_DIR / f"outbox_{AGENT_NAME.lower()}.json"))
+STATE_FILE = Path(os.environ.get("TABLE_STATE_FILE", TABLE_DIR / f"bridge_state_{AGENT_NAME.lower()}.json"))
 
 def _request(path: str, data: Optional[Dict[str, Any]] = None, timeout: int = 10) -> Tuple[int, Dict[str, Any]]:
     url = f"{SERVER_URL}{path}"
